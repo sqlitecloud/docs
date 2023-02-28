@@ -68,7 +68,7 @@ export function Hero() {
               <HeroBackground className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 lg:translate-y-[-60%]" />
             </div>
             <div className="relative">
-              {/* <Image
+              <Image
                 className="absolute -top-64 -right-64"
                 src={blurCyanImage}
                 alt=""
@@ -85,7 +85,7 @@ export function Hero() {
                 height={567}
                 unoptimized
                 priority
-              /> */}
+              />
               {/* <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10 blur-lg" /> */}
               {/* <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10" /> */}
               {/* <div className="relative rounded-2xl bg-[#0A101F]/80 "> */}
