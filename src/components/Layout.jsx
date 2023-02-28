@@ -8,6 +8,7 @@ import { Hero } from '@/components/Hero'
 import { Logo, Logomark } from '@/components/Logo'
 // import LogoSQLiteCloud from '@/images/desk-logo@4x.png'
 import LogoSQLiteCloud from '@/images/logo@4x.png'
+import LogoSQLiteCloudMob from '@/images/logo-mobile@4x.png'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
@@ -102,17 +103,25 @@ function Header({ navigation }) {
           : 'dark:bg-transparent'
       )}
     >
-      <div className="mr-3 flex lg:hidden">
+      <div className="mr-6 flex lg:hidden">
         <MobileNavigation navigation={navigation} />
       </div>
       <div className="relative flex flex-grow basis-0 items-center">
         <Link href="/" aria-label="Home page">
           <Image
-            className="w-32 lg:w-44"
+            className="hidden lg:w-44 lg:block"
             src={LogoSQLiteCloud}
             alt="SQLite"
             width={530}
             height={108}
+            priority
+          />
+          <Image
+            className=" w-9 lg:hidden"
+            src={LogoSQLiteCloudMob}
+            alt="SQLite"
+            width={512}
+            height={512}
             priority
           />
           {/* <Logomark className="h-9 w-9 lg:hidden" /> */}

@@ -6,7 +6,7 @@ import { Dialog } from '@headlessui/react'
 
 import { Logomark } from '@/components/Logo'
 // import LogoSQLiteCloud from '@/images/desk-logo@4x.png'
-import LogoSQLiteCloud from '@/images/logo@4x.png'
+import LogoSQLiteCloudMob from '@/images/logo-mobile@4x.png'
 import { Navigation } from '@/components/Navigation'
 
 function MenuIcon(props) {
@@ -84,14 +84,14 @@ export function MobileNavigation({ navigation }) {
             >
               <CloseIcon className="h-6 w-6 stroke-slate-500" />
             </button>
-            <Link href="/" className="ml-3" aria-label="Home page">
+            <Link href="/" className="ml-6" aria-label="Home page">
               {/* <Logomark className="h-9 w-9" /> */}
               <Image
-                className="w-32 lg:w-48"
-                src={LogoSQLiteCloud}
+                className=" w-9 lg:hidden"
+                src={LogoSQLiteCloudMob}
                 alt="SQLite"
-                width={530}
-                height={108}
+                width={512}
+                height={512}
                 priority
               />
             </Link>
