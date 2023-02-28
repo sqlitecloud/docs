@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Plugins
 description: Quidem magni aut exercitationem maxime rerum eos.
 ---
 

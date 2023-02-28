@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require("fs")
 const fm = require('front-matter')
 const withMarkdoc = require('@markdoc/next.js')
+const { config } = require('./config');
 
 //this function return an array with all the files present in an base folder with ther relative path
 /*
@@ -122,6 +123,7 @@ const nextConfig = {
   },
   env: {
     navigation: navigation,
+    config: config
     // navigationTest: navigationTest,
     // allMdFiles: allMdFiles,
   },

@@ -185,9 +185,21 @@ function useTableOfContents(tableOfContents) {
 }
 
 export function Layout({ children, title, tableOfContents }) {
-  let navigation = process.env.navigation;
+  let navigation = process.env.navigation
+  let config = process.env.config
+  //test actual location
   let router = useRouter()
   let isHomePage = router.pathname === '/'
+  let isIntroduction = router.pathname.includes('introduction') ? true : false
+  let isCommands = router.pathname.includes('commands') ? true : false
+  let isSDK = router.pathname.includes('sdk') ? true : false
+  let isPlugins = router.pathname.includes('plugins') ? true : false
+  //based on location select navigation menu
+  if (isIntroduction) navigation = config.introduction;
+  if (isCommands) navigation = config.commands;
+  if (isSDK) navigation = config.sdk;
+  if (isPlugins) navigation = config.plugins;
+  //exctract links
   let allLinks = navigation.flatMap((section) => section.links)
   let linkIndex = allLinks.findIndex((link) => link.href === router.pathname)
   let previousPage = allLinks[linkIndex - 1]
