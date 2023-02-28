@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
 
 import { Hero } from '@/components/Hero'
 import { Logo, Logomark } from '@/components/Logo'
+// import LogoSQLiteCloud from '@/images/desk-logo@4x.png'
+import LogoSQLiteCloud from '@/images/logo@4x.png'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
@@ -99,13 +102,21 @@ function Header({ navigation }) {
           : 'dark:bg-transparent'
       )}
     >
-      <div className="mr-6 flex lg:hidden">
+      <div className="mr-3 flex lg:hidden">
         <MobileNavigation navigation={navigation} />
       </div>
       <div className="relative flex flex-grow basis-0 items-center">
         <Link href="/" aria-label="Home page">
-          <Logomark className="h-9 w-9 lg:hidden" />
-          <Logo className="hidden h-9 w-auto fill-slate-700 dark:fill-sky-100 lg:block" />
+          <Image
+            className="w-32 lg:w-44"
+            src={LogoSQLiteCloud}
+            alt="SQLite"
+            width={530}
+            height={108}
+            priority
+          />
+          {/* <Logomark className="h-9 w-9 lg:hidden" /> */}
+          {/* <Logo className="hidden h-9 w-auto fill-slate-700 dark:fill-sky-100 lg:block" /> */}
         </Link>
       </div>
       <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
@@ -186,12 +197,6 @@ export function Layout({ children, title, tableOfContents }) {
     }
     return section.children.findIndex(isActive) > -1
   }
-
-  console.log("__________________________")
-  console.log(process.env.allMdFiles)
-  console.log("__________________________")
-  console.log(process.env.navigationTest)
-  console.log("__________________________")
   return (
     <>
       <Header navigation={navigation} />
@@ -221,7 +226,7 @@ export function Layout({ children, title, tableOfContents }) {
                 )}
                 {title && (
                   <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-                    {title} {process.env.customKey} 
+                    {title} {process.env.customKey}
                   </h1>
                 )}
               </header>
@@ -261,7 +266,7 @@ export function Layout({ children, title, tableOfContents }) {
             )}
           </dl>
         </div>
-        <div className="hidden xl:sticky xl:top-[4.5rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6">
+        {/* <div className="hidden xl:sticky xl:top-[4.5rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             {tableOfContents.length > 0 && (
               <>
@@ -313,7 +318,7 @@ export function Layout({ children, title, tableOfContents }) {
               </>
             )}
           </nav>
-        </div>
+        </div> */}
       </div>
     </>
   )

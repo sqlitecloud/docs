@@ -7,6 +7,7 @@ import { Button } from '@/components/Button'
 import { HeroBackground } from '@/components/HeroBackground'
 import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
+import cloudMap from '@/images/cloud-map-clean.png'
 
 const codeLanguage = 'javascript'
 const code = `export default {
@@ -67,7 +68,7 @@ export function Hero() {
               <HeroBackground className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 lg:translate-y-[-60%]" />
             </div>
             <div className="relative">
-              <Image
+              {/* <Image
                 className="absolute -top-64 -right-64"
                 src={blurCyanImage}
                 alt=""
@@ -84,14 +85,22 @@ export function Hero() {
                 height={567}
                 unoptimized
                 priority
-              />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10 blur-lg" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10" />
-              <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
-                <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-sky-300/70 to-sky-300/0" />
-                <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
-                <div className="pl-4 pt-4">
-                  <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
+              /> */}
+              {/* <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10 blur-lg" /> */}
+              {/* <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10" /> */}
+              {/* <div className="relative rounded-2xl bg-[#0A101F]/80 "> */}
+              <div className="relative rounded-2xl">
+                {/* <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-sky-300/0 via-sky-300/70 to-sky-300/0" /> */}
+                {/* <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" /> */}
+                <div className="p-4">
+                  <Image
+                    src={cloudMap}
+                    alt="SQLite Cloud"
+                    width={1752}
+                    height={1132}
+                    priority
+                  />
+                  {/* <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
                   <div className="mt-4 flex space-x-2 text-xs">
                     {tabs.map((tab) => (
                       <div
@@ -163,7 +172,7 @@ export function Hero() {
                         </pre>
                       )}
                     </Highlight>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

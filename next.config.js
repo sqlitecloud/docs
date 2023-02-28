@@ -4,6 +4,7 @@ const fm = require('front-matter')
 const withMarkdoc = require('@markdoc/next.js')
 
 //this function return an array with all the files present in an base folder with ther relative path
+/*
 const readAllFilesFromAFolder = (dirMain, files, publicPath, hierarchy) => {
   const readDirMain = fs.readdirSync(dirMain);
   readDirMain.forEach((dirNext) => {
@@ -34,9 +35,10 @@ const readAllFilesFromAFolder = (dirMain, files, publicPath, hierarchy) => {
     hierarchy: hierarchy
   };
 };
-
 const navigationTest = readAllFilesFromAFolder('./src/pages/docs', [], '../', []);
+*/
 
+/*
 const allFiles = navigationTest.files;
 const allMdFiles = allFiles.map((file, i) => {
   let md = fs.readFileSync(file.completePath, 'utf8');
@@ -51,6 +53,7 @@ const allMdFiles = allFiles.map((file, i) => {
     publicPath: file.publicPath
   };
 })
+*/
 
 const navigation = [
   {
@@ -118,10 +121,9 @@ const nextConfig = {
     scrollRestoration: true,
   },
   env: {
-    customKey: 'fdsa',
     navigation: navigation,
-    navigationTest: navigationTest,
-    allMdFiles: allMdFiles,
+    // navigationTest: navigationTest,
+    // allMdFiles: allMdFiles,
   },
 }
 

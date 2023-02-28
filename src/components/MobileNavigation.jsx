@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Dialog } from '@headlessui/react'
 
 import { Logomark } from '@/components/Logo'
+// import LogoSQLiteCloud from '@/images/desk-logo@4x.png'
+import LogoSQLiteCloud from '@/images/logo@4x.png'
 import { Navigation } from '@/components/Navigation'
 
 function MenuIcon(props) {
@@ -81,8 +84,16 @@ export function MobileNavigation({ navigation }) {
             >
               <CloseIcon className="h-6 w-6 stroke-slate-500" />
             </button>
-            <Link href="/" className="ml-6" aria-label="Home page">
-              <Logomark className="h-9 w-9" />
+            <Link href="/" className="ml-3" aria-label="Home page">
+              {/* <Logomark className="h-9 w-9" /> */}
+              <Image
+                className="w-32 lg:w-48"
+                src={LogoSQLiteCloud}
+                alt="SQLite"
+                width={530}
+                height={108}
+                priority
+              />
             </Link>
           </div>
           <Navigation navigation={navigation} className="mt-5 px-1" />
