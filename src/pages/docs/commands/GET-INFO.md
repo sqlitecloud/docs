@@ -1,3 +1,9 @@
+---
+title: GET INFO
+description: The GET INFO command is used to retrieve a single specific information about a <key>.
+This command can be executed on a specific nodeid by using the NODE argument.
+---
+
 ## GET INFO
 
 ### Syntax

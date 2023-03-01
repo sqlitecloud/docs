@@ -1,3 +1,8 @@
+---
+title: ENABLE PLUGIN
+description: Use this command to re-enable a plugin previously disabled. Note that the newly enabled plugin is available only for new connections.
+---
+
 ## ENABLE PLUGIN
 
 ### Syntax

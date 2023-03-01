@@ -1,3 +1,8 @@
+---
+title: LIST METADATA
+description: The LIST METADATA command is used to retrieve detailed information about the internal structure of a table. The information returned can be further restricted by specifying a <table_name> and/or a <column_name>.
+---
+
 ## LIST METADATA
 
 ### Syntax

@@ -1,3 +1,10 @@
+---
+title: SET APIKEY
+description: The SET APIKEY command is used to update information about an existing APIKEY.
+Using this command you can update the APIKEY name, restriction and expiration date.
+There is no way to update the value of the APIKEY.
+---
+
 ## SET APIKEY
 
 ### Syntax

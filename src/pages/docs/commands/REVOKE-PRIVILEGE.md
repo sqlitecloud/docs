@@ -1,3 +1,8 @@
+---
+title: REVOKE PRIVILEGE
+description: Use this command to revoke a privilege (or a command separated list of privileges) from the ROLE <role_name>. If you can further restrict this command by specifying a database and/or a table name.
+---
+
 ## REVOKE PRIVILEGE
 
 ### Syntax

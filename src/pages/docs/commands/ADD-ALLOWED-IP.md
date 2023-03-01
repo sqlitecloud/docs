@@ -1,3 +1,8 @@
+---
+title: ADD ALLOWED IP
+description: The ADD ALLOWED IP command restricts access for the role or user by allowing only some IP addresses. Ranges are in CIDR notation like 10.10.10.0/24 can be used. IPv4 and IPv6 addresses are supported.
+---
+
 ## ADD ALLOWED IP
 
 ### Syntax

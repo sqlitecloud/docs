@@ -1,3 +1,8 @@
+---
+title: ANALYZER RESET
+description: The ANALYZER RESET command is used to reset statistics about a specific query, a specific database or about all the query analyzer engine (if no options are used).
+---
+
 ## ANALYZER RESET
 
 ### Syntax

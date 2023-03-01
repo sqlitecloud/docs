@@ -1,3 +1,10 @@
+---
+title: TEST
+description: The TEST command is used for debugging purpose and it can be used by developers while developing the SCSP for a new language.
+By specifying different test_name the server will reply with different responses so you can test the parsing capabilities of your new binding.
+Supported test_name are: STRING, STRING0, ZERO_STRING, ERROR, EXTERROR, INTEGER, FLOAT, BLOB, BLOB0, ROWSET, ROWSET_CHUNK, JSON, NULL, COMMAND, ARRAY, ARRAY0
+---
+
 ## TEST
 
 ### Syntax

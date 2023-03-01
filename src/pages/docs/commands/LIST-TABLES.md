@@ -1,3 +1,8 @@
+---
+title: LIST TABLES
+description: The LIST TABLES command is used to retrive the information about the tables available inside current database. Note that the output of this command can change depending on the privileges associated to the currently connected username. If the PUBSUB parameter is used then the output will contains the column chname only (to have the same format as the rowset returned by the LIST CHANNELS command).
+---
+
 ## LIST TABLES
 
 ### Syntax

@@ -1,3 +1,8 @@
+---
+title: REMOVE CHANNEL
+description: The REMOVE CHANNEL command is used to completely delete a previously created channel.
+---
+
 ## REMOVE CHANNEL
 
 ### Syntax

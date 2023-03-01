@@ -1,3 +1,8 @@
+---
+title: GET SQL
+description: The GET SQL command is used to retrieve the SQL statement used to generated the <table_name>.
+---
+
 ## GET SQL
 
 ### Syntax

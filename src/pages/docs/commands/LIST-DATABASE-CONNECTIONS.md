@@ -1,3 +1,9 @@
+---
+title: LIST DATABASE CONNECTIONS
+description: The LIST DATABASE CONNECTION command is used to retrieve a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command).
+The <database_name> parameter can also be a database_id if the ID flag is specified.
+---
+
 ## LIST DATABASE CONNECTIONS
 
 ### Syntax

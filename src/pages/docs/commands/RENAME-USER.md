@@ -1,3 +1,8 @@
+---
+title: RENAME USER
+description: The RENAME USER command is used to update an existing username to a new one.
+---
+
 ## RENAME USER
 
 ### Syntax

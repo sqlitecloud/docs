@@ -1,3 +1,8 @@
+---
+title: GRANT PRIVILEGE
+description: Use this command to add a new <privilege_name> to an existing role. The <privilege_name> parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+---
+
 ## GRANT PRIVILEGE
 
 ### Syntax

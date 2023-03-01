@@ -1,3 +1,9 @@
+---
+title: LIST BACKUPS DATABASE
+description: The LIST BACKUPS DATABASE command is used to retrieve detailed information about which backups are available for a specific database.
+SQLite Cloud backup is a continuous backup system based on LiteStream that uses S3 as storage option and can also backup AES-256 encrypted databases.
+---
+
 ## LIST BACKUPS DATABASE
 
 ### Syntax

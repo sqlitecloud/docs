@@ -1,3 +1,8 @@
+---
+title: GET CLIENT KEY
+description: The GET CLIENT KEY command is used to retrieve a single specific information about a <keyname>.
+---
+
 ## GET CLIENT KEY
 
 ### Syntax

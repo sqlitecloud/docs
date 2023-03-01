@@ -1,3 +1,8 @@
+---
+title: REMOVE APIKEY
+description: The REMOVE APIKEY command is used to permanently remove an APIKEY from the server.
+---
+
 ## REMOVE APIKEY
 
 ### Syntax

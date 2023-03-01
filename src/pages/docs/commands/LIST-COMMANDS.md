@@ -1,3 +1,10 @@
+---
+title: LIST COMMANDS
+description: The LIST COMMANDS command returns a list of all supported built-in commands.
+It also returns information about how many times each command was executed on the average execution time. The DETAILS flag adds a privileges column to the result.
+
+---
+
 ## LIST COMMANDS
 
 ### Syntax

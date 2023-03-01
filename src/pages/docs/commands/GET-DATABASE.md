@@ -1,3 +1,8 @@
+---
+title: GET DATABASE
+description: Use this command to retrieve a single value associated to <database_name> and <keyname>.
+---
+
 ## GET DATABASE
 
 ### Syntax

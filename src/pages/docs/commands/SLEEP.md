@@ -1,3 +1,8 @@
+---
+title: SLEEP
+description: The SLEEP command is used to force current connection to sleep on server-side for a specified amount of milliseconds.
+---
+
 ## SLEEP
 
 ### Syntax

@@ -1,3 +1,8 @@
+---
+title: LIST PRIVILEGES
+description: The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built-into SQLite Cloud.
+---
+
 ## LIST PRIVILEGES
 
 ### Syntax

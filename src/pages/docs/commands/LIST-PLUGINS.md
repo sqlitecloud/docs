@@ -1,3 +1,8 @@
+---
+title: LIST PLUGINS
+description: The LIST PLUGINS command returns a rowset that provides information about the installed native/SQLite extensions.
+---
+
 ## LIST PLUGINS
 
 ### Syntax

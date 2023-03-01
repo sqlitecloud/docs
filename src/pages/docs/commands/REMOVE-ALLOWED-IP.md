@@ -1,3 +1,8 @@
+---
+title: REMOVE ALLOWED IP
+description: The REMOVE ALLOWED IP command permanently remove the <ip_address> from the list of allowed IP. You can specify a ROLE and/or a USER to further restrict the filter.
+---
+
 ## REMOVE ALLOWED IP
 
 ### Syntax

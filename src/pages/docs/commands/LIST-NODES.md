@@ -1,3 +1,8 @@
+---
+title: LIST NODES
+description: The LIST NODES command returns a rowset with information about all the nodes that compose the cluster environment. In addition to static information this commands also reports up-to-date information about the Raft status of each node.
+---
+
 ## LIST NODES
 
 ### Syntax

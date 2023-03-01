@@ -1,3 +1,8 @@
+---
+title: LIST INDEXES
+description: The LIST INDEXES command returns a list of all indexes defined inside the currently used database.
+---
+
 ## LIST INDEXES
 
 ### Syntax

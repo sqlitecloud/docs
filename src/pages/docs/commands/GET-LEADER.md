@@ -1,3 +1,9 @@
+---
+title: GET LEADER
+description: In a cluster the GET LEADER command returns the IP address and port of the Raft leader node.
+If the ID parameter is specified then the nodeID of the leader node is returned.
+---
+
 ## GET LEADER
 
 ### Syntax

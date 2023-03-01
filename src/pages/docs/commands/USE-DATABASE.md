@@ -1,3 +1,8 @@
+---
+title: USE DATABASE
+description: The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent statements.
+---
+
 ## USE DATABASE
 
 ### Syntax

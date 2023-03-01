@@ -1,3 +1,9 @@
+---
+title: NOTIFY
+description: The NOTIFY command is used to send an optional payload (usually a string) to a specified channel_name.
+If no payload is specified then an empty notification is sent.
+---
+
 ## NOTIFY
 
 ### Syntax

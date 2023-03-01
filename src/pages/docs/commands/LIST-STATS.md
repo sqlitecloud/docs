@@ -1,3 +1,8 @@
+---
+title: LIST STATS
+description: The LIST STATS command is used to retrieve statistic information from the connected node (or from a specific <nodeid> if the NODE parameter is used). If no range date is specified with the FROM/TO parameters then stats from the last hour are returned. If the MEMORY argument is used then a new PHYSICAL_MEMORY key is added to the result.
+---
+
 ## LIST STATS
 
 ### Syntax

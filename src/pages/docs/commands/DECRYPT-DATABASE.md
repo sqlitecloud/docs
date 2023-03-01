@@ -1,3 +1,8 @@
+---
+title: DECRYPT DATABASE
+description: The DECRYPT DATABASE command remove encryption from a previously AES-256 encrypted database.
+---
+
 ## DECRYPT DATABASE
 
 ### Syntax

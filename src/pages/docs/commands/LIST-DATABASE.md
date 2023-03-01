@@ -1,3 +1,8 @@
+---
+title: LIST DATABASE
+description: The LIST DATABASE KEYS command returns a list of settings for the <database_name> database.
+---
+
 ## LIST DATABASE
 
 ### Syntax

@@ -1,3 +1,8 @@
+---
+title: GET KEY
+description: The GET KEY command is used to retrieve a single specific setting about a <keyname>.
+---
+
 ## GET KEY
 
 ### Syntax

@@ -1,3 +1,8 @@
+---
+title: SET PASSWORD
+description: The SET PASSWORD command is used to set/change the password for an existing username.
+---
+
 ## SET PASSWORD
 
 ### Syntax
