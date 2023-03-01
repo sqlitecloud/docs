@@ -4,7 +4,6 @@ import clsx from 'clsx'
 
 export function Navigation({ navigation, className }) {
   let router = useRouter()
-
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
       <ul role="list" className="space-y-9">
