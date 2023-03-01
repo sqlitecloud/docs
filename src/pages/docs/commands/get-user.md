@@ -3,27 +3,25 @@ title: GET USER
 description: This command returns the username of the currency connected user.
 ---
 
-## GET USER
-
-### Syntax
+## Syntax
 
 GET USER
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 This command returns the username of the currency connected user.
 
-### Return
+## Return
 
 A string set to the current username.
 
-### Example
+## Example
 
 ```bash
 > GET USER

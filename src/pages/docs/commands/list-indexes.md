@@ -3,27 +3,25 @@ title: LIST INDEXES
 description: The LIST INDEXES command returns a list of all indexes defined inside the currently used database.
 ---
 
-## LIST INDEXES
-
-### Syntax
+## Syntax
 
 LIST INDEXES
 
-### Privileges
+## Privileges
 
 ```
 READWRITE
 ```
 
-### Description
+## Description
 
 The LIST INDEXES command returns a list of all indexes defined inside the currently used database.
 
-### Return
+## Return
 
 A rowset with the following columns: `name` and `tbl_name`.
 
-### Example
+## Example
 
 ```bash
 > LIST INDEXES

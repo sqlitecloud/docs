@@ -4,28 +4,26 @@ description: The LIST INFO command is used to retrieve general information about
 To retrieve a single specific information use the GET INFO <key> command.
 ---
 
-## LIST INFO
-
-### Syntax
+## Syntax
 
 LIST INFO
 
-### Privileges
+## Privileges
 
 ```
 CLUSTERADMIN, CLUSTERMONITOR
 ```
 
-### Description
+## Description
 
 The LIST INFO command is used to retrieve general information about the server.
 To retrieve a single specific information use the GET INFO <key> command.
 
-### Return
+## Return
 
 A rowset with `key`, `value` columns.
 
-### Example
+## Example
 
 ```bash
 > LIST INFO

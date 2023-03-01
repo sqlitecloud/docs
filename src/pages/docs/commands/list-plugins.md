@@ -3,28 +3,26 @@ title: LIST PLUGINS
 description: The LIST PLUGINS command returns a rowset that provides information about the installed native/SQLite extensions.
 ---
 
-## LIST PLUGINS
-
-### Syntax
+## Syntax
 
 LIST PLUGINS
 
-### Privileges
+## Privileges
 
 ```
 PLUGIN
 ```
 
-### Description
+## Description
 
 The LIST PLUGINS command returns a rowset that provides information about the installed native/SQLite extensions.
 
-### Return
+## Return
 
 A rowset with the following columns: `name`, `type`, `enabled`, `version`, `copyright`, `description`.
 The `version`, `copyright` and `description` columns are not null only in case of native SQLite Cloud extensions developed with the official plugins SDK.
 
-### Example
+## Example
 
 ```bash
 > LIST PLUGINS

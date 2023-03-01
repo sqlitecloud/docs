@@ -3,27 +3,25 @@ title: LIST PRIVILEGES
 description: The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built-into SQLite Cloud.
 ---
 
-## LIST PRIVILEGES
-
-### Syntax
+## Syntax
 
 LIST PRIVILEGES
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built-into SQLite Cloud.
 
-### Return
+## Return
 
 A rowset with one `name` column.
 
-### Example
+## Example
 
 ```bash
 > LIST PRIVILEGES

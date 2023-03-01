@@ -27,19 +27,17 @@ The CURSOR option is used to paginate and navigate the rowset.
 The NODE option is used to get the result from a specific node of the cluster.
 ---
 
-## LIST LOG
-
-### Syntax
+## Syntax
 
 LIST LOG [FROM **start_date**] [TO **end_date**] [LEVEL **log_level**] [TYPE **log_type**] [ID] [LIMIT **count**] [CURSOR **cursorid**] [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 HOSTADMIN
 ```
 
-### Description
+## Description
 
 The LIST LOG command is used to retrieve the logs generated on server side. Logs can contains a huge number of entries, that's the reason why this command has so many filter options.
 The FROM/TO dates can be used to restrict the query to a specific date range.
@@ -67,11 +65,11 @@ The LIMIT option is used to set a maximum number of rows to return.
 The CURSOR option is used to paginate and navigate the rowset.
 The NODE option is used to get the result from a specific node of the cluster.
 
-### Return
+## Return
 
 A rowset with the following columns: `datetime`, `log_type`, `log_level, `description`, `username`, `database`, `ip_address`, `connection_id`.
 
-### Example
+## Example
 
 ```bash
 > LIST LOG LIMIT 10

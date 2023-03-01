@@ -3,27 +3,25 @@ title: CLOSE CONNECTION
 description: The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connectionid(s).
 ---
 
-## CLOSE CONNECTION
-
-### Syntax
+## Syntax
 
 CLOSE CONNECTION **connectionid** [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connectionid(s).
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > LIST CONNECTION

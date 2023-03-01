@@ -3,27 +3,25 @@ title: LIST METADATA
 description: The LIST METADATA command is used to retrieve detailed information about the internal structure of a table. The information returned can be further restricted by specifying a <table_name> and/or a <column_name>.
 ---
 
-## LIST METADATA
-
-### Syntax
+## Syntax
 
 LIST METADATA [**database_name**] [TABLE **table_name**] [COLUMN **column_name**]
 
-### Privileges
+## Privileges
 
 ```
 READWRITE
 ```
 
-### Description
+## Description
 
 The LIST METADATA command is used to retrieve detailed information about the internal structure of a table. The information returned can be further restricted by specifying a <table_name> and/or a <column_name>.
 
-### Return
+## Return
 
 A rowset with several columns that depends on the filters used in the command.
 
-### Example
+## Example
 
 ```bash
 > LIST METADATA

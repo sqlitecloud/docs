@@ -3,27 +3,25 @@ title: LIST BACKUPS
 description: The LIST BACKUPS command return a rowset that contains information about which databases have a backup enabled.
 ---
 
-## LIST BACKUPS
-
-### Syntax
+## Syntax
 
 LIST BACKUPS
 
-### Privileges
+## Privileges
 
 ```
 BACKUP
 ```
 
-### Description
+## Description
 
 The LIST BACKUPS command return a rowset that contains information about which databases have a backup enabled.
 
-### Return
+## Return
 
 A rowset with a single `name` column.
 
-### Example
+## Example
 
 ```bash
 > LIST BACKUPS

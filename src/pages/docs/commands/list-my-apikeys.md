@@ -3,27 +3,25 @@ title: LIST MY APIKEYS
 description: The LIST MY APIKEYS command returns a list of all the APIKEYs associated to my username.
 ---
 
-## LIST MY APIKEYS
-
-### Syntax
+## Syntax
 
 LIST MY APIKEYS
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The LIST MY APIKEYS command returns a list of all the APIKEYs associated to my username.
 
-### Return
+## Return
 
 A rowset with the following columns: `key`, `name`, creation_date`, `expiration_date` and `restriction`.
 
-### Example
+## Example
 
 ```bash
 > LIST MY APIKEYS

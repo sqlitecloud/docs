@@ -3,27 +3,25 @@ title: LIST DATABASE
 description: The LIST DATABASE KEYS command returns a list of settings for the <database_name> database.
 ---
 
-## LIST DATABASE
-
-### Syntax
+## Syntax
 
 LIST DATABASE **database_name** KEYS
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The LIST DATABASE KEYS command returns a list of settings for the <database_name> database.
 
-### Return
+## Return
 
 A rowset with `key` and `value` columns.
 
-### Example
+## Example
 
 ```bash
 > LIST DATABASE mediastore.sqlite KEYS

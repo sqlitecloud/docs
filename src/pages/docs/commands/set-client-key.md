@@ -3,27 +3,25 @@ title: SET CLIENT KEY
 description: The SET CLIENT KEY command is used to set a <keyname> to a specific <keyvalue>.
 ---
 
-## SET CLIENT KEY
-
-### Syntax
+## Syntax
 
 SET CLIENT KEY **keyname** TO **keyvalue**
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The SET CLIENT KEY command is used to set a <keyname> to a specific <keyvalue>.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > SET CLIENT KEY COMPRESSION TO 0

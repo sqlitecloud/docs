@@ -3,27 +3,25 @@ title: REVOKE PRIVILEGE
 description: Use this command to revoke a privilege (or a command separated list of privileges) from the ROLE <role_name>. If you can further restrict this command by specifying a database and/or a table name.
 ---
 
-## REVOKE PRIVILEGE
-
-### Syntax
+## Syntax
 
 REVOKE PRIVILEGE **privilege_name** ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 Use this command to revoke a privilege (or a command separated list of privileges) from the ROLE <role_name>. If you can further restrict this command by specifying a database and/or a table name.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > REVOKE PRIVILEGE privilege1 ROLE role1

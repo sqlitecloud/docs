@@ -5,29 +5,27 @@ It also returns information about how many times each command was executed on th
 
 ---
 
-## LIST COMMANDS
-
-### Syntax
+## Syntax
 
 LIST COMMANDS [DETAILED]
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The LIST COMMANDS command returns a list of all supported built-in commands.
 It also returns information about how many times each command was executed on the average execution time. The DETAILS flag adds a privileges column to the result.
 
 
-### Return
+## Return
 
 A rowset with the following columns: `command`, `count` and `avgtime`.
 
-### Example
+## Example
 
 ```bash
 > LIST COMMANDS

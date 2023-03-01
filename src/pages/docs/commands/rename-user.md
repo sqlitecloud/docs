@@ -3,27 +3,25 @@ title: RENAME USER
 description: The RENAME USER command is used to update an existing username to a new one.
 ---
 
-## RENAME USER
-
-### Syntax
+## Syntax
 
 RENAME USER **username** TO **new_username**
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The RENAME USER command is used to update an existing username to a new one.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > RENAME USER user1 TO user2

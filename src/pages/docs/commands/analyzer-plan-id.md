@@ -4,28 +4,26 @@ description: The ANALYZER PLAN ID command is used to gather information about th
 Usually a SCAN tablename entry indicates that no indexes are found and a full table scan must be performed.
 ---
 
-## ANALYZER PLAN ID
-
-### Syntax
+## Syntax
 
 ANALYZER PLAN ID **query_id** [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 DBADMIN
 ```
 
-### Description
+## Description
 
 The ANALYZER PLAN ID command is used to gather information about the indexes used (or not used) in the query plan of a query execution.
 Usually a SCAN tablename entry indicates that no indexes are found and a full table scan must be performed.
 
-### Return
+## Return
 
 A rowset with an analysis about the query id.
 
-### Example
+## Example
 
 ```bash
 > ANALYZER PLAN ID 57

@@ -3,27 +3,25 @@ title: ANALYZER RESET
 description: The ANALYZER RESET command is used to reset statistics about a specific query, a specific database or about all the query analyzer engine (if no options are used).
 ---
 
-## ANALYZER RESET
-
-### Syntax
+## Syntax
 
 ANALYZER RESET [ID **query_id**] [GROUPID **query_id**] [DATABASE **database_name**] [ALL] [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 DBADMIN
 ```
 
-### Description
+## Description
 
 The ANALYZER RESET command is used to reset statistics about a specific query, a specific database or about all the query analyzer engine (if no options are used).
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > ANALYZER RESET

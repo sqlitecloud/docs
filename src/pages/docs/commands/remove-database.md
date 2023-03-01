@@ -3,27 +3,25 @@ title: REMOVE DATABASE
 description: Use this command to permanently remove <keyname> from the list of settings for the database <database_name>.
 ---
 
-## REMOVE DATABASE
-
-### Syntax
+## Syntax
 
 REMOVE DATABASE **database_name** KEY **keyname**
 
-### Privileges
+## Privileges
 
 ```
 READWRITE, DBADMIN
 ```
 
-### Description
+## Description
 
 Use this command to permanently remove <keyname> from the list of settings for the database <database_name>.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > REMOVE DATABASE mediastore.sqlite KEY key1

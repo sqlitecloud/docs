@@ -3,27 +3,25 @@ title: GRANT ROLE
 description: Use this command to add a new <role_name> to an existing username. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
 ---
 
-## GRANT ROLE
-
-### Syntax
+## Syntax
 
 GRANT ROLE **role_name** USER **username** [DATABASE **database_name**] [TABLE **table_name**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 Use this command to add a new <role_name> to an existing username. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > GRANT ROLE role1 USER user1

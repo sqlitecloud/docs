@@ -8,19 +8,17 @@ You can supply additional optional parameters to the command:
 * The PAGESIZE parameter can be used to specify the page size of the newly created database (at the time of writing the default value is 4096). The page size must be a power of two between 512 and 65536 inclusive.
 ---
 
-## CREATE DATABASE
-
-### Syntax
+## Syntax
 
 CREATE DATABASE **database_name** [KEY **encryption_key**] [ENCODING **encoding_value**] [PAGESIZE **pagesize_value**] [IF NOT EXISTS]
 
-### Privileges
+## Privileges
 
 ```
 CREATE_DATABASE
 ```
 
-### Description
+## Description
 
 The CREATE DATABASE command physically creates a new SQLite database using the name specified in the database_name parameter. If another database with the same name exists and the clausole IF NOT EXISTS is specified then OK is returned, otherwise the proper error is generated.
 
@@ -29,11 +27,11 @@ You can supply additional optional parameters to the command:
 * The ENCODING parameter can be used to specified the encoding of the newly created database (default is UTF-8). Allowed values are UTF-8, UTF-16, UTF-16le or UTF-16be. Once an encoding has been set for a database, it cannot be changed.
 * The PAGESIZE parameter can be used to specify the page size of the newly created database (at the time of writing the default value is 4096). The page size must be a power of two between 512 and 65536 inclusive.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > CREATE DATABASE test.sqlite

@@ -7,19 +7,17 @@ This command is also useful for:
 2. Measuring latency.
 ---
 
-## PING
-
-### Syntax
+## Syntax
 
 PING
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The PING command is provided to testing whether a connection is still alive.
 This command is also useful for:
@@ -27,11 +25,11 @@ This command is also useful for:
 1. Verifying the server's ability to serve data - an error is returned when this isn't the case.
 2. Measuring latency.
 
-### Return
+## Return
 
 It returns the "PONG" string. 
 
-### Example
+## Example
 
 ```bash
 > PING

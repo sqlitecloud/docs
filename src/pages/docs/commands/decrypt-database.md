@@ -3,27 +3,25 @@ title: DECRYPT DATABASE
 description: The DECRYPT DATABASE command remove encryption from a previously AES-256 encrypted database.
 ---
 
-## DECRYPT DATABASE
-
-### Syntax
+## Syntax
 
 DECRYPT DATABASE **database_name**
 
-### Privileges
+## Privileges
 
 ```
 CREATE_DATABASE
 ```
 
-### Description
+## Description
 
 The DECRYPT DATABASE command remove encryption from a previously AES-256 encrypted database.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > DECRYPT DATABASE test.sqlite

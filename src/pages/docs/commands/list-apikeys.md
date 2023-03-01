@@ -3,27 +3,25 @@ title: LIST APIKEYS
 description: The LIST APIKEYS command is used to retrieve all the APIKEYS created on the server. The USER parameter can be used to further filter the result.
 ---
 
-## LIST APIKEYS
-
-### Syntax
+## Syntax
 
 LIST APIKEYS [USER **username**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The LIST APIKEYS command is used to retrieve all the APIKEYS created on the server. The USER parameter can be used to further filter the result.
 
-### Return
+## Return
 
 A rowset with the following columns: `username`, key`, `name`, `creation_date`, `expiration_date`, `restriction`.
 
-### Example
+## Example
 
 ```bash
 >> LIST APIKEYS
