@@ -15,7 +15,7 @@ import { Prose } from '@/components/Prose'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
 
-import { introduction } from '../../src/pages/docs/introduction/nav'
+import { introduction } from '../pages/docs/introduction/nav'
 import { commands } from '../../src/pages/docs/commands/nav'
 import { plugins } from '../../src/pages/docs/plugins/nav'
 import { sdk } from '../../src/pages/docs/sdk/nav'
@@ -33,8 +33,8 @@ function GitHubIcon(props) {
       <svg aria-hidden="true" viewBox="0 0 16 16" {...props}>
         <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" />
       </svg>
-      <div class='absolute bottom-0 right-0 top-full mt-2  px-1 flex-col items-center hidden group-hover:flex'>
-        <span class='relative z-10 p-2 text-xs leading-none whitespace-pre bg-slate-100 text-slate-900 dark:bg-black  dark:text-white shadow-lg rounded-md'>Edit this page</span>
+      <div className='absolute bottom-0 right-0 top-full mt-2  px-1 flex-col items-center hidden group-hover:flex'>
+        <span className='relative z-10 p-2 text-xs leading-none whitespace-pre bg-slate-100 text-slate-900 dark:bg-black  dark:text-white shadow-lg rounded-md'>Edit this page</span>
       </div>
     </div>
   )
@@ -45,7 +45,10 @@ function Header({ navigation }) {
   let githubLink = "https://github.com/sqlitecloud/docs/blob/main/src/pages"
   let isHomePage = router.pathname === '/'
   if (isHomePage) githubLink = githubLink + router.pathname + "index.md"
-  else githubLink = githubLink + router.pathname + ".md"
+  else {
+    if (router.pathname.split('/').length == 3) githubLink = githubLink + router.pathname + "/index.md"
+    if (router.pathname.split('/').length == 4) githubLink = githubLink + router.pathname + ".md"
+  }
   let [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -152,25 +155,40 @@ function useTableOfContents(tableOfContents) {
 export function Layout({ children, title, tableOfContents }) {
   //test actual location
   let router = useRouter()
-  let isHomePage = router.pathname === '/'
-  let isIntroduction = router.pathname.includes('introduction') ? true : false
-  let isCommands = router.pathname.includes('commands') ? true : false
-  let isSDK = router.pathname.includes('sdk') ? true : false
-  let isPlugins = router.pathname.includes('plugins') ? true : false
-  //based on location select navigation menu
-  let navigation = [];
-  if (isIntroduction) navigation = config.introduction;
-  if (isCommands) navigation = config.commands;
-  if (isSDK) navigation = config.sdk;
-  if (isPlugins) navigation = config.plugins;
-  //exctract links
-  let allLinks = navigation.flatMap((section) => section.links)
-  let linkIndex = allLinks.findIndex((link) => link.href === router.pathname)
-  let previousPage = allLinks[linkIndex - 1]
-  let nextPage = allLinks[linkIndex + 1]
-  let section = navigation.find((section) =>
-    section.links.find((link) => link.href === router.pathname)
-  )
+  let isHomePage = false
+  let isIntroduction = false
+  let isCommands = false
+  let isSDK = false
+  let isPlugins = false
+  let href = "/"
+  let navigation = []
+  let allLinks = []
+  let linkIndex = 0
+  let previousPage = null
+  let nextPage = null
+  let section = '/'
+  let routeError = router.pathname === "/_error"
+  if (router.pathname && !routeError) {
+    isHomePage = router.pathname === '/'
+    isIntroduction = router.pathname.includes('introduction') ? true : false
+    isCommands = router.pathname.includes('commands') ? true : false
+    isSDK = router.pathname.includes('sdk') ? true : false
+    isPlugins = router.pathname.includes('plugins') ? true : false
+    href = router.pathname
+    //based on location select navigation menu
+    if (isIntroduction) navigation = config.introduction;
+    if (isCommands) navigation = config.commands;
+    if (isSDK) navigation = config.sdk;
+    if (isPlugins) navigation = config.plugins;
+    //exctract links
+    allLinks = navigation.flatMap((section) => section.links)
+    linkIndex = allLinks.findIndex((link) => link.href === href)
+    previousPage = allLinks[linkIndex - 1]
+    nextPage = allLinks[linkIndex + 1]
+    section = navigation.find((section) =>
+      section.links.find((link) => link.href === href)
+    )
+  }
   let currentSection = useTableOfContents(tableOfContents)
 
   function isActive(section) {
@@ -190,7 +208,7 @@ export function Layout({ children, title, tableOfContents }) {
 
       <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
         {
-          !isHomePage &&
+          !isHomePage && !routeError &&
           <div className="hidden lg:relative lg:block lg:flex-none">
             <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
             <div className="absolute top-16 bottom-0 right-0 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
