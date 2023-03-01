@@ -74,7 +74,7 @@ const config = {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['js', 'jsx', 'md'],
+  pageExtensions: ['jsx', 'md'],
   experimental: {
     scrollRestoration: true,
   },
