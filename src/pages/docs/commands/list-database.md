@@ -1,6 +1,6 @@
 ---
 title: LIST DATABASE
-description: The LIST DATABASE KEYS command returns a list of settings for the <database_name> database.
+description: The LIST DATABASE KEYS command returns a list of settings for the database_name database.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The LIST DATABASE KEYS command returns a list of settings for the <database_name> database.
+The LIST DATABASE KEYS command returns a list of settings for the **database_name** database.
 
 ## Return
 

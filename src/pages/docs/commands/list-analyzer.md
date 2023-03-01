@@ -1,9 +1,6 @@
 ---
 title: LIST ANALYZER
-description: The LIST ANALYZER command returns a rowset with the slowest queries performed on the connected server.
-The result of the LIST ANALYZER command can be further filtered by using the GROUPID, DATABASE and GROUPED option.
-If you need to analyze the queries in a specific node then you can use the NODE parameter.
-This command is usually performed with the GROUPED flag to group the slowest queries and reduce the output.
+description: The LIST ANALYZER command returns a rowset with the slowest queries performed on the connected server. The result of the LIST ANALYZER command can be further filtered by using the GROUPID, DATABASE and GROUPED option. If you need to analyze the queries in a specific node then you can use the NODE parameter. This command is usually performed with the GROUPED flag to group the slowest queries and reduce the output.
 ---
 
 ## Syntax

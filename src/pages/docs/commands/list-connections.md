@@ -1,7 +1,6 @@
 ---
 title: LIST CONNECTIONS
-description: The LIST CONNECTIONS command returns information about the client connections server,
-The NODE parameter is used to specify in which node to execute that command.
+description: The LIST CONNECTIONS command returns information about the client connections server, The NODE parameter is used to specify in which node to execute that command.
 ---
 
 ## Syntax

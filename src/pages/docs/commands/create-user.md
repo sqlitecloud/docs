@@ -1,6 +1,6 @@
 ---
 title: CREATE USER
-description: The CREATE USER command adds a new user <username> with a specified <password> to the server. During user creation you can also pass a comma separated list of roles to apply to that user. The DATABASE and/or TABLE arguments can further restrict the which resources the user can access.
+description: The CREATE USER command adds a new user username with a specified password to the server. During user creation you can also pass a comma separated list of roles to apply to that user. The DATABASE and/or TABLE arguments can further restrict the which resources the user can access.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The CREATE USER command adds a new user <username> with a specified <password> to the server. During user creation you can also pass a comma separated list of roles to apply to that user. The DATABASE and/or TABLE arguments can further restrict the which resources the user can access.
+The CREATE USER command adds a new user **username** with a specified **password** to the server. During user creation you can also pass a comma separated list of roles to apply to that user. The DATABASE and/or TABLE arguments can further restrict the which resources the user can access.
 
 ## Return
 

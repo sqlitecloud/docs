@@ -1,6 +1,6 @@
 ---
 title: GRANT PRIVILEGE
-description: Use this command to add a new <privilege_name> to an existing role. The <privilege_name> parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+description: Use this command to add a new privilege_name to an existing role. The privilege_name parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a database_name and/or a table_name.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-Use this command to add a new <privilege_name> to an existing role. The <privilege_name> parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+Use this command to add a new **privilege_name** to an existing role. The **privilege_name** parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a **database_name** and/or a **table_name**.
 
 ## Return
 
