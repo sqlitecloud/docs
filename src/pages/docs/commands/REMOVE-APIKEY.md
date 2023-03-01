@@ -1,0 +1,26 @@
+## REMOVE APIKEY
+
+### Syntax
+
+REMOVE APIKEY **key**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Description
+
+The REMOVE APIKEY command is used to permanently remove an APIKEY from the server.
+
+### Return
+
+OK
+
+### Example
+
+```bash
+> REMOVE APIKEY roEylpydmHsKJSZKDc5acYTzu9vBwSQ9OeKTog02aow
+OK
+```

@@ -1,0 +1,26 @@
+## GRANT PRIVILEGE
+
+### Syntax
+
+GRANT PRIVILEGE **privilege_name** ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Description
+
+Use this command to add a new <privilege_name> to an existing role. The <privilege_name> parameter can be a list of comma separated privileges. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+
+### Return
+
+OK
+
+### Example
+
+```bash
+> GRANT PRIVILEGE readwrite ROLE role1
+OK
+```
