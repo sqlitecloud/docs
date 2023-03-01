@@ -37,7 +37,7 @@ function GitHubIcon(props) {
 
 function Header({ navigation }) {
   let router = useRouter()
-  let githubLink = "https://github.com/sqlitecloud/docs/blob/main/src/pages/"
+  let githubLink = "https://github.com/sqlitecloud/docs/blob/main/src/pages"
   let isHomePage = router.pathname === '/'
   if (isHomePage) githubLink = githubLink + "index.md"
   else githubLink = githubLink + router.pathname + ".md"
