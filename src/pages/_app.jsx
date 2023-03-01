@@ -20,6 +20,7 @@ function getNodeText(node) {
 function collectHeadings(nodes, slugify = slugifyWithCounter()) {
   let sections = []
 
+  /* not using tableOfContents functionality
   for (let node of nodes) {
     if (node.name === 'h2' || node.name === 'h3') {
       let title = getNodeText(node)
@@ -44,7 +45,7 @@ function collectHeadings(nodes, slugify = slugifyWithCounter()) {
 
     sections.push(...collectHeadings(node.children ?? [], slugify))
   }
-
+  */
   return sections
 }
 
