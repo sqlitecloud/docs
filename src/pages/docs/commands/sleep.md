@@ -3,27 +3,25 @@ title: SLEEP
 description: The SLEEP command is used to force current connection to sleep on server-side for a specified amount of milliseconds.
 ---
 
-## SLEEP
-
-### Syntax
+## Syntax
 
 SLEEP **ms**
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The SLEEP command is used to force current connection to sleep on server-side for a specified amount of milliseconds.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > SLEEP 100

@@ -3,27 +3,25 @@ title: AUTH USER
 description: The AUTH command authenticates the current connection, without authentication the connection cannot send any command to the server.
 ---
 
-## AUTH USER
-
-### Syntax
+## Syntax
 
 AUTH USER **username** PASSWORD **password**
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The AUTH command authenticates the current connection, without authentication the connection cannot send any command to the server.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > AUTH USER admin PASSWORD test

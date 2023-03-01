@@ -4,28 +4,26 @@ description: Several backup related settings can be applied using the SET DATABA
 All these settings are not immediately applied up-until an APPLY BACKUP SETTINGS command is executed.
 ---
 
-## APPLY BACKUP SETTINGS
-
-### Syntax
+## Syntax
 
 APPLY BACKUP SETTINGS
 
-### Privileges
+## Privileges
 
 ```
 BACKUP
 ```
 
-### Description
+## Description
 
 Several backup related settings can be applied using the SET DATABASE KEY command: `backup`, `, `backup_retention` and `backup_snapshot_interval`.
 All these settings are not immediately applied up-until an APPLY BACKUP SETTINGS command is executed.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > APPLY BACKUP SETTINGS

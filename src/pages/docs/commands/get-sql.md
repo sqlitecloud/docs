@@ -3,27 +3,25 @@ title: GET SQL
 description: The GET SQL command is used to retrieve the SQL statement used to generated the <table_name>.
 ---
 
-## GET SQL
-
-### Syntax
+## Syntax
 
 GET SQL **table_name**
 
-### Privileges
+## Privileges
 
 ```
 READWRITE
 ```
 
-### Description
+## Description
 
 The GET SQL command is used to retrieve the SQL statement used to generated the <table_name>.
 
-### Return
+## Return
 
 A strings set to the CREATE TABLE sql statement.
 
-### Example
+## Example
 
 ```bash
 > GET SQL table1

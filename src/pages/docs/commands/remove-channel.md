@@ -3,27 +3,25 @@ title: REMOVE CHANNEL
 description: The REMOVE CHANNEL command is used to completely delete a previously created channel.
 ---
 
-## REMOVE CHANNEL
-
-### Syntax
+## Syntax
 
 REMOVE CHANNEL **channel_name**
 
-### Privileges
+## Privileges
 
 ```
 PUBSUBCREATE
 ```
 
-### Description
+## Description
 
 The REMOVE CHANNEL command is used to completely delete a previously created channel.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > REMOVE CHANNEL channel1

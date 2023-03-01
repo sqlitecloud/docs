@@ -4,24 +4,22 @@ description: The LIST DATABASE CONNECTION command is used to retrieve a list of 
 The <database_name> parameter can also be a database_id if the ID flag is specified.
 ---
 
-## LIST DATABASE CONNECTIONS
-
-### Syntax
+## Syntax
 
 LIST DATABASE CONNECTIONS [ID] **database_name**
 
-### Privileges
+## Privileges
 
 ```
 HOSTADMIN
 ```
 
-### Description
+## Description
 
 The LIST DATABASE CONNECTION command is used to retrieve a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command).
 The <database_name> parameter can also be a database_id if the ID flag is specified.
 
-### Return
+## Return
 
 A rowset with the following columns:
 * `id` client ID
@@ -31,7 +29,7 @@ A rowset with the following columns:
 * `connection_date ` connection initial date/time (in UTC format)
 * `last_activity` last client activity
 
-### Example
+## Example
 
 ```bash
 > USE DATABASE mediastore.sqlite

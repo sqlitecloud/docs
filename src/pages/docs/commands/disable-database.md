@@ -3,27 +3,25 @@ title: DISABLE DATABASE
 description: Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connection.
 ---
 
-## DISABLE DATABASE
-
-### Syntax
+## Syntax
 
 DISABLE DATABASE **database_name**
 
-### Privileges
+## Privileges
 
 ```
 DBADMIN
 ```
 
-### Description
+## Description
 
 Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connection.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > DISABLE DATABASE test.sqlite

@@ -4,28 +4,26 @@ description: The ENABLE USER command re-enable a previously disabled user from t
 Once re-enable, that username is able to login again.
 ---
 
-## ENABLE USER
-
-### Syntax
+## Syntax
 
 ENABLE USER **username**
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The ENABLE USER command re-enable a previously disabled user from the system.
 Once re-enable, that username is able to login again.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > ENABLE USER user1

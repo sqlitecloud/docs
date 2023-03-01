@@ -3,27 +3,25 @@ title: ENABLE DATABASE
 description: Use this command to ENABLE a previously disabled database. Once re-enabled that database will be available again to be used with the USE DATABASE command.
 ---
 
-## ENABLE DATABASE
-
-### Syntax
+## Syntax
 
 ENABLE DATABASE **database_name**
 
-### Privileges
+## Privileges
 
 ```
 DBADMIN
 ```
 
-### Description
+## Description
 
 Use this command to ENABLE a previously disabled database. Once re-enabled that database will be available again to be used with the USE DATABASE command.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > ENABLE DATABASE test.sqlite

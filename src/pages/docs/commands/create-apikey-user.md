@@ -3,27 +3,25 @@ title: CREATE APIKEY USER
 description: The CREATE APIKEY USER command creates a new APIKEY associated to a specific username and with a mnemonic name. The RESTRICTION option is currently unused and an expiration date can be set using the EXPIRATION parameter.
 ---
 
-## CREATE APIKEY USER
-
-### Syntax
+## Syntax
 
 CREATE APIKEY USER **username** NAME **key_name** [RESTRICTION **restriction_type**] [EXPIRATION **expiration_date**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The CREATE APIKEY USER command creates a new APIKEY associated to a specific username and with a mnemonic name. The RESTRICTION option is currently unused and an expiration date can be set using the EXPIRATION parameter.
 
-### Return
+## Return
 
 A string with the new APIKEY.
 
-### Example
+## Example
 
 ```bash
 > CREATE APIKEY USER admin NAME test

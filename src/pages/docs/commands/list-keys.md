@@ -6,30 +6,28 @@ All the KEYS in the settings database are automatically distributed all over the
 To retrieve a single specific information use the GET KEY <key> command.
 ---
 
-## LIST KEYS
-
-### Syntax
+## Syntax
 
 LIST KEYS [DETAILED] [NOREADONLY]
 
-### Privileges
+## Privileges
 
 ```
 SETTINGS
 ```
 
-### Description
+## Description
 
 The LIST KEYS command is used to retrieve the server settings.
 Some of the returned settings are readonly and cannot be set. To retrieve more information about the settings use the DETAILED flag.
 All the KEYS in the settings database are automatically distributed all over the cluster.
 To retrieve a single specific information use the GET KEY <key> command.
 
-### Return
+## Return
 
 A rowset with `key`, `value` or three additional `default_value`, `readonly` and `description` if the DETAILED flag is used.
 
-### Example
+## Example
 
 ```bash
 > LIST KEYS

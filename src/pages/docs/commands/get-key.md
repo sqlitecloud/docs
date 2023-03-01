@@ -3,27 +3,25 @@ title: GET KEY
 description: The GET KEY command is used to retrieve a single specific setting about a <keyname>.
 ---
 
-## GET KEY
-
-### Syntax
+## Syntax
 
 GET KEY **keyname**
 
-### Privileges
+## Privileges
 
 ```
 SETTINGS
 ```
 
-### Description
+## Description
 
 The GET KEY command is used to retrieve a single specific setting about a <keyname>.
 
-### Return
+## Return
 
 A single value (usually a string) that depends on the input <keyname>.
 
-### Example
+## Example
 
 ```bash
 > GET KEY max_chunk_size

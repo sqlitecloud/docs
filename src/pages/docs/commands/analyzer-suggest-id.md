@@ -6,30 +6,28 @@ If the APPLY argument is used then the suggested index is automatically written 
 The NODE argument can be used to force the execution of this command to a specific node of the cluster.
 ---
 
-## ANALYZER SUGGEST ID
-
-### Syntax
+## Syntax
 
 ANALYZER SUGGEST ID **query_id** [PERCENTAGE **percentage**] [APPLY] [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 DBADMIN
 ```
 
-### Description
+## Description
 
 The ANALYZER SUGGEST ID command is used to analyze a query_id and return a suggestion about the optimal index to use to speed-up that query.
 To reduce the rows to analyze, the PERCENTAGE argument can be used.
 If the APPLY argument is used then the suggested index is automatically written into the database.
 The NODE argument can be used to force the execution of this command to a specific node of the cluster.
 
-### Return
+## Return
 
 A rowset with the following columns: `statement`, `type`, `report`.
 
-### Example
+## Example
 
 ```bash
 statement | type  | report

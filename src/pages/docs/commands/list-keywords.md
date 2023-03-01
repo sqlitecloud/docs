@@ -3,27 +3,25 @@ title: LIST KEYWORDS
 description: The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserved keywords.
 ---
 
-## LIST KEYWORDS
-
-### Syntax
+## Syntax
 
 LIST KEYWORDS
 
-### Privileges
+## Privileges
 
 ```
 READWRITE, DBADMIN
 ```
 
-### Description
+## Description
 
 The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserved keywords.
 
-### Return
+## Return
 
 A rowset with one `key` column.
 
-### Example
+## Example
 
 ```bash
 > LIST KEYWORDS

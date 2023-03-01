@@ -3,27 +3,25 @@ title: SET PASSWORD
 description: The SET PASSWORD command is used to set/change the password for an existing username.
 ---
 
-## SET PASSWORD
-
-### Syntax
+## Syntax
 
 SET PASSWORD **password** USER **username**
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The SET PASSWORD command is used to set/change the password for an existing username.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > SET PASSWORD uweri76878dsa USER user1

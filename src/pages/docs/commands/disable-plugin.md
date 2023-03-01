@@ -3,27 +3,25 @@ title: DISABLE PLUGIN
 description: Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connection.
 ---
 
-## DISABLE PLUGIN
-
-### Syntax
+## Syntax
 
 DISABLE PLUGIN **plugin_name**
 
-### Privileges
+## Privileges
 
 ```
 PLUGIN
 ```
 
-### Description
+## Description
 
 Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connection.
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > DISABLE PLUGIN sample.plugin

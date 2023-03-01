@@ -3,27 +3,25 @@ title: LIST DATABASES
 description: The LIST DATABASES command return information and statistics about the databases currently available on the server.
 ---
 
-## LIST DATABASES
-
-### Syntax
+## Syntax
 
 LIST DATABASES [DETAILED]
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The LIST DATABASES command return information and statistics about the databases currently available on the server.
 
-### Return
+## Return
 
 A rowset that contains the column `name` if the DETAILED flag is omitted, otherwise several other columns like: `size`, `connections`, `encryption`, `backup`, `nread`, `nwrite`, `inbytes`, `outbytes`,  `fragmentation, `pagesize`, `encoding` and `status`
 
-### Example
+## Example
 
 ```bash
 > LIST DATABASES DETAILED

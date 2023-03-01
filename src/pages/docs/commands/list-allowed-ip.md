@@ -3,27 +3,25 @@ title: LIST ALLOWED IP
 description: The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated to a given ROLE and/or USER. If no ROLE/USER is specified then all the IP restrictions table is returned.
 ---
 
-## LIST ALLOWED IP
-
-### Syntax
+## Syntax
 
 LIST ALLOWED IP [ROLE **role_name**] [USER **username**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN
 ```
 
-### Description
+## Description
 
 The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated to a given ROLE and/or USER. If no ROLE/USER is specified then all the IP restrictions table is returned.
 
-### Return
+## Return
 
 A rowset with the `address`, `name` and `type` columns.
 
-### Example
+## Example
 
 ```bash
 > LIST ALLOWED IP

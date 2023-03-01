@@ -3,27 +3,25 @@ title: REMOVE CLIENT KEY
 description: The REMOVE CLIENT KEY command is used to reset to a default value a <keyname>
 ---
 
-## REMOVE CLIENT KEY
-
-### Syntax
+## Syntax
 
 REMOVE CLIENT KEY **keyname**
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The REMOVE CLIENT KEY command is used to reset to a default value a <keyname>
 
-### Return
+## Return
 
 OK
 
-### Example
+## Example
 
 ```bash
 > REMOVE CLIENT KEY COMPRESSION

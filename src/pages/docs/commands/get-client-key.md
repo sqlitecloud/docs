@@ -3,27 +3,25 @@ title: GET CLIENT KEY
 description: The GET CLIENT KEY command is used to retrieve a single specific information about a <keyname>.
 ---
 
-## GET CLIENT KEY
-
-### Syntax
+## Syntax
 
 GET CLIENT KEY **keyname**
 
-### Privileges
+## Privileges
 
 ```
 NONE
 ```
 
-### Description
+## Description
 
 The GET CLIENT KEY command is used to retrieve a single specific information about a <keyname>.
 
-### Return
+## Return
 
 A single value (usually a string) that depends on the input <keyname>.
 
-### Example
+## Example
 
 ```bash
 > GET CLIENT KEY IP

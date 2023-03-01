@@ -4,28 +4,26 @@ description: The LIST CONNECTIONS command returns information about the client c
 The NODE parameter is used to specify in which node to execute that command.
 ---
 
-## LIST CONNECTIONS
-
-### Syntax
+## Syntax
 
 LIST CONNECTIONS [NODE **nodeid**]
 
-### Privileges
+## Privileges
 
 ```
 USERADMIN, HOSTADMIN
 ```
 
-### Description
+## Description
 
 The LIST CONNECTIONS command returns information about the client connections server,
 The NODE parameter is used to specify in which node to execute that command.
 
-### Return
+## Return
 
 A rowset with the following columns: `id`, `address`, `username`, `database`,  `connection_dat` and `last_activity`.
 
-### Example
+## Example
 
 ```bash
 > LIST CONNECTIONS

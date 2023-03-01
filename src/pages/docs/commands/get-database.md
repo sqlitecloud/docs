@@ -3,27 +3,25 @@ title: GET DATABASE
 description: Use this command to retrieve a single value associated to <database_name> and <keyname>.
 ---
 
-## GET DATABASE
-
-### Syntax
+## Syntax
 
 GET DATABASE **database_name** KEY **keyname**
 
-### Privileges
+## Privileges
 
 ```
 READWRITE, DBADMIN
 ```
 
-### Description
+## Description
 
 Use this command to retrieve a single value associated to <database_name> and <keyname>.
 
-### Return
+## Return
 
 A string with the requested value.
 
-### Example
+## Example
 
 ```bash
 > GET DATABASE mediastore.sqlite KEY key1
