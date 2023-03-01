@@ -44,7 +44,7 @@ function Header({ navigation }) {
   let router = useRouter()
   let githubLink = "https://github.com/sqlitecloud/docs/blob/main/src/pages"
   let isHomePage = router.pathname === '/'
-  if (isHomePage) githubLink = githubLink + "index.md"
+  if (isHomePage) githubLink = githubLink + router.pathname + "index.md"
   else githubLink = githubLink + router.pathname + ".md"
   let [isScrolled, setIsScrolled] = useState(false)
 
