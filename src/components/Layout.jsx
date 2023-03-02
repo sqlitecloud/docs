@@ -168,12 +168,13 @@ export function Layout({ children, title, tableOfContents }) {
   let nextPage = null
   let section = '/'
   let routeError = router.pathname === "/_error"
+  let splittedPathname = router.pathname.split('/');
   if (router.pathname && !routeError) {
     isHomePage = router.pathname === '/'
-    isIntroduction = router.pathname.includes('introduction') ? true : false
-    isCommands = router.pathname.includes('commands') ? true : false
-    isSDK = router.pathname.includes('sdk') ? true : false
-    isPlugins = router.pathname.includes('plugins') ? true : false
+    isIntroduction = splittedPathname[2] === 'introduction' ? true : false
+    isCommands = splittedPathname[2] === 'commands' ? true : false
+    isSDK = splittedPathname[2] === 'sdk' ? true : false
+    isPlugins = splittedPathname[2] === 'plugins' ? true : false
     href = router.pathname
     //based on location select navigation menu
     if (isIntroduction) navigation = config.introduction;
