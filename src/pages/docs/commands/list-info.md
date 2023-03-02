@@ -1,7 +1,6 @@
 ---
 title: LIST INFO
-description: The LIST INFO command is used to retrieve general information about the server.
-To retrieve a single specific information use the GET INFO <key> command.
+description: The LIST INFO command is used to retrieve general information about the server. To retrieve a single specific information use the GET INFO key command.
 ---
 
 ## Syntax
@@ -17,7 +16,7 @@ CLUSTERADMIN, CLUSTERMONITOR
 ## Description
 
 The LIST INFO command is used to retrieve general information about the server.
-To retrieve a single specific information use the GET INFO <key> command.
+To retrieve a single specific information use the GET INFO **key** command.
 
 ## Return
 

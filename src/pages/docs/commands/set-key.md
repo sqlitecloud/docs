@@ -1,7 +1,6 @@
 ---
 title: SET KEY
-description: The SET KEY command is used to set/update a <keyname> to a specific <keyvalue>.
-Once set the updated value is immediately used by the server (and automatically distributed on the cluster).
+description: The SET KEY command is used to set/update a keyname to a specific keyvalue. Once set the updated value is immediately used by the server (and automatically distributed on the cluster).
 ---
 
 ## Syntax
@@ -16,7 +15,7 @@ SETTINGS
 
 ## Description
 
-The SET KEY command is used to set/update a <keyname> to a specific <keyvalue>.
+The SET KEY command is used to set/update a **keyname** to a specific **keyvalue**.
 Once set the updated value is immediately used by the server (and automatically distributed on the cluster).
 
 ## Return

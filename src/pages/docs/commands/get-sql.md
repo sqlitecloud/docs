@@ -1,6 +1,6 @@
 ---
 title: GET SQL
-description: The GET SQL command is used to retrieve the SQL statement used to generated the <table_name>.
+description: The GET SQL command is used to retrieve the SQL statement used to generated the table_name.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ READWRITE
 
 ## Description
 
-The GET SQL command is used to retrieve the SQL statement used to generated the <table_name>.
+The GET SQL command is used to retrieve the SQL statement used to generated the **table_name**.
 
 ## Return
 

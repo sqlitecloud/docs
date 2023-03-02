@@ -1,6 +1,6 @@
 ---
 title: SET PRIVILEGE
-description: The SET PRIVILEGE command is used to grant only specified privileges to a role, previously granted privileges are revoked. The <privilege_name> parameter can be a list of comma separated privileges.
+description: The SET PRIVILEGE command is used to grant only specified privileges to a role, previously granted privileges are revoked. The privilege_name parameter can be a list of comma separated privileges.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The SET PRIVILEGE command is used to grant only specified privileges to a role, previously granted privileges are revoked. The <privilege_name> parameter can be a list of comma separated privileges.
+The SET PRIVILEGE command is used to grant only specified privileges to a role, previously granted privileges are revoked. The **privilege_name** parameter can be a list of comma separated privileges.
 
 ## Return
 

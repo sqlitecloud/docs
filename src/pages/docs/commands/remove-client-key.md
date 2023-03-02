@@ -1,6 +1,6 @@
 ---
 title: REMOVE CLIENT KEY
-description: The REMOVE CLIENT KEY command is used to reset to a default value a <keyname>
+description: The REMOVE CLIENT KEY command is used to reset to a default value a keyname
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The REMOVE CLIENT KEY command is used to reset to a default value a <keyname>
+The REMOVE CLIENT KEY command is used to reset to a default value a **keyname**
 
 ## Return
 

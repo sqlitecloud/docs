@@ -1,6 +1,6 @@
 ---
 title: GRANT ROLE
-description: Use this command to add a new <role_name> to an existing username. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+description: Use this command to add a new role_name to an existing username. You can further restrict this operation by specifying a database_name and/or a table_name.
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-Use this command to add a new <role_name> to an existing username. You can further restrict this operation by specifying a <database_name> and/or a <table_name>.
+Use this command to add a new **role_name** to an existing username. You can further restrict this operation by specifying a **database_name** and/or a **table_name**.
 
 ## Return
 
