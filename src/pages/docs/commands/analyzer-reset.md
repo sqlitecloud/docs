@@ -1,6 +1,6 @@
 ---
 title: ANALYZER RESET
-description: The ANALYZER RESET command is used to reset statistics about a specific query, a specific database or about all the query analyzer engine (if no options are used).
+description: The ANALYZER RESET command resets the statistics about a specific query, a group of queries or a database
 ---
 
 ## Syntax
@@ -15,7 +15,8 @@ DBADMIN
 
 ## Description
 
-The ANALYZER RESET command is used to reset statistics about a specific query, a specific database or about all the query analyzer engine (if no options are used).
+The ANALYZER RESET command resets the statistics about a specific query, a group of queries or a database. When the command is called with the ALL argument, it resets all the statistics.
+The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ## Return
 

@@ -1,6 +1,6 @@
 ---
 title: GET CLIENT KEY
-description: The GET CLIENT KEY command is used to retrieve a single specific information about a keyname.
+description: The GET CLIENT KEY command retrieves a single specific information about a keyname
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The GET CLIENT KEY command is used to retrieve a single specific information about a **keyname**.
+The GET CLIENT KEY command retrieves a single specific information about a **keyname**.
 
 ## Return
 

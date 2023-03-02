@@ -1,6 +1,6 @@
 ---
 title: LIST ALLOWED IP
-description: The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated to a given ROLE and/or USER. If no ROLE/USER is specified then all the IP restrictions table is returned.
+description: The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated with a given ROLE and/or USER
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated to a given ROLE and/or USER. If no ROLE/USER is specified then all the IP restrictions table is returned.
+The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated with a given ROLE and/or USER. If no ROLE/USER is specified, then all the IP restrictions table is returned.
 
 ## Return
 

@@ -1,6 +1,6 @@
 ---
 title: SET CLIENT KEY
-description: The SET CLIENT KEY command is used to set a keyname to a specific keyvalue.
+description: The SET CLIENT KEY command sets a keyname to a specific keyvalue
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The SET CLIENT KEY command is used to set a **keyname** to a specific **keyvalue**.
+The SET CLIENT KEY command sets a **keyname** to a specific **keyvalue**.
 
 ## Return
 

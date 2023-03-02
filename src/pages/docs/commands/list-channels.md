@@ -1,6 +1,6 @@
 ---
 title: LIST CHANNELS
-description: The LIST CHANNELS command return a list of previously created channels that can be used to exchange messages. This command returns only channels created with the CREATE CHANNEL command. To get a list of tables you can subscribe to you can use the LIST TABLES PUBSUB command. The PUBSUB argument forces the LIST TABLES to return a rowset compatible with the rowset returned by the LIST CHANNELS command.
+description: The LIST CHANNELS command returns a list of previously created channels that can be used to exchange messages
 ---
 
 ## Syntax
@@ -15,7 +15,8 @@ PUBSUB
 
 ## Description
 
-The LIST CHANNELS command return a list of previously created channels that can be used to exchange messages. This command returns only channels created with the CREATE CHANNEL command. To get a list of tables you can subscribe to you can use the LIST TABLES PUBSUB command. The PUBSUB argument forces the LIST TABLES to return a rowset compatible with the rowset returned by the LIST CHANNELS command.
+The LIST CHANNELS command returns a list of previously created channels that can be used to exchange messages. This command returns only channels created with the CREATE CHANNEL command.
+You can also subscribe to a table to receive all table-related events (INSERT, UPDATE, and DELETE). The LIST TABLES PUBSUB return a rowset compatible with the rowset returned by the LIST CHANNELS command.
 
 ## Return
 

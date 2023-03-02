@@ -1,6 +1,6 @@
 ---
 title: RENAME USER
-description: The RENAME USER command is used to update an existing username to a new one.
+description: The RENAME USER command updates an existing username to a new one
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The RENAME USER command is used to update an existing username to a new one.
+The RENAME USER command updates an existing username to a new one.
 
 ## Return
 

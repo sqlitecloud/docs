@@ -1,6 +1,6 @@
 ---
 title: REMOVE DATABASE
-description: Use this command to permanently remove keyname from the list of settings for the database database_name.
+description: Use this command to permanently remove keyname from the list of settings for the database database_name
 ---
 
 ## Syntax

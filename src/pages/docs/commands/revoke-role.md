@@ -1,6 +1,6 @@
 ---
 title: REVOKE ROLE
-description: Use this command to revoke a role from the USER username. If you can further restrict this command by specifying a database and/or a table name.
+description: Use this command to revoke a role from the USER username
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-Use this command to revoke a role from the USER **username**. If you can further restrict this command by specifying a database and/or a table name.
+Use this command to revoke a role from the USER **username**. You can further restrict this command by specifying a database and/or a table name.
 
 ## Return
 

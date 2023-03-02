@@ -1,6 +1,6 @@
 ---
 title: LIST USERS
-description: The LIST USERS command is used to retrieve a list of all users created in the server. The WITH ROLES argument adds also a column with a list of roles associated to each username. To restrict the list to all the users that get access to a specific database and/or table you can use the DATABASE and/or TABLE arguments.
+description: The LIST USERS command retrieves a list of all users created on the server
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The LIST USERS command is used to retrieve a list of all users created in the server. The WITH ROLES argument adds also a column with a list of roles associated to each username. To restrict the list to all the users that get access to a specific database and/or table you can use the DATABASE and/or TABLE arguments.
+The LIST USERS command retrieves a list of all users created on the server. The WITH ROLES argument also adds a column with a list of roles associated with each username. To restrict the list to all the users that get access to a specific database and/or table you can use the DATABASE and/or TABLE arguments.
 
 ## Return
 

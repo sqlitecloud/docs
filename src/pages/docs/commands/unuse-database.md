@@ -1,6 +1,6 @@
 ---
 title: UNUSE DATABASE
-description: The UNUSE DATABASE statement tells SQLite Cloud to close connection with the currently used database (previously set by a USE DATABASE statement). In no database is currently set then no error is returned.
+description: The UNUSE DATABASE statement tells SQLite Cloud to close the connection with the currently used database (previously set by a USE DATABASE statement)
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ READWRITE
 
 ## Description
 
-The UNUSE DATABASE statement tells SQLite Cloud to close connection with the currently used database (previously set by a USE DATABASE statement). In no database is currently set then no error is returned.
+The UNUSE DATABASE statement tells SQLite Cloud to close the connection with the currently used database (previously set by a USE DATABASE statement). No error is returned if the current connection has no database set.
 
 ## Return
 

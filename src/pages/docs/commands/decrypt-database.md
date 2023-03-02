@@ -1,6 +1,6 @@
 ---
 title: DECRYPT DATABASE
-description: The DECRYPT DATABASE command remove encryption from a previously AES-256 encrypted database.
+description: The DECRYPT DATABASE command removes encryption from a previously AES-256 encrypted database
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ CREATE_DATABASE
 
 ## Description
 
-The DECRYPT DATABASE command remove encryption from a previously AES-256 encrypted database.
+The DECRYPT DATABASE command removes encryption from a previously AES-256 encrypted database.
 
 ## Return
 

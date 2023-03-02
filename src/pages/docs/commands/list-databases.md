@@ -1,6 +1,6 @@
 ---
 title: LIST DATABASES
-description: The LIST DATABASES command return information and statistics about the databases currently available on the server.
+description: The LIST DATABASES command return information and statistics about the databases currently available on the server
 ---
 
 ## Syntax

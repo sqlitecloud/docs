@@ -1,6 +1,6 @@
 ---
 title: LIST CONNECTIONS
-description: The LIST CONNECTIONS command returns information about the client connections server, The NODE parameter is used to specify in which node to execute that command.
+description: The LIST CONNECTIONS command returns information about the client connections server
 ---
 
 ## Syntax
@@ -15,8 +15,7 @@ USERADMIN, HOSTADMIN
 
 ## Description
 
-The LIST CONNECTIONS command returns information about the client connections server,
-The NODE parameter is used to specify in which node to execute that command.
+The LIST CONNECTIONS command returns information about the client connections server. The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ## Return
 

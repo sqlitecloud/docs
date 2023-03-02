@@ -1,6 +1,6 @@
 ---
 title: RENAME ROLE
-description: The RENAME ROLE command is used to rename an existing role to a new name.
+description: The RENAME ROLE command renames an existing role to a new name
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The RENAME ROLE command is used to rename an existing role to a new name.
+The RENAME ROLE command renames an existing role to a new name.
 
 ## Return
 

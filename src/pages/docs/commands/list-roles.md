@@ -1,6 +1,6 @@
 ---
 title: LIST ROLES
-description: The LIST ROLES command return a rowset that contains all the ROLES (both built-in and user-defined) configured into SQLite Cloud. A ROLE can be associated to a specific database or table or can be globally defined (in that case the databasename and/or tablename columns are set to *).
+description: The LIST ROLES command returns a rowset containing all the ROLES (built-in and user-defined) configured into SQLite Cloud
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The LIST ROLES command return a rowset that contains all the ROLES (both built-in and user-defined) configured into SQLite Cloud. A ROLE can be associated to a specific database or table or can be globally defined (in that case the databasename and/or tablename columns are set to `*`).
+The LIST ROLES command returns a rowset containing all the ROLES (built-in and user-defined) configured into SQLite Cloud. A ROLE can be associated with a specific database or table or globally defined (in that case, the databasename and/or tablename columns are set to `*`).
 
 ## Return
 

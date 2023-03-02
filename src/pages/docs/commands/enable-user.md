@@ -1,6 +1,6 @@
 ---
 title: ENABLE USER
-description: The ENABLE USER command re-enable a previously disabled user from the system. Once re-enable, that username is able to login again.
+description: The ENABLE USER command re-enables a previously disabled user from the system
 ---
 
 ## Syntax
@@ -15,8 +15,7 @@ USERADMIN
 
 ## Description
 
-The ENABLE USER command re-enable a previously disabled user from the system.
-Once re-enable, that username is able to login again.
+The ENABLE USER command re-enables a previously disabled user from the system. Once re-enabled, that username can log in again.
 
 ## Return
 

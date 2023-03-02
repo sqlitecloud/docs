@@ -1,6 +1,6 @@
 ---
 title: USE DATABASE
-description: The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent statements.
+description: The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent SQL statements
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ DBADMIN, PUBSUB
 
 ## Description
 
-The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent statements.
+The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent SQL statements.
 
 ## Return
 

@@ -1,6 +1,6 @@
 ---
 title: DISABLE USER
-description: The DISABLE USER command is used to disable (and not remove) a specified username from the system. After command execution the user specified in the username argument will be no longer able to log-into the system.
+description: The DISABLE USER command disables a specified username from the system (it does not remove it)
 ---
 
 ## Syntax
@@ -15,8 +15,8 @@ USERADMIN
 
 ## Description
 
-The DISABLE USER command is used to disable (and not remove) a specified username from the system.
-After command execution the user specified in the **username** argument will be no longer able to log-into the system.
+The DISABLE USER command disables a specified username from the system (it does not remove it).
+After command execution, the user specified in the **username** argument can no longer log into the system.
 
 ## Return
 

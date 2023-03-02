@@ -1,6 +1,6 @@
 ---
 title: TRANSFER LEADERSHIP TO NODE
-description: The TRANSFER LEADERSHIP TO NODE command is rarely used (mostly for debugging purpose) but it can be used to force Raft to change its leader node to a specific nodeid. The leader node is the one that is used for write operations so it is wise to force the most powerful node to be the leader of a Raft cluster.
+description: The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ CLUSTERADMIN
 
 ## Description
 
-The TRANSFER LEADERSHIP TO NODE command is rarely used (mostly for debugging purpose) but it can be used to force Raft to change its leader node to a specific nodeid. The leader node is the one that is used for write operations so it is wise to force the most powerful node to be the leader of a Raft cluster.
+The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid. The leader node is responsible for all the write operations, so it is wise to force the most powerful node to be the leader of a Raft cluster.
 
 ## Return
 

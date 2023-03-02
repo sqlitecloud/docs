@@ -1,6 +1,6 @@
 ---
 title: SET MY PASSWORD
-description: The SET MY PASSWORD command is used to change the password for the currently connected user.
+description: The SET MY PASSWORD command changes the password for the currently connected user
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The SET MY PASSWORD command is used to change the password for the currently connected user.
+The SET MY PASSWORD command changes the password for the currently connected user.
 
 ## Return
 

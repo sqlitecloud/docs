@@ -1,6 +1,6 @@
 ---
 title: LIST KEYWORDS
-description: The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserved keywords.
+description: The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserved keywords
 ---
 
 ## Syntax

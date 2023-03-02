@@ -1,6 +1,6 @@
 ---
 title: GET INFO
-description: The GET INFO command is used to retrieve a single specific information about a key. This command can be executed on a specific nodeid by using the NODE argument.
+description: The GET INFO command retrieves a single specific information about a key
 ---
 
 ## Syntax
@@ -15,8 +15,7 @@ CLUSTERADMIN, CLUSTERMONITOR
 
 ## Description
 
-The GET INFO command is used to retrieve a single specific information about a **key**.
-This command can be executed on a specific nodeid by using the NODE argument.
+The GET INFO command retrieves a single specific information about a **key**. The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ## Return
 

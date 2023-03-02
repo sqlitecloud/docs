@@ -1,6 +1,6 @@
 ---
 title: LIST MY APIKEYS
-description: The LIST MY APIKEYS command returns a list of all the APIKEYs associated to my username.
+description: The LIST MY APIKEYS command returns a list of all the APIKEYs associated with the username used in the current connection
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The LIST MY APIKEYS command returns a list of all the APIKEYs associated to my username.
+The LIST MY APIKEYS command returns a list of all the APIKEYs associated with the username used in the current connection.
 
 ## Return
 

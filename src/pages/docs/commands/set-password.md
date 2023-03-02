@@ -1,6 +1,6 @@
 ---
 title: SET PASSWORD
-description: The SET PASSWORD command is used to set/change the password for an existing username.
+description: The SET PASSWORD command sets or changes the password for an existing username
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The SET PASSWORD command is used to set/change the password for an existing username.
+The SET PASSWORD command sets or changes the password for an existing username.
 
 ## Return
 

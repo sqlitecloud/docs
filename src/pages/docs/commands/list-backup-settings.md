@@ -1,6 +1,6 @@
 ---
 title: LIST BACKUP SETTINGS
-description: The LIST BACKUP SETTINGS command is used to retrive detailed information about the settings applied to each databases previously enabled for a backup. The backup_retention setting affects the disk space needed to store backup information about a specific database. You can specify a backup_retention settings using values like 24h, 2.5h or 2h45m. The backup_snapshot_interval specifies how often new snapshots will be created. This is used to reduce the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval then a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
+description: The LIST BACKUP SETTINGS command retrieves detailed information about the settings applied to each database previously enabled for a backup
 ---
 
 ## Syntax
@@ -15,9 +15,9 @@ BACKUP
 
 ## Description
 
-The LIST BACKUP SETTINGS command is used to retrive detailed information about the settings applied to each databases previously enabled for a backup.
-The `backup_retention` setting affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h or 2h45m.
-The `backup_snapshot_interval` specifies how often new snapshots will be created. This is used to reduce the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval then a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
+The LIST BACKUP SETTINGS command retrieves detailed information about the settings applied to each database previously enabled for a backup.
+The `backup_retention` setting affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
+The `backup_snapshot_interval` specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval, a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
 
 ## Return
 

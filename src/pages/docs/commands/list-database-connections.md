@@ -1,6 +1,6 @@
 ---
 title: LIST DATABASE CONNECTIONS
-description: The LIST DATABASE CONNECTION command is used to retrieve a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The database_name parameter can also be a database_id if the ID flag is specified.
+description: The LIST DATABASE CONNECTION command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command)
 ---
 
 ## Syntax
@@ -15,18 +15,17 @@ HOSTADMIN
 
 ## Description
 
-The LIST DATABASE CONNECTION command is used to retrieve a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command).
-The **database_name** parameter can also be a database_id if the ID flag is specified.
+The LIST DATABASE CONNECTION command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The **database_name** parameter can also be a database_id if the ID flag is specified.
 
 ## Return
 
 A rowset with the following columns:
-* `id` client ID
-* `address` client IP address
-* `username` username of the connected client
-* `database ` database name
-* `connection_date ` connection initial date/time (in UTC format)
-* `last_activity` last client activity
+* **id**: client ID
+* **address**: client IP address
+* **username**: username of the connected client
+* **database**: database name
+* **connection_date**: connection initial date/time (in UTC format)
+* **last_activity**: last client activity
 
 ## Example
 

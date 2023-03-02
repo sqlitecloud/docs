@@ -1,6 +1,6 @@
 ---
 title: LIST PRIVILEGES
-description: The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built-into SQLite Cloud.
+description: The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built into SQLite Cloud
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built-into SQLite Cloud.
+The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built into SQLite Cloud.
 
 ## Return
 

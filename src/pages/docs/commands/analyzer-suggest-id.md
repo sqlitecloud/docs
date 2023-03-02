@@ -1,6 +1,6 @@
 ---
 title: ANALYZER SUGGEST ID
-description: The ANALYZER SUGGEST ID command is used to analyze a query_id and return a suggestion about the optimal index to use to speed-up that query. To reduce the rows to analyze, the PERCENTAGE argument can be used. If the APPLY argument is used then the suggested index is automatically written into the database. The NODE argument can be used to force the execution of this command to a specific node of the cluster.
+description: The ANALYZER SUGGEST ID command analyzes a query_id and returns a suggestion about the optimal index to use to speed up that query
 ---
 
 ## Syntax
@@ -15,14 +15,17 @@ DBADMIN
 
 ## Description
 
-The ANALYZER SUGGEST ID command is used to analyze a query_id and return a suggestion about the optimal index to use to speed-up that query.
-To reduce the rows to analyze, the PERCENTAGE argument can be used.
-If the APPLY argument is used then the suggested index is automatically written into the database.
-The NODE argument can be used to force the execution of this command to a specific node of the cluster.
+The ANALYZER SUGGEST ID command analyzes a query_id and returns a suggestion about the optimal index to use to speed up that query.
+The PERCENTAGE argument reduces the number of rows to analyze.
+The APPLY argument writes the suggested index into the database automatically.
+The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ## Return
 
-A rowset with the following columns: `statement`, `type`, `report`.
+A rowset with the following columns:
+* **statement**: reference to original statement (when multiple suggestions are returned)
+* **type**: 1 means SQL, 2 means INDEX, 3 means PLAN and 4 means CANDIDATE
+* **report**: sql or suggestion computed by the SQLite engine
 
 ## Example
 

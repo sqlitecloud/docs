@@ -1,6 +1,6 @@
 ---
 title: REMOVE CHANNEL
-description: The REMOVE CHANNEL command is used to completely delete a previously created channel.
+description: The REMOVE CHANNEL command completely deletes a previously created channel
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ PUBSUBCREATE
 
 ## Description
 
-The REMOVE CHANNEL command is used to completely delete a previously created channel.
+The REMOVE CHANNEL command completely deletes a previously created channel.
 
 ## Return
 

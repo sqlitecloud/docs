@@ -1,6 +1,6 @@
 ---
 title: GET USER
-description: This command returns the username of the currency connected user.
+description: The GET USER command returns the username of the currency-connected user
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-This command returns the username of the currency connected user.
+The GET USER command returns the username of the currency-connected user.
 
 ## Return
 

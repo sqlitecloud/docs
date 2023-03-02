@@ -1,6 +1,6 @@
 ---
 title: LIST BACKUPS
-description: The LIST BACKUPS command return a rowset that contains information about which databases have a backup enabled.
+description: The LIST BACKUPS command returns a rowset containing information about which databases have enabled backup
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ BACKUP
 
 ## Description
 
-The LIST BACKUPS command return a rowset that contains information about which databases have a backup enabled.
+The LIST BACKUPS command returns a rowset containing information about which databases have enabled backup.
 
 ## Return
 

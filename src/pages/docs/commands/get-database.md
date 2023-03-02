@@ -1,6 +1,6 @@
 ---
 title: GET DATABASE
-description: Use this command to retrieve a single value associated to database_name and keyname.
+description: Use this command to retrieve a single value associated with database_name and keyname
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ READWRITE, DBADMIN
 
 ## Description
 
-Use this command to retrieve a single value associated to **database_name** and **keyname**.
+Use this command to retrieve a single value associated with **database_name** and **keyname**.
 
 ## Return
 

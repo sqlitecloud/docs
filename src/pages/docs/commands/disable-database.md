@@ -1,6 +1,6 @@
 ---
 title: DISABLE DATABASE
-description: Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connection.
+description: Use this command to disable a database
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ DBADMIN
 
 ## Description
 
-Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connection.
+Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connections.
 
 ## Return
 

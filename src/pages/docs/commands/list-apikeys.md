@@ -1,6 +1,6 @@
 ---
 title: LIST APIKEYS
-description: The LIST APIKEYS command is used to retrieve all the APIKEYS created on the server. The USER parameter can be used to further filter the result.
+description: The LIST APIKEYS command retrieves all the APIKEYS created on the server
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The LIST APIKEYS command is used to retrieve all the APIKEYS created on the server. The USER parameter can be used to further filter the result.
+The LIST APIKEYS command retrieves all the APIKEYS created on the server. The USER parameter can be used to filter the result further.
 
 ## Return
 

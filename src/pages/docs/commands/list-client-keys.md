@@ -1,6 +1,6 @@
 ---
 title: LIST CLIENT KEYS
-description: The LIST CLIENT KEYS command is used to retrieve information and settings that are specific to the current connection. To retrieve a single specific information use the GET CLIENT KEY key command.
+description: The LIST CLIENT KEYS command retrieves information and settings specific to the current connection
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ NONE
 
 ## Description
 
-The LIST CLIENT KEYS command is used to retrieve information and settings that are specific to the current connection. To retrieve a single specific information use the GET CLIENT KEY **key** command.
+The LIST CLIENT KEYS command retrieves information and settings specific to the current connection. Use the GET CLIENT KEY **key** command to retrieve specific information.
 
 ## Return
 

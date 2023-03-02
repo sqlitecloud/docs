@@ -1,6 +1,6 @@
 ---
 title: REMOVE ROLE
-description: The REMOVE ROLE command permanently delete the role_name from the server. As a side-effect the role is removed also from users, privileges and IP restrictions tables.
+description: The REMOVE ROLE command permanently deletes the role_name from the server
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ SETTINGS
 
 ## Description
 
-The REMOVE ROLE command permanently delete the **role_name** from the server. As a side-effect the role is removed also from users, privileges and IP restrictions tables.
+The REMOVE ROLE command permanently deletes the **role_name** from the server. The role is also removed from users, privileges, and IP restrictions tables as a side effect.
 
 ## Return
 

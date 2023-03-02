@@ -1,6 +1,6 @@
 ---
 title: ENABLE DATABASE
-description: Use this command to ENABLE a previously disabled database. Once re-enabled that database will be available again to be used with the USE DATABASE command.
+description: Use this command to ENABLE a previously disabled database
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ DBADMIN
 
 ## Description
 
-Use this command to ENABLE a previously disabled database. Once re-enabled that database will be available again to be used with the USE DATABASE command.
+Use this command to ENABLE a previously disabled database. Once re-enabled, the database will be available again for use with the USE DATABASE command.
 
 ## Return
 

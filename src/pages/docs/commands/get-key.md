@@ -1,6 +1,6 @@
 ---
 title: GET KEY
-description: The GET KEY command is used to retrieve a single specific setting about a keyname.
+description: The GET KEY command retrieves a single specific setting about a keyname
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ SETTINGS
 
 ## Description
 
-The GET KEY command is used to retrieve a single specific setting about a **keyname**.
+The GET KEY command retrieves a single specific setting about a **keyname**.
 
 ## Return
 

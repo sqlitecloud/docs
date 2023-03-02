@@ -1,6 +1,6 @@
 ---
 title: CLOSE CONNECTION
-description: The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connectionid(s).
+description: The CLOSE CONNECTION command closes the connection identified by the parameter connectionid
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connectionid(s).
+The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connection id(s).
 
 ## Return
 

@@ -1,6 +1,6 @@
 ---
 title: DISABLE PLUGIN
-description: Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connection.
+description: Use this command to disable a plugin
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ PLUGIN
 
 ## Description
 
-Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connection.
+Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connections.
 
 ## Return
 

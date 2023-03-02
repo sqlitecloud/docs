@@ -1,6 +1,6 @@
 ---
 title: LIST KEYS
-description: The LIST KEYS command is used to retrieve the server settings. Some of the returned settings are readonly and cannot be set. To retrieve more information about the settings use the DETAILED flag. All the KEYS in the settings database are automatically distributed all over the cluster. To retrieve a single specific information use the GET KEY key command.
+description: The LIST KEYS command retrieves the server settings
 ---
 
 ## Syntax
@@ -15,10 +15,10 @@ SETTINGS
 
 ## Description
 
-The LIST KEYS command is used to retrieve the server settings.
-Some of the returned settings are readonly and cannot be set. To retrieve more information about the settings use the DETAILED flag.
+The LIST KEYS command retrieves the server settings.
+Some of the returned settings are read-only and cannot be set. To retrieve more information about the settings, use the DETAILED flag.
 All the KEYS in the settings database are automatically distributed all over the cluster.
-To retrieve a single specific information use the GET KEY **key** command.
+To retrieve a single specific information, use the GET KEY **key** command.
 
 ## Return
 

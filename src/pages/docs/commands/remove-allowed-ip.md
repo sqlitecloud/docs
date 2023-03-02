@@ -1,6 +1,6 @@
 ---
 title: REMOVE ALLOWED IP
-description: The REMOVE ALLOWED IP command permanently remove the ip_address from the list of allowed IP. You can specify a ROLE and/or a USER to further restrict the filter.
+description: The REMOVE ALLOWED IP command permanently removes the ip_address from the list of allowed IPs
 ---
 
 ## Syntax
@@ -15,7 +15,7 @@ USERADMIN
 
 ## Description
 
-The REMOVE ALLOWED IP command permanently remove the **ip_address** from the list of allowed IP. You can specify a ROLE and/or a USER to further restrict the filter.
+The REMOVE ALLOWED IP command permanently removes the **ip_address** from the list of allowed IPs. You can specify a ROLE and/or a USER to restrict the filter further.
 
 ## Return
 

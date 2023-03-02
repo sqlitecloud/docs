@@ -1,6 +1,6 @@
 ---
 title: CREATE APIKEY USER
-description: The CREATE APIKEY USER command creates a new APIKEY associated to a specific username and with a mnemonic name. The RESTRICTION option is currently unused and an expiration date can be set using the EXPIRATION parameter.
+description: The CREATE APIKEY USER command creates a new APIKEY associated to a specific username and with a mnemonic name
 ---
 
 ## Syntax
