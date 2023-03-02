@@ -8,6 +8,7 @@ import { Hero } from '@/components/Hero'
 import { Logo, Logomark } from '@/components/Logo'
 // import LogoSQLiteCloud from '@/images/desk-logo@4x.png'
 import LogoSQLiteCloud from '@/images/logo@4x.png'
+import LogoLightSQLiteCloud from '@/images/logo-light@4x.png'
 import LogoSQLiteCloudMob from '@/images/logo-mobile@4x.png'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation } from '@/components/Navigation'
@@ -61,7 +62,6 @@ function Header({ navigation }) {
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
-
   return (
     <header
       className={clsx(
@@ -77,7 +77,15 @@ function Header({ navigation }) {
       <div className="relative flex flex-grow basis-0 items-center">
         <Link href="/" aria-label="Home page">
           <Image
-            className="hidden lg:w-44 lg:block"
+            className="hidden lg:dark:block lg:w-44 "
+            src={LogoLightSQLiteCloud}
+            alt="SQLite"
+            width={530}
+            height={108}
+            priority
+          />
+          <Image
+            className="hidden dark:hidden lg:w-44 lg:block"
             src={LogoSQLiteCloud}
             alt="SQLite"
             width={530}
