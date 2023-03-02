@@ -45,8 +45,7 @@ function SystemIcon(props) {
 }
 
 export function ThemeSelector(props) {
-  let [selectedTheme, setSelectedTheme] = useState()
-
+  let [selectedTheme, setSelectedTheme] = useState(null)
   useEffect(() => {
     if (selectedTheme) {
       document.documentElement.setAttribute('data-theme', selectedTheme.value)
@@ -69,7 +68,7 @@ export function ThemeSelector(props) {
       )
 
     window.addEventListener('storage', handler)
-
+    handler()
     return () => window.removeEventListener('storage', handler)
   }, [])
 
