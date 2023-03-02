@@ -30,7 +30,9 @@ A rowset with the following columns:
 ## Example
 
 ```bash
-statement | type  | report
+> ANALYZER SUGGEST ID 57
+----------|-------|----------------------------------------------------------------------------------------------------------------------------------------------|
+statement | type  | report                                                                                                                                       |
 ----------|-------|----------------------------------------------------------------------------------------------------------------------------------------------|
 0         |  1    | SELECT C.CUSTOMERID, SUM(I.TOTAL) FROM customers C JOIN invoices I ON C.CUSTOMERID = I.CUSTOMERID GROUP BY 1 ORDER BY 2 DESC;                |
 0         |  2    | CREATE INDEX customers_idx_4f4310b6 ON customers(CustomerId DESC);                                                                           |

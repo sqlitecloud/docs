@@ -24,7 +24,7 @@ A rowset with the following columns: `username`, key`, `name`, `creation_date`, 
 ## Example
 
 ```bash
->> LIST APIKEYS
+> LIST APIKEYS
 ----------|---------------------------------------------|--------------|---------------------|---------------------|-------------|
  username | key                                         | name         | creation_date       | expiration_date     | restriction |
 ----------|---------------------------------------------|--------------|---------------------|---------------------|-------------|
