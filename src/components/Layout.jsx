@@ -160,7 +160,8 @@ function useTableOfContents(tableOfContents) {
   return currentSection
 }
 
-export function Layout({ children, title, tableOfContents }) {
+// export function Layout({ children, title, tableOfContents }) {
+export function Layout({ children, title }) {
   //test actual location
   let router = useRouter()
   let isHomePage = false
@@ -171,13 +172,13 @@ export function Layout({ children, title, tableOfContents }) {
   let href = "/"
   let navigation = []
   let allLinks = []
-  let linkIndex = 0
+  let linkIndex = 1
   let previousPage = null
   let nextPage = null
-  let section = '/'
+  let section = null
   let routeError = router.pathname === "/_error"
   let splittedPathname = router.pathname.split('/');
-  if (router.pathname && !routeError) {
+  if (!routeError) {
     isHomePage = router.pathname === '/'
     isIntroduction = splittedPathname[2] === 'introduction' ? true : false
     isCommands = splittedPathname[2] === 'commands' ? true : false
@@ -190,25 +191,28 @@ export function Layout({ children, title, tableOfContents }) {
     if (isSDK) navigation = config.sdk;
     if (isPlugins) navigation = config.plugins;
     //exctract links
-    allLinks = navigation.flatMap((section) => section.links)
-    linkIndex = allLinks.findIndex((link) => link.href === href)
-    previousPage = allLinks[linkIndex - 1]
-    nextPage = allLinks[linkIndex + 1]
-    section = navigation.find((section) =>
-      section.links.find((link) => link.href === href)
-    )
+    if (navigation.length > 0) {
+      allLinks = navigation.flatMap((section) => section.links)
+      linkIndex = allLinks.findIndex((link) => link.href === href)
+      previousPage = linkIndex > 0 ? allLinks[linkIndex - 1] : null
+      nextPage = linkIndex >= 0 ? allLinks[linkIndex + 1] : null
+      section = navigation.find((section) =>
+        section.links.find((link) => link.href === href)
+      )
+    }
   }
-  let currentSection = useTableOfContents(tableOfContents)
+  // let currentSection = useTableOfContents(tableOfContents)
 
-  function isActive(section) {
-    if (section.id === currentSection) {
-      return true
-    }
-    if (!section.children) {
-      return false
-    }
-    return section.children.findIndex(isActive) > -1
-  }
+  // function isActive(section) {
+  //   if (section.id === currentSection) {
+  //     return true
+  //   }
+  //   if (!section.children) {
+  //     return false
+  //   }
+  //   return section.children.findIndex(isActive) > -1
+  // }
+
   return (
     <>
       <Header navigation={navigation} />
@@ -241,7 +245,7 @@ export function Layout({ children, title, tableOfContents }) {
                 )}
                 {title && (
                   <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-                    {title} {process.env.customKey}
+                    {title}
                   </h1>
                 )}
               </header>
