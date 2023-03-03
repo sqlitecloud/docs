@@ -7,7 +7,7 @@ export function Navigation({ navigation, className }) {
   let title = ""
   let titleUrl = "/"
   let href = "/"
-  if (router.pathname && router.pathname !== "/_error") {
+  if (router.pathname !== "/_error") {
     title = router.pathname.split('/')[2].toUpperCase()
     titleUrl = '/' + router.pathname.split('/')[1] + '/' + router.pathname.split('/')[2]
     href = router.pathname
