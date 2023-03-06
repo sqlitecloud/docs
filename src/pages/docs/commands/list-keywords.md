@@ -19,7 +19,7 @@ The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserv
 
 ## Return
 
-A rowset with one `key` column.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with one **key** column that returns all the reserved SQLite keywords.
 
 ## Example
 

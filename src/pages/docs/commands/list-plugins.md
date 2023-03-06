@@ -19,8 +19,15 @@ The LIST PLUGINS command returns a rowset that provides information about the in
 
 ## Return
 
-A rowset with the following columns: `name`, `type`, `enabled`, `version`, `copyright`, `description`.
-The `version`, `copyright` and `description` columns are not null only in case of native SQLite Cloud extensions developed with the official plugins SDK.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: plugin name
+* **type**: plugin type (SQLite or SQLiteCloud)
+* **enabled**: 1 enabled, 0 disabled
+* **version**: plugin version
+* **copyright**: plugin copyright
+* **description**: plugin description
+
+The **version**, **copyright** and **description** columns are not NULL only in case of native SQLite Cloud extensions developed with the official plugins SDK.
 
 ## Example
 

@@ -19,7 +19,7 @@ The SET CLIENT KEY command sets a **keyname** to a specific **keyvalue**.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

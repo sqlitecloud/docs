@@ -19,7 +19,7 @@ The CLOSE CONNECTION command closes the connection identified by the parameter c
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

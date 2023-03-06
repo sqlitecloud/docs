@@ -21,7 +21,11 @@ The `backup_snapshot_interval` specifies how often new snapshots will be created
 
 ## Return
 
-A rowset with the following columns: `name`, `enabled`, `backup_retention` and  `backup_snapshot_interval`
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: database name
+* **enabled**: 1 enabled, 0 disabled
+* **backup_retention**: retention period
+* **backup_snapshot_interval**: snapshot interval value
 
 ## Example
 

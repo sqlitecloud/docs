@@ -19,7 +19,7 @@ The SET MY PASSWORD command changes the password for the currently connected use
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

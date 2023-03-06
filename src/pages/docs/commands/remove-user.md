@@ -19,7 +19,7 @@ The REMOVE USER command removes the user specified in the **username** parameter
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

@@ -19,7 +19,7 @@ Use this command to permanently remove **keyname** from the list of settings for
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

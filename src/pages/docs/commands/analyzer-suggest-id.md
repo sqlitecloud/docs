@@ -22,7 +22,7 @@ The NODE argument forces the execution of the command to a specific node of the 
 
 ## Return
 
-A rowset with the following columns:
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
 * **statement**: reference to original statement (when multiple suggestions are returned)
 * **type**: 1 means SQL, 2 means INDEX, 3 means PLAN and 4 means CANDIDATE
 * **report**: sql or suggestion computed by the SQLite engine

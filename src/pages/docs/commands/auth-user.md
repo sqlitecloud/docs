@@ -1,6 +1,6 @@
 ---
 title: AUTH USER
-description: The AUTH command authenticates the current connection, without authentication the connection cannot send any command to the server
+description: The AUTH command authenticates the current connection, without authentication the connection cannot send any other command to the server
 ---
 
 ## Syntax
@@ -15,11 +15,11 @@ NONE
 
 ## Description
 
-The AUTH command authenticates the current connection, without authentication the connection cannot send any command to the server.
+The AUTH command authenticates the current connection, without authentication the connection cannot send any other command to the server.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

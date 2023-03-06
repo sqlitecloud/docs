@@ -19,7 +19,7 @@ The LIST METADATA command retrieves detailed information about the internal stru
 
 ## Return
 
-A rowset with several columns that depends on the filters used in the command.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with several columns that depends on the filters used in the command. The output is similar to the one obtains by calling the [sqlite3_table_column_metadata](https://www.sqlite.org/c3ref/table_column_metadata.html) API.
 
 ## Example
 

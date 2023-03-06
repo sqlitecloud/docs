@@ -26,7 +26,7 @@ All the above settings are not immediately applied up-until an APPLY BACKUP SETT
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

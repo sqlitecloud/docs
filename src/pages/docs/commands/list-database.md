@@ -19,7 +19,9 @@ The LIST DATABASE KEYS command returns a list of settings for the **database_nam
 
 ## Return
 
-A rowset with `key` and `value` columns.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: database key
+* **value**:database value
 
 ## Example
 

@@ -19,7 +19,7 @@ The REMOVE APIKEY command permanently removes an APIKEY from the server.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

@@ -19,7 +19,7 @@ The DECRYPT DATABASE command removes encryption from a previously AES-256 encryp
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

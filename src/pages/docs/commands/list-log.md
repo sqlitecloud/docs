@@ -43,7 +43,17 @@ The NODE argument forces the execution of the command to a specific node of the 
 
 ## Return
 
-A rowset with the following columns: `datetime`, `log_type`, `log_level, `description`, `username`, `database`, `ip_address`, `connection_id`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns: `datetime`, `log_type`, `log_level, `description`, `username`, `database`, `ip_address`, `connection_id`.
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **datetime**: log entry date and time
+* **log_type**: log type (a number from 1 to 8, see description)
+* **log_level**: log level (a number from 0 to 5, see description)
+* **description**: a textual description of the event
+* **username**: the username associated to the entry
+* **database**: the database name (if any) bound to the event
+* **ip_address**: the origin IP address
+* **connection_id**: the unique connection ID
 
 ## Example
 

@@ -19,7 +19,7 @@ The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

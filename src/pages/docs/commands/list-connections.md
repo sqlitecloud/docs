@@ -19,7 +19,13 @@ The LIST CONNECTIONS command returns information about the client connections se
 
 ## Return
 
-A rowset with the following columns: `id`, `address`, `username`, `database`,  `connection_dat` and `last_activity`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **id**: unique connection (client) ID
+* **address**: source connection IP address
+* **username**: username used to authenticate the connection
+* **connection_date**: original connection date and time
+* **last_activity**: last activity date and time
+* **address**: source connection IP address
 
 ## Example
 

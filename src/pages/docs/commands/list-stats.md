@@ -19,7 +19,10 @@ The LIST STATS command retrieves statistic information from the connected node (
 
 ## Return
 
-A rowset with `datetime`, `key` and `value` columns.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **datetime**: the data time of the stat
+* **key**: stat name
+* **value**: stat value
 
 ## Example
 

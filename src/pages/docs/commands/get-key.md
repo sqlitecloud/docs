@@ -19,7 +19,7 @@ The GET KEY command retrieves a single specific setting about a **keyname**.
 
 ## Return
 
-A single value (usually a string) that depends on the input <keyname>.
+A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **keyname**.
 
 ## Example
 

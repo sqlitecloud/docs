@@ -19,7 +19,7 @@ The RENAME ROLE command renames an existing role to a new name.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

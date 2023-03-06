@@ -19,7 +19,7 @@ The REMOVE CHANNEL command completely deletes a previously created channel.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

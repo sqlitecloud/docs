@@ -19,7 +19,10 @@ The LIST COMMANDS command returns a list of all supported built-in commands. It 
 
 ## Return
 
-A rowset with the following columns: `command`, `count` and `avgtime`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **command**: command syntax
+* **count**: how many times the command was executed
+* **avgtime**: average command execution time
 
 ## Example
 

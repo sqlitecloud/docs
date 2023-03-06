@@ -19,7 +19,7 @@ The LIST PRIVILEGES command returns a rowset that contains a list of all the pri
 
 ## Return
 
-A rowset with one `name` column.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with one privilege **name** column.
 
 ## Example
 

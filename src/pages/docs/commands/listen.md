@@ -23,7 +23,7 @@ In the case of TABLE, the channel_name can be *, which means you'll start receiv
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

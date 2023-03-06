@@ -19,8 +19,8 @@ In a cluster environment, the GET LEADER command returns the IP address and port
 
 ## Return
 
-A string containing the IP address and port of the leader.
-If the ID parameter is specified then the integer nodeID of the leader node is returned.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) containing the IP address and port of the leader.
+If the ID parameter is specified then the [Integer](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) nodeID of the leader node is returned.
 
 ## Example
 

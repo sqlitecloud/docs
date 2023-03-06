@@ -21,7 +21,7 @@ This command is usually performed with the GROUPED flag to group the slowest que
 
 ## Return
 
-A rowset with columns that depend on the command flags.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with columns that depend on the command flags.
 
 ## Example
 

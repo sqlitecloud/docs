@@ -19,7 +19,7 @@ Use this command to revoke a role from the USER **username**. You can further re
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

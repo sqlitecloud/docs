@@ -19,7 +19,7 @@ In a running server, the LOAD PLUGIN command forces plugin_name to be loaded in 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

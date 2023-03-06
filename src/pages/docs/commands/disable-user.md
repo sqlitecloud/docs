@@ -20,7 +20,7 @@ After command execution, the user specified in the **username** argument can no 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

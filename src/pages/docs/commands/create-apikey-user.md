@@ -19,7 +19,7 @@ The CREATE APIKEY USER command creates a new APIKEY associated to a specific use
 
 ## Return
 
-A string with the new APIKEY.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the new APIKEY.
 
 ## Example
 

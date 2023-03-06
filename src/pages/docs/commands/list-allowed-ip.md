@@ -5,7 +5,7 @@ description: The LIST ALLOWED IP returns a rowset that contains all the IP restr
 
 ## Syntax
 
-LIST ALLOWED IP [ROLE **role_name**] [USER **username**]
+LIST ALLOWED IP [ROLE **role_name**] [USER **user_name**]
 
 ## Privileges
 
@@ -19,7 +19,10 @@ The LIST ALLOWED IP returns a rowset that contains all the IP restrictions assoc
 
 ## Return
 
-A rowset with the `address`, `name` and `type` columns.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **address**: IP address(es) allowed
+* **name**: user name or role name
+* **type**: user or role [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)
 
 ## Example
 

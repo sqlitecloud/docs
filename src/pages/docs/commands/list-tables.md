@@ -19,7 +19,15 @@ The LIST TABLES command retrieves the information about the tables available ins
 
 ## Return
 
-A rowset with the following columns: `schema`, `name`, `type`, `ncol`, `wr, `strict`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **schema**: database schema name
+* **name**: table name
+* **type**: always 'table' in this version
+* **ncol**: number of columns
+* **wr**: without rowid flag
+* **name**: strict flag
+
+If the PUBSUB option is used then a single **chname** column is returned (to produce the same output as the LIST CHANNELS command).
 
 ## Example
 

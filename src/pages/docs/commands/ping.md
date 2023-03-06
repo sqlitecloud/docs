@@ -23,7 +23,7 @@ This command is also useful for:
 
 ## Return
 
-It returns the "PONG" string. 
+It returns the "PONG" [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md). 
 
 ## Example
 

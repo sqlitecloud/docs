@@ -19,7 +19,14 @@ The LIST USERS command retrieves a list of all users created on the server. The 
 
 ## Return
 
-A rowset with the following columns:  `username`, `enabled, `roles, `databasename`, and `tablename`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **username**: user name
+* **enabled**: 1 enabled, 0 disabled
+* **roles**: list of roles
+* **databasename**: database name
+* **tablename**: table name
+
+The ** roles**, ** databasename** and ** tablename** columns are returned only when the WITH ROLES flag is used.
 
 ## Example
 

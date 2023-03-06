@@ -19,7 +19,7 @@ The SLEEP command forces the current connection to sleep on the server-side for 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

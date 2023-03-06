@@ -19,7 +19,14 @@ The LIST NODES command returns a rowset with information about all the nodes tha
 
 ## Return
 
-A rowset with the following columns: `id`, `node`, `cluster`, `status`, `progress`, `match`, `last_activity`
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **id**: node ID
+* **node**: public node DNS name and port
+* **cluster**: DNS name and port used for Raft intra-node communication
+* **status**: Follower or Leader
+* **progress**: Probe, Replicate, Snapshot or Unknown
+* **match**: Raft log ID
+* **last_activity**: last activity date and time
 
 ## Example
 

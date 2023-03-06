@@ -19,7 +19,7 @@ The REMOVE ROLE command permanently deletes the **role_name** from the server. T
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

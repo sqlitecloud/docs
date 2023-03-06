@@ -19,7 +19,7 @@ The REMOVE CLIENT KEY command is used to reset to a default value a **keyname**
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

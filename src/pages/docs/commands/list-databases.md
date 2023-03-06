@@ -19,7 +19,20 @@ The LIST DATABASES command return information and statistics about the databases
 
 ## Return
 
-A rowset that contains the column `name` if the DETAILED flag is omitted, otherwise several other columns like: `size`, `connections`, `encryption`, `backup`, `nread`, `nwrite`, `inbytes`, `outbytes`,  `fragmentation, `pagesize`, `encoding` and `status`
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with only the column **name** if the DETAILED flag is omitted, otherwise several other columns:
+* **name**: database name
+* **size**: database size (in bytes)
+* **connections**: number of clients connected to the database
+* **encryption**: encryption algorithm (if any)
+* **backup**: 1 if database has backup enabled
+* **nread**: number of read operations
+* **nwrite**: number of write operations
+* **inbytes**: number of bytes received
+* **outbytes**: number of bytes sent
+* **fragmentation**: a number between 0 and 1 that represents the database fragmentation
+* **pagesize**: database default page size
+* **encoding**: database default encoding
+* **status**: database status (1 = OK, 2 = DISABLED, 3 = MAINTENANCE, 4 = ERROR)
 
 ## Example
 

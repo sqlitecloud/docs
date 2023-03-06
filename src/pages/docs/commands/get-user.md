@@ -19,7 +19,7 @@ The GET USER command returns the username of the currency-connected user.
 
 ## Return
 
-A string set to the current username.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) set to the current username.
 
 ## Example
 

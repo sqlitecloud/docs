@@ -23,7 +23,7 @@ You can use any key/value, but some keys are reserved for a special purpose:
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

@@ -19,7 +19,7 @@ The LIST BACKUPS command returns a rowset containing information about which dat
 
 ## Return
 
-A rowset with a single `name` column.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a single **name** column that returns all the databases with backup enabled.
 
 ## Example
 

@@ -19,7 +19,12 @@ The LIST ROLES command returns a rowset containing all the ROLES (built-in and u
 
 ## Return
 
-A rowset with columns `rolename`, `builtin`, `privileges`, `databasename`, and `tablename`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **rolename**: the name of the role
+* **builtin**: 1 if it is a built-in role, 0 otherwise
+* **privileges**: a comma separated list of privileges associated to the role
+* **databasename**: an optional database name to further restrict the role
+* **tablename**: an optional table name to further restrict the role
 
 ## Example
 

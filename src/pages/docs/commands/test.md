@@ -21,7 +21,7 @@ Supported test_name are: STRING, STRING0, ZERO_STRING, ERROR, EXTERROR, INTEGER,
 
 ## Return
 
-Different output that depends on the <test_name> value.
+Different output that depends on the **test_name** value.
 
 ## Example
 

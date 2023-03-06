@@ -19,7 +19,9 @@ The LIST CLIENT KEYS command retrieves information and settings specific to the 
 
 ## Return
 
-A rowset with `key` and `value` columns.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: client key
+* **value**: client value
 
 ## Example
 

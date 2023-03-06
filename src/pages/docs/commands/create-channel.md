@@ -20,7 +20,7 @@ It is usually an error to attempt to create a new channel if another one exists 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

@@ -19,7 +19,7 @@ The GET INFO command retrieves a single specific information about a **key**. Th
 
 ## Return
 
-A single value (usually a string) that depends on the input <key>.
+A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **key**.
 
 ## Example
 

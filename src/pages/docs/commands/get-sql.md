@@ -19,7 +19,7 @@ The GET SQL command retrieves the SQL statement used to generate the **table_nam
 
 ## Return
 
-A strings set to the CREATE TABLE sql statement.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) set to the CREATE TABLE sql statement.
 
 ## Example
 

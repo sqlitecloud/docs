@@ -19,7 +19,7 @@ The NOTIFY command sends an optional payload (usually a string) to a specified c
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

@@ -19,7 +19,7 @@ The ANALYZER PLAN ID command is used to gather information about the indexes use
 
 ## Return
 
-A rowset with an analysis about the query id.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with an analysis about the query id.
 
 ## Example
 

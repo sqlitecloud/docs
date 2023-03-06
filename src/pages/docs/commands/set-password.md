@@ -19,7 +19,7 @@ The SET PASSWORD command sets or changes the password for an existing username.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

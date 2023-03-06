@@ -22,7 +22,14 @@ To retrieve a single specific information, use the GET KEY **key** command.
 
 ## Return
 
-A rowset with `key`, `value` or three additional `default_value`, `readonly` and `description` if the DETAILED flag is used.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: settings key
+* **value**: settings value
+* **default_value**: default value
+* **readonly**: 1 if key is read-only
+* **description**: key description
+
+The additional **default_value**, **readonly** and **description** columns are returned only if the DETAILED flag is used.
 
 ## Example
 

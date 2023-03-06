@@ -19,7 +19,7 @@ The ENABLE USER command re-enables a previously disabled user from the system. O
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

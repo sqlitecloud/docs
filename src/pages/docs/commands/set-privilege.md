@@ -19,7 +19,7 @@ The SET PRIVILEGE command grants only specified privileges to a role. Previously
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

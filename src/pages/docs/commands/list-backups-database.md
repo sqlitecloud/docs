@@ -20,7 +20,14 @@ SQLite Cloud backup is a continuous backup system based on LiteStream that uses 
 
 ## Return
 
-A rowset with the following columns: `type`, `replica`, `generation`, `index`, `offset, `size`, `created`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **type**: can be snapshot or wal
+* **replica**: always S3 in this version
+* **generation**: backup generation ID
+* **index**: backup index ID
+* **offset**: backup offset
+* **size**: backup size in bytes
+* **created**: backup creation date and time
 
 ## Example
 

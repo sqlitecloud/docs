@@ -19,7 +19,13 @@ The LIST APIKEYS command retrieves all the APIKEYS created on the server. The US
 
 ## Return
 
-A rowset with the following columns: `username`, key`, `name`, `creation_date`, `expiration_date`, `restriction`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **username**: user name
+* **key**: API KEY
+* **name**: mnemonic name
+* **creation_date**: API KEY creation date and time
+* **expiration_date**: API KEY expiration date and time (if any)
+* **restriction**: always 0 in this version
 
 ## Example
 

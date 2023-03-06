@@ -19,7 +19,7 @@ The USE DATABASE statement tells SQLite Cloud to use the named database as the d
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

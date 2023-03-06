@@ -19,7 +19,7 @@ The REMOVE ALLOWED IP command permanently removes the **ip_address** from the li
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

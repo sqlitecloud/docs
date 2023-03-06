@@ -19,7 +19,7 @@ The REMOVE KEY command permanently deletes a **keyname** from the settings datab
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

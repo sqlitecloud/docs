@@ -19,7 +19,7 @@ Use this command to add a new **privilege_name** to an existing role. The **priv
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

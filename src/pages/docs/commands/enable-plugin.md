@@ -19,7 +19,7 @@ Use this command to re-enable a plugin previously disabled. Note that the newly 
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

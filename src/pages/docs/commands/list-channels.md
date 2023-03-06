@@ -20,7 +20,7 @@ You can also subscribe to a table to receive all table-related events (INSERT, U
 
 ## Return
 
-A rowset with a single `chname` column.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a single **chname** column that returns all channels created for Pub/Sub.
 
 ## Example
 

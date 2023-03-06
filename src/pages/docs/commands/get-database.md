@@ -19,7 +19,7 @@ Use this command to retrieve a single value associated with **database_name** an
 
 ## Return
 
-A string with the requested value.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the requested value.
 
 ## Example
 

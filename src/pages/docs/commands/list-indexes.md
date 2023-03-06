@@ -19,7 +19,9 @@ The LIST INDEXES command returns a list of all indexes defined inside the curren
 
 ## Return
 
-A rowset with the following columns: `name` and `tbl_name`.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: index name
+* **tbl_name**: table name
 
 ## Example
 

@@ -19,7 +19,7 @@ Use this command to revoke a privilege (or a command-separated list of privilege
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

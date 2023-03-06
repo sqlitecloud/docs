@@ -19,7 +19,9 @@ The LIST INFO command retrieves general information about the server. To retriev
 
 ## Return
 
-A rowset with `key`, `value` columns.
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: server key
+* **value**: server value
 
 ## Example
 

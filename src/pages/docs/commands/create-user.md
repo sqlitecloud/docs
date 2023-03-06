@@ -19,7 +19,7 @@ The CREATE USER command adds a new user **username** with a specified **password
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

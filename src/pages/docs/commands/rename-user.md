@@ -19,7 +19,7 @@ The RENAME USER command updates an existing username to a new one.
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 

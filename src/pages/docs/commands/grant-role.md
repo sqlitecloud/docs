@@ -19,7 +19,7 @@ Use this command to add a new **role_name** to an existing username. You can fur
 
 ## Return
 
-OK
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
 
 ## Example
 
