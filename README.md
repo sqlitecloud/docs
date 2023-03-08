@@ -1,2 +1,2 @@
-# docs
-Official SQLite Cloud documentation
+# SQLite Cloud documentation
+ 
