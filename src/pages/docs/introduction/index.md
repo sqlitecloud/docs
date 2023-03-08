@@ -3,7 +3,7 @@ title: Introduction to SQLite Cloud
 description: SQLite Cloud Introduction
 ---
 
-**SQLite Cloud** is a distributed relational database system built on top of the most widely used database engine, SQLite. It has been specifically designed from the ground up to ensure the strong consistency of your data across all nodes in a cluster while simultaneously managing the technical aspects of scaling, security, and data distribution. This ensures that you can focus on your core tasks while relying on **SQLite Cloud** to handle the complexities of managing your databases.
+**SQLite Cloud** is a distributed relational database system built on top of the SQLite database engine. It has been specifically designed from the ground up to ensure the strong consistency of your data across all nodes in a cluster while simultaneously managing the technical aspects of scaling, security, and data distribution. This ensures that you can focus on your core tasks while relying on **SQLite Cloud** to handle the complexities of managing your databases.
 
 ---
 

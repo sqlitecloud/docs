@@ -20,12 +20,16 @@ import { introduction } from '../pages/docs/introduction/nav'
 import { commands } from '../../src/pages/docs/commands/nav'
 import { plugins } from '../../src/pages/docs/plugins/nav'
 import { sdk } from '../../src/pages/docs/sdk/nav'
+import { sqlite } from '../../src/pages/docs/sqlite/nav'
+import { cli } from '../../src/pages/docs/cli/nav'
 
 const config = {
   introduction,
   commands,
   plugins,
-  sdk
+  sdk,
+  sqlite,
+  cli
 }
 
 function GitHubIcon(props) {
@@ -169,6 +173,8 @@ export function Layout({ children, title }) {
   let isCommands = false
   let isSDK = false
   let isPlugins = false
+  let isSQLite = false
+  let isCLI = false
   let href = "/"
   let navigation = []
   let allLinks = []
@@ -184,13 +190,17 @@ export function Layout({ children, title }) {
     isCommands = splittedPathname[2] === 'commands' ? true : false
     isSDK = splittedPathname[2] === 'sdk' ? true : false
     isPlugins = splittedPathname[2] === 'plugins' ? true : false
+    isSQLite = splittedPathname[2] === 'sqlite' ? true : false
+    isCLI = splittedPathname[2] === 'cli' ? true : false
     href = router.pathname
     //based on location select navigation menu
     if (isIntroduction) navigation = config.introduction;
     if (isCommands) navigation = config.commands;
     if (isSDK) navigation = config.sdk;
     if (isPlugins) navigation = config.plugins;
-    //exctract links
+    if (isSQLite) navigation = config.sqlite;
+    if (isCLI) navigation = config.cli;
+    //extract links
     if (navigation.length > 0) {
       allLinks = navigation.flatMap((section) => section.links)
       linkIndex = allLinks.findIndex((link) => link.href === href)

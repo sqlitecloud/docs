@@ -4,7 +4,7 @@ pageTitle: SQLite Cloud Documentation
 description: Cache every single thing your app could ever do ahead of time, so your code never even has to run at all.
 ---
 
-SQLite Cloud guarantees your data to be strongly consistent across all the cluster nodes while handling all the technical details about managing the underlying infrastructure, security, and data distribution. {% .lead %}
+**SQLite Cloud** is a distributed relational database system built on top of the SQLite database engine. It has been specifically designed from the ground up to ensure the strong consistency of your data across all nodes in a cluster while simultaneously managing the technical aspects of scaling, security, and data distribution.
 
 {% quick-links %}
 
