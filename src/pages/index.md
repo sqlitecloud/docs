@@ -16,8 +16,8 @@ description: Cache every single thing your app could ever do ahead of time, so y
 
 {% quick-link title="SDK reference" icon="theming" href="/docs/sdk" description="Learn how to customize SQLite Cloud to better fit your needs." /%}
 
-{% quick-link title="SQLite" icon="plugins" href="/docs/sqlite" description="Learn more about the SQLite bridge." /%}
+{% quick-link title="SQLite" icon="feather" href="/docs/sqlite" description="Learn more about the SQLite bridge." /%}
 
-{% quick-link title="Command Line Interface" icon="theming" href="/docs/cli" description="Learn how to use the SQLite Cloud command line interface." /%}
+{% quick-link title="Command Line Interface" icon="terminal" href="/docs/cli" description="Learn how to use the SQLite Cloud command line interface." /%}
 
 {% /quick-links %}
