@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import PlausibleProvider from 'next-plausible'
 import { slugifyWithCounter } from '@sindresorhus/slugify'
 
 import { Layout } from '@/components/Layout'
@@ -67,11 +68,12 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>{pageTitle}</title>
         {description && <meta name="description" content={description} />}
-        <script defer data-domain="docs.sqlitecloud.io" src="https://plausible.io/js/script.js"></script>
       </Head>
-      <Layout title={title} tableOfContents={tableOfContents}>
-        <Component {...pageProps} />
-      </Layout>
+      <PlausibleProvider domain="docs.sqlitecloud.io">
+        <Layout title={title} tableOfContents={tableOfContents}>
+          <Component {...pageProps} />
+        </Layout>
+      </PlausibleProvider>
     </>
   )
 }

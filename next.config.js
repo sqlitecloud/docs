@@ -1,4 +1,5 @@
 const withMarkdoc = require('@markdoc/next.js')
+const { withPlausibleProxy } = require('next-plausible')
 
 /*
 const path = require('path')
@@ -81,7 +82,7 @@ const nextConfig = {
   env: {
   },
 }
-
-module.exports = withMarkdoc()(nextConfig)
-
+module.exports = withPlausibleProxy()(
+  withMarkdoc()(nextConfig)
+)
 
