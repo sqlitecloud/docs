@@ -1,6 +1,6 @@
 ---
 title: SQLite Cloud Documentation
-description: how to participate
+description: Documentation files for docs.sqlitecloud.io
 ---
 
 # SQLite Cloud Documentation
