@@ -1,0 +1,52 @@
+---
+title: Nodes
+description: Dashboard Nodes
+---
+
+The **Nodes** section of your cluster provides information on each node. A green circle next to a node's name denotes the leader node, while a blue circle indicates a follower node. The leader node can change periodically due to the nature of the Raft algorithm. For technical details on the Leader Election algorithm, please refer to [this article](https://towardsdatascience.com/raft-algorithm-explained-a7c856529f40).
+
+You can add more nodes to your cluster at any time.
+
+![Dashboard Nodes](@docs-website-assets/introduction/dashboard_nodes.png)
+
+The **Node** column shows the hostname and port of each node, SQLite Cloud assigns a unique UUID to every node and adds it to our `sqlite.cloud` domain name system. To map this name to your domain, add a CNAME entry to your DNS.
+
+The **Hardware** column summarizes the hardware specifications of the node running your SQLite Cloud instance.
+
+The **Status** column provides Raft-specific information and can display the following values:
+
+* Replicate: A follower that eagerly receives log entries to append to its log.
+* Probe: A follower whose last index is unknown and is "probed" periodically to narrow down its last index. In the ideal (and common) case, only one round of probing is necessary as the follower will react with a hint. Followers that are probed over extended periods of time are often offline.
+* Snapshot: A follower that needs log entries not available from the leader's Raft log and requires a full snapshot to return to Replicate status.
+* Unknown: An error condition that should not occur.
+
+The **Raft** column displays information on the node's Raft log ID and the leader log ID. A green color indicates that the two values are equal, meaning that the follower node is up to date. An orange color indicates that the follower is about 10% behind the leader Raft Log ID. In case of a read operation, the node will require an update from the leader node, and the client may need to wait a bit before the operation is completed. A red color indicates that the follower node is more than 10% behind the leader Raft Log ID.
+
+The **Connections** column shows the number of currently established connections in the node.
+
+The **CPU**, **RAM**, and **Disk** values display information on the node's hardware resource usage. By clicking on the **CPU** or **RAM** values, you can view a more detailed historical graph.
+
+The last Action menu contains links to:
+
+* Logs: Lists all logs related to the node, which can be filtered by type, date, and log level.
+* Connections: Displays information on all currently established connections in the node.
+* Delete Node: Used to remove the node. Please note that this action cannot be undone.
+
+### Add a New Node
+
+To add a new node to your cluster (project), simply click on the "Create Node" button.
+A dialogue box will appear, allowing you to specify a deployment region, the number of nodes to add and the type of node(s).
+
+In this beta version, projects are limited to the **Hobby Tier** plan, so you cannot add more than three nodes per project.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_create_node.png)
+
+To ensure global distribution for your project, you have the option to add a node in three distinct regions. Subsequently, you can utilize the project connection string to enable the load balancer to make decisions based on client-to-server latency, effectively determining which node to utilize.
+
+### Project connection string
+
+When you click on the project name in the left navigation bar, a window will appear, presenting all the necessary information to connect to your cluster. While you have the option to use the individual node address, opting for this approach means forfeiting the benefits of the multi-regional load balancer.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_info_project.png)
+
+Finally, the world map at the bottom of the page visualizes all cluster nodes in their specific geo-locations.

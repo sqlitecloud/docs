@@ -1,0 +1,29 @@
+---
+title: DISABLE PLUGIN
+description: Use this command to disable a plugin
+---
+
+## Syntax
+
+DISABLE PLUGIN **plugin_name**
+
+## Privileges
+
+```
+PLUGIN
+```
+
+## Description
+
+Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connections.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> DISABLE PLUGIN sample.plugin
+OK
+```

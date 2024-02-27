@@ -1,0 +1,20 @@
+---
+title: API
+description: Dashboard API
+---
+
+SQLite Cloud provides the ability to automatically generate basic REST API(s) for your databases. To enable the REST API, you can select the appropriate HTTP verbs that you want to activate for individual tables or the whole database.
+
+For instance, in the given screenshot, the REST API(s) are enabled only for the `Track` table in the `Chinook.sqlite` database.
+
+![Dashboard Create API](@docs-website-assets/introduction/dashboard_create_restapi.png)
+
+Moreover, the OpenAPI setting is also enabled to automatically describe the APIs using this standard. You can learn more about OpenAPI on the official [website](https://oai.github.io/Documentation/).
+
+By clicking on the **Open API** button, you can access a list of all the supported operations that you can perform on your tables using the REST API(s).
+
+![Dashboard OpenAPI](@docs-website-assets/introduction/dashboard_openapi.png)
+
+To authorize these operations, you need to insert a previously generated [API KEY](/docs/introduction/apikey) by clicking the **Authorize** button.
+
+![Dashboard OpenAPI Authorization](@docs-website-assets/introduction/dashboard_openapi_auth.png)

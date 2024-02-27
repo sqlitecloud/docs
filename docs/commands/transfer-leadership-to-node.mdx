@@ -1,0 +1,35 @@
+---
+title: TRANSFER LEADERSHIP TO NODE
+description: The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid
+---
+
+## Syntax
+
+TRANSFER LEADERSHIP TO NODE **nodeid**
+
+## Privileges
+
+```
+CLUSTERADMIN
+```
+
+## Description
+
+The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid. The leader node is responsible for all the write operations, so it is wise to force the most powerful node to be the leader of a Raft cluster.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> GET LEADER ID
+1
+
+> TRANSFER LEADERSHIP TO NODE 3
+OK
+
+> GET LEADER ID
+3
+```

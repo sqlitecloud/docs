@@ -1,0 +1,41 @@
+---
+title: "connect"
+description: SQLite Cloud PHP SDK SQLiteCloud.connect()
+---
+
+```js
+SQLiteCloud.connect($hostname, $port = 8860)
+```
+
+To connect to SQLite Cloud, you need to first allocate an SQLiteCloud instance and then inizialize some mandatory public properties (username and password). The SQLiteCloud PHP class has the following properties:
+```js
+class SQLiteCloud {
+		public $username = '';
+		public $password = '';
+		public $database = '';
+		public $timeout = NULL;
+		public $connect_timeout = 20;
+		public $compression = false;
+    // ...
+}
+```
+
+### Example
+```js
+
+  $sqlitecloud = new SQLiteCloud();
+  $sqlitecloud->username = 'admin';
+  $sqlitecloud->password = 'admin';
+
+  try {
+			if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+				$msg = $sqlitecloud->errmsg;
+				$sqlitecloud = NULL;
+				return $msg;
+			}
+  } catch (Exception $e) {
+			return $e->getMessage();
+  }
+
+  return true;
+```

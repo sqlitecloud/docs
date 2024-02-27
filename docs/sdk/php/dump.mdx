@@ -1,0 +1,33 @@
+---
+title: "dump"
+description: SQLite Cloud PHP SDK SQLiteCloudRowset.dump()
+---
+
+```js
+SQLiteCloudRowset.dump()
+```
+
+Print the Rowset on standard output.
+
+### Example
+```js
+
+$sqlitecloud = new SQLiteCloud();
+$sqlitecloud->username = 'admin';
+$sqlitecloud->password = 'admin';
+
+try {
+	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+		$msg = $sqlitecloud->errmsg;
+		$sqlitecloud = NULL;
+		return $msg;
+	}
+  } catch (Exception $e) {
+		return $e->getMessage();
+  }
+
+$result = $sqlitecloud->execute('LIST INFO');
+$result->dump();
+
+$sqlitecloud->disconnect();
+```

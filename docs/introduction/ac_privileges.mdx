@@ -1,0 +1,58 @@
+---
+title: Privileges
+description: Privileges
+---
+
+In a role-based access control system, a privilege represents a specific action or permission that a user or role is allowed to perform within the system.
+It defines what a user can or cannot do, such as reading, writing, or managing certain resources like tables, databases, or settings.
+Essentially, a privilege is a **right** or **ability** granted to a user or role, specifying their level of access and control over the system's resources.
+
+A privilege can be [granted](https://docs.sqlitecloud.io/docs/commands/grant-privilege), [revoked](https://docs.sqlitecloud.io/docs/commands/revoke-privilege) and [assigned](https://docs.sqlitecloud.io/docs/commands/set-privilege) to a given role.
+A role can contains any combination of privileges.
+
+```bash
+>> LIST PRIVILEGES
+-----------------|
+ name            |
+-----------------|
+ NONE            |
+ READ            |
+ INSERT          |
+ UPDATE          |
+ DELETE          |
+ READWRITE       |
+ PRAGMA          |
+ CREATE_TABLE    |
+ CREATE_INDEX    |
+ CREATE_VIEW     |
+ CREATE_TRIGGER  |
+ DROP_TABLE      |
+ DROP_INDEX      |
+ DROP_VIEW       |
+ DROP_TRIGGER    |
+ ALTER_TABLE     |
+ ANALYZE         |
+ ATTACH          |
+ DETACH          |
+ DBADMIN         |
+ SUB             |
+ PUB             |
+ PUBSUB          |
+ BACKUP          |
+ RESTORE         |
+ DOWNLOAD        |
+ PLUGIN          |
+ SETTINGS        |
+ USERADMIN       |
+ CLUSTERADMIN    |
+ CLUSTERMONITOR  |
+ CREATE_DATABASE |
+ DROP_DATABASE   |
+ HOSTADMIN       |
+ SWITCH_USER     |
+ PUBSUBCREATE    |
+ PUBSUBADMIN     |
+ WEBLITE         |
+ ADMIN           |
+-----------------|
+```

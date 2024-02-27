@@ -1,0 +1,36 @@
+---
+title: LISTEN
+description: The LISTEN command is used to start receiving notifications for a given channel/table
+---
+
+## Syntax
+
+LISTEN [TABLE] **channel_name** [DATABASE **database_name**]
+
+## Privileges
+
+```
+SUB
+```
+
+## Description
+
+The LISTEN command is used to start receiving notifications for a given channel/table.
+Nothing is done if the current connection is registered as a listener for this notification channel.
+The optional DATABASE parameter is ignored if the TABLE flag is not specified.
+
+
+The optional TABLE flag specifies that you want to receive notification for a given table. The DATABASE parameter can be used to identify which database to use (or the current database will be used).
+LISTENING to a table means you'll receive notification about all the write operations in that table.
+In the case of TABLE, the channel_name can be *, which means you'll start receiving notifications from all the tables inside the specified database.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> LISTEN channel1
+OK
+```

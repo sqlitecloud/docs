@@ -1,0 +1,26 @@
+---
+title: Analyzer
+description: Dashboard Analyzer
+---
+
+The Analyzer panel is a powerful tool that collects and categorizes all the queries executed on your cluster based on their execution time. It allows for intelligent and proactive analysis, and provides recommendations on which indexes to use to optimize frequently used queries.
+
+![Dashboard Empty Analyzer](@docs-website-assets/introduction/dashboard_analyzer_empty.png)
+
+By default, the Analyzer is turned off to avoid a small performance penalty. However, you can enable it by accessing the Settings button and setting the `query_analyzer_enabled` flag to 1, then pressing Save. You can also adjust the `query_analyzer_threshold` flag to set the minimum threshold query time (in milliseconds) that triggers a query to be included in the Analyzer. If the default value is too low, it's recommended to increase it to avoid having too many queries included in the panel.
+
+![Dashboard Analyzer Settings](@docs-website-assets/introduction/dashboard_analyzer_settings.png)
+
+To test the Analyzer, we can go to the `Databases -> Chinook.sqlite -> Console` section and perform a query that filters the non-indexed Composer column of the Track table with the following statement: `SELECT * FROM Tracks WHERE Composer = 'AC/DC'`;
+
+![Dashboard Analyzer Console](@docs-website-assets/introduction/dashboard_analyzer_console.png)
+
+Once we have executed this query, we can go back to the Analyzer panel and see that it has been successfully analyzed by the **nemtfenosk** node. 
+
+![Dashboard Analyzer Query](@docs-website-assets/introduction/dashboard_analyzer_query.png)
+
+By selecting **Details** and **Plan**, we can get more in-depth information about the execution of this query over time. However, what we're most interested in is the intelligent recommendation, which can be found by selecting **Suggest**. In the Indexes field, we can find the optimal index to apply to our database, which will speed up all queries on the Track table filtered by the Composer column.
+
+![Dashboard Analyzer Suggestion](@docs-website-assets/introduction/dashboard_analyzer_suggest.png)
+
+To apply the recommended index(es), simply select **Apply** and they will be automatically written and distributed in the `Chinook.sqlite` database.

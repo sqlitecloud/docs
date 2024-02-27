@@ -1,0 +1,40 @@
+---
+title: GET DATABASE
+description: Use this command to retrieve information about the currently used database.
+---
+
+## Syntax
+
+GET DATABASE **[key]**
+
+## Privileges
+
+```
+HOSTADMIN
+```
+
+## Description
+
+Use this command to retrieve information about the currently used database. **key** parameter can be ID, SIZE, and NAME (default if **key** is not specified).
+
+## Return
+
+An [Integer](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)  if **key** is ID or SIZE.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)  if **key** is NAME.
+
+## Example
+
+```bash
+> GET DATABASE ID
+9
+
+> GET DATABASE SIZE
+921600
+
+> GET DATABASE NAME
+mediastore.sqlite
+
+> GET DATABASE
+mediastore.sqlite
+
+```

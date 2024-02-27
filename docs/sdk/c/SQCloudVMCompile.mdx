@@ -1,0 +1,48 @@
+---
+title: "SQCloudVMCompile"
+description: SQCloud VM C/C++ Interface SQCloudVMCompile
+---
+
+```c
+SQCloudVM *SQCloudVMCompile (SQCloudConnection *connection, const char *sql, int32_t len, const char **tail);
+```
+
+### Description
+Compile an SQL statement into a byte-code virtual machine.
+This function resembles the [sqlite3_prepare](https://www.sqlite.org/c3ref/prepare.html) SQLite API. 
+
+### Parameters
+* **connection**: A valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **sql**: The statement to be compiled. 
+* **len**: If the len argument is negative, then sql is read up to the first zero terminator. If len is positive, then it is the number of bytes read from sql.
+* **tail**: If the tail argument is not NULL then *tail is made to point to the first byte past the end of the first SQL statement in sql. SQCloudVMCompile compiles only the first statement in sql, so *tail is left pointing to what remains uncompiled.
+
+
+### Return value
+An `SQCloudVM` opaque datatype representing the compiled statement.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES (?1);", -1, NULL);
+
+    // do something with vm
+}
+```

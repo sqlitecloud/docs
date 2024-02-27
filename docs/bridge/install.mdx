@@ -1,0 +1,31 @@
+---
+title: SQLite Cloud Bridge Installation
+description: SQLite Cloud Installation.
+---
+
+All the communications between the clients and the cluster are encrypted, and so you must link the [LibreSSL](https://www.libressl.org) (libtls) library with your code.
+
+### Install LibreSSL
+
+#### **Linux:**
+
+- Download the latest portable source from [www.libressl.org](https://www.libressl.org/)
+- Extract the tarball and change the directory to the libressl dir
+- Compile and install LibreSSL. By default, the install script will install LibreSSL to the `/usr/local/` folder. In order to avoid issue with other SSL libraries installed on the system, you can specify a different install directory, for example `/usr/local/libressl`, with the following command:
+
+```bash
+./configure --prefix=/usr/local/libressl --with-openssldir=/usr/local/libressl && make && make install
+```
+
+#### **macOS:**
+
+```bash
+brew install libressl
+```
+
+or you can compile and install from the source code using the same Linux instructions.
+
+
+#### **Windows:**
+
+Follow the [official LibreSSL build instructions](https://github.com/libressl/portable).

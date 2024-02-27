@@ -1,0 +1,41 @@
+---
+title: "execute"
+description: SQLite Cloud PHP SDK SQLiteCloud.execute()
+---
+
+```js
+SQLiteCloud.execute($command)
+```
+
+Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands).
+
+## Return value
+* `false` is returned in case of an error
+* `true` is returned in case of OK reply
+* `NULL` is returned in case of NULL reply
+* An `integer` or a `double` in case of numeric reply
+* A `string` if the reply is a string value
+* A PHP `array` if the reply contains multiple values
+* An `SQLiteCloudRowset` instance in case of a query reply
+
+### Example
+```js
+
+$sqlitecloud = new SQLiteCloud();
+$sqlitecloud->username = 'admin';
+$sqlitecloud->password = 'admin';
+
+try {
+	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+		$msg = $sqlitecloud->errmsg;
+		$sqlitecloud = NULL;
+		return $msg;
+	}
+  } catch (Exception $e) {
+		return $e->getMessage();
+  }
+
+$result = $sqlitecloud->execute('LIST INFO');
+
+$sqlitecloud->disconnect();
+```

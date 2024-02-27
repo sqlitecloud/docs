@@ -1,0 +1,111 @@
+---
+title: LIST METADATA
+description: The LIST METADATA command retrieves detailed information about the internal structure of a table
+---
+
+## Syntax
+
+LIST METADATA [**database_name**] [TABLE **table_name**] [COLUMN **column_name**]
+
+## Privileges
+
+```
+READWRITE
+```
+
+## Description
+
+The LIST METADATA command retrieves detailed information about the internal structure of a table. The information returned can be further restricted by specifying a **table_name** and/or a **column_name**.
+
+## Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with several columns that depends on the filters used in the command. The output is similar to the one obtains by calling the [sqlite3_table_column_metadata](https://www.sqlite.org/c3ref/table_column_metadata.html) API.
+
+## Example
+
+```bash
+> LIST METADATA
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+ name              | data_type     | col_seq | not_null | primary_key | auto_inc | tablename     | affinity_type |
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+ TrackId           | INTEGER       | BINARY  | 1        | 1           | 0        | Track         | 1             |
+ Name              | NVARCHAR(200) | BINARY  | 1        | 0           | 0        | Track         | 3             |
+ AlbumId           | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ MediaTypeId       | INTEGER       | BINARY  | 1        | 0           | 0        | Track         | 1             |
+ GenreId           | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ Composer          | NVARCHAR(220) | BINARY  | 0        | 0           | 0        | Track         | 3             |
+ Milliseconds      | INTEGER       | BINARY  | 1        | 0           | 0        | Track         | 1             |
+ Bytes             | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ UnitPrice         | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | Track         | 3             |
+ PlaylistId        | INTEGER       | BINARY  | 1        | 1           | 0        | PlaylistTrack | 1             |
+ TrackId           | INTEGER       | BINARY  | 1        | 1           | 0        | PlaylistTrack | 1             |
+ PlaylistId        | INTEGER       | BINARY  | 1        | 1           | 0        | Playlist      | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Playlist      | 3             |
+ ArtistId          | INTEGER       | BINARY  | 1        | 1           | 0        | Artist        | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Artist        | 3             |
+ CustomerId        | INTEGER       | BINARY  | 1        | 1           | 0        | Customer      | 1             |
+ FirstName         | NVARCHAR(40)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ LastName          | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ Company           | NVARCHAR(80)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Address           | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ City              | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ State             | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Country           | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ PostalCode        | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Phone             | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Fax               | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Email             | NVARCHAR(60)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ SupportRepId      | INTEGER       | BINARY  | 0        | 0           | 0        | Customer      | 1             |
+ EmployeeId        | INTEGER       | BINARY  | 1        | 1           | 0        | Employee      | 1             |
+ LastName          | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Employee      | 3             |
+ FirstName         | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Employee      | 3             |
+ Title             | NVARCHAR(30)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ ReportsTo         | INTEGER       | BINARY  | 0        | 0           | 0        | Employee      | 1             |
+ BirthDate         | DATETIME      | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ HireDate          | DATETIME      | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Address           | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ City              | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ State             | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Country           | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ PostalCode        | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Phone             | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Fax               | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Email             | NVARCHAR(60)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ GenreId           | INTEGER       | BINARY  | 1        | 1           | 0        | Genre         | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Genre         | 3             |
+ InvoiceId         | INTEGER       | BINARY  | 1        | 1           | 0        | Invoice       | 1             |
+ CustomerId        | INTEGER       | BINARY  | 1        | 0           | 0        | Invoice       | 1             |
+ InvoiceDate       | DATETIME      | BINARY  | 1        | 0           | 0        | Invoice       | 3             |
+ BillingAddress    | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingCity       | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingState      | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingCountry    | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingPostalCode | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ Total             | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | Invoice       | 3             |
+ AlbumId           | INTEGER       | BINARY  | 1        | 1           | 0        | Album         | 1             |
+ Title             | NVARCHAR(160) | BINARY  | 1        | 0           | 0        | Album         | 3             |
+ ArtistId          | INTEGER       | BINARY  | 1        | 0           | 0        | Album         | 1             |
+ InvoiceLineId     | INTEGER       | BINARY  | 1        | 1           | 0        | InvoiceLine   | 1             |
+ InvoiceId         | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ TrackId           | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ UnitPrice         | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | InvoiceLine   | 3             |
+ Quantity          | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ MediaTypeId       | INTEGER       | BINARY  | 1        | 1           | 0        | MediaType     | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | MediaType     | 3             |
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+
+> LIST METADATA TABLE Track
+--------------|---------------|---------|----------|-------------|----------|
+ name         | data_type     | col_seq | not_null | primary_key | auto_inc |
+--------------|---------------|---------|----------|-------------|----------|
+ TrackId      | INTEGER       | BINARY  | 1        | 1           | 0        |
+ Name         | NVARCHAR(200) | BINARY  | 1        | 0           | 0        |
+ AlbumId      | INTEGER       | BINARY  | 0        | 0           | 0        |
+ MediaTypeId  | INTEGER       | BINARY  | 1        | 0           | 0        |
+ GenreId      | INTEGER       | BINARY  | 0        | 0           | 0        |
+ Composer     | NVARCHAR(220) | BINARY  | 0        | 0           | 0        |
+ Milliseconds | INTEGER       | BINARY  | 1        | 0           | 0        |
+ Bytes        | INTEGER       | BINARY  | 0        | 0           | 0        |
+ UnitPrice    | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        |
+--------------|---------------|---------|----------|-------------|----------|
+```

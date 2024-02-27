@@ -1,0 +1,29 @@
+---
+title: CREATE USER
+description: The CREATE USER command adds a new user username with a specified password to the server
+---
+
+## Syntax
+
+CREATE USER **username** PASSWORD **password** [ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]]
+
+## Privileges
+
+```
+USERADMIN
+```
+
+## Description
+
+The CREATE USER command adds a new user **username** with a specified **password** to the server. During user creation, you can also pass a comma-separated list of roles to apply to that user. The DATABASE and TABLE optional arguments can restrict the particular ROLE to a specific resource. If ROLE is omitted then DATABASE and TABLE parameters are ignored.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> CREATE USER user1 PASSWORD gdfhjs76fdgshj
+OK
+```

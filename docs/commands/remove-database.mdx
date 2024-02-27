@@ -1,0 +1,29 @@
+---
+title: REMOVE DATABASE
+description: The REMOVE DATABASE command permanently deletes a database from the cluster.
+---
+
+## Syntax
+
+REMOVE DATABASE **database_name** [IF EXISTS]
+
+## Privileges
+
+```
+DROP_DATABASE
+```
+
+## Description
+
+The REMOVE DATABASE command permanently deletes a database from the cluster.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> REMOVE DATABASE mediastore.sqlite
+OK
+```

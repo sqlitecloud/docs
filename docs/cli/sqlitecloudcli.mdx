@@ -1,0 +1,149 @@
+---
+title: sqlitecloud-cli
+description: SQLite Cloud Command Line Interface.
+---
+
+**sqlitecloud-cli** is a terminal-based front-end to SQLite Cloud written in C. It enables you to type in queries interactively, issue them to SQLite Cloud, and see the query results. Alternatively, input can be from a file or from command line arguments.
+
+In addition, **sqlitecloud-cli** provides a number of meta-commands and various shell-like features to facilitate writing scripts and automating a wide variety of tasks. Meta-commands begin with a dot.
+
+## Options
+```bash
+-v                    print usage and exit
+-h HOSTNAME           hostname to connect to (default localhost)
+-p PORT               port to connect to (default 8860)
+-f FILEPATH           file path with commands to execute
+-d DATABASE           database name
+-r ROOT_CERTIFICATE   path to root certificate for TLS connection
+-s CLI_CERTIFICATE    path to client certificate for TLS connection
+-t CLI_KEY            path to client key certificate for TLS connection
+-u TIMEOUT            connection timeout in seconds (default no timeout)
+-y IP                 connection type (IPv4, IPv6 or IPany, default IPv4)
+-n USERNAME           authentication username
+-m PASSWORD           authentication password
+-c                    activate compression
+-i                    activate insecure mode (non TLS connection)
+-q                    activate quite mode (disable output print)
+-x                    activate special sqlite mode
+-z                    request zero-terminated strings in all replies
+```
+
+## Example
+```bash
+% sqlitecloud-cli -n admin -m admin -h test.sqlitecloud.io -p 9960 -r $HOME/ca.pem -c
+```
+
+```bash
+sqlitecloud-cli version 1.0 (build date Jan 24 2023)
+Connection to test.sqlitecloud.io OK...
+
+>> LIST INFO
+--------------------------|----------------------------------------------------|
+ key                      | value                                              |
+--------------------------|----------------------------------------------------|
+ sqlitecloud_version      | 0.9.9                                              |
+ sqlite_version           | 3.41.0                                             |
+ sqlitecloud_build_date   | Mar  6 2023                                        |
+ sqlitecloud_git_hash     | 11f771e773d982aa3a9b40302f0d9f942c057e87           |
+ os                       | Linux on x86_64 (Kernel version 5.15.0-58-generic) |
+ arch_bits                | 64bit                                              |
+ multiplexing_api         | epool                                              |
+ listening_port           | 9960                                               |
+ process_id               | 435261                                             |
+ num_processors           | 1                                                  |
+ startup_datetime         | 2023-03-06 23:19:28                                |
+ current_datetime         | 2023-03-07 15:02:04                                |
+ nocluster                | 0                                                  |
+ nodeid                   | 1                                                  |
+ load                     | 0.00338942802613171                                |
+ num_clients              | 3                                                  |
+ running_clients          | 1                                                  |
+ max_fd                   | 15824                                              |
+ num_fd                   | 37                                                 |
+ mem_current              | 7034048                                            |
+ mem_max                  | 7132712                                            |
+ mem_total                | 1016545280                                         |
+ disk_total               | 25821052928                                        |
+ disk_free                | 12787093504                                        |
+ disk_usage               | 13033959424                                        |
+ disk_usage_perc          | 50.4780322488947                                   |
+ cpu_load                 | 0.753006625291746                                  |
+ num_connections          | 3                                                  |
+ max_connections          | 10000                                              |
+ tls                      | LibreSSL 3.6.1                                     |
+ tls_conn_version         | TLSv1.3                                            |
+ tls_conn_cipher          | TLS_AES_256_GCM_SHA384                             |
+ tls_conn_cipher_strength | 256                                                |
+ tls_conn_alpn_selected   | NULL                                               |
+ tls_conn_servername      | test.sqlitecloud.io                                |
+ tls_peer_cert_provided   | 0                                                  |
+ tls_peer_cert_subject    | NULL                                               |
+ tls_peer_cert_issuer     | NULL                                               |
+ tls_peer_cert_hash       | NULL                                               |
+ tls_peer_cert_notbefore  | NULL                                               |
+ tls_peer_cert_notafter   | NULL                                               |
+--------------------------|----------------------------------------------------|
+Rows: 41 - Cols: 2 - Bytes: 1239 Time: 0.107468 secs
+
+>> PING
+PONG
+
+>> LIST DATABASES
+------------------------|
+ name                   |
+------------------------|
+ chinook-enc.sqlite     |
+ chinook.sqlite         |
+ db space.sqlite        |
+ db1.sqlite             |
+ dbempty.sqlite         |
+ encdb.sqlite           |
+ encdb2.sqlite          |
+ test-blob-10x10.sqlite |
+ wrongdb5.sqlite        |
+ wrongdb9.sqlite        |
+------------------------|
+Rows: 10 - Cols: 1 - Bytes: 209 Time: 0.247084 secs
+
+>> USE DATABASE chinook.sqlite
+OK
+
+>> LIST TABLES
+--------|----------------|-------|------|----|--------|
+ schema | name           | type  | ncol | wr | strict |
+--------|----------------|-------|------|----|--------|
+ main   | albums         | table | 3    | 0  | 0      |
+ main   | artists        | table | 2    | 0  | 0      |
+ main   | playlists      | table | 2    | 0  | 0      |
+ main   | customers      | table | 13   | 0  | 0      |
+ main   | employees      | table | 15   | 0  | 0      |
+ main   | genres         | table | 2    | 0  | 0      |
+ main   | tracks         | table | 9    | 0  | 0      |
+ main   | media_types    | table | 2    | 0  | 0      |
+ main   | invoices       | table | 9    | 0  | 0      |
+ main   | playlist_track | table | 2    | 0  | 0      |
+ main   | invoice_items  | table | 5    | 0  | 0      |
+--------|----------------|-------|------|----|--------|
+Rows: 11 - Cols: 6 - Bytes: 458 Time: 0.287904 secs
+
+>> SELECT * FROM albums LIMIT 10
+---------|---------------------------------------|----------|
+ AlbumId | Title                                 | ArtistId |
+---------|---------------------------------------|----------|
+ 1       | For Those About To Rock We Salute You | 1        |
+ 2       | Balls to the Wall                     | 2        |
+ 3       | Restless and Wild                     | 2        |
+ 4       | Let There Be Rock                     | 1        |
+ 5       | Big Ones                              | 3        |
+ 6       | Jagged Little Pill                    | 4        |
+ 7       | Facelift                              | 5        |
+ 8       | Warner 25 Anos                        | 6        |
+ 9       | Plays Metallica By Four Cellos        | 7        |
+ 10      | Audioslave                            | 8        |
+---------|---------------------------------------|----------|
+Rows: 10 - Cols: 3 - Bytes: 318 Time: 0.263576 secs
+
+>> .exit
+Program ended with exit code: 0
+
+```

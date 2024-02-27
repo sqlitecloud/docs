@@ -1,0 +1,19 @@
+---
+title: Role Based Access Control
+description: Role Based Access Control
+---
+
+SQLite Cloud offers robust support for multiple authentication methods and employs role-based authorization to manage access effectively. Roles are the cornerstone of SQLite Cloud, providing a secure and manageable way to isolate users.
+
+Each user can be assigned one or more roles, and their access to the database system is entirely defined by these roles. Users cannot access the system beyond the roles they've been granted.
+
+Roles, in SQLite Cloud, grant permissions (privileges) for specific actions on particular resources, such as databases or tables. A single user account can encompass multiple roles. Roles can be assigned in two ways:
+
+- During user creation.
+- By updating the roles of existing users.
+
+SQLite Cloud categorizes roles into two main types:
+
+- **Built-In Roles**: These are predefined roles that offer a comprehensive set of privileges commonly required in a database system. Built-in roles typically grant permissions across any database.
+
+- **User-Defined Roles**: In situations where the built-in roles don't cover all the necessary privileges or when permissions need to be tailored for specific resources like databases or tables, SQLite Cloud administrators can create custom roles using the [CREATE ROLE](https://docs.sqlitecloud.io/docs/commands/create-role) command. These custom roles are known as User-Defined roles.

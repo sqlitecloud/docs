@@ -1,0 +1,42 @@
+---
+title: LIST DATABASE CONNECTIONS
+description: The LIST DATABASE CONNECTIONS command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command)
+---
+
+## Syntax
+
+LIST DATABASE CONNECTIONS [ID] **database_name**
+
+## Privileges
+
+```
+HOSTADMIN
+```
+
+## Description
+
+The LIST DATABASE CONNECTIONS command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The **database_name** parameter can also be a database_id if the ID flag is specified.
+
+## Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **id**: client ID
+* **address**: client IP address
+* **username**: username of the connected client
+* **database**: database name
+* **connection_date**: connection initial date/time (in UTC format)
+* **last_activity**: last client activity
+
+## Example
+
+```bash
+> USE DATABASE mediastore.sqlite
+OK
+
+> LIST DATABASE CONNECTIONS mediastore.sqlite
+----|-----------|----------|-------------------|---------------------|---------------------|
+ id | address   | username | database          | connection_date     | last_activity       |
+----|-----------|----------|-------------------|---------------------|---------------------|
+ 1  | 127.0.0.1 | admin    | mediastore.sqlite | 2023-02-14 16:00:52 | 2023-02-14 16:01:10 |
+----|-----------|----------|-------------------|---------------------|---------------------|
+```

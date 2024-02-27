@@ -1,0 +1,29 @@
+---
+title: REMOVE ROLE
+description: The REMOVE ROLE command permanently deletes the role_name from the server
+---
+
+## Syntax
+
+REMOVE ROLE **role_name**
+
+## Privileges
+
+```
+USERADMIN
+```
+
+## Description
+
+The REMOVE ROLE command permanently deletes the **role_name** from the server. The role is also removed from users, privileges, and IP restrictions tables as a side effect.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> REMOVE ROLE role1
+OK
+```

@@ -1,0 +1,36 @@
+---
+title: "name"
+description: SQLite Cloud PHP SDK SQLiteCloudRowset.name()
+---
+
+```js
+SQLiteCloudRowset.name($col)
+```
+
+Use the function to retrieve the name of a column in the Rowset at index $col (from 0 to SQLiteCloudRowset.ncols).
+
+## Return value
+A `string` with the column name.
+
+### Example
+```js
+
+$sqlitecloud = new SQLiteCloud();
+$sqlitecloud->username = 'admin';
+$sqlitecloud->password = 'admin';
+
+try {
+	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+		$msg = $sqlitecloud->errmsg;
+		$sqlitecloud = NULL;
+		return $msg;
+	}
+  } catch (Exception $e) {
+		return $e->getMessage();
+  }
+
+$result = $sqlitecloud->execute('LIST INFO');
+$col1name = $result->name(0);
+
+$sqlitecloud->disconnect();
+```

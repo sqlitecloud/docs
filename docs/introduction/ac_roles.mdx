@@ -1,0 +1,66 @@
+---
+title: Built-in roles
+description: Built-in roles
+---
+import Callout from "@commons-components/Information/Callout.astro"; 
+
+SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the [GRANT ROLE](https://docs.sqlitecloud.io/docs/commands/grant-role) command, and custom roles can be created with the [CREATE ROLE](https://docs.sqlitecloud.io/docs/commands/create-role) command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
+
+Here is an overview of the built-in roles:
+
+- **ADMIN**: This role possesses the highest level of privileges, with unrestricted access to all assigned permissions.
+- **READ**: Grants read-only access to a specified database or table.
+- **READANYDATABASE**: Provides read-only access to any database and table.
+- **READWRITE**: Offers both read and write functionality for a specified database or table.
+- **READWRITEANYDATABASE**: Grants read and write capabilities across any database and table.
+- **DBADMIN**: Allows for administrative tasks like indexing and statistics gathering but doesn't manage users or roles.
+- **DBADMINANYDATABASE**: Provides administrative functions for any database.
+- **USERADMIN**: Enables the creation and modification of roles and users.
+- **CLUSTERADMIN**: Empowers users to manage and monitor the cluster.
+- **CLUSTERMONITOR**: Offers read-only access to cluster monitoring commands.
+- **HOSTADMIN**: Allows monitoring and management of individual nodes.
+- **SUB**: Grants the subscribe privilege to a specified database, table, or channel.
+- **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
+- **PUB**: Offers the publish privilege to a specified database, table, or channel.
+- **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
+- **PUBSUB**: Combines subscribe and publish privileges for a specified database, table, or channel.
+- **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
+- **PUBSUBADMIN**: Allows the creation and removal of channel privileges for a specified database or channel.
+- **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
+
+
+<Callout type="note" title="Restrictions">
+To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/commands/create-role), [GRANT ROLE](/docs/commands/grant-role), [GRANT PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/grant-privilege) and [SET PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/set-privilege) commands, as well as during the [CREATE USER](https://docs.sqlitecloud.io/docs/commands/create-user) command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
+</Callout>
+
+```bash
+>> LIST ROLES
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+ rolename              | builtin | privileges                                                                                                                             | databasename | tablename |
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+ ADMIN                 | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,														  |              |           |
+                       |         | ATTACH,DETACH,DBADMIN,SUB,PUB,PUBSUB,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												  |              |           |
+                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,PUBSUBCREATE,PUBSUBADMIN,WEBLITE,ADMIN 				  | NULL         | NULL      |
+ READ                  | 1       | READ                                                                                                                                   | NULL         | NULL      |
+ READANYDATABASE       | 1       | READ                                                                                                                                   | *            | *         |
+ READWRITE             | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | NULL         | NULL      |
+ READWRITEANYDATABASE  | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | *            | *         |
+ DBADMIN               | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,ATTACH,DETACH,DBADMIN                                  | NULL         | NULL      |
+ DBADMINANYDATABASE    | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,													  |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,ATTACH,DETACH,DBADMIN                                  | *            | *         |
+ USERADMIN             | 1       | USERADMIN                                                                                                                              | *            | *         |
+ CLUSTERADMIN          | 1       | CLUSTERADMIN                                                                                                                           | *            | *         |
+ CLUSTERMONITOR        | 1       | CLUSTERMONITOR                                                                                                                         | *            | *         |
+ HOSTADMIN             | 1       | BACKUP,RESTORE,DOWNLOAD,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN                                                                        | *            | *         |
+ SUB                   | 1       | SUB                                                                                                                                    | NULL         | NULL      |
+ SUBANYCHANNEL         | 1       | SUB                                                                                                                                    | *            | *         |
+ PUB                   | 1       | PUB                                                                                                                                    | NULL         | NULL      |
+ PUBANYCHANNEL         | 1       | PUB                                                                                                                                    | *            | *         |
+ PUBSUB                | 1       | SUB,PUB,PUBSUB                                                                                                                         | NULL         | NULL      |
+ PUBSUBANYCHANNEL      | 1       | SUB,PUB,PUBSUB                                                                                                                         | *            | *         |
+ PUBSUBADMIN           | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | NULL         | NULL      |
+ PUBSUBADMINANYCHANNEL | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | *            | *         |
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+```

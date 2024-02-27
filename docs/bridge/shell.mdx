@@ -1,0 +1,34 @@
+---
+title: SQLite Cloud Shell
+description: SQLite Cloud Shell.
+---
+import Callout from "@commons-components/Information/Callout.astro"
+
+The official SQLite distribution comes with a powerful [SQLite Command-Line Interface](https://www.sqlite.org/cli.html).
+
+To compile the SQLite cli with the SQLite Cloud Bridge just follow these instructions:
+
+* [Install LibreSSL](/docs/bridge/install)
+* A build of the [SQLite command-line interface](https://www.sqlite.org/cli.html) requires three source files:
+  * sqlite3.c: The SQLite Bridge amalgamation source file
+  * sqlite3.h: The SQLite Bridge amalgamation header file
+  * shell.c: The command-line interface program from the [SQLite amalgamation tarball](https://www.sqlite.org/download.html#amalgtarball)
+* To build the CLI, simply put these three files in the same directory and compile them together:
+  * if LibreSSL was installed in the `/usr/local/libressl` folder you can use the following command:
+
+```shell
+gcc shell.c sqlite3.c -I. -L/usr/local/libressl/lib/ -Wl,-rpath=/usr/local/libressl/lib/ -ltls -o sqlitecloud
+```
+
+Once the build is completed you can connect to any cloud database using a special connection string in the form:
+`sqlitecloud://user:pass@host.com:port/dbname?timeout=10&key2=value2&key3=value3`
+
+
+<Callout type="warning" title="Connection String">
+An easy way to obtain a valid connection string is to click on the node address in the [Dashboard Nodes](/docs/introduction/nodes) section. A valid connection string will be copied in your clipboard.
+</Callout>
+For example:
+
+```shell
+./sqlitecloud "sqlitecloud://<username>:<password>@<hostname>.sqlite.cloud:8860/<database-name>?create=1&sqlite=1"
+```

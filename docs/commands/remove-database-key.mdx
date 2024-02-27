@@ -1,0 +1,29 @@
+---
+title: REMOVE DATABASE KEY
+description: Use this command to permanently remove keyname from the list of settings for the database database_name
+---
+
+## Syntax
+
+REMOVE DATABASE **database_name** KEY **keyname**
+
+## Privileges
+
+```
+PRAGMA
+```
+
+## Description
+
+Use this command to permanently remove **keyname** from the list of settings for the database **database_name**.
+
+## Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+## Example
+
+```bash
+> REMOVE DATABASE mediastore.sqlite KEY key1
+OK
+```

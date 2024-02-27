@@ -1,0 +1,55 @@
+---
+title: LIST DATABASES
+description: The LIST DATABASES command return information and statistics about the databases currently available on the server
+---
+
+## Syntax
+
+LIST DATABASES [DETAILED]
+
+## Privileges
+
+```
+NONE
+```
+
+## Description
+
+The LIST DATABASES command return information and statistics about the databases currently available on the server.
+
+## Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with only the column **name** if the DETAILED flag is omitted, otherwise several other columns:
+* **name**: database name
+* **size**: database size (in bytes)
+* **connections**: number of clients connected to the database
+* **encryption**: encryption algorithm (if any)
+* **backup**: 1 if database has backup enabled
+* **nread**: number of read operations
+* **nwrite**: number of write operations
+* **inbytes**: number of bytes received
+* **outbytes**: number of bytes sent
+* **fragmentation**: a number between 0 and 1 that represents the database fragmentation
+* **pagesize**: database default page size
+* **encoding**: database default encoding
+* **status**: database status (1 = OK, 2 = DISABLED, 3 = MAINTENANCE, 4 = ERROR)
+
+## Example
+
+```bash
+> LIST DATABASES DETAILED
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+ name                     | size      | connections | encryption | backup | nread | nwrite | inbytes | outbytes | fragmentation | pagesize | encoding | status |
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+ 555.sqlite               | 104992768 | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ cli-test-1.sqlite        | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ cli-test-2.sqlite        | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ images.sqlite            | 11409408  | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 1024     | UTF-8    | 1      |
+ mediastore.sqlite        | 921600    | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ multiple-commands.sqlite | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ numbers.sqlite           | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ pluto.sqlite             | 4246528   | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 1024     | UTF-8    | 1      |
+ test.sqlite              | 32768     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.12          | 4096     | UTF-8    | 1      |
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+
+```

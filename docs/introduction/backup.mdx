@@ -1,0 +1,22 @@
+---
+title: Backup
+description: Dashboard Backup
+---
+
+With SQLite Cloud, you have the flexibility to restore your database from any desired point in time, a feature not typically offered by traditional backups which only restore data from a fixed backup interval.
+This capability is facilitated by the continuous and seamless backup mechanism, where your database is automatically backed up to S3-compatible storage in real-time.
+Furthermore, this continuous backup system operates seamlessly on both encrypted and unencrypted databases, ensuring data integrity and security across all setups.
+
+Initially, the Backup section may appear empty.
+
+![Dashboard Empty Backup](@docs-website-assets/introduction/dashboard_backup_empty.png)
+
+You can activate backups for a database by selecting it in the Settings menu and specifying a retention period. 
+
+![Dashboard Backup Settings](@docs-website-assets/introduction/dashboard_backup_settings.png)
+
+Once backups are enabled, all the corresponding backup copies will be listed in the Backup section.
+
+![Dashboard Backup](@docs-website-assets/introduction/dashboard_backup.png)
+
+From this section, you can easily restore your database to any point in time or delete individual backup copies. This means that you have complete control over your data and can easily recover it in case of any issues.
