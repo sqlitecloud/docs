@@ -1,6 +1,6 @@
 ---
-title: ADD ALLOWED IP
-description: The ADD ALLOWED IP command restricts access for the role or user by allowing only some IP addresses
+title: SQLite Cloud DOCS
+description: how to participate
 ---
 
 # SQLite Cloud DOCS
