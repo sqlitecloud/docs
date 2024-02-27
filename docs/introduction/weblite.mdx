@@ -3,4 +3,26 @@ title: Weblite
 description: Dashboard Weblite
 ---
 
-The Weblite panel documentation will be published within a couple of days.
+With Weblite, adding robust database capabilities to your site is as simple as adding Google Analytics.
+Our technology simplifies integration to just one include tag in your HTML header.
+You retain full control over rendering using easy div tags for customization.
+Whether you're a pro developer or a beginner, Weblite enables you to unleash dynamic data management without the headaches.
+
+To create a Weblite, start by writing a query in the [Console](/docs/introduction/console). The query can be a simple `SELECT * FROM artists` statement, which does not require any parameter, to a more complex `SELECT * FROM artists WHERE name LIKE ?1;`, which requires a parameter to be specified during execution.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_console.png)
+
+Once satisfied with your query, press the "+ Weblite" button.
+A dialog will appear with the script to add to your web page and other details like the slug name (optional).
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_create.png)
+
+The Weblite section lists all the Weblite created so far.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_list.png)
+
+To test a Webliste query, just press the SQL statement, and a new panel will enable you to add values to your parameter and check the result of your query.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_check.png)
+
+For more information about Weblite integration, see the [GitHub repo](https://github.com/sqlitecloud/weblite).
