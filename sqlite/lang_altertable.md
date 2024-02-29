@@ -11,7 +11,7 @@ statement: ALTER TABLE Album ADD COLUMN year INTEGER;
 !['altertable.svg'](/public/docs/sqlite/_svg/altertable.svg)
 
 <p>SQLite supports a limited subset of ALTER TABLE.
-The ALTER TABLE command in SQLite allowsthese alterations of an existing table:
+The ALTER TABLE command in SQLite allows these alterations of an existing table:
 <ul>
 <li>a table can be renamed</li>
 <li>a column can be renamed</li>
