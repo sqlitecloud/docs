@@ -3,7 +3,7 @@ title: Transaction
 description: Transaction
 statement: BEGIN TRANSACTION;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: BEGIN TRANSACTION;
 
 <h2 id="transaction_control_syntax"><span>1. </span>Transaction Control Syntax</h2>
 
-!['transaction.svg'](/public/docs/sqlite/_svg/transaction.svg)
+<!-- do-not-touch-svg-import: 'transaction.svg' -->
 
 
 <h2 id="transactions"><span>2. </span>Transactions</h2>

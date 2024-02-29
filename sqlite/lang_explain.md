@@ -3,7 +3,7 @@ title: EXPLAIN
 description: EXPLAIN
 statement: EXPLAIN SELECT * FROM Artist;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: EXPLAIN SELECT * FROM Artist;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['explain.svg'](/public/docs/sqlite/_svg/explain.svg)
+<!-- do-not-touch-svg-import: 'explain.svg' -->
 
 
 <h2 id="description"><span>2. </span>Description</h2>

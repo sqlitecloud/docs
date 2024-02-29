@@ -3,7 +3,7 @@ title: CREATE VIEW
 description: CREATE VIEW
 statement: CREATE VIEW view_names AS SELECT name FROM Artist;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: CREATE VIEW view_names AS SELECT name FROM Artist;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['createview.svg'](/public/docs/sqlite/_svg/createview.svg)
+<!-- do-not-touch-svg-import: 'createview.svg' -->
 
 
 <h2 id="description"><span>2. </span>Description</h2>

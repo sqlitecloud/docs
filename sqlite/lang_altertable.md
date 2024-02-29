@@ -4,11 +4,9 @@ description: ALTER TABLE
 statement: ALTER TABLE Album ADD COLUMN year INTEGER;
 ---
 
-!['script.js'](/public/docs/sqlite/script.js)
-
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['altertable.svg'](/public/docs/sqlite/_svg/altertable.svg)
+<!-- do-not-touch-svg-import: 'altertable.svg' -->
 
 <p>SQLite supports a limited subset of ALTER TABLE.
 The ALTER TABLE command in SQLite allows these alterations of an existing table:

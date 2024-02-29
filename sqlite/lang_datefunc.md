@@ -3,7 +3,7 @@ title: Date And Time Functions
 description: Date And Time Functions
 statement: SELECT DATE('now');
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 

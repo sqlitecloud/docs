@@ -3,7 +3,7 @@ title: SELECT
 description: SELECT
 statement: SELECT * FROM Artist;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: SELECT * FROM Artist;
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['select.svg'](/public/docs/sqlite/_svg/select.svg)
+<!-- do-not-touch-svg-import: 'select.svg' -->
 
 
 
@@ -26,7 +26,7 @@ find that helpful. The following "<a href="https://www.sqlite.org/syntax/factore
 syntax diagrams that expresses the same syntax but tries to break the syntax 
 down into smaller chunks.
 
-!['select2.svg'](/public/docs/sqlite/_svg/select2.svg)
+<!-- do-not-touch-svg-import: 'select2.svg' -->
 
 
 </p><p>Note that there are paths through the syntax diagrams that
@@ -56,7 +56,7 @@ this or any other specific process.
 <a href="https://www.sqlite.org/syntax/select-core.html" target="_blank">select-core</a> and <a href="https://www.sqlite.org/syntax/simple-select-stmt.html" target="_blank">simple-select-stmt</a> syntax diagrams below. 
 In practice, most SELECT statements are simple SELECT statements.
 
-!['select3.svg'](/public/docs/sqlite/_svg/select3.svg)
+<!-- do-not-touch-svg-import: 'select3.svg' -->
 
 
 </p><p>Generating the results of a simple SELECT
@@ -419,7 +419,7 @@ sequence to compare text values.
 a compound SELECT using the UNION, UNION ALL, INTERSECT or EXCEPT operator,
 as shown by the following diagram:
 
-!['select4.svg'](/public/docs/sqlite/_svg/select4.svg)
+<!-- do-not-touch-svg-import: 'select4.svg' -->
 
 
 </p><p>In a compound SELECT, all the constituent SELECTs must return the same 
@@ -657,7 +657,7 @@ we leave it alone and document it here, rather than try to fix it.
 
 <p>SQLite accepts all of the usual syntax for JOIN operators:
 
-!['select5.svg'](/public/docs/sqlite/_svg/select5.svg)
+<!-- do-not-touch-svg-import: 'select5.svg' -->
 
 
 </p><p>But it does not stop there. SQLite is actually very flexible in how you

@@ -3,7 +3,7 @@ title: CREATE TABLE
 description: CREATE TABLE
 statement: CREATE TABLE IF NOT EXISTS Genre (GenreId INTEGER PRIMARY KEY, Name TEXT);
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: CREATE TABLE IF NOT EXISTS Genre (GenreId INTEGER PRIMARY KEY, Name T
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['createtable.svg'](/public/docs/sqlite/_svg/createtable.svg)
+<!-- do-not-touch-svg-import: 'createtable.svg' -->
 
 
 <h2 id="the_create_table_command"><span>2. </span>The CREATE TABLE command</h2>

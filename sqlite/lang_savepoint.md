@@ -3,7 +3,7 @@ title: Savepoints
 description: Savepoints
 statement: SAVEPOINT savepoint_name;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: SAVEPOINT savepoint_name;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['savepoint.svg'](/public/docs/sqlite/_svg/savepoint.svg)
+<!-- do-not-touch-svg-import: 'savepoint.svg' -->
 
 
 <h2 id="savepoints"><span>2. </span>Savepoints</h2>

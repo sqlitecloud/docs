@@ -3,7 +3,7 @@ title: CREATE INDEX
 description: CREATE INDEX
 statement: CREATE INDEX IF NOT EXISTS ArtistNameIdx ON Artist(Name);
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: CREATE INDEX IF NOT EXISTS ArtistNameIdx ON Artist(Name);
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['createindex.svg'](/public/docs/sqlite/_svg/createindex.svg)
+<!-- do-not-touch-svg-import: 'createindex.svg' -->
 
 
 <p>The CREATE INDEX command consists of the keywords "CREATE INDEX" followed

@@ -3,7 +3,7 @@ title: ATTACH DATABASE
 description: ATTACH DATABASE
 statement: ATTACH DATABASE 'database_name' AS alias;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: ATTACH DATABASE 'database_name' AS alias;
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['attach.svg'](/public/docs/sqlite/_svg/attach.svg)
+<!-- do-not-touch-svg-import: 'attach.svg' -->
 
 
 <p> The ATTACH DATABASE statement adds another database 

@@ -3,7 +3,7 @@ title: ANALYZE
 description: ANALYZE
 statement: ANALYZE;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: ANALYZE;
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['analyze.svg'](/public/docs/sqlite/_svg/analyze.svg)
+<!-- do-not-touch-svg-import: 'analyze.svg' -->
 
 
 <p> The ANALYZE command gathers statistics about tables and

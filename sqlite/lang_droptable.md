@@ -3,13 +3,13 @@ title: DROP TABLE
 description: DROP TABLE
 statement: DROP TABLE IF EXISTS Genre;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['droptable.svg'](/public/docs/sqlite/_svg/droptable.svg)
+
+<!-- do-not-touch-svg-import: 'droptable.svg' -->
 
 <p>The DROP TABLE statement removes a table added with the
 <a href="lang_createtable">CREATE TABLE</a> statement. The name specified is the

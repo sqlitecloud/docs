@@ -3,13 +3,13 @@ title: DETACH
 description: DETACH
 statement: DETACH DATABASE database_name;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['detach.svg'](/public/docs/sqlite/_svg/detach.svg)
+
+<!-- do-not-touch-svg-import: 'detach.svg' -->
 
 
 <p>This statement detaches an additional database connection previously 

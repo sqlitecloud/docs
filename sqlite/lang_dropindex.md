@@ -3,13 +3,13 @@ title: DROP INDEX
 description: DROP INDEX
 statement: DROP INDEX IF EXISTS ArtistNameIdx;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['dropindex.svg'](/public/docs/sqlite/_svg/dropindex.svg)
+
+<!-- do-not-touch-svg-import: 'dropindex.svg' -->
 
 
 <p>The DROP INDEX statement removes an index added

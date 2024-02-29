@@ -3,11 +3,11 @@ title: DROP TRIGGER
 description: DROP TRIGGER
 statement: DROP TRIGGER IF EXISTS validate_artist_name;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
-!['droptrigger.svg'](/public/docs/sqlite/_svg/droptrigger.svg)
+
+<!-- do-not-touch-svg-import: 'droptrigger.svg' -->
 
 <p>The DROP TRIGGER statement removes a trigger created by the 
 <a href="lang_createtrigger">CREATE TRIGGER</a> statement. Once removed, the trigger definition is no

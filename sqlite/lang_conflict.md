@@ -2,13 +2,13 @@
 title: The ON CONFLICT Clause
 description: The ON CONFLICT Clause
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['conflict.svg'](/public/docs/sqlite/_svg/conflict.svg)
+
+<!-- do-not-touch-svg-import: 'conflict.svg' -->
 
 
 <p>The ON CONFLICT clause is a

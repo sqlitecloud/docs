@@ -3,7 +3,7 @@ title: Built-In Mathematical SQL Functions
 description: Built-In Mathematical SQL Functions
 statement: SELECT log(3.1415);
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 

@@ -3,13 +3,13 @@ title: REINDEX
 description: REINDEX
 statement: REINDEX;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['reindex.svg'](/public/docs/sqlite/_svg/reindex.svg)
+
+<!-- do-not-touch-svg-import: 'reindex.svg' -->
 
 <p>The REINDEX command is used to delete and recreate indices from scratch.
 This is useful when the definition of a collation sequence has changed, or

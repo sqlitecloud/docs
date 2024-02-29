@@ -3,7 +3,7 @@ title: Built-in Aggregate Functions
 description: Built-in Aggregate Functions
 statement: SELECT COUNT(*) FROM Artist;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -12,7 +12,7 @@ statement: SELECT COUNT(*) FROM Artist;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['aggfunc.svg'](/public/docs/sqlite/_svg/aggfunc.svg)
+<!-- do-not-touch-svg-import: 'aggfunc.svg' -->
 
 
 <p>

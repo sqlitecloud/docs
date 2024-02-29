@@ -3,7 +3,7 @@ title: The WITH Clause
 description: The WITH Clause
 statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHERE x<10) SELECT * FROM ten;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHER
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['with.svg'](/public/docs/sqlite/_svg/with.svg)
+<!-- do-not-touch-svg-import: 'with.svg' -->
 
 
 <p>Common Table Expressions or CTEs act like temporary <a href="lang_createview">views</a> that exist
@@ -81,7 +81,7 @@ additional attributes:
 <p>To put it another way, a recursive common table expression must
 look something like the following:
 
-!['with2.svg'](/public/docs/sqlite/_svg/with2.svg)
+<!-- do-not-touch-svg-import: 'with2.svg' -->
 
 
 </p><p>In the diagram above, <span class='yyterm'>initial-select</span> means one or more

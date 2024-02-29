@@ -3,7 +3,7 @@ title: VACUUM
 description: VACUUM
 statement: VACUUM;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: VACUUM;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['vacuum.svg'](/public/docs/sqlite/_svg/vacuum.svg)
+<!-- do-not-touch-svg-import: 'vacuum.svg' -->
 
 <h2 id="description"><span>2. </span>Description</h2>
 <p>

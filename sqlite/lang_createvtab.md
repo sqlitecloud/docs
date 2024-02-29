@@ -3,14 +3,14 @@ title: CREATE VIRTUAL TABLE
 description: CREATE VIRTUAL TABLE
 statement: CREATE VIRTUAL TABLE MyNames USING fts5(content);
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
 
-!['createvtab.svg'](/public/docs/sqlite/_svg/createvtab.svg)
+
+<!-- do-not-touch-svg-import: 'createvtab.svg' -->
 
 
 <p>A <a href="https://www.sqlite.org/vtab.html" target="_blank">virtual table</a> is an interface to an external storage or computation

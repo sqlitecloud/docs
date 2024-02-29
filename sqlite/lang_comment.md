@@ -3,14 +3,14 @@ title: SQL Comment Syntax
 description: SQL Comment Syntax
 statement: /* This is a comment */
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
 
-!['comment.svg'](/public/docs/sqlite/_svg/comment.svg)
+
+<!-- do-not-touch-svg-import: 'comment.svg' -->
 
 
 <p>Comments are not SQL commands, but can occur within the text of

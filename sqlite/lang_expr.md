@@ -3,7 +3,7 @@ title: SQL Language Expressions
 description: SQL Language Expressions
 statement: SELECT (10 * (5 + 2) / 15) AS result;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: SELECT (10 * (5 + 2) / 15) AS result;
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['expr.svg'](/public/docs/sqlite/_svg/expr.svg)
+<!-- do-not-touch-svg-import: 'expr.svg' -->
 
 <a name="binaryops"></a>
 
@@ -179,7 +179,7 @@ BLOBs, or NULLs.
 The syntax for integer and floating point literals (collectively
 "numeric literals") is shown by the following diagram:</p>
 
-!['expr2.svg'](/public/docs/sqlite/_svg/expr2.svg)
+<!-- do-not-touch-svg-import: 'expr2.svg' -->
 
 <p>
 If a numeric literal has a decimal point or an exponentiation
@@ -752,7 +752,7 @@ bubble diagram. In reality, each type of function has a slightly different
 syntax, shown below. The function invocation syntax shown in the main
 expression bubble diagram is the union of the three syntaxes shown here:
 
-!['expr3.svg'](/public/docs/sqlite/_svg/expr3.svg)
+<!-- do-not-touch-svg-import: 'expr3.svg' -->
 
 </p><p>
 The OVER clause is required for <a href="https://www.sqlite.org/windowfunctions.html" target="_blank">window functions</a> and is prohibited

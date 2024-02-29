@@ -3,7 +3,7 @@ title: UPSERT
 description: UPSERT
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') ON CONFLICT (ArtistId) DO UPDATE SET name = 'New Lady Gaga';
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') ON CONFLICT (ArtistId)
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['upsert.svg'](/public/docs/sqlite/_svg/upsert.svg)
+<!-- do-not-touch-svg-import: 'upsert.svg' -->
 
 
 <h2 id="description"><span>2. </span>Description</h2>

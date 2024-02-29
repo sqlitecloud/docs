@@ -3,7 +3,7 @@ title: RETURNING
 description: RETURNING
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') RETURNING Name, ArtistId;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') RETURNING Name, Artist
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['returning.svg'](/public/docs/sqlite/_svg/returning.svg)
+<!-- do-not-touch-svg-import: 'returning.svg' -->
 
 <p>
 The RETURNING clause is not a statement itself, but a clause that can

@@ -3,7 +3,7 @@ title: UPDATE
 description: UPDATE
 statement: UPDATE Artist SET name = 'New Lady Gaga' WHERE name = 'Lady Gaga';
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: UPDATE Artist SET name = 'New Lady Gaga' WHERE name = 'Lady Gaga';
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['update.svg'](/public/docs/sqlite/_svg/update.svg)
+<!-- do-not-touch-svg-import: 'update.svg' -->
 
 <p>An UPDATE statement is used to modify a subset of the values stored in 
 zero or more rows of the database table identified by the 
@@ -163,7 +163,7 @@ update multiple tables at once!
 compile-time option then the syntax of the UPDATE statement is extended
 with optional ORDER BY and LIMIT clauses as follows:</p>
 
-!['update2.svg'](/public/docs/sqlite/_svg/update2.svg)
+<!-- do-not-touch-svg-import: 'update2.svg' -->
 
 
 <p>If an UPDATE statement has a LIMIT clause, the maximum number of rows that

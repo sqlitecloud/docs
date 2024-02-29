@@ -3,13 +3,13 @@ title: DROP VIEW
 description: DROP VIEW
 statement: DROP VIEW IF EXISTS view_names;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
 
 
 
 
 
-!['dropview.svg'](/public/docs/sqlite/_svg/dropview.svg)
+
+<!-- do-not-touch-svg-import: 'dropview.svg' -->
 
 <p>The DROP VIEW statement removes a view created by the <a href="lang_createview">CREATE VIEW</a> 
 statement. The view definition is removed from the database schema, but 

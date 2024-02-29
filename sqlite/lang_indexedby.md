@@ -3,7 +3,7 @@ title: The INDEXED BY Clause
 description: The INDEXED BY Clause
 statement: SELECT * FROM Artist INDEXED BY ArtistNameIdx;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -16,7 +16,7 @@ particular named index on a <a href="lang_delete">DELETE</a>, <a href="lang_sele
 The INDEXED BY phrase is an SQLite extension and
 is not portable to other SQL database engines.</p>
 
-!['indexedby.svg'](/public/docs/sqlite/_svg/indexedby.svg)
+<!-- do-not-touch-svg-import: 'indexedby.svg' -->
 
 <p>The "INDEXED BY <span class='yyterm'>index-name</span>" phrase specifies 
 that the named index

@@ -3,7 +3,7 @@ title: INSERT
 description: INSERT
 statement: INSERT INTO Artist (name) VALUES ('Rod Stewart');
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: INSERT INTO Artist (name) VALUES ('Rod Stewart');
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['insert.svg'](/public/docs/sqlite/_svg/insert.svg)
+<!-- do-not-touch-svg-import: 'insert.svg' -->
 
 <p>The INSERT statement comes in three basic forms. 
 </p><ol>

@@ -3,7 +3,7 @@ title: REPLACE
 description: REPLACE
 statement: REPLACE INTO Artist (name) VALUES ('Taylor Swift');
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 

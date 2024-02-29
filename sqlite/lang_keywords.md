@@ -2,7 +2,7 @@
 title: SQLite Keywords
 description: SQLite Keywords
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 

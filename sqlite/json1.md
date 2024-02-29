@@ -3,17 +3,12 @@ title: JSON Functions And Operators
 description: JSON Functions And Operators
 statement: SELECT json_object('id' , ArtistId, 'name', name) FROM Artist;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
-
-
-
-
 
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 <p>
 By default, SQLite supports twenty-nine functions and two operators for
-dealing with JSON values.  There are also two <a href="vtab.html#tabfunc2">table-valued functions</a>
+dealing with JSON values.  There are also two <a href="https://sqlite.org/vtab.html#tabfunc2">table-valued functions</a>
 that can be used to decompose a JSON string.
 
 </p><p>
@@ -145,7 +140,7 @@ There are 25 scalar functions and operators:
 
 </ol>
 
-<p>The two <a href="vtab.html#tabfunc2">table-valued functions</a> are:
+<p>The two <a href="https://sqlite.org/vtab.html#tabfunc2">table-valued functions</a> are:
 
 </p><ol>
 <li value='30'>

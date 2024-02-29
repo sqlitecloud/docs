@@ -3,7 +3,7 @@ title: Database Object Name Resolution
 description: Database Object Name Resolution
 statement: SELECT column AS alias FROM table;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 

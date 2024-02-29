@@ -3,7 +3,7 @@ title: Built-In Scalar SQL Functions
 description: Built-In Scalar SQL Functions
 statement: SELECT random();
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -22,7 +22,7 @@ application may define additional
 functions written in C and added to the database engine using
 the <a href="https://www.sqlite.org/c3ref/create_function.html" target="_blank">sqlite3_create_function()</a> API.</p>
 
-!['corefunc.svg'](/public/docs/sqlite/_svg/corefunc.svg)
+<!-- do-not-touch-svg-import: 'corefunc.svg' -->
 
 
 <p>

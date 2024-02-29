@@ -3,7 +3,7 @@ title: DELETE
 description: DELETE
 statement: DELETE FROM Artist WHERE name LIKE 'Z%';
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: DELETE FROM Artist WHERE name LIKE 'Z%';
 
 <h2 id="overview"><span>1. </span>Overview</h2>
 
-!['delete.svg'](/public/docs/sqlite/_svg/delete.svg)
+<!-- do-not-touch-svg-import: 'delete.svg' -->
 
 
 <p>The DELETE command removes records from the table identified by the
@@ -58,7 +58,7 @@ DELETE statements within triggers.</p>
 compile-time option, then the syntax of the DELETE statement is
 extended by the addition of optional ORDER BY and LIMIT clauses:</p>
 
-!['delete2.svg'](/public/docs/sqlite/_svg/delete2.svg)
+<!-- do-not-touch-svg-import: 'delete2.svg' -->
 
 
 <p>If a DELETE statement has a LIMIT clause, the maximum number of rows that

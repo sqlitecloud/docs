@@ -3,7 +3,7 @@ title: CREATE TRIGGER
 description: CREATE TRIGGER
 statement: CREATE TRIGGER IF NOT EXISTS validate_artist_name BEFORE INSERT ON Artist BEGIN SELECT CASE WHEN NEW.name LIKE 'Z%' THEN RAISE (ABORT,'Invalid artist name!') END; END;
 ---
-!['script.js'](/public/docs/sqlite/script.js)
+
 
 
 
@@ -11,7 +11,7 @@ statement: CREATE TRIGGER IF NOT EXISTS validate_artist_name BEFORE INSERT ON Ar
 
 <h2 id="syntax"><span>1. </span>Syntax</h2>
 
-!['createtrigger.svg'](/public/docs/sqlite/_svg/createtrigger.svg)
+<!-- do-not-touch-svg-import: 'createtrigger.svg' -->
 
 
 
@@ -237,7 +237,7 @@ prefer AFTER triggers over BEFORE triggers.</p>
 <p>A special SQL function RAISE() may be used within a trigger-program,
 with the following syntax</p> 
 
-!['createtrigger2.svg'](/public/docs/sqlite/_svg/createtrigger2.svg)
+<!-- do-not-touch-svg-import: 'createtrigger2.svg' -->
 
 
 <p>When one of RAISE(ROLLBACK,...), RAISE(ABORT,...) or RAISE(FAIL,...)
