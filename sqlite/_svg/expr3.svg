@@ -1,0 +1,176 @@
+<p><b><a href="https://www.sqlite.org/syntax/simple-function-invocation.html" target="_blank">simple-function-invocation:</a></b></p><div class='imgcontainer'>
+ <div style="max-width:414px"><svg xmlns='http://www.w3.org/2000/svg' class="pikchr" viewBox="0 0 414.49 126.792">
+<circle cx="5" cy="55" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="32,55 20,59 20,50" style="fill:rgb(0,0,0)"/>
+<path d="M9,55L26,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M47,70L126,70A15 15 0 0 0 141 55A15 15 0 0 0 126 39L47,39A15 15 0 0 0 32 55A15 15 0 0 0 47 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="86" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">simple-func</text>
+<polygon points="164,55 152,59 152,50" style="fill:rgb(0,0,0)"/>
+<path d="M141,55L158,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M179,70A15 15 0 0 0 194 55A15 15 0 0 0 179 39A15 15 0 0 0 164 55A15 15 0 0 0 179 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="179" y="55" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">(</text>
+<polygon points="248,55 237,59 237,50" style="fill:rgb(0,0,0)"/>
+<path d="M194,55L242,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M248,70L297,70L297,39L248,39Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="273" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">expr</text>
+<polygon points="351,55 340,59 340,50" style="fill:rgb(0,0,0)"/>
+<path d="M297,55L346,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M366,70A15 15 0 0 0 382 55A15 15 0 0 0 366 39A15 15 0 0 0 351 55A15 15 0 0 0 366 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="366" y="55" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">)</text>
+<polygon points="405,55 393,59 393,50" style="fill:rgb(0,0,0)"/>
+<path d="M382,55L399,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<circle cx="408" cy="55" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M273,32A15 15 0 0 0 288 17L288,17A15 15 0 0 0 273 2A15 15 0 0 0 258 17L258,17A15 15 0 0 0 273 32Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="273" y="17" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">,</text>
+<polygon points="288,17 299,12 299,21" style="fill:rgb(0,0,0)"/>
+<path d="M297,55 L 305,55 Q 312,55 312,40 L 312,32 Q 312,17 303,17 L 294,17"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M258,17 L 237,17 Q 222,17 222,32 L 222,40 Q 222,55 229,55 L 237,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="273,82 261,86 261,77" style="fill:rgb(0,0,0)"/>
+<path d="M194,55 L 202,55 Q 209,55 209,68 Q 209,82 224,82 L 252,82 L 267,82"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M273,82 L 310,82 Q 325,82 325,68 Q 325,55 332,55 L 340,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M273,124A15 15 0 0 0 288 109A15 15 0 0 0 273 94A15 15 0 0 0 258 109A15 15 0 0 0 273 124Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="273" y="109" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">*</text>
+<polygon points="258,109 246,113 246,105" style="fill:rgb(0,0,0)"/>
+<path d="M194,55 L 202,55 Q 209,55 209,70 L 209,94 Q 209,109 224,109 L 237,109 L 252,109"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M288,109 L 310,109 Q 325,109 325,94 L 325,85 L 325,70"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+</svg>
+</div>
+ </div>
+<p><b><a href="https://www.sqlite.org/syntax/aggregate-function-invocation.html" target="_blank">aggregate-function-invocation:</a></b></p><div class='imgcontainer'>
+ <div style="max-width:909px"><svg xmlns='http://www.w3.org/2000/svg' class="pikchr" viewBox="0 0 909.533 223.344">
+<circle cx="5" cy="56" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="32,56 20,60 20,52" style="fill:rgb(0,0,0)"/>
+<path d="M9,56L26,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M47,71L156,71A15 15 0 0 0 171 56A15 15 0 0 0 156 41L47,41A15 15 0 0 0 32 56A15 15 0 0 0 47 71Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="102" y="56" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">aggregate-func</text>
+<polygon points="189,56 178,60 178,52" style="fill:rgb(0,0,0)"/>
+<path d="M171,56L183,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M204,71A15 15 0 0 0 219 56A15 15 0 0 0 204 41A15 15 0 0 0 189 56A15 15 0 0 0 204 71Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="204" y="56" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">(</text>
+<polygon points="242,56 231,60 231,52" style="fill:rgb(0,0,0)"/>
+<path d="M219,56L237,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="277,26 265,30 265,22" style="fill:rgb(0,0,0)"/>
+<path d="M242,56 L 248,56 Q 254,56 254,41 L 254,41 Q 254,26 263,26 L 271,26"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M292,41L360,41A15 15 0 0 0 376 26L376,26A15 15 0 0 0 360 11L292,11A15 15 0 0 0 277 26L277,26A15 15 0 0 0 292 41Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="326" y="26" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">DISTINCT</text>
+<polygon points="394,26 382,30 382,22" style="fill:rgb(0,0,0)"/>
+<path d="M376,26L388,26"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="428,56 417,60 417,52" style="fill:rgb(0,0,0)"/>
+<path d="M394,26 L 399,26 Q 405,26 405,41 L 405,41 Q 405,56 414,56 L 422,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="464,56 453,60 453,52" style="fill:rgb(0,0,0)"/>
+<path d="M428,56L458,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M464,71L513,71L513,41L464,41Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="489" y="56" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">expr</text>
+<polygon points="657,56 646,60 646,52" style="fill:rgb(0,0,0)"/>
+<path d="M513,56L652,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M672,71A15 15 0 0 0 688 56A15 15 0 0 0 672 41A15 15 0 0 0 657 56A15 15 0 0 0 672 71Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="672" y="56" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">)</text>
+<polygon points="734,86 722,91 722,82" style="fill:rgb(0,0,0)"/>
+<path d="M688,56 L 699,56 Q 711,56 711,71 L 711,71 Q 711,86 719,86 L 728,86"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M734,101L846,101L846,71L734,71Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="790" y="86" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">filter-clause</text>
+<polygon points="900,56 888,60 888,52" style="fill:rgb(0,0,0)"/>
+<path d="M846,86 L 855,86 Q 864,86 864,71 L 864,71 Q 864,56 879,56 L 879,56 L 894,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<circle cx="903" cy="56" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="790,56 778,60 778,52" style="fill:rgb(0,0,0)"/>
+<path d="M688,56L784,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="900,56 888,60 888,52" style="fill:rgb(0,0,0)"/>
+<path d="M790,56L894,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="326,56 315,60 315,52" style="fill:rgb(0,0,0)"/>
+<path d="M242,56L321,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="428,56 417,60 417,52" style="fill:rgb(0,0,0)"/>
+<path d="M326,56L422,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M489,32A15 15 0 0 0 504 17A15 15 0 0 0 489 2A15 15 0 0 0 474 17A15 15 0 0 0 489 32Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="489" y="17" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">,</text>
+<polygon points="504,17 515,12 515,21" style="fill:rgb(0,0,0)"/>
+<path d="M513,56 L 525,56 Q 536,56 536,41 L 536,32 Q 536,17 523,17 L 510,17"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="464,56 453,60 453,52" style="fill:rgb(0,0,0)"/>
+<path d="M474,17 L 456,17 Q 441,17 441,32 L 441,41 Q 441,56 450,56 L 458,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M438,207A15 15 0 0 0 453 192A15 15 0 0 0 438 177A15 15 0 0 0 423 192A15 15 0 0 0 438 207Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="438" y="192" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">*</text>
+<polygon points="423,192 412,196 412,188" style="fill:rgb(0,0,0)"/>
+<path d="M242,56 L 248,56 Q 254,56 254,71 L 254,177 Q 254,192 269,192 L 402,192 L 417,192"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="489,192 477,196 477,188" style="fill:rgb(0,0,0)"/>
+<path d="M453,192L483,192"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M489,192 L 570,192 Q 585,192 600,192 L 605,192 Q 620,192 620,177 L 620,71 Q 620,56 626,56 L 631,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="438,216 427,221 427,212" style="fill:rgb(0,0,0)"/>
+<path d="M326,192 L 392,192 Q 407,192 407,204 Q 407,216 420,216 L 433,216"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M438,216 L 453,216 Q 467,216 467,204 Q 467,192 473,192 L 479,192"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="300,117 289,121 289,112" style="fill:rgb(0,0,0)"/>
+<path d="M513,56 L 523,56 Q 533,56 533,71 L 533,71 Q 533,86 518,86 L 292,86 Q 277,86 277,101 L 277,102 Q 277,117 286,117 L 294,117"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M315,132L360,132A15 15 0 0 0 375 117A15 15 0 0 0 360 101L315,101A15 15 0 0 0 300 117A15 15 0 0 0 315 132Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="337" y="117" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">ORDER</text>
+<polygon points="392,117 381,121 381,112" style="fill:rgb(0,0,0)"/>
+<path d="M375,117L386,117"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M407,132L411,132A15 15 0 0 0 426 117A15 15 0 0 0 411 101L407,101A15 15 0 0 0 392 117A15 15 0 0 0 407 132Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="409" y="117" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">BY</text>
+<polygon points="455,117 444,121 444,112" style="fill:rgb(0,0,0)"/>
+<path d="M426,117L449,117"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M455,132L585,132L585,101L455,101Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="520" y="117" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">ordering-term</text>
+<path d="M520,169A15 15 0 0 0 535 154A15 15 0 0 0 520 139A15 15 0 0 0 505 154A15 15 0 0 0 520 169Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="520" y="154" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">,</text>
+<polygon points="535,154 547,150 547,159" style="fill:rgb(0,0,0)"/>
+<path d="M585,117 L 591,117 Q 597,117 597,132 L 597,139 Q 597,154 582,154 L 556,154 L 541,154"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="455,117 444,121 444,112" style="fill:rgb(0,0,0)"/>
+<path d="M505,154 L 470,154 Q 455,154 447,154 Q 438,154 438,139 L 438,132 Q 438,117 444,117 L 449,117"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M585,117 L 594,117 Q 602,117 602,102 L 602,71 Q 602,56 617,56 L 623,56 L 638,56"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+</svg>
+</div>
+ </div>
+<p><b><a href="https://www.sqlite.org/syntax/window-function-invocation.html" target="_blank">window-function-invocation:</a></b></p><div class='imgcontainer'>
+ <div style="max-width:870px"><svg xmlns='http://www.w3.org/2000/svg' class="pikchr" viewBox="0 0 870.446 132.84">
+<circle cx="5" cy="55" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="32,55 20,59 20,50" style="fill:rgb(0,0,0)"/>
+<path d="M9,55L26,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M47,70L135,70A15 15 0 0 0 150 55A15 15 0 0 0 135 39L47,39A15 15 0 0 0 32 55A15 15 0 0 0 47 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="91" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">window-func</text>
+<polygon points="167,55 156,59 156,50" style="fill:rgb(0,0,0)"/>
+<path d="M150,55L161,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M182,70A15 15 0 0 0 197 55A15 15 0 0 0 182 39A15 15 0 0 0 167 55A15 15 0 0 0 182 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="182" y="55" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">(</text>
+<polygon points="251,55 240,59 240,50" style="fill:rgb(0,0,0)"/>
+<path d="M197,55L246,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M251,70L300,70L300,39L251,39Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="276" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">expr</text>
+<polygon points="354,55 343,59 343,50" style="fill:rgb(0,0,0)"/>
+<path d="M300,55L349,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M370,70A15 15 0 0 0 385 55A15 15 0 0 0 370 39A15 15 0 0 0 354 55A15 15 0 0 0 370 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="370" y="55" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">)</text>
+<polygon points="426,85 415,89 415,81" style="fill:rgb(0,0,0)"/>
+<path d="M385,55 L 392,55 Q 400,55 400,70 L 400,70 Q 400,85 410,85 L 420,85"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M426,100L538,100L538,70L426,70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="482" y="85" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">filter-clause</text>
+<polygon points="580,55 568,59 568,50" style="fill:rgb(0,0,0)"/>
+<path d="M538,85 L 546,85 Q 553,85 553,70 L 553,70 Q 553,55 564,55 L 574,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M595,70L626,70A15 15 0 0 0 641 55A15 15 0 0 0 626 39L595,39A15 15 0 0 0 580 55A15 15 0 0 0 595 70Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="610" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">OVER</text>
+<polygon points="682,92 671,97 671,88" style="fill:rgb(0,0,0)"/>
+<path d="M641,55 L 648,55 Q 656,55 656,70 L 656,77 Q 656,92 666,92 L 677,92"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M697,108L794,108A15 15 0 0 0 810 92L810,92A15 15 0 0 0 794 77L697,77A15 15 0 0 0 682 92L682,92A15 15 0 0 0 697 108Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="746" y="92" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">window-name</text>
+<polygon points="861,55 849,59 849,50" style="fill:rgb(0,0,0)"/>
+<path d="M810,92 L 817,92 Q 825,92 825,77 L 825,70 Q 825,55 840,55 L 840,55 L 855,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<circle cx="864" cy="55" r="3.6"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M385,55L568,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="682,55 671,59 671,50" style="fill:rgb(0,0,0)"/>
+<path d="M641,55L677,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M682,70L801,70L801,39L682,39Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="742" y="55" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">window-defn</text>
+<path d="M801,55L849,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M276,32A15 15 0 0 0 291 17L291,17A15 15 0 0 0 276 2A15 15 0 0 0 261 17L261,17A15 15 0 0 0 276 32Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="276" y="17" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">,</text>
+<polygon points="291,17 303,12 303,21" style="fill:rgb(0,0,0)"/>
+<path d="M300,55 L 308,55 Q 315,55 315,40 L 315,32 Q 315,17 306,17 L 297,17"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M261,17 L 240,17 Q 225,17 225,32 L 225,40 Q 225,55 232,55 L 240,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<polygon points="276,85 264,89 264,81" style="fill:rgb(0,0,0)"/>
+<path d="M197,55 L 205,55 Q 212,55 212,70 L 212,70 Q 212,85 227,85 L 255,85 L 270,85"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M276,85 L 313,85 Q 328,85 328,70 L 328,70 Q 328,55 335,55 L 343,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M276,130A15 15 0 0 0 291 115L291,115A15 15 0 0 0 276 100A15 15 0 0 0 261 115L261,115A15 15 0 0 0 276 130Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="276" y="115" text-anchor="middle" font-weight="bold" fill="rgb(0,0,0)" dominant-baseline="central">*</text>
+<polygon points="261,115 249,119 249,111" style="fill:rgb(0,0,0)"/>
+<path d="M197,55 L 205,55 Q 212,55 212,70 L 212,100 Q 212,115 227,115 L 240,115 L 255,115"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M291,115 L 313,115 Q 328,115 328,100 L 328,70 Q 328,55 335,55 L 343,55"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+</svg>
+</div>
+ </div>
