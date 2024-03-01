@@ -4,122 +4,105 @@ description: Savepoints
 statement: SAVEPOINT savepoint_name;
 ---
 
-
-
-
-
-
-<h2 id="syntax"><span>1. </span>Syntax</h2>
+## 1. Syntax
 
 <!-- do-not-touch-svg-import: 'savepoint.svg' -->
 
+## 2. Savepoints
 
-<h2 id="savepoints"><span>2. </span>Savepoints</h2>
+SAVEPOINTs are a method of creating transactions, similar to
+[BEGIN](lang_transaction) and [COMMIT](lang_transaction), except that
+the SAVEPOINT and RELEASE commands are named and may be nested.
 
-<p> SAVEPOINTs are a method of creating transactions, similar to
-<a href="lang_transaction">BEGIN</a> and <a href="lang_transaction">COMMIT</a>, except that the SAVEPOINT and RELEASE commands
-are named and may be nested.</p>
+The SAVEPOINT command starts a new transaction with a name. The
+transaction names need not be unique. A SAVEPOINT can be started either
+within or outside of a
+[BEGIN](lang_transaction)...[COMMIT](lang_transaction). When a SAVEPOINT
+is the outer-most savepoint and it is not within a
+[BEGIN](lang_transaction)...[COMMIT](lang_transaction) then the behavior
+is the same as BEGIN DEFERRED TRANSACTION.
 
-<p> The SAVEPOINT command starts a new transaction with a name.
-The transaction names need not be unique.
-A SAVEPOINT can be started either within or outside of
-a <a href="lang_transaction">BEGIN</a>...<a href="lang_transaction">COMMIT</a>. When a SAVEPOINT is the outer-most savepoint
-and it is not within a <a href="lang_transaction">BEGIN</a>...<a href="lang_transaction">COMMIT</a> then the behavior is the
-same as BEGIN DEFERRED TRANSACTION.</p>
-
-<p>The ROLLBACK TO command reverts the state of the database back to what
+The ROLLBACK TO command reverts the state of the database back to what
 it was just after the corresponding SAVEPOINT. Note that unlike that
-plain <a href="lang_transaction">ROLLBACK</a> command (without the TO keyword) the ROLLBACK TO command
-does not cancel the transaction. Instead of cancelling the transaction,
-the ROLLBACK TO command restarts the transaction again at the beginning.
-All intervening SAVEPOINTs are canceled, however.</p>
+plain [ROLLBACK](lang_transaction) command (without the TO keyword) the
+ROLLBACK TO command does not cancel the transaction. Instead of
+cancelling the transaction, the ROLLBACK TO command restarts the
+transaction again at the beginning. All intervening SAVEPOINTs are
+canceled, however.
 
-<p>The RELEASE command is like a <a href="lang_transaction">COMMIT</a> for a SAVEPOINT.
-The RELEASE command causes all savepoints back to and including the 
-most recent savepoint with a matching name to be removed from the 
-transaction stack. The RELEASE of an inner transaction
-does not cause any changes to be written to the database file; it merely
-removes savepoints from the transaction stack such that it is
-no longer possible to ROLLBACK TO those savepoints.
-If a RELEASE command releases the outermost savepoint, so
-that the transaction stack becomes empty, then RELEASE is the same
-as <a href="lang_transaction">COMMIT</a>.
-The <a href="lang_transaction">COMMIT</a> command may be used to release all savepoints and
-commit the transaction even if the transaction was originally started
-by a SAVEPOINT command instead of a <a href="lang_transaction">BEGIN</a> command.</p>
+The RELEASE command is like a [COMMIT](lang_transaction) for a
+SAVEPOINT. The RELEASE command causes all savepoints back to and
+including the most recent savepoint with a matching name to be removed
+from the transaction stack. The RELEASE of an inner transaction does not
+cause any changes to be written to the database file; it merely removes
+savepoints from the transaction stack such that it is no longer possible
+to ROLLBACK TO those savepoints. If a RELEASE command releases the
+outermost savepoint, so that the transaction stack becomes empty, then
+RELEASE is the same as [COMMIT](lang_transaction). The
+[COMMIT](lang_transaction) command may be used to release all savepoints
+and commit the transaction even if the transaction was originally
+started by a SAVEPOINT command instead of a [BEGIN](lang_transaction)
+command.
 
-<p>If the savepoint-name in a RELEASE command does not match any
-savepoint currently in the transaction stack, then no savepoints are
-released, the database is unchanged, and the RELEASE command returns
-an error.</p>
+If the savepoint-name in a RELEASE command does not match any savepoint
+currently in the transaction stack, then no savepoints are released, the
+database is unchanged, and the RELEASE command returns an error.
 
-<p>Note that an inner transaction might commit (using the RELEASE command)
-but then later have its work undone by a ROLLBACK in an outer transaction.
-A power failure or program crash or OS crash will cause the outer-most
-transaction to rollback, undoing all changes that have occurred within
-that outer transaction, even changes that have supposedly been "committed"
-by the RELEASE command. Content is not actually committed on the disk 
-until the outermost transaction commits.</p>
+Note that an inner transaction might commit (using the RELEASE command)
+but then later have its work undone by a ROLLBACK in an outer
+transaction. A power failure or program crash or OS crash will cause the
+outer-most transaction to rollback, undoing all changes that have
+occurred within that outer transaction, even changes that have
+supposedly been "committed" by the RELEASE command. Content is not
+actually committed on the disk until the outermost transaction commits.
 
-<p>There are several ways of thinking about the RELEASE command:</p>
+There are several ways of thinking about the RELEASE command:
 
-<ul>
-<li><p>
-Some people view RELEASE as the equivalent of COMMIT for a SAVEPOINT.
-This is an acceptable point of view as long as one remembers that the
-changes committed by an inner transaction might later be undone by a
-rollback in an outer transaction.</p></li>
+- Some people view RELEASE as the equivalent of COMMIT for a SAVEPOINT.
+  This is an acceptable point of view as long as one remembers that the
+  changes committed by an inner transaction might later be undone by a
+  rollback in an outer transaction.
 
-<li><p>
-Another view of RELEASE is that it merges a named transaction into its
-parent transaction, so that the named transaction and its parent become
-the same transaction. After RELEASE, the named transaction and its parent
-will commit or rollback together, whatever their fate may be.
-</p></li>
+- Another view of RELEASE is that it merges a named transaction into its
+  parent transaction, so that the named transaction and its parent
+  become the same transaction. After RELEASE, the named transaction and
+  its parent will commit or rollback together, whatever their fate may
+  be.
 
-<li><p>
-One can also think of savepoints as
-"marks" in the transaction timeline. In this view, the SAVEPOINT command
-creates a new mark, the ROLLBACK TO command rewinds the timeline back
-to a point just after the named mark, and the RELEASE command
-erases marks from the timeline without actually making any
-changes to the database.
-</p></li>
-</ul>
+- One can also think of savepoints as "marks" in the transaction
+  timeline. In this view, the SAVEPOINT command creates a new mark, the
+  ROLLBACK TO command rewinds the timeline back to a point just after
+  the named mark, and the RELEASE command erases marks from the timeline
+  without actually making any changes to the database.
 
+## 3. Transaction Nesting Rules
 
+The last transaction started will be the first transaction committed or
+rolled back.
 
-<h2 id="transaction_nesting_rules"><span>3. </span>Transaction Nesting Rules</h2>
+The [BEGIN](lang_transaction) command only works if the transaction
+stack is empty, or in other words if there are no pending transactions.
+If the transaction stack is not empty when the [BEGIN](lang_transaction)
+command is invoked, then the command fails with an error.
 
-<p>The last transaction started will be the first
-transaction committed or rolled back.</p>
+The [COMMIT](lang_transaction) command commits all outstanding
+transactions and leaves the transaction stack empty.
 
-<p>The <a href="lang_transaction">BEGIN</a> command only works if the transaction stack is empty, or
-in other words if there are no pending transactions. If the transaction
-stack is not empty when the <a href="lang_transaction">BEGIN</a> command is invoked, then the command
-fails with an error.</p>
+The RELEASE command starts with the most recent addition to the
+transaction stack and releases savepoints backwards in time until it
+releases a savepoint with a matching savepoint-name. Prior savepoints,
+even savepoints with matching savepoint-names, are unchanged. If the
+RELEASE command causes the transaction stack to become empty (if the
+RELEASE command releases the outermost transaction from the stack) then
+the transaction commits.
 
-<p>The <a href="lang_transaction">COMMIT</a> command commits all outstanding transactions and leaves
-the transaction stack empty.</p>
+The [ROLLBACK](lang_transaction) command without a TO clause rolls backs
+all transactions and leaves the transaction stack empty.
 
-<p>The RELEASE command starts with the most recent addition to the
-transaction stack and releases savepoints backwards 
-in time until it releases a savepoint with a matching savepoint-name.
-Prior savepoints, even savepoints with matching savepoint-names, are
-unchanged.
-If the RELEASE command causes the
-transaction stack to become empty (if the RELEASE command releases the
-outermost transaction from the stack) then the transaction commits.</p>
-
-<p>The <a href="lang_transaction">ROLLBACK</a> command without a TO clause rolls backs all transactions
-and leaves the transaction stack empty.</p>
-
-<p>The ROLLBACK command with a TO clause rolls back transactions going
-backwards in time back to the most recent SAVEPOINT with a matching name.
-The SAVEPOINT with the matching name remains on the transaction stack,
-but all database changes that occurred after that SAVEPOINT was created
-are rolled back. If the savepoint-name in a ROLLBACK TO command does not
-match any SAVEPOINT on the stack, then the ROLLBACK command fails with an
-error and leaves the state of the database unchanged.</p>
-
-
+The ROLLBACK command with a TO clause rolls back transactions going
+backwards in time back to the most recent SAVEPOINT with a matching
+name. The SAVEPOINT with the matching name remains on the transaction
+stack, but all database changes that occurred after that SAVEPOINT was
+created are rolled back. If the savepoint-name in a ROLLBACK TO command
+does not match any SAVEPOINT on the stack, then the ROLLBACK command
+fails with an error and leaves the state of the database unchanged.

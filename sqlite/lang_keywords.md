@@ -3,240 +3,210 @@ title: SQLite Keywords
 description: SQLite Keywords
 ---
 
-
-
-
-
-
-
-<p>The SQL standard specifies a large number of keywords which may not
-be used as the names of tables, indices, columns, databases, user-defined
+The SQL standard specifies a large number of keywords which may not be
+used as the names of tables, indices, columns, databases, user-defined
 functions, collations, virtual table modules, or any other named object.
 The list of keywords is so long that few people can remember them all.
 For most SQL code, your safest bet is to never use any English language
-word as the name of a user-defined object.</p>
+word as the name of a user-defined object.
 
-<p>If you want to use a keyword as a name, you need to quote it. There
-are four ways of quoting keywords in SQLite:</p>
+If you want to use a keyword as a name, you need to quote it. There are
+four ways of quoting keywords in SQLite:
 
-<p>
-</p><blockquote>
-<table>
-<tr>	<td valign="top"><b>'keyword'</b></td><td width="20"></td>
-	<td>A keyword in single quotes is a string literal.</td></tr>
+> |                 |     |
+> |-----------------|-----|
+> | **'keyword'**   | A keyword in single quotes is a string literal. |
+> | **"keyword"**   | A keyword in double-quotes is an identifier.    |
+> | **\[keyword\]** | A keyword enclosed in square brackets is an identifier. This is not standard SQL. This quoting mechanism is used by MS Access and SQL Server and is included in SQLite for compatibility. |
+> | **\`keyword\`** | A keyword enclosed in grave accents (ASCII code 96) is an identifier. This is not standard SQL. This quoting mechanism is used by MySQL and is included in SQLite for compatibility.  |
 
-<tr>	<td valign="top"><b>"keyword"</b></td><td></td>
-	<td>A keyword in double-quotes is an identifier.</td></tr>
+For resilience when confronted with historical SQL statements, SQLite
+will sometimes bend the quoting rules above:
 
-<tr>	<td valign="top"><b>&#91;keyword&#93;</b></td><td></td>
-	<td>A keyword enclosed in square brackets is 
-        an identifier.  This is not standard SQL.  This quoting mechanism
-        is used by MS Access and SQL Server and is included in SQLite for
-        compatibility.</td></tr>
+- If a keyword in single quotes (ex: **'key'** or **'glob'**) is used in
+  a context where an identifier is allowed but where a string literal is
+  not allowed, then the token is understood to be an identifier instead
+  of a string literal.
 
-<tr>	<td valign="top"><b>&#96;keyword&#96;</b></td><td></td>
-	<td>A keyword enclosed in grave accents (ASCII code 96) is 
-        an identifier.  This is not standard SQL.  This quoting mechanism
-        is used by MySQL and is included in SQLite for
-        compatibility.</td></tr>
-</table>
-</blockquote>
+- If a keyword in double quotes (ex: **"key"** or **"glob"**) is used in
+  a context where it cannot be resolved to an identifier but where a
+  string literal is allowed, then the token is understood to be a string
+  literal instead of an identifier.
 
+Programmers are cautioned not to use the two exceptions described in the
+previous bullets. We emphasize that they exist only so that old and
+ill-formed SQL statements will run correctly. Future versions of SQLite
+might raise errors instead of accepting the malformed statements covered
+by the exceptions above.
 
-<p>For resilience when confronted with historical SQL statements, SQLite
-will sometimes bend the quoting rules above:</p>
+SQLite adds new keywords from time to time when it takes on new
+features. So to prevent your code from being broken by future
+enhancements, you should normally quote any identifier that is an
+English language word, even if you do not have to.
 
-<ul>
-<li><p>If a keyword in single
-quotes (ex: <b>'key'</b> or <b>'glob'</b>) is used in a context where
-an identifier is allowed but where a string literal is not allowed, then
-the token is understood to be an identifier instead of a string literal.
-</p></li>
+The list below shows all possible keywords used by any build of SQLite
+regardless of <a href="https://www.sqlite.org/compile.html"
+target="_blank">compile-time options</a>. Most reasonable configurations
+use most or all of these keywords, but some keywords may be omitted when
+SQL language features are disabled. Applications can use the
+<a href="https://www.sqlite.org/c3ref/keyword_check.html"
+target="_blank">sqlite3_keyword_count()</a>,
+<a href="https://www.sqlite.org/c3ref/keyword_check.html"
+target="_blank">sqlite3_keyword_name()</a>, and
+<a href="https://www.sqlite.org/c3ref/keyword_check.html"
+target="_blank">sqlite3_keyword_check()</a> interfaces to determine the
+keywords recognized by SQLite at run-time. Regardless of the
+compile-time configuration, any identifier that is not on the following
+147-element list is not a keyword to the SQL parser in SQLite:
 
-<li><p>If a keyword in double
-quotes (ex: <b>"key"</b> or <b>"glob"</b>) is used in a context where
-it cannot be resolved to an identifier but where a string literal
-is allowed, then the token is understood to be a string literal instead
-of an identifier.</p></li>
-</ul>
+<div class="columns">
 
-<p>Programmers are cautioned not to use the two exceptions described in
-the previous bullets. We emphasize that they exist only so that old
-and ill-formed SQL statements will run correctly. Future versions of
-SQLite might raise errors instead of accepting the malformed
-statements covered by the exceptions above.</p>
+- ABORT
+- ACTION
+- ADD
+- AFTER
+- ALL
+- ALTER
+- ALWAYS
+- ANALYZE
+- AND
+- AS
+- ASC
+- ATTACH
+- AUTOINCREMENT
+- BEFORE
+- BEGIN
+- BETWEEN
+- BY
+- CASCADE
+- CASE
+- CAST
+- CHECK
+- COLLATE
+- COLUMN
+- COMMIT
+- CONFLICT
+- CONSTRAINT
+- CREATE
+- CROSS
+- CURRENT
+- CURRENT_DATE
+- CURRENT_TIME
+- CURRENT_TIMESTAMP
+- DATABASE
+- DEFAULT
+- DEFERRABLE
+- DEFERRED
+- DELETE
+- DESC
+- DETACH
+- DISTINCT
+- DO
+- DROP
+- EACH
+- ELSE
+- END
+- ESCAPE
+- EXCEPT
+- EXCLUDE
+- EXCLUSIVE
+- EXISTS
+- EXPLAIN
+- FAIL
+- FILTER
+- FIRST
+- FOLLOWING
+- FOR
+- FOREIGN
+- FROM
+- FULL
+- GENERATED
+- GLOB
+- GROUP
+- GROUPS
+- HAVING
+- IF
+- IGNORE
+- IMMEDIATE
+- IN
+- INDEX
+- INDEXED
+- INITIALLY
+- INNER
+- INSERT
+- INSTEAD
+- INTERSECT
+- INTO
+- IS
+- ISNULL
+- JOIN
+- KEY
+- LAST
+- LEFT
+- LIKE
+- LIMIT
+- MATCH
+- MATERIALIZED
+- NATURAL
+- NO
+- NOT
+- NOTHING
+- NOTNULL
+- NULL
+- NULLS
+- OF
+- OFFSET
+- ON
+- OR
+- ORDER
+- OTHERS
+- OUTER
+- OVER
+- PARTITION
+- PLAN
+- PRAGMA
+- PRECEDING
+- PRIMARY
+- QUERY
+- RAISE
+- RANGE
+- RECURSIVE
+- REFERENCES
+- REGEXP
+- REINDEX
+- RELEASE
+- RENAME
+- REPLACE
+- RESTRICT
+- RETURNING
+- RIGHT
+- ROLLBACK
+- ROW
+- ROWS
+- SAVEPOINT
+- SELECT
+- SET
+- TABLE
+- TEMP
+- TEMPORARY
+- THEN
+- TIES
+- TO
+- TRANSACTION
+- TRIGGER
+- UNBOUNDED
+- UNION
+- UNIQUE
+- UPDATE
+- USING
+- VACUUM
+- VALUES
+- VIEW
+- VIRTUAL
+- WHEN
+- WHERE
+- WINDOW
+- WITH
+- WITHOUT
 
-<p>
-SQLite adds new keywords from time to time when it takes on new features.
-So to prevent your code from being broken by future enhancements, you should
-normally quote any identifier that is an English language word, even if
-you do not have to.
-</p>
-
-<p>
-The list below shows all possible keywords used by any build of
-SQLite regardless of <a href="https://www.sqlite.org/compile.html" target="_blank">compile-time options</a>. 
-Most reasonable configurations use most or all of these keywords,
-but some keywords may be omitted when SQL language features are
-disabled.
-Applications can use the
-<a href="https://www.sqlite.org/c3ref/keyword_check.html" target="_blank">sqlite3_keyword_count()</a>, <a href="https://www.sqlite.org/c3ref/keyword_check.html" target="_blank">sqlite3_keyword_name()</a>, and
-<a href="https://www.sqlite.org/c3ref/keyword_check.html" target="_blank">sqlite3_keyword_check()</a> interfaces to determine the keywords
-recognized by SQLite at run-time.
-Regardless of the compile-time configuration, any identifier that is not on
-the following 147-element list is not a keyword to the SQL parser in SQLite:
-</p>
-
-<div class="columns" >
-<ul style="padding-top:0;">
-<li>ABORT</li>
-<li>ACTION</li>
-<li>ADD</li>
-<li>AFTER</li>
-<li>ALL</li>
-<li>ALTER</li>
-<li>ALWAYS</li>
-<li>ANALYZE</li>
-<li>AND</li>
-<li>AS</li>
-<li>ASC</li>
-<li>ATTACH</li>
-<li>AUTOINCREMENT</li>
-<li>BEFORE</li>
-<li>BEGIN</li>
-<li>BETWEEN</li>
-<li>BY</li>
-<li>CASCADE</li>
-<li>CASE</li>
-<li>CAST</li>
-<li>CHECK</li>
-<li>COLLATE</li>
-<li>COLUMN</li>
-<li>COMMIT</li>
-<li>CONFLICT</li>
-<li>CONSTRAINT</li>
-<li>CREATE</li>
-<li>CROSS</li>
-<li>CURRENT</li>
-<li>CURRENT_DATE</li>
-<li>CURRENT_TIME</li>
-<li>CURRENT_TIMESTAMP</li>
-<li>DATABASE</li>
-<li>DEFAULT</li>
-<li>DEFERRABLE</li>
-<li>DEFERRED</li>
-<li>DELETE</li>
-<li>DESC</li>
-<li>DETACH</li>
-<li>DISTINCT</li>
-<li>DO</li>
-<li>DROP</li>
-<li>EACH</li>
-<li>ELSE</li>
-<li>END</li>
-<li>ESCAPE</li>
-<li>EXCEPT</li>
-<li>EXCLUDE</li>
-<li>EXCLUSIVE</li>
-<li>EXISTS</li>
-<li>EXPLAIN</li>
-<li>FAIL</li>
-<li>FILTER</li>
-<li>FIRST</li>
-<li>FOLLOWING</li>
-<li>FOR</li>
-<li>FOREIGN</li>
-<li>FROM</li>
-<li>FULL</li>
-<li>GENERATED</li>
-<li>GLOB</li>
-<li>GROUP</li>
-<li>GROUPS</li>
-<li>HAVING</li>
-<li>IF</li>
-<li>IGNORE</li>
-<li>IMMEDIATE</li>
-<li>IN</li>
-<li>INDEX</li>
-<li>INDEXED</li>
-<li>INITIALLY</li>
-<li>INNER</li>
-<li>INSERT</li>
-<li>INSTEAD</li>
-<li>INTERSECT</li>
-<li>INTO</li>
-<li>IS</li>
-<li>ISNULL</li>
-<li>JOIN</li>
-<li>KEY</li>
-<li>LAST</li>
-<li>LEFT</li>
-<li>LIKE</li>
-<li>LIMIT</li>
-<li>MATCH</li>
-<li>MATERIALIZED</li>
-<li>NATURAL</li>
-<li>NO</li>
-<li>NOT</li>
-<li>NOTHING</li>
-<li>NOTNULL</li>
-<li>NULL</li>
-<li>NULLS</li>
-<li>OF</li>
-<li>OFFSET</li>
-<li>ON</li>
-<li>OR</li>
-<li>ORDER</li>
-<li>OTHERS</li>
-<li>OUTER</li>
-<li>OVER</li>
-<li>PARTITION</li>
-<li>PLAN</li>
-<li>PRAGMA</li>
-<li>PRECEDING</li>
-<li>PRIMARY</li>
-<li>QUERY</li>
-<li>RAISE</li>
-<li>RANGE</li>
-<li>RECURSIVE</li>
-<li>REFERENCES</li>
-<li>REGEXP</li>
-<li>REINDEX</li>
-<li>RELEASE</li>
-<li>RENAME</li>
-<li>REPLACE</li>
-<li>RESTRICT</li>
-<li>RETURNING</li>
-<li>RIGHT</li>
-<li>ROLLBACK</li>
-<li>ROW</li>
-<li>ROWS</li>
-<li>SAVEPOINT</li>
-<li>SELECT</li>
-<li>SET</li>
-<li>TABLE</li>
-<li>TEMP</li>
-<li>TEMPORARY</li>
-<li>THEN</li>
-<li>TIES</li>
-<li>TO</li>
-<li>TRANSACTION</li>
-<li>TRIGGER</li>
-<li>UNBOUNDED</li>
-<li>UNION</li>
-<li>UNIQUE</li>
-<li>UPDATE</li>
-<li>USING</li>
-<li>VACUUM</li>
-<li>VALUES</li>
-<li>VIEW</li>
-<li>VIRTUAL</li>
-<li>WHEN</li>
-<li>WHERE</li>
-<li>WINDOW</li>
-<li>WITH</li>
-<li>WITHOUT</li>
-</ul></div>
-
-</ul></div>
-
+</div>

@@ -1,69 +1,66 @@
 ---
 title: EXPLAIN
 description: EXPLAIN
-statement: EXPLAIN SELECT * FROM Artist;
+statement: EXPLAIN SELECT \* FROM Artist;
 ---
 
-
-
-
-
-
-<h2 id="syntax"><span>1. </span>Syntax</h2>
+## 1. Syntax
 
 <!-- do-not-touch-svg-import: 'explain.svg' -->
 
+## 2. Description
 
-<h2 id="description"><span>2. </span>Description</h2>
+An SQL statement can be preceded by the keyword "EXPLAIN" or by the
+phrase "EXPLAIN QUERY PLAN". Either modification causes the SQL
+statement to behave as a query and to return information about how the
+SQL statement would have operated if the EXPLAIN keyword or phrase had
+been omitted.
 
-<p>An SQL statement can be preceded by the keyword "EXPLAIN" or
-by the phrase "EXPLAIN QUERY PLAN". Either modification causes the
-SQL statement to behave as a query and to return information about
-how the SQL statement would have operated if the EXPLAIN keyword or
-phrase had been omitted.</p>
+The output from EXPLAIN and EXPLAIN QUERY PLAN is intended for
+interactive analysis and troubleshooting only. The details of the output
+format are subject to change from one release of SQLite to the next.
+Applications should not use EXPLAIN or EXPLAIN QUERY PLAN since their
+exact behavior is variable and only partially documented.
 
-<p>The output from EXPLAIN and EXPLAIN QUERY PLAN is intended for
-interactive analysis and troubleshooting only. The details of the 
-output format are subject to change from one release of SQLite to the next.
-Applications should not use EXPLAIN or EXPLAIN QUERY PLAN since
-their exact behavior is variable and only partially documented.</p>
-
-<p>When the EXPLAIN keyword appears by itself it causes the statement
-to behave as a query that returns the sequence of 
-<a href="https://www.sqlite.org/opcode.html" target="_blank">virtual machine instructions</a> it would have used to execute the command had
+When the EXPLAIN keyword appears by itself it causes the statement to
+behave as a query that returns the sequence of
+<a href="https://www.sqlite.org/opcode.html" target="_blank">virtual
+machine instructions</a> it would have used to execute the command had
 the EXPLAIN keyword not been present. When the EXPLAIN QUERY PLAN phrase
-appears, the statement returns high-level information regarding the query
-plan that would have been used.
+appears, the statement returns high-level information regarding the
+query plan that would have been used.
 
-</p><p>The EXPLAIN QUERY PLAN command is described in 
-<a href="https://www.sqlite.org/eqp.html" target="_blank">more detail here</a>.
+The EXPLAIN QUERY PLAN command is described in
+<a href="https://www.sqlite.org/eqp.html" target="_blank">more detail
+here</a>.
 
-</p><h2 id="explain_operates_at_run_time_not_at_prepare_time"><span>2.1. </span>EXPLAIN operates at run-time, not at prepare-time</h2>
+## 2.1. EXPLAIN operates at run-time, not at prepare-time
 
-<p>The EXPLAIN and EXPLAIN QUERY PLAN prefixes affect the behavior of
-running a <a href="https://www.sqlite.org/c3ref/stmt.html" target="_blank">prepared statement</a> using <a href="https://www.sqlite.org/c3ref/step.html" target="_blank">sqlite3_step()</a>. The process of
-generating a new prepared statement using <a href="https://www.sqlite.org/c3ref/prepare.html" target="_blank">sqlite3_prepare()</a> or similar
-is (mostly) unaffected by EXPLAIN. (The exception to the previous sentence
-is that some special opcodes used by EXPLAIN QUERY PLAN are omitted when
-building an EXPLAIN QUERY PLAN prepared statement, as a performance
-optimization.)
+The EXPLAIN and EXPLAIN QUERY PLAN prefixes affect the behavior of
+running a <a href="https://www.sqlite.org/c3ref/stmt.html"
+target="_blank">prepared statement</a> using
+<a href="https://www.sqlite.org/c3ref/step.html"
+target="_blank">sqlite3_step()</a>. The process of generating a new
+prepared statement using
+<a href="https://www.sqlite.org/c3ref/prepare.html"
+target="_blank">sqlite3_prepare()</a> or similar is (mostly) unaffected
+by EXPLAIN. (The exception to the previous sentence is that some special
+opcodes used by EXPLAIN QUERY PLAN are omitted when building an EXPLAIN
+QUERY PLAN prepared statement, as a performance optimization.)
 
-</p><p>This means that actions that occur during sqlite3_prepare() are
+This means that actions that occur during sqlite3_prepare() are
 unaffected by EXPLAIN.
 
-</p><ul>
-<li><p>
-Some <a href="https://www.sqlite.org/pragma.html#syntax" target="_blank">PRAGMA</a> statements do their work during sqlite3_prepare() rather
-than during sqlite3_step(). Those PRAGMA statements are unaffected
-by EXPLAIN. They operate the same with or without the EXPLAIN prefix.
-The set of PRAGMA statements that are unaffected by EXPLAIN can vary
-from one release to the next. Some PRAGMA statements operate during
-sqlite3_prepare() depending on their arguments. For consistent
-results, avoid using EXPLAIN on PRAGMA statements.
+- Some <a href="https://www.sqlite.org/pragma.html#syntax"
+  target="_blank">PRAGMA</a> statements do their work during
+  sqlite3_prepare() rather than during sqlite3_step(). Those PRAGMA
+  statements are unaffected by EXPLAIN. They operate the same with or
+  without the EXPLAIN prefix. The set of PRAGMA statements that are
+  unaffected by EXPLAIN can vary from one release to the next. Some
+  PRAGMA statements operate during sqlite3_prepare() depending on their
+  arguments. For consistent results, avoid using EXPLAIN on PRAGMA
+  statements.
 
-</p></li><li><p>
-The <a href="https://www.sqlite.org/c3ref/set_authorizer.html" target="_blank">authorizer callback</a> is invoked regardless of the presence of
-EXPLAIN or EXPLAIN QUERY PLAN.
-</p></li></ul>
-
-
+- The <a href="https://www.sqlite.org/c3ref/set_authorizer.html"
+  target="_blank">authorizer callback</a> is invoked regardless of the
+  presence of EXPLAIN or EXPLAIN QUERY PLAN.
