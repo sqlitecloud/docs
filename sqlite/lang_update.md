@@ -58,7 +58,7 @@ statement.
 
 - The <span class="yyterm">table-name</span> specified as part of an
   UPDATE statement within a trigger body must be unqualified. In other
-  words, the *schema-name***.** prefix on the table name of the UPDATE
+  words, the _schema-name_**.** prefix on the table name of the UPDATE
   is not allowed within triggers. Unless the table to which the trigger
   is attached is in the TEMP database, the table being updated by the
   trigger program must reside in the same database as it. If the table
