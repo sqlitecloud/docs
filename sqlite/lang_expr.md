@@ -14,7 +14,9 @@ SQLite understands these operators, listed in precedence<sup>1</sup>
 order  
 (top to bottom / highest to lowest):
 
-| Operators 2 |
+<div class="small-table">
+
+| Operators<sup>2</sup> |
 | --- |
 | ~ [expr]    + [expr]    - [expr] |
 | [expr] COLLATE (collation-name) 3 |
@@ -28,6 +30,8 @@ order
 | NOT [expr] |
 | AND |
 | OR |
+
+</div>
 
 1.  Operators shown within the same table cell share precedence.  
 2.  "<span class="small">\[expr\]</span>" denotes operand locations for
@@ -506,102 +510,15 @@ by applying the <a href="https://www.sqlite.org/datatype3.html#affname"
 target="_blank">rules for determining column affinity</a> to the
 <span class="yyterm">type-name</span>.
 
-> <table data-border="1">
-> <colgroup>
-> <col style="width: 50%" />
-> <col style="width: 50%" />
-> </colgroup>
-> <thead>
-> <tr class="header">
-> <th>Affinity of <span class="yyterm">type-name</span></th>
-> <th>Conversion Processing</th>
-> </tr>
-> </thead>
-> <tbody>
-> <tr class="odd">
-> <td>NONE</td>
-> <td>Casting a value to a <span class="yyterm">type-name</span> with no
-> affinity causes the value to be converted into a BLOB. Casting to a BLOB
-> consists of first casting the value to TEXT in the <a
-> href="https://www.sqlite.org/pragma.html#pragma_encoding"
-> target="_blank">encoding</a> of the database connection, then
-> interpreting the resulting byte sequence as a BLOB instead of as
-> TEXT.</td>
-> </tr>
-> <tr class="even">
-> <td>TEXT</td>
-> <td>To cast a BLOB value to TEXT, the sequence of bytes that make up the
-> BLOB is interpreted as text encoded using the database encoding.
-> <p>Casting an INTEGER or REAL value into TEXT renders the value as if
-> via <a href="https://www.sqlite.org/c3ref/mprintf.html"
-> target="_blank">sqlite3_snprintf()</a> except that the resulting TEXT
-> uses the <a href="https://www.sqlite.org/pragma.html#pragma_encoding"
-> target="_blank">encoding</a> of the database connection.</p></td>
-> </tr>
-> <tr class="odd">
-> <td>REAL</td>
-> <td>When casting a BLOB value to a REAL, the value is first converted to
-> TEXT.
-> <p>When casting a TEXT value to REAL, the longest possible prefix of the
-> value that can be interpreted as a real number is extracted from the
-> TEXT value and the remainder ignored. Any leading spaces in the TEXT
-> value are ignored when converging from TEXT to REAL. If there is no
-> prefix that can be interpreted as a real number, the result of the
-> conversion is 0.0.</p></td>
-> </tr>
-> <tr class="even">
-> <td>INTEGER</td>
-> <td>When casting a BLOB value to INTEGER, the value is first converted
-> to TEXT.
-> <p>When casting a TEXT value to INTEGER, the longest possible prefix of
-> the value that can be interpreted as an integer number is extracted from
-> the TEXT value and the remainder ignored. Any leading spaces in the TEXT
-> value when converting from TEXT to INTEGER are ignored. If there is no
-> prefix that can be interpreted as an integer number, the result of the
-> conversion is 0. If the prefix integer is greater than
-> +9223372036854775807 then the result of the cast is exactly
-> +9223372036854775807. Similarly, if the prefix integer is less than
-> -9223372036854775808 then the result of the cast is exactly
-> -9223372036854775808.</p>
-> <p>When casting to INTEGER, if the text looks like a floating point
-> value with an exponent, the exponent will be ignored because it is no
-> part of the integer prefix. For example, "CAST('123e+5' AS INTEGER)"
-> results in 123, not in 12300000.</p>
-> <p>The CAST operator understands decimal integers only — conversion of
-> <a href="lang_expr#hexint">hexadecimal integers</a> stops at the "x" in
-> the "0x" prefix of the hexadecimal integer string and thus result of the
-> CAST is always zero.</p>
-> <p>A cast of a REAL value into an INTEGER results in the integer between
-> the REAL value and zero that is closest to the REAL value. If a REAL is
-> greater than the greatest possible signed integer (+9223372036854775807)
-> then the result is the greatest possible signed integer and if the REAL
-> is less than the least possible signed integer (-9223372036854775808)
-> then the result is the least possible signed integer.</p>
-> <p>Prior to SQLite version 3.8.2 (2013-12-06), casting a REAL value
-> greater than +9223372036854775807.0 into an integer resulted in the most
-> negative integer, -9223372036854775808. This behavior was meant to
-> emulate the behavior of x86/x64 hardware when doing the equivalent
-> cast.</p></td>
-> </tr>
-> <tr class="odd">
-> <td>NUMERIC</td>
-> <td>Casting a TEXT or BLOB value into NUMERIC yields either an INTEGER
-> or a REAL result. If the input text looks like an integer (there is no
-> decimal point nor exponent) and the value is small enough to fit in a
-> 64-bit signed integer, then the result will be INTEGER. Input text that
-> looks like floating point (there is a decimal point and/or an exponent)
-> and the text describes a value that can be losslessly converted back and
-> forth between IEEE 754 64-bit float and a 51-bit signed integer, then
-> the result is INTEGER. (In the previous sentence, a 51-bit integer is
-> specified since that is one bit less than the length of the mantissa of
-> an IEEE 754 64-bit float and thus provides a 1-bit of margin for the
-> text-to-float conversion operation.) Any text input that describes a
-> value outside the range of a 64-bit signed integer yields a REAL result.
-> <p>Casting a REAL or INTEGER value to NUMERIC is a no-op, even if a real
-> value could be losslessly converted to an integer.</p></td>
-> </tr>
-> </tbody>
-> </table>
+
+| <div style="width:100px">Affinity of <span class="yyterm">type-name</span></div> | Conversion Processing |
+| --- | --- |
+| NONE | Casting a value to a <span class="yyterm">type-name</span> with no affinity causes the value to be converted into a BLOB. Casting to a BLOB consists of first casting the value to TEXT in the <a href="https://www.sqlite.org/pragma.html#pragma_encoding" target="_blank">encoding</a> of the database connection, then interpreting the resulting byte sequence as a BLOB instead of as TEXT. |
+| TEXT | To cast a BLOB value to TEXT, the sequence of bytes that make up the BLOB is interpreted as text encoded using the database encoding. <br><br> Casting an INTEGER or REAL value into TEXT renders the value as if via <a href="https://www.sqlite.org/c3ref/mprintf.html" target="_blank">sqlite3_snprintf()</a> except that the resulting TEXT uses the <a href="https://www.sqlite.org/pragma.html#pragma_encoding" target="_blank">encoding</a> of the database connection. |
+| REAL | When casting a BLOB value to a REAL, the value is first converted to TEXT.<br><br> When casting a TEXT value to REAL, the longest possible prefix of the value that can be interpreted as a real number is extracted from the TEXT value and the remainder ignored. Any leading spaces in the TEXT value are ignored when converging from TEXT to REAL. If there is no prefix that can be interpreted as a real number, the result of the conversion is 0.0. |
+| INTEGER | When casting a BLOB value to INTEGER, the value is first converted to TEXT.<br><br> When casting a TEXT value to INTEGER, the longest possible prefix of the value that can be interpreted as an integer number is extracted from the TEXT value and the remainder ignored. Any leading spaces in the TEXT value when converting from TEXT to INTEGER are ignored. If there is no prefix that can be interpreted as an integer number, the result of the conversion is 0. If the prefix integer is greater than +9223372036854775807 then the result of the cast is exactly +9223372036854775807. Similarly, if the prefix integer is less than -9223372036854775808 then the result of the cast is exactly -9223372036854775808.<br><br> When casting to INTEGER, if the text looks like a floating point value with an exponent, the exponent will be ignored because it is no part of the integer prefix. For example, "CAST('123e+5' AS INTEGER)" results in 123, not in 12300000.<br><br> The CAST operator understands decimal integers only — conversion of <a href="lang_expr#hexint">hexadecimal integers</a> stops at the "x" in the "0x" prefix of the hexadecimal integer string and thus result of the CAST is always zero.<br><br> A cast of a REAL value into an INTEGER results in the integer between the REAL value and zero that is closest to the REAL value. If a REAL is greater than the greatest possible signed integer (+9223372036854775807) then the result is the greatest possible signed integer and if the REAL is less than the least possible signed integer (-9223372036854775808) then the result is the least possible signed integer.<br><br> Prior to SQLite version 3.8.2 (2013-12-06), casting a REAL value greater than +9223372036854775807.0 into an integer resulted in the most negative integer, -9223372036854775808. This behavior was meant to emulate the behavior of x86/x64 hardware when doing the equivalent cast. |
+| NUMERIC | Casting a TEXT or BLOB value into NUMERIC yields either an INTEGER or a REAL result. If the input text looks like an integer (there is no decimal point nor exponent) and the value is small enough to fit in a 64-bit signed integer, then the result will be INTEGER. Input text that looks like floating point (there is a decimal point and/or an exponent) and the text describes a value that can be losslessly converted back and forth between IEEE 754 64-bit float and a 51-bit signed integer, then the result is INTEGER. (In the previous sentence, a 51-bit integer is specified since that is one bit less than the length of the mantissa of an IEEE 754 64-bit float and thus provides a 1-bit of margin for the text-to-float conversion operation.) Any text input that describes a value outside the range of a 64-bit signed integer yields a REAL result.<br><br> Casting a REAL or INTEGER value to NUMERIC is a no-op, even if a real value could be losslessly converted to an integer. |
+
 
 Note that the result from casting any non-BLOB value into a BLOB and the
 result from casting any BLOB value into a non-BLOB value may be
