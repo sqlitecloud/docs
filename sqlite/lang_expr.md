@@ -272,8 +272,8 @@ purposes.
 ## 6. The BETWEEN operator
 
 The BETWEEN operator is logically equivalent to a pair of comparisons.
-"*x* **BETWEEN** *y* **AND** *z*" is equivalent to "*x***\>=***y*
-**AND** *x***\<=***z*" except that with BETWEEN, the *x* expression is
+"*x* **BETWEEN** *y* **AND** *z*" is equivalent to "_x_**\>=**_y_
+**AND** _x_**\<=**_z_" except that with BETWEEN, the *x* expression is
 only evaluated once. <span id="case"></span>
 
 ## 7. The CASE expression
