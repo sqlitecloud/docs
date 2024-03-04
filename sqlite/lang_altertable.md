@@ -213,34 +213,32 @@ constraints. The safe procedure on the left constructs the revised table
 definition using a new temporary name, then renames the table into its
 final name, which does not break links.
 
-<table data-border="1" data-cellpadding="10" data-cellspacing="0">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td data-valign="top"><ol>
-<li>Create new table</li>
-<li>Copy data</li>
-<li>Drop old table</li>
-<li>Rename new into old</li>
-</ol></td>
-<td data-valign="top"><ol>
-<li>Rename old table</li>
-<li>Create new table</li>
-<li>Copy data</li>
-<li>Drop old table</li>
-</ol></td>
-</tr>
-<tr class="even">
-<td>↑<br />
-Correct</td>
-<td>↑<br />
-Incorrect</td>
-</tr>
-</tbody>
-</table>
+<center>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <td valign="top">
+                <ol>
+                    <li>Create new table</li>
+                    <li>Copy data</li>
+                    <li>Drop old table</li>
+                    <li>Rename new into old</li>
+                </ol>
+            </td>
+            <td valign="top">
+                <ol>
+                    <li>Rename old table</li>
+                    <li>Create new table</li>
+                    <li>Copy data</li>
+                    <li>Drop old table</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <th>&uarr;<br>Correct</th>
+            <th>&uarr;<br>Incorrect</th>
+        </tr>
+    </table>
+</center>
 
 The 12-step [generalized ALTER TABLE
 procedure](lang_altertable#otheralter) above will work even if the
