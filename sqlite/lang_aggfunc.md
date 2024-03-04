@@ -1,7 +1,7 @@
 ---
 title: Built-in Aggregate Functions
 description: Built-in Aggregate Functions
-statement: SELECT COUNT(\*) FROM Artist;
+statement: SELECT COUNT(*) FROM Artist;
 ---
 
 ## 1. Syntax

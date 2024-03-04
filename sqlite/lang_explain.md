@@ -1,7 +1,7 @@
 ---
 title: EXPLAIN
 description: EXPLAIN
-statement: EXPLAIN SELECT \* FROM Artist;
+statement: EXPLAIN SELECT * FROM Artist;
 ---
 
 ## 1. Syntax

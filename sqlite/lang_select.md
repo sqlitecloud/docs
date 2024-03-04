@@ -1,7 +1,7 @@
 ---
 title: SELECT
 description: SELECT
-statement: SELECT \* FROM Artist;
+statement: SELECT * FROM Artist;
 ---
 
 ## 1. Overview

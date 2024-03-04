@@ -1,7 +1,7 @@
 ---
 title: The WITH Clause
 description: The WITH Clause
-statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHERE x\<10) SELECT \* FROM ten;
+statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHERE x<10) SELECT * FROM ten;
 ---
 
 ## 1. Overview

@@ -1,7 +1,7 @@
 ---
 title: SQL Comment Syntax
 description: SQL Comment Syntax
-statement: /\* This is a comment \*/
+statement: /* This is a comment */
 --- 
 
 <!-- do-not-touch-svg-import: 'comment.svg' -->

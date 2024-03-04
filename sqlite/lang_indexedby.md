@@ -1,7 +1,7 @@
 ---
 title: The INDEXED BY Clause
 description: The INDEXED BY Clause
-statement: SELECT \* FROM Artist INDEXED BY ArtistNameIdx;
+statement: SELECT * FROM Artist INDEXED BY ArtistNameIdx;
 ---
 
 ## 1. How INDEXED BY Works

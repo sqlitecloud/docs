@@ -1,7 +1,7 @@
 ---
 title: SQL Language Expressions
 description: SQL Language Expressions
-statement: SELECT (10 \* (5 + 2) / 15) AS result;
+statement: SELECT (10 * (5 + 2) / 15) AS result;
 ---
 
 ## 1. Syntax

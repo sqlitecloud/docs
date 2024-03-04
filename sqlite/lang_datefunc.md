@@ -9,13 +9,13 @@ statement: SELECT DATE('now');
 SQLite supports seven [scalar](lang_corefunc) date and time functions as
 follows:
 
-1.  **date(***time-value, modifier, modifier, ...***)**
-2.  **time(***time-value, modifier, modifier, ...***)**
-3.  **datetime(***time-value, modifier, modifier, ...***)**
-4.  **julianday(***time-value, modifier, modifier, ...***)**
-5.  **unixepoch(***time-value, modifier, modifier, ...***)**
-6.  **strftime(***format, time-value, modifier, modifier, ...***)**
-7.  **timediff(***time-value, time-value***)**
+1.  **date(**_time-value, modifier, modifier, ..._**)**
+2.  **time(**_time-value, modifier, modifier, ..._**)**
+3.  **datetime(**_time-value, modifier, modifier, ..._**)**
+4.  **julianday(**_time-value, modifier, modifier, ..._**)**
+5.  **unixepoch(**_time-value, modifier, modifier, ..._**)**
+6.  **strftime(**_format, time-value, modifier, modifier, ..._**)**
+7.  **timediff(**_time-value, time-value_**)**
 
 The first six date and time functions take an optional time value as an
 argument, followed by zero or more modifiers. The strftime() function
