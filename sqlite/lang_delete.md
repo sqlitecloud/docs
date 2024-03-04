@@ -24,7 +24,7 @@ the body of a [CREATE TRIGGER](lang_createtrigger) statement:
 
 - The <span class="yyterm">table-name</span> specified as part of a
   DELETE statement within a trigger body must be unqualified. In other
-  words, the *schema-name***.** prefix on the table name is not allowed
+  words, the _schema-name_**.** prefix on the table name is not allowed
   within triggers. If the table to which the trigger is attached is not
   in the temp database, then DELETE statements within the trigger body
   must operate on tables within the same database as it. If the table to
