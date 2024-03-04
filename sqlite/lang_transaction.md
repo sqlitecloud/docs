@@ -256,13 +256,15 @@ means that:
   conflict if the values of the keys (either primary keys or indexed
   rows) are fairly close together. For example, given a large table with
   the schema:
+<div class="no-bullets-list">
 
-           CREATE TABLE t1(a INTEGER PRIMARY KEY, b BLOB);
+- > CREATE TABLE t1(a INTEGER PRIMARY KEY, b BLOB);
 
-  writing two rows with adjacent values for "a" probably will cause a
+- writing two rows with adjacent values for "a" probably will cause a
   conflict (as the two keys are stored on the same page), but writing
   two rows with vastly different values for "a" will not (as the keys
   will likly be stored on different pages).
+</div>
 
 Note that, in SQLite, if values are not explicitly supplied for an
 INTEGER PRIMARY KEY, as for example in:

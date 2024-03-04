@@ -88,11 +88,13 @@ fit into the context of an SQL expression.
 
 ## 3. Descriptions of built-in scalar SQL functions
 
+<div class="no-bullets-list">
+
 <span id="abs"></span>
 
 **abs(*X*)**
 
-The abs(X) function returns the absolute value of the numeric argument
+- The abs(X) function returns the absolute value of the numeric argument
 X. Abs(X) returns NULL if X is NULL. Abs(X) returns 0.0 if X is a string
 or blob that cannot be converted to a numeric value. If X is the integer
 -9223372036854775808 then abs(X) throws an integer overflow error since
@@ -102,7 +104,7 @@ there is no equivalent positive 64-bit two complement value.
 
 **changes()**
 
-The changes() function returns the number of database rows that were
+- The changes() function returns the number of database rows that were
 changed or inserted or deleted by the most recently completed INSERT,
 DELETE, or UPDATE statement, exclusive of statements in lower-level
 triggers. The changes() SQL function is a wrapper around the
@@ -114,7 +116,7 @@ the same rules for counting changes.
 
 **char(*X1*,*X2*,...,*XN*)**
 
-The char(X1,X2,...,XN) function returns a string composed of characters
+- The char(X1,X2,...,XN) function returns a string composed of characters
 having the unicode code point values of integers X1 through XN,
 respectively.
 
@@ -122,7 +124,7 @@ respectively.
 
 **coalesce(*X*,*Y*,...)**
 
-The coalesce() function returns a copy of its first non-NULL argument,
+- The coalesce() function returns a copy of its first non-NULL argument,
 or NULL if all arguments are NULL. Coalesce() must have at least 2
 arguments.
 
@@ -130,7 +132,7 @@ arguments.
 
 **concat(*X*,...)**
 
-The concat(...) function returns a string which is the concatenation of
+- The concat(...) function returns a string which is the concatenation of
 the string representation of all of its non-NULL arguments. If all
 arguments are NULL, then concat() returns an empty string.
 
@@ -138,7 +140,7 @@ arguments are NULL, then concat() returns an empty string.
 
 **concat_ws(*SEP*,*X*,...)**
 
-The concat_ws(SEP,...) function returns a string that is the
+- The concat_ws(SEP,...) function returns a string that is the
 concatenation of all non-null arguments beyond the first argument, using
 the text value of the first argument as a separator. If the first
 argument is NULL, then concat_ws() returns NULL. If all arguments other
@@ -148,7 +150,7 @@ than the first are NULL, then concat_ws() returns an empty string.
 
 **format(*FORMAT*,...)**
 
-The format(FORMAT,...) SQL function works like the
+- The format(FORMAT,...) SQL function works like the
 <a href="https://www.sqlite.org/c3ref/mprintf.html"
 target="_blank">sqlite3_mprintf()</a> C-language function and the
 printf() function from the standard C library. The first argument is a
@@ -167,16 +169,16 @@ printf()</a> documentation for additional information.
 
 **glob(*X*,*Y*)**
 
-The glob(X,Y) function is equivalent to the expression "**Y GLOB X**".
+- The glob(X,Y) function is equivalent to the expression "**Y GLOB X**".
 Note that the X and Y arguments are reversed in the glob() function
 relative to the infix [GLOB](lang_expr#glob) operator. Y is the string
 and X is the pattern. So, for example, the following expressions are
 equivalent:
 
->      name GLOB '*helium*'
->      glob('*helium*',name)
+- >     name GLOB '*helium*'
+  >       glob('*helium*',name)
 
-If the <a href="https://www.sqlite.org/c3ref/create_function.html"
+- If the <a href="https://www.sqlite.org/c3ref/create_function.html"
 target="_blank">sqlite3_create_function()</a> interface is used to
 override the glob(X,Y) function with an alternative implementation then
 the [GLOB](lang_expr#glob) operator will invoke the alternative
@@ -186,24 +188,24 @@ implementation.
 
 **hex(*X*)**
 
-The hex() function interprets its argument as a BLOB and returns a
+- The hex() function interprets its argument as a BLOB and returns a
 string which is the upper-case hexadecimal rendering of the content of
 that blob.
 
-If the argument *X* in "hex(*X*)" is an integer or floating point
+- If the argument *X* in "hex(*X*)" is an integer or floating point
 number, then "interprets its argument as a BLOB" means that the binary
 number is first converted into a UTF8 text representation, then that
 text is interpreted as a BLOB. Hence, "hex(12345678)" renders as
 "3132333435363738" not the binary representation of the integer value
 "0000000000BC614E".
 
-See also:[unhex()](lang_corefunc#unhex)
+- See also:[unhex()](lang_corefunc#unhex)
 
 <span id="ifnull"></span>
 
 **ifnull(*X*,*Y*)**
 
-The ifnull() function returns a copy of its first non-NULL argument, or
+- The ifnull() function returns a copy of its first non-NULL argument, or
 NULL if both arguments are NULL. Ifnull() must have exactly 2 arguments.
 The ifnull() function is equivalent to
 [coalesce()](lang_corefunc#coalesce) with two arguments.
@@ -212,7 +214,7 @@ The ifnull() function is equivalent to
 
 **iif(*X*,*Y*,*Z*)**
 
-The iif(X,Y,Z) function returns the value Y if X is true, and Z
+- The iif(X,Y,Z) function returns the value Y if X is true, and Z
 otherwise. The iif(X,Y,Z) function is logically equivalent to and
 generates the same <a href="https://www.sqlite.org/opcode.html"
 target="_blank">bytecode</a> as the [CASE expression](lang_expr#case)
@@ -222,7 +224,7 @@ target="_blank">bytecode</a> as the [CASE expression](lang_expr#case)
 
 **instr(*X*,*Y*)**
 
-The instr(X,Y) function finds the first occurrence of string Y within
+- The instr(X,Y) function finds the first occurrence of string Y within
 string X and returns the number of prior characters plus 1, or 0 if Y is
 nowhere found within X. Or, if X and Y are both BLOBs, then instr(X,Y)
 returns one more than the number bytes prior to the first occurrence of
@@ -235,7 +237,7 @@ NULL.
 
 **last_insert_rowid()**
 
-The last_insert_rowid() function returns the
+- The last_insert_rowid() function returns the
 [ROWID](lang_createtable#rowid) of the last row insert from the database
 connection which invoked the function. The last_insert_rowid() SQL
 function is a wrapper around the
@@ -247,7 +249,7 @@ function.
 
 **length(*X*)**
 
-For a string value X, the length(X) function returns the number of
+- For a string value X, the length(X) function returns the number of
 characters (not bytes) in X prior to the first NUL character. Since
 SQLite strings do not normally contain NUL characters, the length(X)
 function will usually return the total number of characters in the
@@ -255,7 +257,7 @@ string X. For a blob value X, length(X) returns the number of bytes in
 the blob. If X is NULL then length(X) is NULL. If X is numeric then
 length(X) returns the length of a string representation of X.
 
-Note that for strings, the length(X) function returns the *character*
+- Note that for strings, the length(X) function returns the *character*
 length of the string, not the byte length. The character length is the
 number of characters in the string. The character length is always
 different from the byte length for UTF-16 strings, and can be different
@@ -263,9 +265,9 @@ from the byte length for UTF-8 strings if the string contains multi-byte
 characters. Use the [octet_length()](lang_corefunc#octet_length)
 function to find the byte length of a string.
 
-For BLOB values, length(X) always returns the byte-length of the BLOB.
+- For BLOB values, length(X) always returns the byte-length of the BLOB.
 
-For string values, length(X) must read the entire string into memory in
+- For string values, length(X) must read the entire string into memory in
 order to compute the character length. But for BLOB values, that is not
 necessary as SQLite knows how many bytes are in the BLOB. Hence, for
 multi-megabyte values, the length(X) function is usually much faster for
@@ -277,7 +279,7 @@ memory.
 **like(*X*,*Y*)  
 like(*X*,*Y*,*Z*)**
 
-The like() function is used to implement the "**Y LIKE X \[ESCAPE Z\]**"
+- The like() function is used to implement the "**Y LIKE X \[ESCAPE Z\]**"
 expression. If the optional ESCAPE clause is present, then the like()
 function is invoked with three arguments. Otherwise, it is invoked with
 two arguments only. Note that the X and Y parameters are reversed in the
@@ -285,10 +287,10 @@ like() function relative to the infix [LIKE](lang_expr#like) operator. X
 is the pattern and Y is the string to match against that pattern. Hence,
 the following expressions are equivalent:
 
->      name LIKE '%neon%'
->      like('%neon%',name)
+- >      name LIKE '%neon%'
+  >        like('%neon%',name)
 
-The <a href="https://www.sqlite.org/c3ref/create_function.html"
+- The <a href="https://www.sqlite.org/c3ref/create_function.html"
 target="_blank">sqlite3_create_function()</a> interface can be used to
 override the like() function and thereby change the operation of the
 [LIKE](lang_expr#like) operator. When overriding the like() function, it
@@ -301,7 +303,7 @@ not an ESCAPE clause was specified.
 
 **likelihood(*X*,*Y*)**
 
-The likelihood(X,Y) function returns argument X unchanged. The value Y
+- The likelihood(X,Y) function returns argument X unchanged. The value Y
 in likelihood(X,Y) must be a floating point constant between 0.0 and
 1.0, inclusive. The likelihood(X) function is a no-op that the code
 generator optimizes away so that it consumes no CPU cycles during
@@ -318,7 +320,7 @@ short-hand for likelihood(X,0.9375).
 
 **likely(*X*)**
 
-The likely(X) function returns the argument X unchanged. The likely(X)
+- The likely(X) function returns the argument X unchanged. The likely(X)
 function is a no-op that the code generator optimizes away so that it
 consumes no CPU cycles at run-time (that is, during calls to
 <a href="https://www.sqlite.org/c3ref/step.html"
@@ -333,7 +335,7 @@ also: [unlikely(X)](lang_corefunc#unlikely).
 **load_extension(*X*)  
 load_extension(*X*,*Y*)**
 
-The load_extension(X,Y) function loads
+- The load_extension(X,Y) function loads
 <a href="https://www.sqlite.org/loadext.html" target="_blank">SQLite
 extensions</a> out of the shared library file named X using the entry
 point Y. The result of load_extension() is always a NULL. If Y is
@@ -341,7 +343,7 @@ omitted then the default entry point name is used. The load_extension()
 function raises an exception if the extension fails to load or
 initialize correctly.
 
-The load_extension() function will fail if the extension attempts to
+- The load_extension() function will fail if the extension attempts to
 modify or delete an SQL function or collating sequence. The extension
 can add new functions or collating sequences, but cannot modify or
 delete existing functions or collating sequences because those functions
@@ -351,7 +353,7 @@ functions or collating sequences, use the
 <a href="https://www.sqlite.org/c3ref/load_extension.html"
 target="_blank">sqlite3_load_extension()</a> C-language API.
 
-For security reasons, extension loading is disabled by default and must
+- For security reasons, extension loading is disabled by default and must
 be enabled by a prior call to
 <a href="https://www.sqlite.org/c3ref/enable_load_extension.html"
 target="_blank">sqlite3_enable_load_extension()</a>.
@@ -360,7 +362,7 @@ target="_blank">sqlite3_enable_load_extension()</a>.
 
 **lower(*X*)**
 
-The lower(X) function returns a copy of string X with all ASCII
+- The lower(X) function returns a copy of string X with all ASCII
 characters converted to lower case. The default built-in lower()
 function works for ASCII characters only. To do case conversions on
 non-ASCII characters, load the ICU extension.
@@ -370,7 +372,7 @@ non-ASCII characters, load the ICU extension.
 **ltrim(*X*)  
 ltrim(*X*,*Y*)**
 
-The ltrim(X,Y) function returns a string formed by removing any and all
+- The ltrim(X,Y) function returns a string formed by removing any and all
 characters that appear in Y from the left side of X. If the Y argument
 is omitted, ltrim(X) removes spaces from the left side of X.
 
@@ -378,7 +380,7 @@ is omitted, ltrim(X) removes spaces from the left side of X.
 
 **max(*X*,*Y*,...)**
 
-The multi-argument max() function returns the argument with the maximum
+- The multi-argument max() function returns the argument with the maximum
 value, or return NULL if any argument is NULL. The multi-argument max()
 function searches its arguments from left to right for an argument that
 defines a collating function and uses that collating function for all
@@ -392,7 +394,7 @@ a single argument.
 
 **min(*X*,*Y*,...)**
 
-The multi-argument min() function returns the argument with the minimum
+- The multi-argument min() function returns the argument with the minimum
 value. The multi-argument min() function searches its arguments from
 left to right for an argument that defines a collating function and uses
 that collating function for all string comparisons. If none of the
@@ -405,7 +407,7 @@ function](lang_aggfunc#min_agg) if given only a single argument.
 
 **nullif(*X*,*Y*)**
 
-The nullif(X,Y) function returns its first argument if the arguments are
+- The nullif(X,Y) function returns its first argument if the arguments are
 different and NULL if the arguments are the same. The nullif(X,Y)
 function searches its arguments from left to right for an argument that
 defines a collating function and uses that collating function for all
@@ -416,19 +418,19 @@ function then the BINARY collating function is used.
 
 **octet_length(*X*)**
 
-The octet_length(X) function returns the number of bytes in the encoding
+- The octet_length(X) function returns the number of bytes in the encoding
 of text string X. If X is NULL then octet_length(X) returns NULL. If X
 is a BLOB value, then octet_length(X) is the same as
 [length(X)](lang_corefunc#length). If X is a numeric value, then
 octet_length(X) returns the number of bytes in a text rendering of that
 number.
 
-Because octet_length(X) returns the number of bytes in X, not the number
+- Because octet_length(X) returns the number of bytes in X, not the number
 of characters, the value returned depends on the database encoding. The
 octet_length() function can return different answers for the same input
 string if the database encoding is UTF16 instead of UTF8.
 
-If argument X is a table column and the value is of type text or blob,
+- If argument X is a table column and the value is of type text or blob,
 then octet_length(X) avoids reading the content of X from disk, as the
 byte length can be computed from metadata. Thus, octet_length(X) is
 efficient even if X is a column containing a multi-megabyte text or blob
@@ -438,7 +440,7 @@ value.
 
 **printf(*FORMAT*,...)**
 
-The printf() SQL function is an alias for the [format() SQL
+- The printf() SQL function is an alias for the [format() SQL
 function](lang_corefunc#format). The format() SQL function was
 originally named printf(). But the name was later changed to format()
 for compatibility with other database engines. The printf() name is
@@ -448,7 +450,7 @@ retained as an alias so as not to break legacy code.
 
 **quote(*X*)**
 
-The quote(X) function returns the text of an SQL literal which is the
+- The quote(X) function returns the text of an SQL literal which is the
 value of its argument suitable for inclusion into an SQL statement.
 Strings are surrounded by single-quotes with escapes on interior quotes
 as needed. BLOBs are encoded as hexadecimal literals. Strings with
@@ -460,29 +462,29 @@ NUL.
 
 **random()**
 
-The random() function returns a pseudo-random integer between
+- The random() function returns a pseudo-random integer between
 -9223372036854775808 and +9223372036854775807.
 
 <span id="randomblob"></span>
 
 **randomblob(*N*)**
 
-The randomblob(N) function return an N-byte blob containing
+- The randomblob(N) function return an N-byte blob containing
 pseudo-random bytes. If N is less than 1 then a 1-byte random blob is
 returned.
 
-Hint:applications can generate globally unique identifiers using this
+- Hint:applications can generate globally unique identifiers using this
 function together with [hex()](lang_corefunc#hex) and/or
 [lower()](lang_corefunc#lower) like this:
 
-> hex(randomblob(16))  
-> lower(hex(randomblob(16)))
+- >      hex(randomblob(16))  
+  >        lower(hex(randomblob(16)))
 
 <span id="replace"></span>
 
 **replace(*X*,*Y*,*Z*)**
 
-The replace(X,Y,Z) function returns a string formed by substituting
+- The replace(X,Y,Z) function returns a string formed by substituting
 string Z for every occurrence of string Y in string X. The
 <a href="https://www.sqlite.org/datatype3.html#collation"
 target="_blank">BINARY</a> collating sequence is used for comparisons.
@@ -494,7 +496,7 @@ string, it is cast to a UTF-8 string prior to processing.
 **round(*X*)  
 round(*X*,*Y*)**
 
-The round(X,Y) function returns a floating-point value X rounded to Y
+- The round(X,Y) function returns a floating-point value X rounded to Y
 digits to the right of the decimal point. If the Y argument is omitted
 or negative, it is taken to be 0.
 
@@ -503,7 +505,7 @@ or negative, it is taken to be 0.
 **rtrim(*X*)  
 rtrim(*X*,*Y*)**
 
-The rtrim(X,Y) function returns a string formed by removing any and all
+- The rtrim(X,Y) function returns a string formed by removing any and all
 characters that appear in Y from the right side of X. If the Y argument
 is omitted, rtrim(X) removes spaces from the right side of X.
 
@@ -511,7 +513,7 @@ is omitted, rtrim(X) removes spaces from the right side of X.
 
 **sign(*X*)**
 
-The sign(X) function returns -1, 0, or +1 if the argument X is a numeric
+- The sign(X) function returns -1, 0, or +1 if the argument X is a numeric
 value that is negative, zero, or positive, respectively. If the argument
 to sign(X) is NULL or is a string or blob that cannot be losslessly
 converted into a number, then sign(X) returns NULL.
@@ -520,7 +522,7 @@ converted into a number, then sign(X) returns NULL.
 
 **soundex(*X*)**
 
-The soundex(X) function returns a string that is the soundex encoding of
+- The soundex(X) function returns a string that is the soundex encoding of
 the string X. The string "?000" is returned if the argument is NULL or
 contains no ASCII alphabetic characters. This function is omitted from
 SQLite by default. It is only available if the
@@ -532,7 +534,7 @@ SQLite is built.
 
 **sqlite_compileoption_get(*N*)**
 
-The sqlite_compileoption_get() SQL function is a wrapper around the
+- The sqlite_compileoption_get() SQL function is a wrapper around the
 <a href="https://www.sqlite.org/c3ref/compileoption_get.html"
 target="_blank">sqlite3_compileoption_get()</a> C/C++ function. This
 routine returns the N-th compile-time option used to build SQLite or
@@ -544,7 +546,7 @@ target="_blank">compile_options pragma</a>.
 
 **sqlite_compileoption_used(*X*)**
 
-The sqlite_compileoption_used() SQL function is a wrapper around the
+- The sqlite_compileoption_used() SQL function is a wrapper around the
 <a href="https://www.sqlite.org/c3ref/compileoption_get.html"
 target="_blank">sqlite3_compileoption_used()</a> C/C++ function. When
 the argument X to sqlite_compileoption_used(X) is a string which is the
@@ -555,7 +557,7 @@ name of a compile-time option, this routine returns true (1) or false
 
 **sqlite_offset(*X*)**
 
-The sqlite_offset(X) function returns the byte offset in the database
+- The sqlite_offset(X) function returns the byte offset in the database
 file for the beginning of the record from which value would be read. If
 X is not a column in an ordinary table, then sqlite_offset(X) returns
 NULL. The value returned by sqlite_offset(X) might reference either the
@@ -565,7 +567,7 @@ offset to the corresponding index record. If the value X would be
 extracted from the original table, then sqlite_offset(X) returns the
 offset to the table record.
 
-The sqlite_offset(X) SQL function is only available if SQLite is built
+- The sqlite_offset(X) SQL function is only available if SQLite is built
 using the
 <a href="https://www.sqlite.org/compile.html#enable_offset_sql_func"
 target="_blank">-DSQLITE_ENABLE_OFFSET_SQL_FUNC</a> compile-time option.
@@ -574,7 +576,7 @@ target="_blank">-DSQLITE_ENABLE_OFFSET_SQL_FUNC</a> compile-time option.
 
 **sqlite_source_id()**
 
-The sqlite_source_id() function returns a string that identifies the
+- The sqlite_source_id() function returns a string that identifies the
 specific version of the source code that was used to build the SQLite
 library. The string returned by sqlite_source_id() is the date and time
 that the source code was checked in followed by the SHA3-256 hash for
@@ -586,7 +588,7 @@ target="_blank">sqlite3_sourceid()</a> C interface.
 
 **sqlite_version()**
 
-The sqlite_version() function returns the version string for the SQLite
+- The sqlite_version() function returns the version string for the SQLite
 library that is running. This function is an SQL wrapper around the
 <a href="https://www.sqlite.org/c3ref/libversion.html"
 target="_blank">sqlite3_libversion()</a> C-interface.
@@ -598,7 +600,7 @@ substr(*X*,*Y*)
 substring(*X*,*Y*,*Z*)  
 substring(*X*,*Y*)**
 
-The substr(X,Y,Z) function returns a substring of input string X that
+- The substr(X,Y,Z) function returns a substring of input string X that
 begins with the Y-th character and which is Z characters long. If Z is
 omitted then substr(X,Y) returns all characters through the end of the
 string X beginning with the Y-th. The left-most character of X is
@@ -608,14 +610,14 @@ then the abs(Z) characters preceding the Y-th character are returned. If
 X is a string then characters indices refer to actual UTF-8 characters.
 If X is a BLOB then the indices refer to bytes.
 
-"substring()" is an alias for "substr()" beginning with SQLite version
+- "substring()" is an alias for "substr()" beginning with SQLite version
 3.34.
 
 <span id="total_changes"></span>
 
 **total_changes()**
 
-The total_changes() function returns the number of row changes caused by
+- The total_changes() function returns the number of row changes caused by
 INSERT, UPDATE or DELETE statements since the current database
 connection was opened. This function is a wrapper around the
 <a href="https://www.sqlite.org/c3ref/total_changes.html"
@@ -626,7 +628,7 @@ target="_blank">sqlite3_total_changes64()</a> C/C++ interface.
 **trim(*X*)  
 trim(*X*,*Y*)**
 
-The trim(X,Y) function returns a string formed by removing any and all
+- The trim(X,Y) function returns a string formed by removing any and all
 characters that appear in Y from both ends of X. If the Y argument is
 omitted, trim(X) removes spaces from both ends of X.
 
@@ -634,7 +636,7 @@ omitted, trim(X) removes spaces from both ends of X.
 
 **typeof(*X*)**
 
-The typeof(X) function returns a string that indicates the
+- The typeof(X) function returns a string that indicates the
 <a href="https://www.sqlite.org/datatype3.html"
 target="_blank">datatype</a> of the expression X: "null", "integer",
 "real", "text", or "blob".
@@ -644,7 +646,7 @@ target="_blank">datatype</a> of the expression X: "null", "integer",
 **unhex(*X*)  
 unhex(*X*,*Y*)**
 
-The unhex(X,Y) function returns a BLOB value which is the decoding of
+- The unhex(X,Y) function returns a BLOB value which is the decoding of
 the hexadecimal string X. If X contains any characters that are not
 hexadecimal digits and which are not in Y, then unhex(X,Y) returns NULL.
 If Y is omitted, it is understood to be an empty string and hence X must
@@ -656,13 +658,13 @@ arbitrary mix of upper and lower case hexadecimal digits. Hexadecimal
 digits in Y have no affect on the translation of X. Only characters in Y
 that are not hexadecimal digits are ignored in X.
 
-See also: [hex()](lang_corefunc#hex)
+- See also: [hex()](lang_corefunc#hex)
 
 <span id="unicode"></span>
 
 **unicode(*X*)**
 
-The unicode(X) function returns the numeric unicode code point
+- The unicode(X) function returns the numeric unicode code point
 corresponding to the first character of the string X. If the argument to
 unicode(X) is not a string then the result is undefined.
 
@@ -670,7 +672,7 @@ unicode(X) is not a string then the result is undefined.
 
 **unlikely(*X*)**
 
-The unlikely(X) function returns the argument X unchanged. The
+- The unlikely(X) function returns the argument X unchanged. The
 unlikely(X) function is a no-op that the code generator optimizes away
 so that it consumes no CPU cycles at run-time (that is, during calls to
 <a href="https://www.sqlite.org/c3ref/step.html"
@@ -683,7 +685,7 @@ equivalent to [likelihood](lang_corefunc#likelihood)(X, 0.0625).
 
 **upper(*X*)**
 
-The upper(X) function returns a copy of input string X in which all
+- The upper(X) function returns a copy of input string X in which all
 lower-case ASCII characters are converted to their upper-case
 equivalent.
 
@@ -691,7 +693,7 @@ equivalent.
 
 **zeroblob(*N*)**
 
-The zeroblob(N) function returns a BLOB consisting of N bytes of 0x00.
+- The zeroblob(N) function returns a BLOB consisting of N bytes of 0x00.
 SQLite manages these zeroblobs very efficiently. Zeroblobs can be used
 to reserve space for a BLOB that is later written using
 <a href="https://www.sqlite.org/c3ref/blob_open.html"
@@ -700,3 +702,5 @@ implemented using the
 <a href="https://www.sqlite.org/c3ref/result_blob.html"
 target="_blank">sqlite3_result_zeroblob()</a> routine from the C/C++
 interface.
+
+</div>

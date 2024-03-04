@@ -65,55 +65,57 @@ IEEE754 doubles.
 
 ## 2. Descriptions of built-in scalar SQL math functions
 
+<div class="no-bullets-list">
+
 <span id="acos"></span>
 
 **acos(*X*)**
 
-Return the arccosine of X. The result is in radians.
+- Return the arccosine of X. The result is in radians.
 
 <span id="acosh"></span>
 
 **acosh(*X*)**
 
-Return the hyperbolic arccosine of X.
+- Return the hyperbolic arccosine of X.
 
 <span id="asin"></span>
 
 **asin(*X*)**
 
-Return the arcsine of X. The result is in radians.
+- Return the arcsine of X. The result is in radians.
 
 <span id="asinh"></span>
 
 **asinh(*X*)**
 
-Return the hyperbolic arcsine of X.
+- Return the hyperbolic arcsine of X.
 
 <span id="atan"></span>
 
 **atan(*X*)**
 
-Return the arctangent of X. The result is in radians.
+- Return the arctangent of X. The result is in radians.
 
 <span id="atan2"></span>
 
 **atan2(*Y*,*X*)**
 
-Return the arctangent of Y/X. The result is in radians. The result is
+- Return the arctangent of Y/X. The result is in radians. The result is
 placed into correct quadrant depending on the signs of X and Y.
 
 <span id="atanh"></span>
 
 **atanh(*X*)**
 
-Return the hyperbolic arctangent of X.
+- Return the hyperbolic arctangent of X.
 
 <span id="ceil"></span>
 
 **ceil(*X*)  
 ceiling(*X*)**
 
-Return the first representable integer value greater than or equal to X.
+- Return the first representable integer value greater than or equal to X.
 For positive values of X, this routine rounds away from zero. For
 negative values of X, this routine rounds toward zero.
 
@@ -121,32 +123,32 @@ negative values of X, this routine rounds toward zero.
 
 **cos(*X*)**
 
-Return the cosine of X. X is in radians.
+- Return the cosine of X. X is in radians.
 
 <span id="cosh"></span>
 
 **cosh(*X*)**
 
-Return the hyperbolic cosine of X.
+- Return the hyperbolic cosine of X.
 
 <span id="degrees"></span>
 
 **degrees(*X*)**
 
-Convert value X from radians into degrees.
+- Convert value X from radians into degrees.
 
 <span id="exp"></span>
 
 **exp(*X*)**
 
-Compute *e* (Euler's number, approximately 2.71828182845905) raised to
+- Compute *e* (Euler's number, approximately 2.71828182845905) raised to
 the power X.
 
 <span id="floor"></span>
 
 **floor(*X*)**
 
-Return the first representable integer value less than or equal to X.
+- Return the first representable integer value less than or equal to X.
 For positive numbers, this function rounds toward zero. For negative
 numbers, this function rounds away from zero.
 
@@ -154,7 +156,7 @@ numbers, this function rounds away from zero.
 
 **ln(*X*)**
 
-Return the natural logarithm of X.
+- Return the natural logarithm of X.
 
 <span id="log"></span>
 
@@ -162,10 +164,10 @@ Return the natural logarithm of X.
 log10(*X*)  
 log(*B*,*X*)**
 
-Return the base-10 logarithm for X. Or, for the two-argument version,
+- Return the base-10 logarithm for X. Or, for the two-argument version,
 return the base-B logarithm of X.
 
-Compatibility note: SQLite works like PostgreSQL in that the log()
+- Compatibility note: SQLite works like PostgreSQL in that the log()
 function computes a base-10 logarithm. Most other SQL database engines
 compute a natural logarithm for log(). In the two-argument version of
 log(B,X), the first argument is the base and the second argument is the
@@ -177,71 +179,73 @@ argument as the operand.
 
 **log2(*X*)**
 
-Return the logarithm base-2 for the number X.
+- Return the logarithm base-2 for the number X.
 
 <span id="mod"></span>
 
 **mod(*X*,*Y*)**
 
-Return the remainder after dividing X by Y. This is similar to the '%'
+- Return the remainder after dividing X by Y. This is similar to the '%'
 operator, except that it works for non-integer arguments.
 
 <span id="pi"></span>
 
 **pi()**
 
-Return an approximation for π.
+- Return an approximation for π.
 
 <span id="pow"></span>
 
 **pow(*X*,*Y*)  
 power(*X*,*Y*)**
 
-Compute X raised to the power Y.
+- Compute X raised to the power Y.
 
 <span id="radians"></span>
 
 **radians(*X*)**
 
-Convert X from degrees into radians.
+- Convert X from degrees into radians.
 
 <span id="sin"></span>
 
 **sin(*X*)**
 
-Return the sine of X. X is in radians.
+- Return the sine of X. X is in radians.
 
 <span id="sinh"></span>
 
 **sinh(*X*)**
 
-Return the hyperbolic sine of X.
+- Return the hyperbolic sine of X.
 
 <span id="sqrt"></span>
 
 **sqrt(*X*)**
 
-Return the square root of X. NULL is returned if X is negative.
+- Return the square root of X. NULL is returned if X is negative.
 
 <span id="tan"></span>
 
 **tan(*X*)**
 
-Return the tangent of X. X is in radians.
+- Return the tangent of X. X is in radians.
 
 <span id="tanh"></span>
 
 **tanh(*X*)**
 
-Return the hyperbolic tangent of X.
+- Return the hyperbolic tangent of X.
 
 <span id="trunc"></span>
 
 **trunc(*X*)**
 
-Return the representable integer in between X and 0 (inclusive) that is
+- Return the representable integer in between X and 0 (inclusive) that is
 furthest away from zero. Or, in other words, return the integer part of
 X, rounding toward zero. The trunc() function is similar to
 [ceiling(X)](lang_mathfunc#ceil) and [floor(X)](lang_mathfunc#floor)
 except that it always rounds toward zero whereas ceiling(X) and floor(X)
 round up and down, respectively.
+
+</div>
