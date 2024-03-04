@@ -72,7 +72,7 @@ algorithm](lang_conflict) to use during that one INSERT command. For
 compatibility with MySQL, the parser allows the use of the single
 keyword [REPLACE](lang_replace) as an alias for "INSERT OR REPLACE".
 
-The optional "*schema-name***.**" prefix on the
+The optional "_schema-name_**.**" prefix on the
 <span class="yyterm">table-name</span> is supported for top-level INSERT
 statements only. The table name must be unqualified for INSERT
 statements that occur within [CREATE TRIGGER](lang_createtrigger)
