@@ -47,16 +47,16 @@ target="_blank">window functions</a>. <span id="aggfunclist"></span>
 
 <div class="columns">
 
-- [avg(X)](lang_aggfunc.html#avg)
-- [count(\*)](lang_aggfunc.html#count)
-- [count(X)](lang_aggfunc.html#count)
-- [group_concat(X)](lang_aggfunc.html#group_concat)
-- [group_concat(X,Y)](lang_aggfunc.html#group_concat)
-- [max(X)](lang_aggfunc.html#max_agg)
-- [min(X)](lang_aggfunc.html#min_agg)
-- [string_agg(X,Y)](lang_aggfunc.html#group_concat)
-- [sum(X)](lang_aggfunc.html#sumunc)
-- [total(X)](lang_aggfunc.html#sumunc)
+- [avg(X)](lang_aggfunc#avg)
+- [count(\*)](lang_aggfunc#count)
+- [count(X)](lang_aggfunc#count)
+- [group_concat(X)](lang_aggfunc#group_concat)
+- [group_concat(X,Y)](lang_aggfunc#group_concat)
+- [max(X)](lang_aggfunc#max_agg)
+- [min(X)](lang_aggfunc#min_agg)
+- [string_agg(X,Y)](lang_aggfunc#group_concat)
+- [sum(X)](lang_aggfunc#sumunc)
+- [total(X)](lang_aggfunc#sumunc)
 
 </div>
 
