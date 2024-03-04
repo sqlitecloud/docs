@@ -147,10 +147,8 @@ performing a numeric operation or for any other run-time conversions.
 When coercing a string value in the format of a hexadecimal integer into
 an integer value, the conversion process stops when the 'x' character is
 seen so the resulting integer value is always zero. SQLite only
-understands the hexadecimal integer notation when it appears in the SQL
-
-<!-- do-not-touch-svg-import: 'expr2.svg' -->t: 'expr2.svg' -->rs as part of the content of the
-database.
+understands the hexadecimal integer notation when it appears in the SQL statement 
+text, not when it appears as part of the content of the database.
 
 A string constant is formed by enclosing the string in single quotes
 ('). A single quote within the string can be encoded by putting two
@@ -172,19 +170,13 @@ expression for a value that is filled in at runtime using the
 target="_blank">sqlite3_bind()</a> family of C/C++ interfaces.
 Parameters can take several forms:
 
-> |              |     |                                                                                                                                                                                                                                                                                                                                                                           |
-> |-------------:|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-> |   **?***NNN* |     | A question mark followed by a number *NNN* holds a spot for the NNN-th parameter. NNN must be between 1 and <a href="https://www.sqlite.org/limits.html#max_variable_number"                                                                                                                                                                                              
->                       target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>.                                                                                                                                                                                                                                                                                                                            |
-> |        **?** |     | A question mark that is not followed by a number creates a parameter with a number one greater than the largest parameter number already assigned. If this means the parameter number is greater than <a href="https://www.sqlite.org/limits.html#max_variable_number"                                                                                                    
->                       target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>, it is an error. This parameter format is provided for compatibility with other database engines. But because it is easy to miscount the question marks, the use of this parameter format is discouraged. Programmers are encouraged to use one of the symbolic formats below or the ?NNN format above instead.             |
-> |  **:***AAAA* |     | A colon followed by an identifier name holds a spot for a <a href="https://www.sqlite.org/c3ref/bind_parameter_name.html"                                                                                                                                                                                                                                                 
->                       target="_blank">named parameter</a> with the name :AAAA. Named parameters are also numbered. The number assigned is one greater than the largest parameter number already assigned. If this means the parameter would be assigned a number greater than <a href="https://www.sqlite.org/limits.html#max_variable_number"                                                   
->                       target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>, it is an error. To avoid confusion, it is best to avoid mixing named and numbered parameters.                                                                                                                                                                                                                              |
-> |  **@***AAAA* |     | An "at" sign works exactly like a colon, except that the name of the parameter created is @AAAA.                                                                                                                                                                                                                                                                          |
-> | **\$***AAAA* |     | A dollar-sign followed by an identifier name also holds a spot for a named parameter with the name \$AAAA. The identifier name in this case can include one or more occurrences of "::" and a suffix enclosed in "(...)" containing any text at all. This syntax is the form of a variable name in the <a href="http://www.tcl-lang.org/" target="_blank">Tcl programming 
->                       language</a>. The presence of this syntax results from the fact that SQLite is really a <a href="https://www.sqlite.org/tclsqlite.html" target="_blank">Tcl                                                                                                                                                                                                                
->                       extension</a> that has escaped into the wild.                                                                                                                                                                                                                                                                                                                              |
+> |                 |     |
+> |-----------------|-----|
+> |<div style="width:45px"></div>   **?**_NNN_ | A question mark followed by a number *NNN* holds a spot for the NNN-th parameter. NNN must be between 1 and <a href="https://www.sqlite.org/limits.html#max_variable_number" target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>.                   |
+> |   **?** | A question mark that is not followed by a number creates a parameter with a number one greater than the largest parameter number already assigned. If this means the parameter number is greater than <a href="https://www.sqlite.org/limits.html#max_variable_number" target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>, it is an error. This parameter format is provided for compatibility with other database engines. But because it is easy to miscount the question marks, the use of this parameter format is discouraged. Programmers are encouraged to use one of the symbolic formats below or the ?NNN format above instead.              |
+> |  **:**_AAAA_ | A colon followed by an identifier name holds a spot for a <a href="https://www.sqlite.org/c3ref/bind_parameter_name.html" target="_blank">named parameter</a> with the name :AAAA. Named parameters are also numbered. The number assigned is one greater than the largest parameter number already assigned. If this means the parameter would be assigned a number greater than <a href="https://www.sqlite.org/limits.html#max_variable_number" target="_blank">SQLITE_MAX_VARIABLE_NUMBER</a>, it is an error. To avoid confusion, it is best to avoid mixing named and numbered parameters.  |
+> |**@**_AAAA_ | An "at" sign works exactly like a colon, except that the name of the parameter created is @AAAA. |
+> |**\$**_AAAA_ | A dollar-sign followed by an identifier name also holds a spot for a named parameter with the name \$AAAA. The identifier name in this case can include one or more occurrences of "::" and a suffix enclosed in "(...)" containing any text at all. This syntax is the form of a variable name in the <a href="http://www.tcl-lang.org/" target="_blank">Tcl programming language</a>. The presence of this syntax results from the fact that SQLite is really a <a href="https://www.sqlite.org/tclsqlite.html" target="_blank">Tcl extension</a> that has escaped into the wild.   |
 
 Parameters that are not assigned values using
 <a href="https://www.sqlite.org/c3ref/bind_blob.html"
@@ -663,7 +655,7 @@ functions](lang_corefunc), [date-time functions](lang_datefunc), [math
 functions](lang_mathfunc), and
 <a href="https://www.sqlite.org/json1.html" target="_blank">JSON
 functions</a>. Applications can add new functions, written in C/C++,
-using the <a href="https://www.sqlite.o<!-- do-not-touch-svg-import: 'expr3.svg' -->svg-import: 'expr3.svg' -->lank">sqlite3_create_function()</a> interface.
+using the <a href="https://www.sqlite.org/c3ref/create_function.html" target="_blank">sqlite3_create_function()</a> interface.
 
 The main expression bubble diagram above shows a single syntax for all
 function invocations. But this is merely to simplify the expression
