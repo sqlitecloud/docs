@@ -173,7 +173,7 @@ more instances of ".*objectlabel*" or "\[*arrayindex*\]".
 The *arrayindex* is usually a non-negative integer *N*. In that case,
 the array element selected is the *N*-th element of the array, starting
 with zero on the left. The *arrayindex* can also be of the form
-"**\#-***N*" in which case the element selected is the *N*-th from the
+"**\#-**_N_" in which case the element selected is the *N*-th from the
 right. The last element of the array is "**\#-1**". Think of the "#"
 characters as the "number of elements in the array". Then the expression
 "#-1" evaluates to the integer that corresponds to the last entry in the
