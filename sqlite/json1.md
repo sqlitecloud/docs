@@ -6,7 +6,7 @@ statement: SELECT json_object('id' , ArtistId, 'name', name) FROM Artist;
 
 ## 1. Overview
 
-By default, SQLite supports twenty-nine functions and two operators for
+By deTESTING WEBHOOKSfault, SQLite supports twenty-nine functions and two operators for
 dealing with JSON values. There are also two [table-valued
 functions](https://sqlite.org/vtab.html#tabfunc2) that can be used to
 decompose a JSON string.
