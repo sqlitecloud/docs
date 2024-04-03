@@ -2,6 +2,7 @@
 title: ALTER TABLE
 description: ALTER TABLE
 statement: ALTER TABLE Album ADD COLUMN year INTEGER;
+success: SELECT * FROM Album
 ---
 
 ## 1. Overview
