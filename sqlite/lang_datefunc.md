@@ -1,6 +1,6 @@
 ---
 title: Date And Time Functions
-description: Date And Time Functions
+description: SQLite supports seven scalar date and time functions  as follows in this page
 statement: SELECT DATE('now');
 ---
 

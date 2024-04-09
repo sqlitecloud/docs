@@ -1,6 +1,6 @@
 ---
 title: SQLite Keywords
-description: SQLite Keywords
+description: The SQL standard specifies a large number of keywords which may not be used as the names of any named object.
 ---
 
 The SQL standard specifies a large number of keywords which may not be

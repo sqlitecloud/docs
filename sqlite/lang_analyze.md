@@ -1,6 +1,6 @@
 ---
 title: ANALYZE
-description: ANALYZE
+description: The ANALYZE command gathers statistics about tables and indices and stores the collected information in internal tables.
 statement: ANALYZE;
 ---
 

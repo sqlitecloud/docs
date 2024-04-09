@@ -1,6 +1,6 @@
 ---
 title: CREATE VIEW
-description: CREATE VIEW
+description: The CREATE VIEW command assigns a name to a pre-packaged SELECT statement.
 statement: CREATE VIEW view_names AS SELECT name FROM Artist;
 ---
 

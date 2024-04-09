@@ -1,6 +1,6 @@
 ---
 title: Savepoints
-description: Savepoints
+description: SAVEPOINTs are a method of creating transactions, similar to BEGIN and COMMIT.
 statement: SAVEPOINT savepoint_name;
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: ATTACH DATABASE
-description: ATTACH DATABASE
+description: The ATTACH DATABASE statement adds another database file to the current database connection.
 statement: ATTACH DATABASE 'database_name' AS alias;
 ---
 

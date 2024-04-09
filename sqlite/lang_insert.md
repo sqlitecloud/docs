@@ -1,6 +1,6 @@
 ---
 title: INSERT
-description: INSERT
+description: The INSERT statement comes in three basic forms. INSERT INTO table VALUES(...); INSERT INTO table SELECT ...; INSERT INTO table DEFAULT VALUES;
 statement: INSERT INTO Artist (name) VALUES ('Rod Stewart');
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: SQL Language Expressions
-description: SQL Language Expressions
+description: SQLite understands various operators, listed in this page of the SQLite Cloud Docs.
 statement: SELECT (10 * (5 + 2) / 15) AS result;
 ---
 

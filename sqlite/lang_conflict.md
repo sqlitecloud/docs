@@ -1,6 +1,6 @@
 ---
 title: The ON CONFLICT Clause
-description: The ON CONFLICT Clause
+description: The ON CONFLICT clause is a non-standard extension specific to SQLite that can appear in many other SQL commands.
 ---
 
 <!-- do-not-touch-svg-import: 'conflict.svg' -->

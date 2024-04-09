@@ -1,6 +1,6 @@
 ---
 title: DETACH
-description: DETACH
+description: This statement detaches an additional database connection previously attached using the ATTACH statement.
 statement: DETACH DATABASE database_name;
 ---
 

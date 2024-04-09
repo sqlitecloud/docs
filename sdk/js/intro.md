@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: JS SDK Introduction
 description: SQLite Cloud Javascript SDK
 ---
 

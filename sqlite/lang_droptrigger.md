@@ -1,6 +1,6 @@
 ---
 title: DROP TRIGGER
-description: DROP TRIGGER
+description: The DROP TRIGGER statement removes a trigger created by the CREATE TRIGGER statement.
 statement: DROP TRIGGER IF EXISTS validate_artist_name;
 ---
 

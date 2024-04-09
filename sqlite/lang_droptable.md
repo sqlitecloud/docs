@@ -1,6 +1,6 @@
 ---
 title: DROP TABLE
-description: DROP TABLE
+description: The DROP TABLE statement removes a table added with the CREATE TABLE statement.
 statement: DROP TABLE IF EXISTS Genre;
 ---
 
