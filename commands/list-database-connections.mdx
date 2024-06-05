@@ -5,7 +5,7 @@ description: The LIST DATABASE CONNECTIONS command retrieves a list of all clien
 
 ## Syntax
 
-LIST DATABASE CONNECTIONS [ID] **database_name**
+LIST DATABASE **database_name** CONNECTIONS [ID]
 
 ## Privileges
 
@@ -33,7 +33,7 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the 
 > USE DATABASE mediastore.sqlite
 OK
 
-> LIST DATABASE CONNECTIONS mediastore.sqlite
+> LIST DATABASE mediastore.sqlite CONNECTIONS
 ----|-----------|----------|-------------------|---------------------|---------------------|
  id | address   | username | database          | connection_date     | last_activity       |
 ----|-----------|----------|-------------------|---------------------|---------------------|
