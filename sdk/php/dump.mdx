@@ -3,28 +3,18 @@ title: PHP SDK "dump"
 description: It prints the Rowset on standard output with SQLiteCloudRowset.dump()
 ---
 
-```js
+```php
 SQLiteCloudRowset.dump()
 ```
 
 Print the Rowset on standard output.
 
 ### Example
-```js
+```php
+use SQLiteCloud\SQLiteCloudClient;
 
-$sqlitecloud = new SQLiteCloud();
-$sqlitecloud->username = 'admin';
-$sqlitecloud->password = 'admin';
-
-try {
-	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
-		$msg = $sqlitecloud->errmsg;
-		$sqlitecloud = NULL;
-		return $msg;
-	}
-  } catch (Exception $e) {
-		return $e->getMessage();
-  }
+$sqlitecloud = new SQLiteCloudCient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $result = $sqlitecloud->execute('LIST INFO');
 $result->dump();

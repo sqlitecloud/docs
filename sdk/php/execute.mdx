@@ -3,8 +3,8 @@ title: PHP SDK "execute"
 description: Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in SQLite Cloud command.
 ---
 
-```js
-SQLiteCloud.execute($command)
+```php
+SQLiteCloudClient.execute($command)
 ```
 
 Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands).
@@ -19,21 +19,11 @@ Submits a command to the server and waits for the result. The command can be any
 * An `SQLiteCloudRowset` instance in case of a query reply
 
 ### Example
-```js
+```php
+use SQLiteCloud\SQLiteCloudClient;
 
-$sqlitecloud = new SQLiteCloud();
-$sqlitecloud->username = 'admin';
-$sqlitecloud->password = 'admin';
-
-try {
-	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
-		$msg = $sqlitecloud->errmsg;
-		$sqlitecloud = NULL;
-		return $msg;
-	}
-  } catch (Exception $e) {
-		return $e->getMessage();
-  }
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $result = $sqlitecloud->execute('LIST INFO');
 
