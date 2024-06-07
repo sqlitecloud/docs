@@ -119,6 +119,7 @@ const sidebarNav: SidebarNavStruct = [
 
 
 	{ title: "PHP", type: "secondary" },
+	{ filePath: 'sdk/php/intro', type: "inner", level: 0 },
 	{ filePath: 'sdk/php/admin', type: "inner", level: 0 },
 
 	{ title: 'SQLiteCloud', type: "inner", level: 0 },

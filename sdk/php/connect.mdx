@@ -1,41 +1,62 @@
 ---
 title: PHP SDK "connect"
-description: To connect to SQLite Cloud, you need to first allocate an SQLiteCloud instance and then inizialize some mandatory public properties (username and password).
+description: To connect to SQLite Cloud, you need to first allocate an SQLiteCloud Client instance and then inizialize some mandatory public properties: connection string or username and password.
 ---
 
-```js
-SQLiteCloud.connect($hostname, $port = 8860)
+```php
+SQLiteCloudClient.connect($hostname, $port = 8860)
+SQLiteCloudClient.connectWithString('sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey')
 ```
 
-To connect to SQLite Cloud, you need to first allocate an SQLiteCloud instance and then inizialize some mandatory public properties (username and password). The SQLiteCloud PHP class has the following properties:
-```js
-class SQLiteCloud {
-		public $username = '';
-		public $password = '';
-		public $database = '';
-		public $timeout = NULL;
-		public $connect_timeout = 20;
-		public $compression = false;
-    // ...
+To connect to SQLite Cloud, you need to first allocate an SQLiteCloud Client instance and then inizialize some mandatory public properties: connection string or username and password. The SQLiteCloud PHP class has the following properties:
+```php
+class SQLiteCloudClient {
+	public $username = '';
+	public $password = '';
+	public $database = '';
+	public $timeout = NULL;
+	public $connect_timeout = 20;
+	public $compression = false;
+    // ...and more
 }
 ```
 
-### Example
-```js
+### Example with Connection String
 
-  $sqlitecloud = new SQLiteCloud();
-  $sqlitecloud->username = 'admin';
-  $sqlitecloud->password = 'admin';
+```php
+use SQLiteCloud\SQLiteCloudClient;
 
-  try {
-			if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
-				$msg = $sqlitecloud->errmsg;
-				$sqlitecloud = NULL;
-				return $msg;
-			}
-  } catch (Exception $e) {
-			return $e->getMessage();
-  }
+$sqlitecloud = new SQLiteCloudClient();
 
-  return true;
+try {
+	if ($sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey') == false) {
+		$msg = $sqlitecloud->errmsg;
+		return $msg;
+	}
+} catch (Exception $e) {
+	return $e->getMessage();
+}
+
+return true;
+```
+
+### Example with Username and password
+
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->username = 'admin';
+$sqlitecloud->password = 'pass';
+
+try {
+	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+		$msg = $sqlitecloud->errmsg;
+		return $msg;
+	}
+} catch (Exception $e) {
+	return $e->getMessage();
+}
+
+return true;
 ```

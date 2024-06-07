@@ -3,7 +3,7 @@ title: PHP SDK "value"
 description: Use the function to retrieve the value of an item in the Rowset at row $row and column $col.
 ---
 
-```js
+```php
 SQLiteCloudRowset.value($row, $col)
 ```
 
@@ -13,22 +13,14 @@ Use the function to retrieve the value of an item in the Rowset at row $row (fro
 The column value.
 
 ### Example
-```js
+```php
+use SQLiteCloud\SQLiteCloudClient;
+use SQLiteCloud\SQLiteCloudRowset;
 
-$sqlitecloud = new SQLiteCloud();
-$sqlitecloud->username = 'admin';
-$sqlitecloud->password = 'admin';
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
-try {
-	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
-		$msg = $sqlitecloud->errmsg;
-		$sqlitecloud = NULL;
-		return $msg;
-	}
-  } catch (Exception $e) {
-		return $e->getMessage();
-  }
-
+/** @var SQLiteCloudRowset */
 $result = $sqlitecloud->execute('LIST INFO');
 $col = 1;
 $row = 1;

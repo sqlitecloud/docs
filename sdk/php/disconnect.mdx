@@ -3,28 +3,18 @@ title: PHP SDK "disconnect"
 description: The PHP SDK disconnect public method closes the connection with the server.
 ---
 
-```js
-SQLiteCloud.disconnect()
+```php
+SQLiteCloudClient.disconnect()
 ```
 
 The **disconnect** public method closes the connection with the server.
 
 ### Example
-```js
+```php
+use SQLiteCloud\SQLiteCloudClient;
 
-$sqlitecloud = new SQLiteCloud();
-$sqlitecloud->username = 'admin';
-$sqlitecloud->password = 'admin';
-
-try {
-	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
-		$msg = $sqlitecloud->errmsg;
-		$sqlitecloud = NULL;
-		return $msg;
-	}
-  } catch (Exception $e) {
-		return $e->getMessage();
-  }
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $sqlitecloud->disconnect();
 ```
