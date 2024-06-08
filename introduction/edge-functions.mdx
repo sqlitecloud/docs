@@ -1,0 +1,59 @@
+# Edge functions
+Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same node as your database.
+
+You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, SQL, or Python (experimental). You can [import modules](https://bun.sh/docs/runtime/autoimport) into your JavaScript and TypeScript edge functions. Module imports for Python are not currently supported.
+
+Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/introduction/webhooks). Each function runs in an isolated environment using the Bun runtime. 
+
+## Getting Started
+1. Navigate to the Edge Functions page from your dashboard. [add image]
+1. Under "Development", select "Edge Function", then click the "Create" button. [add image]
+1. Write and test your function.
+    1. Select the database you want to access and an api key if necessary
+    2. When you're finished, click deploy. [image - hello world function]
+
+#### Note:
+1. Functions must return a JSON-serializable object
+
+## Guides
+
+### Interacting with your Database
+Use the following global objects to access and manipulate your database using JavaScript/TypeScript or Python:
+1. In JavaScript/TypeScript: connection
+2. In Python: ???
+
+### Storing and Accessing Environment Variables
+Environment variables can be stored in either the server settings file, database settings file, or stored directly in your database. 
+
+Use the following commands to set and read values in your server settings file:
+* [SET KEY](https://docs.sqlitecloud.io/docs/commands/set-key) <keyname> TO <keyvalue>
+* [GET KEY](https://docs.sqlitecloud.io/docs/commands/get-key) <keyname>
+* [REMOVE KEY](https://docs.sqlitecloud.io/docs/commands/remove-key) <keyname>
+* [LIST KEYS](https://docs.sqlitecloud.io/docs/commands/list-keys)
+
+Use the following commands to set and read values in your database-specific settings file:
+* [SET DATABASE](https://docs.sqlitecloud.io/docs/commands/set-database) <database_name> KEY <keyname> TO <keyvalue> 
+* [GET DATABASE](https://docs.sqlitecloud.io/docs/commands/get-database-key) <database_name> KEY <keyname> 
+* [REMOVE DATABASE](https://docs.sqlitecloud.io/docs/commands/remove-database-key) <database_name> KEY <keyname>
+* LIST DATABASE <database_name> KEYS
+
+### Handling Errors
+* In case of error we return an HTTP error code and a JSON with the error message.
+
+## Examples
+
+### Modifying HTTP Headers
+#### Setup
+#### Example
+
+### Slack Notification
+#### Setup
+#### Example
+
+### Dynamic Pricing by Region
+#### Setup
+#### Example
+
+###  REST API 
+#### Setup
+#### Example
