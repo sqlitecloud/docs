@@ -43,17 +43,58 @@ Use the following commands to set and read values in your database-specific sett
 ## Examples
 
 ### Modifying HTTP Headers
-#### Setup
-#### Example
+Example code
 
 ### Slack Notification
-#### Setup
-#### Example
+Example code
 
-### Dynamic Pricing by Region
-#### Setup
-#### Example
+### New User Enrichment
+```JavaScript
+// define fake route
+const enrichmentEndpoint = 'https://www.fake-enrichment.com/api/v1/person/enrich';
+const fetchCompanyEnrichment = async () => ({ likelihood: Math.random() * 100, company: "Apple" })
+const makeUrl = (endpoint, queryParams) => `${endpoint}?${queryParams ? Object.entries(queryParams).map(([key, val]) => key + '=' + val).join('&') : ''}`
+
+// Get api key from database settings
+const apiKey = await connection.sql`get key enrichment_api_key`;
+// Get users with null companies
+const newUsers = await connection.sql`select * from customers where company is null`;
+const responses = [];
+for await (const user of newUsers) {
+    const email = user['Email'];
+    const queryParams = [{ apiKey }, { email }];
+    const requestUrl = makeUrl(enrichmentEndpoint, queryParams);
+    const response = await fetchCompanyEnrichment(requestUrl);
+    if (response?.company && response.likelihood > 50) {
+        // set company
+        await connection.sql`update customers set company = ${response.company} where email = ${email}`
+        responses.push({company: response.company, email })
+    } else {
+        // mark as company not found
+        await connection.sql`update customers set company = 0 where email = ${email} and company is null`
+        responses.push({company: false, email })
+    }
+}
+return {
+    updateCount: responses.length,
+    updated: responses.map(({ email, company }) => `${email}: ${company}`)
+}
+
+// Response
+```JSON
+{
+  "updateCount": 2,
+  "updated": [
+    "example@gmail.com: false",
+    "example-2@gmail.com: Apple"
+  ],
+  "metadata": {
+    "connectMs": 78,
+    "elapsedMs": 81
+  }
+}
+```
+
 
 ###  REST API 
-#### Setup
-#### Example
+#### Example code
