@@ -1,0 +1,19 @@
+name: Documentation Search CI
+
+on:
+  push:
+    branches:
+      - main
+      - stage
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: sqlitecloud/sqlitecloud-docsearch@v0.5
+        with:
+          project-string: ${{ secrets.PROJECT_STRING }}
+          database: documentation.sqlite
