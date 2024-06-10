@@ -6,11 +6,11 @@ You can write edge functions directly in the SQLite Cloud dashboard using JavaSc
 Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/introduction/webhooks). Each function runs in an isolated environment using the Bun runtime. 
 
 ## Getting Started
-1. Navigate to the Edge Functions page from your dashboard. [add image]
-1. Under "Development", select "Edge Function", then click the "Create" button. [add image]
+1. Navigate to the Edge Functions page from your dashboard.
+1. Under "Development", select "Edge Function", then click the "Create" button.
 1. Write and test your function.
-    1. Select the database you want to access and an api key if necessary
-    2. When you're finished, click deploy. [image - hello world function]
+    1. Select the database you want to access and an API key if necessary
+    2. When you're finished, click deploy.
 
 #### Note:
 Functions should return a JSON-serializable object with a data field:
@@ -23,7 +23,6 @@ return {
 ```
 
 ## Guides
-
 ### Interacting with your Database
 Use the global `connection` object to access and manipulate your database.
 ```JavaScript
