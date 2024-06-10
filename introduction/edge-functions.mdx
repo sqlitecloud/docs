@@ -1,7 +1,7 @@
 # Edge functions
 Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same node as your database.
 
-You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, SQL, or Python (experimental). You can [import modules](https://bun.sh/docs/runtime/autoimport) into your JavaScript and TypeScript edge functions. Module imports for Python are not currently supported.
+You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
 
 Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/introduction/webhooks). Each function runs in an isolated environment using the Bun runtime. 
 
@@ -13,14 +13,32 @@ Edge functions can be called remotely over HTTP or Websockets via API, or trigge
     2. When you're finished, click deploy. [image - hello world function]
 
 #### Note:
-1. Functions must return a JSON-serializable object
+Functions should return a JSON-serializable object with a data field:
+```JavaScript
+return {
+  data: {
+    // your return object
+  }
+}
+```
 
 ## Guides
 
 ### Interacting with your Database
-Use the following global objects to access and manipulate your database using JavaScript/TypeScript or Python:
-1. In JavaScript/TypeScript: connection
-2. In Python: ???
+Use the global `connection` object to access and manipulate your database.
+```JavaScript
+const customers = await connection.sql`SELECT * FROM customers;`
+return {
+  data: customers
+}
+```
+Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/commands/use-database).
+```JavaScript
+const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
+return {
+  data: customers
+}
+```
 
 ### Storing and Accessing Environment Variables
 Environment variables can be stored in either the server settings file, database settings file, or stored directly in your database. 
@@ -38,62 +56,42 @@ Use the following commands to set and read values in your database-specific sett
 * LIST DATABASE <database_name> KEYS
 
 ### Handling Errors
-* In case of error we return an HTTP error code and a JSON with the error message.
+In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response.
+
 
 ## Examples
 
-### Modifying HTTP Headers
-Example code
-
-### Slack Notification
-Example code
-
-### New User Enrichment
+### Assigning and Notifying a Support Rep on User Sign up
 ```JavaScript
-// define fake route
-const enrichmentEndpoint = 'https://www.fake-enrichment.com/api/v1/person/enrich';
-const fetchCompanyEnrichment = async () => ({ likelihood: Math.random() * 100, company: "Apple" })
-const makeUrl = (endpoint, queryParams) => `${endpoint}?${queryParams ? Object.entries(queryParams).map(([key, val]) => key + '=' + val).join('&') : ''}`
+// Get secret from database
+const slackWebhookEndpoint = await connection.sql`GET KEY slack_webhook_endpoint`;
 
-// Get api key from database settings
-const apiKey = await connection.sql`get key enrichment_api_key`;
-// Get users with null companies
-const newUsers = await connection.sql`select * from customers where company is null`;
-const responses = [];
-for await (const user of newUsers) {
-    const email = user['Email'];
-    const queryParams = [{ apiKey }, { email }];
-    const requestUrl = makeUrl(enrichmentEndpoint, queryParams);
-    const response = await fetchCompanyEnrichment(requestUrl);
-    if (response?.company && response.likelihood > 50) {
-        // set company
-        await connection.sql`update customers set company = ${response.company} where email = ${email}`
-        responses.push({company: response.company, email })
-    } else {
-        // mark as company not found
-        await connection.sql`update customers set company = 0 where email = ${email} and company is null`
-        responses.push({company: false, email })
+// Get record sent in body via webhook
+const newCustomer = request.data
+
+// Sample business logic - assign and notify support rep
+// Get reps from database
+const reps = await connection.sql`SELECT id, name, country FROM reps`;
+const rep = reps.find(({ country }) => country === newCustomer.country.toLowerCase());
+
+// Define helpers to assign and notify
+const assignRep = async (repId, customerId) => await connection.sql`UPDATE customers SET SupportRepId = ${repId} WHERE CustomerId = ${customerId}`;
+const notifyRep = async (repName, customer) => {
+    const message = `@${repName}: New User Sign Up - ${JSON.stringify(customer)}`
+    try {
+        await fetch(slackWebhookEndpoint, { body: JSON.stringify({ text: message }), method: 'POST', 'Content-type': 'application/json'  });
+    } catch (err) {
+        await fetch(slackWebhookEndpoint, { body: JSON.stringify({ text: err }), method: 'POST', 'Content-type': 'application/json'  });
     }
-}
-return {
-    updateCount: responses.length,
-    updated: responses.map(({ email, company }) => `${email}: ${company}`)
-}
+} 
 
-// Response
-```JSON
-{
-  "updateCount": 2,
-  "updated": [
-    "example@gmail.com: false",
-    "example-2@gmail.com: Apple"
-  ],
-  "metadata": {
-    "connectMs": 78,
-    "elapsedMs": 81
-  }
+// Call async functions
+await assignRep(rep.id, newCustomer.id);
+await notifyRep(rep.name, newCustomer);
+
+return {
+    data: 'OK'
 }
 ```
 
-###  Dynamic Regional Pricing
-#### Example code
+
