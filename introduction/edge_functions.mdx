@@ -3,7 +3,6 @@ title: Edge Functions
 description: SQLite Cloud offers powerful edge functions for performant data processing and third-party integrations.
 ---
 
-# Edge functions
 Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same server as your database.
 
 You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
@@ -19,7 +18,7 @@ Edge functions can be called remotely over HTTP or Websockets via API, or trigge
 
 #### Note:
 Functions should return a JSON-serializable object with a data field:
-```JavaScript
+```js
 return {
   data: {
     // your return object
@@ -30,7 +29,7 @@ return {
 ## Guides
 ### Interacting with your Database
 Use the global `connection` object to access and manipulate your database.
-```JavaScript
+```js
 const customers = await connection.sql`SELECT * FROM customers;`
 return {
   data: customers
@@ -39,7 +38,7 @@ return {
 
 Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/commands/use-database).
 
-```JavaScript
+```js
 const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
 return {
   data: customers
@@ -68,7 +67,7 @@ In case of error we return an HTTP error code and a JSON with the error message.
 
 ### Assigning and Notifying a Support Rep on User Sign up
 
-```JavaScript
+```js
 // Get secret from database
 const slackWebhookEndpoint = await connection.sql`GET KEY slack_webhook_endpoint`;
 
