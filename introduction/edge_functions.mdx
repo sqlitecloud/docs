@@ -36,7 +36,9 @@ return {
   data: customers
 }
 ```
+
 Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/commands/use-database).
+
 ```JavaScript
 const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
 return {
@@ -61,22 +63,11 @@ Use the following commands to set and read values in your database-specific sett
 
 ### Handling Errors
 In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
-We recommend the following shape:
-```json
-{
-	error: {
-		/** Error status as http code */
-		status: string
-		title?: string
-		detail?: string
-	}
-}
-```
-
 
 ## Examples
 
 ### Assigning and Notifying a Support Rep on User Sign up
+
 ```JavaScript
 // Get secret from database
 const slackWebhookEndpoint = await connection.sql`GET KEY slack_webhook_endpoint`;
