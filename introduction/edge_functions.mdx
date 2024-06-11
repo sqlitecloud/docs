@@ -63,18 +63,6 @@ Use the following commands to set and read values in your database-specific sett
 
 ### Handling Errors
 In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
-We recommend the following shape:
-
-```JSON
-{
-	error: {
-		status: string
-		title?: string
-		detail?: string
-	}
-}
-```
-
 
 ## Examples
 
