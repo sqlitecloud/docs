@@ -1,5 +1,5 @@
 # Edge functions
-Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same node as your database.
+Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same server as your database.
 
 You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
 
@@ -55,7 +55,18 @@ Use the following commands to set and read values in your database-specific sett
 * LIST DATABASE <database_name> KEYS
 
 ### Handling Errors
-In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response.
+In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
+We recommend the following shape:
+```json
+{
+	error: {
+		/** Error status as http code */
+		status: string
+		title?: string
+		detail?: string
+	}
+}
+```
 
 
 ## Examples
@@ -66,7 +77,10 @@ In case of error we return an HTTP error code and a JSON with the error message.
 const slackWebhookEndpoint = await connection.sql`GET KEY slack_webhook_endpoint`;
 
 // Get record sent in body via webhook
-const newCustomer = request.data
+const content = request.data;
+const database = content.database;
+const primaryKey = content.data[0];
+const newCustomer = await connection.sql`USE DATABASE ${database}; SELECT * FROM customers WHERE CustomerId = ${primaryKey};`;
 
 // Sample business logic - assign and notify support rep
 // Get reps from database
