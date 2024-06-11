@@ -50,16 +50,16 @@ return {
 Environment variables can be stored in either the server settings file, database settings file, or stored directly in your database. 
 
 Use the following commands to set and read values in your server settings file:
-* [SET KEY](https://docs.sqlitecloud.io/docs/commands/set-key) <keyname> TO <keyvalue>
-* [GET KEY](https://docs.sqlitecloud.io/docs/commands/get-key) <keyname>
-* [REMOVE KEY](https://docs.sqlitecloud.io/docs/commands/remove-key) <keyname>
+* [SET KEY](https://docs.sqlitecloud.io/docs/commands/set-key) keyname TO keyvalue
+* [GET KEY](https://docs.sqlitecloud.io/docs/commands/get-key) keyname
+* [REMOVE KEY](https://docs.sqlitecloud.io/docs/commands/remove-key) keyname
 * [LIST KEYS](https://docs.sqlitecloud.io/docs/commands/list-keys)
 
 Use the following commands to set and read values in your database-specific settings file:
-* [SET DATABASE](https://docs.sqlitecloud.io/docs/commands/set-database) <database_name> KEY <keyname> TO <keyvalue> 
-* [GET DATABASE](https://docs.sqlitecloud.io/docs/commands/get-database-key) <database_name> KEY <keyname> 
-* [REMOVE DATABASE](https://docs.sqlitecloud.io/docs/commands/remove-database-key) <database_name> KEY <keyname>
-* LIST DATABASE <database_name> KEYS
+* [SET DATABASE](https://docs.sqlitecloud.io/docs/commands/set-database) database_name KEY keyname TO keyvalue
+* [GET DATABASE](https://docs.sqlitecloud.io/docs/commands/get-database-key) database_name KEY keyname 
+* [REMOVE DATABASE](https://docs.sqlitecloud.io/docs/commands/remove-database-key) database_name KEY keyname
+* LIST DATABASE database_name KEYS
 
 ### Handling Errors
 In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
