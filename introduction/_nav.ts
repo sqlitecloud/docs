@@ -23,7 +23,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Advanced", type: "inner", level: 0 },
 	{ filePath: "introduction/analyzer", type: "inner", level: 1 },
 	{ filePath: "introduction/webhooks", type: "inner", level: 1 },
-	{ filePath: "introduction/edge-functions", type: "inner", level: 1 },
 	{ filePath: "introduction/settings", type: "inner", level: 1 },
 	
 	//{ filePath: "introduction/plugins", type: "inner", level: 0 },
