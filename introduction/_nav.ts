@@ -1,8 +1,8 @@
 import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
-	{ title: "Introduction", type: "primary" },
-	{ title: "Dashboard", type: "secondary" },
+	{ title: "Getting Started", type: "primary" },
+	{ title: "Introduction", type: "inner", level: 0 },
 	{ filePath: "introduction/login", type: "inner", level: 0 },
 	{ filePath: "introduction/projects", type: "inner", level: 0 },
 	{ filePath: "introduction/nodes", type: "inner", level: 0 },
