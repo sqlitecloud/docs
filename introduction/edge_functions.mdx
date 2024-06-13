@@ -9,6 +9,8 @@ You can write edge functions directly in the SQLite Cloud dashboard using JavaSc
 
 Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/introduction/webhooks). Each function runs in an isolated environment using the Bun runtime. 
 
+Turning on linearizable reads ensures strong consistency, but may introduce some latency. When eventual consistency is sufficient, we recommend leaving linearizable reads off.
+
 ## Getting Started
 1. Navigate to the Edge Functions page from your dashboard.
 1. Under "Development", select "Edge Function", then click the "Create" button.
