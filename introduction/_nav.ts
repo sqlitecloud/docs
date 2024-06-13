@@ -12,7 +12,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: "introduction/backup", type: "inner", level: 1 },
 
 	{ filePath: "introduction/console", type: "inner", level: 0 },
-	{ filePath: "introduction/weblite", type: "inner", level: 1 },
+	//{ filePath: "introduction/weblite", type: "inner", level: 1 },
 
 	{ title: "Security", type: "inner", level: 0 },
 	{ filePath: "introduction/users", type: "inner", level: 1 },
