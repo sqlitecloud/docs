@@ -1,0 +1,21 @@
+---
+title: Server-side Commands - SQLite Cloud
+description: Learn about the server side commands in SQLite Cloud.
+slug: /server-commands-slug
+---
+
+## Overview
+In addition to the standard SQL statements supported by the SQLite engine, SQLite Cloud also understands a number of server-specific commands (92 in the current version).
+
+In general, commands that begin with LIST are intended to query the server for information and SQLite Cloud returns the information in the form of Rowset (see SCSP protocol for more details). The GET verb is used to read a single value (or an array of values in some cases) and the SET verb is used to update an existing setting. Commands that do not begin with LIST and GET are intended to make a change on the server.
+
+Most commands require special privileges to execute. If you are logged into a server with an account that has insufficient privileges to execute a particular command, then SQLite Cloud will return an error.
+
+In the Syntax field of each command, the keywords that make up the command are shown in uppercase and the values passed as parameters are surrounded by the angle brackets. The square brackets delimit the optional parts of a command (if any).
+
+To get a list of all available commands, you can send a LIST COMMANDS statement:
+
+```bash
+> LIST COMMANDS
+```
+
