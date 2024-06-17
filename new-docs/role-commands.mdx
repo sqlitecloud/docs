@@ -1,0 +1,182 @@
+---
+title: Role Commands
+description: Role commands allow you to manage roles in SQLite Cloud.
+---
+## CREATE ROLE
+
+Roles grant users access to SQLite Cloud resources (a database, a table, or global). SQLite Cloud provides several built-in roles administrators can use to control access to an SQLite Cloud system. However, if these roles cannot describe the desired set of privileges, you can create new roles in a particular database/table.
+The optional PRIVILEGE parameter specifies which privileges (in comma-separated format) must be associated with the ROLE. A privilege can later be associated with a ROLE using the GRANT PRIVILEGE command.
+The DATABASE and TABLE optional arguments can restrict the particular PRIVILEGES to a specific resource (otherwise, the ROLE is considered global). If PRIVILEGES is omitted then DATABASE and TABLE parameters are ignored.
+
+### Syntax
+
+CREATE ROLE **role_name** [PRIVILEGE **privilege_name** [DATABASE **database_name**] [TABLE **table_name**]]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> CREATE ROLE sample_role PRIVILEGE CLUSTERADMIN,CLUSTERMONITOR,READWRITE
+OK
+```
+
+## GRANT ROLE
+
+Use this command to add a new **role_name** to an existing username. You can further restrict this operation by specifying a **database_name** and/or a **table_name**.
+
+### Syntax
+
+GRANT ROLE **role_name** USER **username** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> GRANT ROLE role1 USER user1
+OK
+```
+
+## LIST ROLES
+
+The LIST ROLES command returns a rowset containing all the ROLES (built-in and user-defined) configured into SQLite Cloud. A ROLE can be associated with a specific database or table or globally defined (in that case, the databasename and/or tablename columns are set to `*`).
+
+### Syntax
+
+LIST ROLES
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **rolename**: the name of the role
+* **builtin**: 1 if it is a built-in role, 0 otherwise
+* **privileges**: a comma separated list of privileges associated to the role
+* **databasename**: an optional database name to further restrict the role
+* **tablename**: an optional table name to further restrict the role
+
+### Example
+
+```bash
+> LIST ROLES
+-----------------------|---------|-----------------------------|--------------|-----------|
+ rolename              | builtin | privileges                  | databasename | tablename |
+-----------------------|---------|-----------------------------|--------------|-----------|
+ ADMIN                 | 1       | READ,INSERT,UPDATE,...      | NULL         | NULL      |
+ READ                  | 1       | READ                        | NULL         | NULL      |
+ READANYDATABASE       | 1       | READ                        | *            | *         |
+ READWRITE             | 1       | READ,INSERT,UPDATE,...      | NULL         | NULL      |
+ READWRITEANYDATABASE  | 1       | READ,INSERT,UPDATE,...      | *            | *         |
+ DBADMIN               | 1       | READ,INSERT,UPDATE,...      | NULL         | NULL      |
+ DBADMINANYDATABASE    | 1       | READ,INSERT,UPDATE,...      | *            | *         |
+ USERADMIN             | 1       | USERADMIN                   | NULL         | NULL      |
+ CLUSTERADMIN          | 1       | CLUSTERADMIN                | NULL         | NULL      |
+ CLUSTERMONITOR        | 1       | CLUSTERMONITOR              | NULL         | NULL      |
+ HOSTADMIN             | 1       | BACKUP,RESTORE,...          | NULL         | NULL      |
+ SUB                   | 1       | SUB                         | NULL         | NULL      |
+ SUBANYCHANNEL         | 1       | SUB                         | *            | *         |
+ PUB                   | 1       | PUB                         | NULL         | NULL      |
+ PUBANYCHANNEL         | 1       | PUB                         | *            | *         |
+ PUBSUB                | 1       | SUB,PUB,PUBSUB              | NULL         | NULL      |
+ PUBSUBANYCHANNEL      | 1       | SUB,PUB,PUBSUB              | *            | *         |
+ PUBSUBADMIN           | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE | NULL         | NULL      |
+ PUBSUBADMINANYCHANNEL | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE | *            | *         |
+-----------------------|---------|-----------------------------|--------------|-----------|
+```
+
+## REMOVE ROLE
+
+The REMOVE ROLE command permanently deletes the **role_name** from the server. The role is also removed from users, privileges, and IP restrictions tables as a side effect.
+
+### Syntax
+
+REMOVE ROLE **role_name**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE ROLE role1
+OK
+```
+
+## RENAME ROLE
+
+The RENAME ROLE command renames an existing role to a new name.
+
+### Syntax
+
+RENAME ROLE **role_name** TO **new_role_name**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> RENAME ROLE old_role TO new_role
+OK
+```
+
+## REVOKE ROLE
+
+Use this command to revoke a role from the USER **username**. You can further restrict this command by specifying a database and/or a table name.
+
+### Syntax
+
+REVOKE ROLE **role_name** USER **username** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REVOKE ROLE role1 USER user1
+OK
+```
