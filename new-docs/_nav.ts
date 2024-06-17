@@ -5,7 +5,7 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "Getting Started", type: "secondary" },
 	{ title: "Introduction", filePath: "new-docs/index", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
-  // { title: "Core Concepts", filePath: "new-docs/core-concepts", type: "inner", level: 0 },
+  // { title: "Core Concepts", filePath: "new-docs/core-concepts", type: "inner", level: 0 }, // should remove new-docs
   { title: "Quick Start Guides", type: "inner", level: 0},
   { title: "React", filePath: "new-docs/quick-start-react", type: "inner", level: 1 },
 
@@ -29,8 +29,8 @@ const sidebarNav: SidebarNavStruct = [
   // { title: "Query Analyzer", type: "inner", level: 0 },
 
   { title: "Reference" , type: "secondary" },
-  // { title: "Server-side Commands", type: "inner", level: 0 },
-  // { title: "API Keys", type: "inner", level: 1 },
+  { title: "Server-side Commands", type: "inner", filePath: "new-docs/server-side-commands", level: 0 },
+  { title: "API Keys", filePath: "new-docs/api-key-commands", type: "inner", level: 1 },
   // { title: "Authentication", type: "inner", level: 1 },
   // { title: "Backups", type: "inner", level: 1 },
   // { title: "Cluster", type: "inner", level: 1 },
