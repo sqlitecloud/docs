@@ -7,13 +7,16 @@ on:
       - stage
 
 jobs:
-  build:
+  docsearch:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: sqlitecloud/sqlitecloud-docsearch@v0.5
+      - uses: sqlitecloud/docsearch-action@v1
         with:
           project-string: ${{ secrets.PROJECT_STRING }}
           database: documentation.sqlite
+          strip-astro-header: true
+          strip-md-titles: true
+          strip-jsx: true
+          strip-html: true
