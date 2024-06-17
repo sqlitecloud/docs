@@ -46,7 +46,19 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Settings", filePath: "new-docs/settings-commands", type: "inner", level: 1 },
   { title: "User", filePath: "new-docs/user-commands", type: "inner", level: 1 },
   { title: "CLI", filePath: "new-docs/cli-commands", type: "inner", level: 0 },
-  // { title: "SDKs", type: "inner", level: 0 },
+  { title: "SDKs", type: "inner", level: 0 },
+  { title: "JavaScript", filePath: "new-docs/sdk-js", type: "inner", level: 1 },
+	{ title: "Modules", filePath: 'new-docs/sdk-js/modules', type: "inner", level: 2 },
+	{ title: "Classes", type: "inner", level: 2 },
+	{ filePath: 'new-docs/sdk-js/classes/Database', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/classes/SQLiteCloudConnection', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/classes/SQLiteCloudError', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/classes/SQLiteCloudRow', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/classes/SQLiteCloudRowset', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/classes/Statement', type: "inner", level: 3 },
+	{ title: 'Interfaces', type: "inner", level: 2 },
+	{ filePath: 'new-docs/sdk-js/interfaces/SQLCloudRowsetMetadata', type: "inner", level: 3 },
+	{ filePath: 'new-docs/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 }
 ];
 
 export default sidebarNav
