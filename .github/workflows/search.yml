@@ -1,4 +1,4 @@
-name: Documentation Search CI
+name: docsearch-action
 
 on:
   push:
