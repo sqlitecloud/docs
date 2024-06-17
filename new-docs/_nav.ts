@@ -44,9 +44,8 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Query Analyzer", filePath: "new-docs/query-analyzer-commands", type: "inner", level: 1 },
   { title: "Roles", filePath: "new-docs/role-commands", type: "inner", level: 1 },
   { title: "Settings", filePath: "new-docs/settings-commands", type: "inner", level: 1 },
-  // { title: "User", type: "inner", level: 1 },
-  // { title: "Environment Variables", type: "inner", level: 1 },
-  // { title: "CLI", type: "inner", level: 0 },
+  { title: "User", filePath: "new-docs/user-commands", type: "inner", level: 1 },
+  { title: "CLI", filePath: "new-docs/cli-commands", type: "inner", level: 0 },
   // { title: "SDKs", type: "inner", level: 0 },
 ];
 
