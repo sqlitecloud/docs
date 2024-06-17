@@ -1,0 +1,142 @@
+---
+title: Privilege Commands
+description: Use these commands to manage privileges in SQLite Cloud.
+---
+## GRANT PRIVILEGE
+
+Use this command to add a new **privilege_name** to an existing role. The **privilege_name** parameter can be a list of comma-separated privileges. You can further restrict this operation by specifying a **database_name** and/or a **table_name**.
+
+### Syntax
+
+GRANT PRIVILEGE **privilege_name** ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> GRANT PRIVILEGE readwrite ROLE role1
+OK
+```
+
+## LIST PRIVILEGES
+
+The LIST PRIVILEGES command returns a rowset that contains a list of all the privileges built into SQLite Cloud.
+
+### Syntax
+
+LIST PRIVILEGES
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with one privilege **name** column.
+
+### Example
+
+```bash
+> LIST PRIVILEGES
+-----------------|
+ name            |
+-----------------|
+ NONE            |
+ READ            |
+ INSERT          |
+ UPDATE          |
+ DELETE          |
+ READWRITE       |
+ PRAGMA          |
+ CREATE_TABLE    |
+ CREATE_INDEX    |
+ CREATE_VIEW     |
+ CREATE_TRIGGER  |
+ DROP_TABLE      |
+ DROP_INDEX      |
+ DROP_VIEW       |
+ DROP_TRIGGER    |
+ ALTER_TABLE     |
+ ANALYZE         |
+ ATTACH          |
+ DETACH          |
+ DBADMIN         |
+ SUB             |
+ PUB             |
+ PUBSUB          |
+ BACKUP          |
+ RESTORE         |
+ DOWNLOAD        |
+ PLUGIN          |
+ SETTINGS        |
+ USERADMIN       |
+ CLUSTERADMIN    |
+ CLUSTERMONITOR  |
+ CREATE_DATABASE |
+ DROP_DATABASE   |
+ HOSTADMIN       |
+ ADMIN           |
+ PUBSUBCREATE    |
+-----------------|
+```
+
+## SET PRIVILEGE
+
+The SET PRIVILEGE command grants only specified privileges to a role. Previously granted privileges are revoked. The **privilege_name** parameter can be a list of comma-separated privileges.
+
+### Syntax
+
+SET PRIVILEGE **privilege_name** ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET PRIVILEGE readwrite ROLE role1
+OK
+```
+
+## REVOKE PRIVILEGE
+
+Use this command to revoke a privilege (or a command-separated list of privileges) from the ROLE **role_name**. You can further restrict this command by specifying a database and/or a table name.
+
+### Syntax
+
+REVOKE PRIVILEGE **privilege_name** ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REVOKE PRIVILEGE privilege1 ROLE role1
+OK
+```

@@ -1,0 +1,46 @@
+---
+title: "SQCloudVMErrorCode"
+description: SQCloud VM C/C++ Interface SQCloudVMErrorCode
+---
+
+```c
+int SQCloudVMErrorCode (SQCloudVM *vm);
+```
+
+### Description
+Retrieve the latest error code (if any) from the associated vm.
+
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+An error code or 0 if no error is found.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // get error code
+    int err = SQCloudVMErrorCode(vm);
+}
+```

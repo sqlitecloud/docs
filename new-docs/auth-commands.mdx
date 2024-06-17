@@ -1,0 +1,22 @@
+---
+title: Auth Commands
+description: The AUTH command authenticates the current connection, without authentication the connection cannot send any other command to the server
+---
+
+## AUTH USER
+The AUTH command authenticates the current connection, without authentication the connection cannot send any other command to the server.
+
+Once authenticated, any PubSub connection in place will be closed.
+### Syntax
+
+AUTH USER **username** PASSWORD **password**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).

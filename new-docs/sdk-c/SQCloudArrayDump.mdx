@@ -1,0 +1,44 @@
+---
+title: "SQCloudArrayDump"
+description: SQCloud Array C/C++ Interface SQCloudArrayDump
+---
+
+```c
+void SQCloudArrayDump (SQCloudResult *result);
+```
+
+### Description
+Print the array on standard output.
+
+### Parameters
+* **result**: A valid SQCloudResult pointer returned by an SQCloud function.
+
+### Return value
+None.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // perform a sample query
+    SQCloudResult *r = SQCloudExec(conn, "TEST ARRAY;");
+
+    // dump result
+    SQCloudArrayDump(r);
+
+    // free result
+    SQCloudResultFree(r);
+}
+```

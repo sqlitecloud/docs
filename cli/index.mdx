@@ -2,6 +2,7 @@
 title: Command Line Interface
 description: The SQLite Cloud Command Line Interface is a user-friendly interface that runs on the terminal and acts as a front-end to SQLite Cloud.
 ---
+import Callout from "@commons-components/Information/Callout.astro"
 
 The **SQLite Cloud Command Line Interface** is a user-friendly interface that runs on the terminal and acts as a front-end to SQLite Cloud. This interface allows you to enter queries interactively, submit them to SQLite Cloud, and view the resulting data. Additionally, input can come from a file or command line arguments, giving you greater flexibility in how you interact with SQLite Cloud.
 
@@ -14,3 +15,86 @@ It's worth noting that there are two versions of the CLI available: one written 
 The C cli (sqlitecloud-cli) is available for Linux (x86) and macOS (Intel and ARM).
 
 The GO cli (sqlc) is available for Linux (x86), Windows (x86) and macOS (Intel and ARM).
+
+## sqlitecloud-cli (C)
+**sqlitecloud-cli** is a terminal-based front-end to SQLite Cloud written in C. It enables you to type in queries interactively, issue them to SQLite Cloud, and see the query results. Alternatively, input can be from a file or from command line arguments.
+
+In addition, **sqlitecloud-cli** provides a number of meta-commands and various shell-like features to facilitate writing scripts and automating a wide variety of tasks. Meta-commands begin with a dot.
+
+## Options
+```bash
+-v                    print usage and exit
+-h HOSTNAME           hostname to connect to (default localhost)
+-p PORT               port to connect to (default 8860)
+-f FILEPATH           file path with commands to execute
+-d DATABASE           database name
+-r ROOT_CERTIFICATE   path to root certificate for TLS connection
+-s CLI_CERTIFICATE    path to client certificate for TLS connection
+-t CLI_KEY            path to client key certificate for TLS connection
+-u TIMEOUT            connection timeout in seconds (default no timeout)
+-y IP                 connection type (IPv4, IPv6 or IPany, default IPv4)
+-n USERNAME           authentication username
+-m PASSWORD           authentication password
+-c                    activate compression
+-i                    activate insecure mode (non TLS connection)
+-q                    activate quite mode (disable output print)
+-x                    activate special sqlite mode
+-z                    request zero-terminated strings in all replies
+```
+
+
+## sqlc (GO)
+
+**sqlc** is a terminal-based front-end to SQLite Cloud written in GO. It enables you to type in queries interactively, issue them to SQLite Cloud, and see the query results. Alternatively, input can be from a file or from command line arguments.
+
+In addition, **sqlc** provides various shell-like features to facilitate writing scripts and automating a wide variety of tasks.
+
+## Options
+```bash
+> ./sqlc --help
+
+Usage:
+  sqlc [URL] [options] [<FILE>...]
+  sqlc -?|--help|--version
+
+Arguments:
+  URL       "sqlitecloud://user:pass@host.com:port/dbname?timeout=10&compress=NO"
+  FILE...   Execute SQL commands from FILE(s) after connecting to the SQLite Cloud database
+
+Examples:
+  sqlc "sqlitecloud://user:pass@host.com:8860/dbname?timeout=10&compress=lz4&tls=intern"
+  sqlc --host hostname -u user --password=pass -d dbname -c LZ4 --tls=no
+  sqlc --version
+  sqlc -?
+
+General Options:
+  --cmd COMMAND            Run "COMMAND" before executing FILE... or reading from stdin
+  -l, --list               List available databases, then exit
+  -d, --dbname NAME        Use database NAME
+  -b, --bail               Stop after hitting an error
+  -?, --help               Show this screen
+  --version                Display version information
+
+Output Format Options:
+  -o, --output FILE        Switch to BATCH mode, execute SQL Commands and send output to FILE, then exit.
+                           In BATCH mode, the default output format is switched to QUOTE.
+  
+  --echo                   Disables --quiet, print command(s) before execution
+  --quiet                  Disables --echo, run command(s) quietly (no messages, only query output)
+  --noheader               Turn headers off
+  --nullvalue TEXT         Set text string for NULL values [default: "NULL"]
+  --newline SEP            Set output row separator [default: "\r\n"]
+  --separator SEP          Set output column separator [default: "|"]
+  --format (LIST|CSV|QUOTE|TABS|LINE|JSON|HTML|XML|MARKDOWN|TABLE|BOX)
+                           Specify the Output mode [default: BOX]
+
+Connection Options:
+  -h, --host HOSTNAME      Connect to SQLite Cloud database server host name [default: localhost]
+  -p, --port PORT          Use specified port to connect to SQLIte Cloud database server [default: 8860]
+  -u, --user USERNAME      Use USERNAME for authentication
+  -w, --password PASSWORD  Use PASSWORD for authentication
+  -t, --timeout SECS       Set Timeout for network operations to SECS seconds [default: 10]
+  -c, --compress (NO|LZ4)  Use line compression [default: NO]
+  --tls [YES|NO|INTERN|FILE] Encrypt the database connection using the host's root CA set (YES), a custom CA with a PEM from FILE (FILE), the internal SQLiteCloud CA (INTERN), or disable the encryption (NO) [default: YES]
+```
+

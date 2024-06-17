@@ -1,0 +1,185 @@
+---
+title: Backup Commands
+description: Backup-related commands in SQLite Cloud
+---
+
+## APPLY BACKUP SETTINGS
+Several backup-related settings can be applied using the SET DATABASE KEY command.
+
+The following keys affect the backup settings:
+* **backup**: set to 1 to activate a backup, 0 to disable.
+* **backup_retention**: affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
+* **backup_snapshot_interval**: specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply.
+
+All the above settings are not immediately applied up until an APPLY BACKUP SETTINGS command is executed.
+
+### Syntax
+
+APPLY BACKUP SETTINGS
+
+### Privileges
+
+```
+BACKUP
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+
+## LIST BACKUP SETTINGS
+
+The LIST BACKUP SETTINGS command retrieves detailed information about the settings applied to each database previously enabled for a backup.
+The `backup_retention` setting affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
+The `backup_snapshot_interval` specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval, a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
+
+### Syntax
+
+LIST BACKUP SETTINGS
+
+### Privileges
+
+```
+BACKUP
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: database name
+* **enabled**: 1 enabled, 0 disabled
+* **backup_retention**: retention period
+* **backup_snapshot_interval**: snapshot interval value
+
+### Example
+
+```bash
+> LIST BACKUP SETTINGS
+------------------------|---------|------------------|--------------------------|
+ name                   | enabled | backup_retention | backup_snapshot_interval |
+------------------------|---------|------------------|--------------------------|
+ chinook-enc.sqlite     | 1       | 24h              | NULL                     |
+ chinook.sqlite         | 1       | 168h             | NULL                     |
+ db space.sqlite        | 0       | NULL             | NULL                     |
+ db1.sqlite             | 1       | 168h             | NULL                     |
+ dbempty.sqlite         | 1       | 24h              | NULL                     |
+ encdb.sqlite           | 1       | 168h             | NULL                     |
+ encdb2.sqlite          | 1       | 24h              | NULL                     |
+ test-blob-10x10.sqlite | 0       | NULL             | NULL                     |
+ wrongdb5.sqlite        | 0       | 24h              | NULL                     |
+ wrongdb9.sqlite        | 0       | NULL             | NULL                     |
+------------------------|---------|------------------|--------------------------|
+```
+
+## LIST BACKUPS DATABASE
+
+The LIST BACKUPS DATABASE command retrieves detailed information about which backups are available for a specific database.
+SQLite Cloud backup is a continuous backup system based on LiteStream that uses S3 as a storage option and can also backup AES-256 encrypted databases.
+
+### Syntax
+LIST BACKUPS DATABASE **database_name**
+
+### Privileges
+
+```
+BACKUP
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **type**: can be snapshot or wal
+* **replica**: always S3 in this version
+* **generation**: backup generation ID
+* **index**: backup index ID
+* **offset**: backup offset
+* **size**: backup size in bytes
+* **created**: backup creation date and time
+
+### Example
+
+```bash
+> LIST BACKUPS DATABASE db1.sqlite
+----------|---------|------------------|-------|--------|------|----------------------|
+ type     | replica | generation       | index | offset | size | created              |
+----------|---------|------------------|-------|--------|------|----------------------|
+ snapshot | s3      | 6283e07babc9aff1 | 0     | NULL   | 797  | 2023-02-01T14:51:24Z |
+ wal      | s3      | 6283e07babc9aff1 | 0     | 0      | 119  | 2023-02-01T14:51:24Z |
+ wal      | s3      | 6283e07babc9aff1 | 0     | 4152   | 493  | 2023-02-06T15:46:32Z |
+ wal      | s3      | 6283e07babc9aff1 | 1     | 0      | 119  | 2023-02-06T15:46:33Z |
+ wal      | s3      | 6283e07babc9aff1 | 1     | 4152   | 386  | 2023-02-06T15:47:44Z |
+ wal      | s3      | 6283e07babc9aff1 | 2     | 0      | 119  | 2023-02-06T15:47:44Z |
+ wal      | s3      | 6283e07babc9aff1 | 2     | 4152   | 386  | 2023-02-06T15:48:20Z |
+ wal      | s3      | 6283e07babc9aff1 | 3     | 0      | 119  | 2023-02-06T15:48:45Z |
+ wal      | s3      | 6283e07babc9aff1 | 3     | 4152   | 386  | 2023-02-06T15:48:55Z |
+ wal      | s3      | 6283e07babc9aff1 | 3     | 8272   | 386  | 2023-02-06T15:49:28Z |
+ wal      | s3      | 6283e07babc9aff1 | 4     | 0      | 119  | 2023-02-06T15:49:45Z |
+ wal      | s3      | 6283e07babc9aff1 | 4     | 4152   | 386  | 2023-02-06T15:53:30Z |
+ wal      | s3      | 6283e07babc9aff1 | 5     | 0      | 119  | 2023-02-06T15:53:30Z |
+ wal      | s3      | 6283e07babc9aff1 | 5     | 4152   | 386  | 2023-02-06T15:53:52Z |
+ wal      | s3      | 6283e07babc9aff1 | 6     | 0      | 115  | 2023-02-06T15:54:31Z |
+ snapshot | s3      | b866f7b3be9557d1 | 0     | NULL   | 799  | 2023-02-07T17:39:46Z |
+ wal      | s3      | b866f7b3be9557d1 | 0     | 0      | 119  | 2023-02-07T17:39:46Z |
+ snapshot | s3      | 1131237b6da7ae81 | 0     | NULL   | 799  | 2023-02-07T19:25:15Z |
+ wal      | s3      | 1131237b6da7ae81 | 0     | 0      | 119  | 2023-02-07T19:25:15Z |
+----------|---------|------------------|-------|--------|------|----------------------|
+```
+
+## LIST BACKUPS
+
+The LIST BACKUPS command returns a rowset containing information about which databases have enabled backup.
+
+### Syntax
+
+LIST BACKUPS
+
+### Privileges
+
+```
+BACKUP
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a single **name** column that returns all the databases with backup enabled.
+
+### Example
+
+```bash
+> LIST BACKUPS
+--------------------|
+ name               |
+--------------------|
+ chinook-enc.sqlite |
+ chinook.sqlite     |
+ db1.sqlite         |
+ dbempty.sqlite     |
+ encdb.sqlite       |
+ encdb2.sqlite      |
+--------------------|
+```
+
+## RESTORE BACKUP DATABASE
+
+Starting from the information returned by the `LIST BACKUP DATABASE` command, you can restore a database with the RESTORE BACKUP DATABASE command. During a RESTORE, the database **database_name** will not be available. The TIMESTAMP option is usually used to restore a specific database back in time, but the GENERATION and INDEX options can also be used.
+
+### Syntax
+RESTORE BACKUP DATABASE **database_name** [GENERATION **generation**] [INDEX **index**] [TIMESTAMP **timestamp**]
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Privileges
+
+```
+RESTORE
+```
+
+## Example
+
+```bash
+> RESTORE BACKUP DATABASE db1.sqlite TIMESTAMP 2023-02-06T15:53:30Z
+```
+
