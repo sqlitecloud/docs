@@ -38,7 +38,7 @@ const sidebarNav: SidebarNavStruct = [
   { title: "General Info", filePath: "new-docs/general-commands", type: "inner", level: 1 },
   { title: "IP", filePath: "new-docs/ip-commands", type: "inner", level: 1 },
   { title: "Logs", filePath: "new-docs/log-commands", type: "inner", level: 1 },
-  // { title: "Plugin", type: "inner", level: 1 },
+  { title: "Plugin",filePath: "new-docs/plugin-commands", type: "inner", level: 1 },
   // { title: "Privileges", type: "inner", level: 1 },
   // { title: "Pub/Sub", type: "inner", level: 1 },
   // { title: "Query Analyzer", type: "inner", level: 1 },

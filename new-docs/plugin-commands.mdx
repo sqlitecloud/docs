@@ -1,0 +1,131 @@
+---
+title: Plugin Commands
+description: Use these commands to manage the SQLite Cloud plugins.
+---
+
+## DISABLE PLUGIN
+### Syntax
+
+DISABLE PLUGIN **plugin_name**
+
+### Description
+
+Use this command to disable a plugin. Established connections will continue to have that plugin loaded. The disabled setting affects only new connections.
+
+### Privileges
+
+```
+PLUGIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> DISABLE PLUGIN sample.plugin
+OK
+```
+
+## ENABLE PLUGIN
+### Syntax
+
+ENABLE PLUGIN **plugin_name**
+
+### Description
+
+Use this command to re-enable a plugin previously disabled. Note that the newly enabled plugin is available only for new connections.
+
+### Privileges
+
+```
+PLUGIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> ENABLE PLUGIN sample.plugin
+OK
+```
+
+## LIST PLUGINS
+### Syntax
+
+LIST PLUGINS
+
+### Description
+
+The LIST PLUGINS command returns a rowset that provides information about the installed native/SQLite extensions.
+
+### Privileges
+
+```
+PLUGIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: plugin name
+* **type**: plugin type (SQLite or SQLiteCloud)
+* **enabled**: 1 enabled, 0 disabled
+* **version**: plugin version
+* **copyright**: plugin copyright
+* **description**: plugin description
+
+The **version**, **copyright** and **description** columns are not NULL only in case of native SQLite Cloud extensions developed with the official plugins SDK.
+
+### Example
+
+```bash
+> LIST PLUGINS
+---------|--------|---------|---------|-----------|-------------|
+ name    | type   | enabled | version | copyright | description |
+---------|--------|---------|---------|-----------|-------------|
+ crypto  | SQLite | 1       | NULL    | NULL      | NULL        |
+ fileio  | SQLite | 1       | NULL    | NULL      | NULL        |
+ fuzzy   | SQLite | 1       | NULL    | NULL      | NULL        |
+ ipaddr  | SQLite | 1       | NULL    | NULL      | NULL        |
+ math    | SQLite | 1       | NULL    | NULL      | NULL        |
+ stats   | SQLite | 1       | NULL    | NULL      | NULL        |
+ text    | SQLite | 1       | NULL    | NULL      | NULL        |
+ unicode | SQLite | 1       | NULL    | NULL      | NULL        |
+ uuid    | SQLite | 1       | NULL    | NULL      | NULL        |
+ vsv     | SQLite | 1       | NULL    | NULL      | NULL        |
+ re      | SQLite | 0       | NULL    | NULL      | NULL        |
+---------|--------|---------|---------|-----------|-------------|
+
+```
+
+## LOAD PLUGIN
+### Syntax
+
+LOAD PLUGIN **plugin_name**
+
+### Description
+
+In a running server, the LOAD PLUGIN command forces plugin_name to be loaded in the core services. A loaded plugin is also enabled by default and will be registered in newly established connections.
+
+### Privileges
+
+```
+PLUGIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> LOAD PLUGIN sample.plugin
+OK
+```
