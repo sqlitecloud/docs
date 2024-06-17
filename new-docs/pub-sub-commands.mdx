@@ -1,0 +1,172 @@
+---
+title: Pub/Sub Commands
+description: Use these commands to manage the SQLite Cloud Pub/Sub feature.
+---
+## CREATE CHANNEL
+
+The CREATE CHANNEL command creates a new Pub/Sub environment channel.
+It is usually an error to attempt to create a new channel if another one exists with the same name. However, if the "IF NOT EXISTS" clause is specified as part of the CREATE CHANNEL statement, and a channel of the same name already exists, the CREATE CHANNEL command has no effect (and no error message is returned). An error is still returned if the channel cannot be created for any other reason, even if the "IF NOT EXISTS" clause is specified.
+
+### Syntax
+
+CREATE CHANNEL **channel_name** [IF NOT EXISTS]
+
+### Privileges
+
+```
+PUBSUBCREATE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> CREATE CHANNEL channel1 IF NOT EXISTS
+OK
+```
+
+## LIST CHANNELS
+
+The LIST CHANNELS command returns a list of previously created channels that can be used to exchange messages. This command returns only channels created with the CREATE CHANNEL command.
+You can also subscribe to a table to receive all table-related events (INSERT, UPDATE, and DELETE). The LIST TABLES PUBSUB return a rowset compatible with the rowset returned by the LIST CHANNELS command.
+
+### Syntax
+
+LIST CHANNELS
+
+### Privileges
+
+```
+PUBSUB
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a single **chname** column that returns all channels created for Pub/Sub.
+
+### Example
+
+```bash
+> LIST CHANNELS
+----------|
+ chname   |
+----------|
+ channel1 |
+ channel2 |
+ channel3 |
+ channel4 |
+ channel5 |
+ channel6 |
+----------|
+```
+
+## LISTEN
+
+The LISTEN command is used to start receiving notifications for a given channel/table.
+Nothing is done if the current connection is registered as a listener for this notification channel.
+The optional DATABASE parameter is ignored if the TABLE flag is not specified.
+
+The optional TABLE flag specifies that you want to receive notification for a given table. The DATABASE parameter can be used to identify which database to use (or the current database will be used).
+LISTENING to a table means you'll receive notification about all the write operations in that table.
+In the case of TABLE, the channel_name can be *, which means you'll start receiving notifications from all the tables inside the specified database.
+
+### Syntax
+
+LISTEN [TABLE] **channel_name** [DATABASE **database_name**]
+
+### Privileges
+
+```
+SUB
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> LISTEN channel1
+OK
+```
+## NOTIFY
+
+The NOTIFY command sends an optional payload (usually a string) to a specified channel_name. If no payload is specified, then an empty notification is sent.
+
+### Syntax
+
+NOTIFY **channel_name** [**payload_value**]
+
+### Privileges
+
+```
+PUB
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> NOTIFY channel1 "Hello World"
+OK
+```
+
+## REMOVE CHANNEL
+
+The REMOVE CHANNEL command completely deletes a previously created channel.
+
+### Syntax
+
+REMOVE CHANNEL **channel_name**
+
+### Privileges
+
+```
+PUBSUBCREATE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE CHANNEL channel1
+OK
+```
+
+## UNLISTEN
+
+The UNLISTEN command is used to stop receiving notifications about a particular channel/table.
+In the case of TABLE, the channel_name can be *, meaning you'll stop receiving notifications from all the tables inside the current database.
+The DATABASE parameter can be used to identify which database to use (or the current database will be used).
+The optional DATABASE parameter is ignored if the TABLE flag is not specified.
+
+### Syntax
+
+UNLISTEN [TABLE] **channel_name** [DATABASE **database_name**]
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> UNLISTEN channel1
+OK
+```

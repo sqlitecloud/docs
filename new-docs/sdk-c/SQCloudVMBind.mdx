@@ -1,0 +1,68 @@
+---
+title: "SQCloudVMBind"
+description: SQCloud VM C/C++ Interface SQCloudVMBind
+---
+
+```c
+bool SQCloudVMBindDouble (SQCloudVM *vm, int index, double value);
+bool SQCloudVMBindInt (SQCloudVM *vm, int index, int value);
+bool SQCloudVMBindInt64 (SQCloudVM *vm, int index, int64_t value);
+bool SQCloudVMBindNull (SQCloudVM *vm, int index);
+bool SQCloudVMBindText (SQCloudVM *vm, int index, const char *value, int32_t len);
+bool SQCloudVMBindBlob (SQCloudVM *vm, int index, void *value, int32_t len);
+bool SQCloudVMBindZeroBlob (SQCloudVM *vm, int index, int64_t len);
+```
+
+### Description
+Bind a value to a compiled SQL statement.
+In the SQL statement text input to [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile), literals may be replaced by a parameter that matches one of following templates:
+* ?
+* ?NNN
+* :VVV
+* @VVV
+* $VVV
+
+In the templates above, NNN represents an integer literal, and VVV represents an alphanumeric identifier. The values of these parameters can be set using the SQCloudVMBind*() routines defined here.
+These functions resemble the [sqlite3_bind_*](https://www.sqlite.org/c3ref/bind_blob.html) SQLite APIs. 
+
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+* **index**: Represents the index of the SQL parameter to be set. The leftmost SQL parameter has an index of 1. When the same named SQL parameter is used more than once, second and subsequent occurrences have the same index as the first occurrence. The index for named parameters can be looked up using the [SQCloudVMBindParameterIndex](/docs/sdk/c/sqcloudvmbindparameterindex) API if desired. The index for "?NNN" parameters is the value of NNN.
+* **value**: The the value to bind to the parameter.
+* **len**: The number of bytes in the parameter. To be clear: the value is the number of bytes in the value, not the number of characters. 
+
+### Return value
+If the value is successfully bound without any errors, the function will return `true`. If an error occurs during the binding process, the function will return `false`.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1, col2, col3, col4) VALUES (?1, ?2, ?3, ?4);", -1, NULL);
+
+    // bind values
+    bool r1 = SQCloudVMBindText(vm, 1, "Hello World", );
+    bool r2 = SQCloudVMBindInt(vm, 2, 42);
+    bool r3 = SQCloudVMBindDouble(vm, 3, 3.1415);
+    bool r4 = SQCloudVMBindNull(vm, 4);
+
+    // ...
+}
+```

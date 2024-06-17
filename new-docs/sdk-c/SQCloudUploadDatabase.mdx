@@ -1,0 +1,78 @@
+---
+title: "SQCloudUploadDatabase"
+description: SQCloud Basic C/C++ Interface SQCloudUploadDatabase
+---
+
+```c
+bool SQCloudUploadDatabase (SQCloudConnection *connection, const char *dbname, const char *key, void *xdata, int64_t dbsize,
+                            int (*xCallback)(void *xdata, void *buffer, uint32_t *blen, int64_t ntot, int64_t nprogress));
+```
+
+### Description
+Initiate an SQLite database upload to an already connected SQLite Cloud node. 
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **dbname**: the name of the database on server-side once uploaded will be completed
+* **key**: encryption database key (if any)
+* **xdata**: a pointer to an opaque datatype that will be passed as-is to the callback
+* **dbsize**: original database size
+* **xcallback**: callback that will be automatically called to read from the input database file
+
+### Return value
+`true` if upload is succesfully completed.
+
+### Example
+```c
+
+#define DATABASE_PATH "/full_path_to/database.sqlite"
+
+// convenient struct to be used with SQCloudUploadDatabase
+typedef struct {
+    void            *ptr;
+    int             fd;
+} SQCloudData;
+
+static int do_internal_read_cb (void *xdata, void *buffer, uint32_t *blen, int64_t ntot, int64_t nprogress) {
+    int fd = ((SQCloudData *)xdata)->fd;
+    
+    ssize_t nread = read(fd, buffer, (size_t)*blen);
+    if (nread == -1) return -1;
+    
+    if (nread == 0) printf("UPLOAD COMPLETE\n\n");
+    else printf("%.2f%% ", ((double)(nprogress+nread) / (double)ntot) * 100.0);
+    
+    *blen = (uint32_t)nread;
+    return 0;
+}
+
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // open file in read-only mode (database must not be in use)
+    int fd = file_open_read(DATABASE_PATH);
+    if (fd < 0) {
+        printf("Unable to open database file %s\n", DATABASE_PATH);
+        return false;
+    }
+    
+    // get file size (to have a nice progress stat)
+    int64_t dbsize = file_size(fd);
+    if (dbsize < 0) dbsize = 0;
+
+    SQCloudData data = {.ptr = NULL, .fd = fd};
+    bool result = SQCloudUploadDatabase(conn, "database.sqlite", NULL, (void *)&data, dbsize, do_internal_read_cb);
+    close(fd);
+}
+```

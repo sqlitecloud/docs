@@ -1,0 +1,40 @@
+---
+title: "SQCloudResultInt64"
+description: SQCloud Basic C/C++ Interface SQCloudResultInt64
+---
+
+```c
+int64_t SQCloudResultInt64 (SQCloudResult *result);
+```
+
+### Description
+If the result of the function [SQCloudResultType](/docs/sdk/c/sqcloudresulttype) is RESULT_INTEGER then use this function to retrieve an Int64 value.
+
+### Parameters
+* **result**: A valid SQCloudResult pointer returned by an SQCloud function.
+
+### Return value
+An `int64_t` value.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // execute a sample command
+    SQCloudResult *r = SQCloudExec(conn, "GET INFO process_id;");
+    int64_t value = SQCloudResultInt64(r);
+    SQCloudResultFree(r);
+}
+```

@@ -1,0 +1,377 @@
+---
+title: Settings Commands
+description: Settings commands are used to manage settings in SQLite Cloud.
+---
+## GET CLIENT KEY
+
+The GET CLIENT KEY command retrieves a single specific information about a **keyname**.
+
+### Syntax
+
+GET CLIENT KEY **keyname**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **keyname**.
+
+### Example
+
+```bash
+> GET CLIENT KEY IP
+127.0.0.1
+
+> GET CLIENT KEY COMPRESSION
+1
+```
+
+## GET DATABASE KEY
+
+Use this command to retrieve a single value associated with **database_name** and **keyname**.
+
+### Syntax
+
+GET DATABASE **database_name** KEY **keyname**
+
+### Privileges
+
+```
+PRAGMA
+```
+
+### Return
+
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the requested value.
+
+### Example
+
+```bash
+> GET DATABASE mediastore.sqlite KEY key1
+value1
+```
+
+## GET KEY
+
+The GET KEY command retrieves a single specific setting about a **keyname**.
+
+### Syntax
+
+GET KEY **keyname**
+
+### Privileges
+
+```
+SETTINGS
+```
+
+### Return
+
+A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **keyname**.
+
+### Example
+
+```bash
+> GET KEY max_chunk_size
+307200
+
+> GET KEY non_existing_key
+NULL
+```
+
+## LIST CLIENT KEYS
+
+The LIST CLIENT KEYS command retrieves information and settings specific to the current connection. Use the GET CLIENT KEY **key** command to retrieve specific information.
+
+### Syntax
+
+LIST CLIENT KEYS
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: client key
+* **value**: client value
+
+### Example
+
+```bash
+> LIST CLIENT KEYS
+-----------------|--------------------------------------|
+ key             | value                                |
+-----------------|--------------------------------------|
+ COMPRESSION     | 1                                    |
+ ID              | 1                                    |
+ IP              | 127.0.0.1                            |
+ MAXDATA         | 0                                    |
+ MAXROWS         | 0                                    |
+ MAXROWSET       | 0                                    |
+ NOBLOB          | 0                                    |
+ NONLINEARIZABLE | 0                                    |
+ SQLITE          | 0                                    |
+ UUID            | 374c7c93-c8bb-4ba8-ac19-26edb78fc1cc |
+ ZEROTEXT        | 0                                    |
+-----------------|--------------------------------------|
+```
+
+## LIST KEYS
+
+The LIST KEYS command retrieves the server settings.
+Some of the returned settings are read-only and cannot be set. To retrieve more information about the settings, use the DETAILED flag.
+All the KEYS in the settings database are automatically distributed all over the cluster.
+To retrieve a single specific information, use the GET KEY **key** command.
+
+### Syntax
+
+LIST KEYS [DETAILED] [NOREADONLY]
+
+### Privileges
+
+```
+SETTINGS
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: settings key
+* **value**: settings value
+* **default_value**: default value
+* **readonly**: 1 if key is read-only
+* **description**: key description
+
+The additional **default_value**, **readonly** and **description** columns are returned only if the DETAILED flag is used.
+
+### Example
+
+```bash
+> LIST KEYS
+---------------------------------|-------------------------------|
+ key                             | value                         |
+---------------------------------|-------------------------------|
+ autocheckpoint                  | 1000                          |
+ autocheckpoint_full             | 0                             |
+ backlog                         | 512                           |
+ backup_node_id                  | 0                             |
+ base_path                       | /Users/marco/SQLiteCloud/data |
+ client_compression              | 1                             |
+ client_timeout                  | 0                             |
+ cluster_address                 | NULL                          |
+---------------------------------|-------------------------------|
+
+> LIST KEYS DETAILED
+---------------------------------|-------------------------------|---------------|----------|--------------------------------------------------------------------------|
+ key                             | value                         | default_value | readonly | description                                                              |
+---------------------------------|-------------------------------|---------------|----------|--------------------------------------------------------------------------|
+ autocheckpoint                  | 1000                          | 1000          | 0        | Number of frames in the WAL file above which a checkpoint is run.        |
+ autocheckpoint_full             | 0                             | 0             | 0        | Number of frames in the WAL file above which a full checkpoint is run.   |
+ backlog                         | 512                           | 512           | 0        | Size of the backlog queue for the socket listening function.             |
+ base_path                       | /Users/marco/SQLiteCloud/data | NULL          | 1        | Full path to the main data directory.                                    |
+ client_compression              | 1                             | 0             | 0        | Custom key set by the user.                                              |
+ client_timeout                  | 0                             | 0             | 0        | Maximum time (in seconds) to allow a connected client to stay connected. |
+ --------------------------------|-------------------------------|---------------|----------|--------------------------------------------------------------------------|
+ 
+```
+
+## REMOVE CLIENT KEY
+
+The REMOVE CLIENT KEY command is used to reset to a default value a **keyname**
+
+### Syntax
+
+REMOVE CLIENT KEY **keyname**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE CLIENT KEY COMPRESSION
+OK
+```
+
+## REMOVE DATABASE KEY
+
+Use this command to permanently remove **keyname** from the list of settings for the database **database_name**.
+
+### Syntax
+
+REMOVE DATABASE **database_name** KEY **keyname**
+
+### Privileges
+
+```
+PRAGMA
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE DATABASE mediastore.sqlite KEY key1
+OK
+```
+
+## REMOVE KEY
+
+The REMOVE KEY command permanently deletes a **keyname** from the settings database file (the change is automatically distributed on the cluster). Removing a previously set **keyname** value usually means restoring its default value.
+
+### Syntax
+
+REMOVE KEY **keyname**
+
+### Privileges
+
+```
+SETTINGS
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE KEY max_chunk_size
+OK
+```
+
+## SET CLIENT KEY
+
+The SET CLIENT KEY command sets a **keyname** to a specific **keyvalue**.
+
+### Syntax
+
+SET CLIENT KEY **keyname** TO **keyvalue**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET CLIENT KEY COMPRESSION TO 0
+OK
+```
+
+## SET DATABASE KEY
+
+Use this command to set a specific key/value setting to **database_name**.
+
+You can use any key/value, but some keys are reserved for a special purpose:
+* use_concurrent_transactions: set to 1 or 0 to enable/disable CONCURRENT transaction for the database
+* DATABASE_KEY: set to the encryption key used to decrypt the database file. Note that this is not equivalent to encrypting a database. This value must be used to set an encryption key for an already encrypted database.
+
+### Syntax
+
+SET DATABASE **database_name** KEY **keyname** TO **keyvalue**
+
+### Privileges
+
+```
+PRAGMA
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET DATABASE mediastore.sqlite KEY key1 VALUE value1
+OK
+```
+
+## SET KEY
+
+The SET KEY command sets or updates a **keyname** to a specific **keyvalue**. Once set, the server immediately uses the updated value (and automatically distributes it on the cluster).
+
+### Syntax
+
+SET KEY **keyname** TO **keyvalue**
+
+### Privileges
+
+```
+SETTINGS
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET KEY max_chunk_size TO 524288
+OK
+```
+
+## LIST ENV
+
+The LIST ENV command lists all the environment variables for the project.
+
+### Syntax
+```
+LIST ENV
+```
+
+### Description
+
+## GET ENV
+
+The GET ENV command retrieves the value of a specific environment variable.
+
+### Syntax
+```
+GET ENV key
+```
+
+## SET ENV
+
+The SET ENV command sets the value of an environment variable.
+
+### Syntax
+```
+SET ENV key VALUE value
+```
+### Description
+
+## REMOVE ENV
+
+The REMOVE ENV command removes the given environment variable.
+
+### Syntax
+```
+REMOVE ENV key
+```

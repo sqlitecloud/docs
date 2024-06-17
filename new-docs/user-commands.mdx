@@ -1,0 +1,247 @@
+---
+title: User Commands
+description: Use these commands to manage the SQLite Cloud users.
+---
+## CREATE USER
+
+The CREATE USER command adds a new user **username** with a specified **password** to the server. During user creation, you can also pass a comma-separated list of roles to apply to that user. The DATABASE and TABLE optional arguments can restrict the particular ROLE to a specific resource. If ROLE is omitted then DATABASE and TABLE parameters are ignored.
+
+### Syntax
+
+CREATE USER **username** PASSWORD **password** [ROLE **role_name** [DATABASE **database_name**] [TABLE **table_name**]]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> CREATE USER user1 PASSWORD gdfhjs76fdgshj
+OK
+```
+
+## DISABLE USER
+
+The DISABLE USER command disables a specified username from the system (it does not remove it).
+After command execution, the user specified in the **username** argument can no longer log into the system.
+
+### Syntax
+
+DISABLE USER **username**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> DISABLE USER user1
+OK
+```
+
+## ENABLE USER
+
+The ENABLE USER command re-enables a previously disabled user from the system. Once re-enabled, that username can log in again.
+
+### Syntax
+
+ENABLE USER **username**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> ENABLE USER user1
+OK
+```
+
+## GET USER
+
+The GET USER command returns the username of the currency-connected user.
+
+### Syntax
+
+GET USER
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) set to the current username.
+
+### Example
+
+```bash
+> GET USER
+admin
+```
+
+## LIST USERS
+
+The LIST USERS command retrieves a list of all users created on the server. The WITH ROLES argument also adds a column with a list of roles associated with each username. To restrict the list to all the users that get access to a specific database and/or table you can use the DATABASE and/or TABLE arguments.
+
+### Syntax
+
+LIST USERS [WITH ROLES] [DATABASE **database_name**] [TABLE **table_name**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **username**: user name
+* **enabled**: 1 enabled, 0 disabled
+* **roles**: list of roles
+* **databasename**: database name
+* **tablename**: table name
+
+The ** roles**, ** databasename** and ** tablename** columns are returned only when the WITH ROLES flag is used.
+
+### Example
+
+```bash
+> LIST USERS
+----------|---------|
+ username | enabled |
+----------|---------|
+ admin    | 1       |
+----------|---------|
+
+> LIST USERS WITH ROLES
+----------|---------|-------|--------------|-----------|
+ username | enabled | roles | databasename | tablename |
+----------|---------|-------|--------------|-----------|
+ admin    | 1       | ADMIN | *            | *         |
+----------|---------|-------|--------------|-----------|
+```
+
+## REMOVE USER
+
+The REMOVE USER command removes the user specified in the **username** parameter from the system. After command execution, the **username** cannot log in to the server. Admin users cannot be removed from the system.
+
+### Syntax
+
+REMOVE USER **username**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE USER user1
+OK
+```
+
+## RENAME USER
+
+The RENAME USER command updates an existing username to a new one.
+
+### Syntax
+
+RENAME USER **username** TO **new_username**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> RENAME USER user1 TO user2
+OK
+```
+
+## SET MY PASSWORD
+
+The SET MY PASSWORD command changes the password for the currently connected user.
+
+### Syntax
+
+SET MY PASSWORD **password**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET MY PASSWORD foo
+OK
+```
+
+## SET PASSWORD
+
+The SET PASSWORD command sets or changes the password for an existing username.
+
+### Syntax
+
+SET PASSWORD **password** USER **username**
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SET PASSWORD uweri76878dsa USER user1
+OK
+```
