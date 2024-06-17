@@ -1,7 +1,6 @@
 import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
-  // no header
 	{ title: "", type: "primary" },
   // first header
 	{ title: "Getting Started", type: "secondary" },
@@ -11,10 +10,9 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Quick Start Guides", type: "inner", level: 0},
   { title: "React", filePath: "new-docs/quick-start-react", type: "inner", level: 1 },
 
-  // second header
   { title: "Database" , type: "secondary" },
-  // { title: "Fundamentals", type: "inner", level: 0 },
-  // { title: "Connecting", type: "inner", level: 1 },
+  { title: "Fundamentals", type: "inner", level: 0 },
+  { title: "Connecting", type: "inner", level: 1 },
   // { title: "Importing data", type: "inner", level: 1 },
   // { title: "Transactions", type: "inner", level: 1 },
   // { title: "Backups", type: "inner", level: 0 },
@@ -22,17 +20,15 @@ const sidebarNav: SidebarNavStruct = [
   // { title: "Partitioning", type: "inner", level: 0 },
   // { title: "Extensions", type: "inner", level: 0 },
 
-  // third header
   { title: "Platform" , type: "secondary" },
-  // { title: "Overview", type: "inner", level: 0 },
-  // { title: "Scaling", type: "inner", level: 0 },
+  { title: "Overview", type: "inner", level: 0 },
+  { title: "Scaling", type: "inner", level: 1 },
   // { title: "Security", type: "inner", level: 0 },
   // { title: "Edge Functions", type: "inner", level: 0 },
   // { title: "Webhooks", type: "inner", level: 0 },
   // { title: "Pub/Sub", type: "inner", level: 0 },
   // { title: "Query Analyzer", type: "inner", level: 0 },
 
-  // fourth header
   { title: "Reference" , type: "secondary" },
   { title: "Server-side Commands", type: "inner", filePath: "new-docs/server-side-commands", level: 0 },
   { title: "API Keys", filePath: "new-docs/api-key-commands", type: "inner", level: 1 },
