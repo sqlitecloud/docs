@@ -1,0 +1,23 @@
+name: docsearch-action
+
+on:
+  push:
+    branches:
+      - main
+      - stage
+
+jobs:
+  docsearch:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sqlitecloud/docsearch-action@v1
+        with:
+          project-string: ${{ secrets.PROJECT_STRING }}
+          database: documentation.sqlite
+          strip-astro-header: true
+          strip-md-titles: true
+          strip-jsx: true
+          strip-html: true
