@@ -48,19 +48,16 @@ return {
 ```
 
 ### Storing and Accessing Environment Variables
-Environment variables can be stored in either the server settings file, database settings file, or stored directly in your database. 
-
+Environment variables can be accessed and stored with the ENV command. ENV variables are stored in the server settings file and are project-specific.
 Use the following commands to set and read values in your server settings file:
-* [SET KEY](https://docs.sqlitecloud.io/docs/commands/set-key) keyname TO keyvalue
-* [GET KEY](https://docs.sqlitecloud.io/docs/commands/get-key) keyname
-* [REMOVE KEY](https://docs.sqlitecloud.io/docs/commands/remove-key) keyname
-* [LIST KEYS](https://docs.sqlitecloud.io/docs/commands/list-keys)
 
-Use the following commands to set and read values in your database-specific settings file:
-* [SET DATABASE](https://docs.sqlitecloud.io/docs/commands/set-database) database_name KEY keyname TO keyvalue
-* [GET DATABASE](https://docs.sqlitecloud.io/docs/commands/get-database-key) database_name KEY keyname 
-* [REMOVE DATABASE](https://docs.sqlitecloud.io/docs/commands/remove-database-key) database_name KEY keyname
-* LIST DATABASE database_name KEYS
+* [LIST ENV](https://docs.sqlitecloud.io/docs/list-env)
+* [SET ENV](https://docs.sqlitecloud.io/docs/set-env) key VALUE value
+* [GET ENV](https://docs.sqlitecloud.io/docs/get-env) key
+* [REMOVE ENV](https://docs.sqlitecloud.io/docs/remove-env) key
+
+You can also add environment variables in the UI by navigating to the "Environment Variables" section and clicking the "Create" button.
+
 
 ### Handling Errors
 In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
@@ -71,7 +68,7 @@ In case of error we return an HTTP error code and a JSON with the error message.
 
 ```js
 // Get secret from database
-const slackWebhookEndpoint = await connection.sql`GET KEY slack_webhook_endpoint`;
+const slackWebhookEndpoint = await connection.sql`GET ENV slack_webhook_endpoint`;
 
 // Get record sent in body via webhook
 const content = request.data;

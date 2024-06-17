@@ -95,6 +95,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: "commands/set-client-key", type: "inner", level: 0 },
 	{ filePath: "commands/set-database", type: "inner", level: 0 },
 	{ filePath: "commands/set-key", type: "inner", level: 0 },
+	{ filePath: "commands/env-commands", type: "inner", level: 0 },
 	{ title: "USER", type: "secondary" },
 	{ filePath: "commands/create-user", type: "inner", level: 0 },
 	{ filePath: "commands/disable-user", type: "inner", level: 0 },
