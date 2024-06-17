@@ -1,26 +1,34 @@
 ---
-title: Weblite
-description: With Weblite, adding robust database capabilities to your site is as simple as adding Google Analytics.
+title: Weblite - SQLite Cloud
+description: Learn more about auto-generated RESTful APIs with Weblite in SQLite Cloud.
 ---
 
-With Weblite, adding robust database capabilities to your site is as simple as adding Google Analytics.
-Our technology simplifies integration to just one include tag in your HTML header.
-You retain full control over rendering using easy div tags for customization.
-Whether you're a pro developer or a beginner, Weblite enables you to unleash dynamic data management without the headaches.
+## Overview
+Weblite is an auto-generated RESTful API layer that lets you interact with your SQLite Cloud databases and edge functions via HTTP/JSON request/responses.
 
-To create a Weblite, start by writing a query in the [Console](/docs/introduction/console). The query can be a simple `SELECT * FROM artists` statement, which does not require any parameter, to a more complex `SELECT * FROM artists WHERE name LIKE ?1;`, which requires a parameter to be specified during execution.
+Weblite is designed to be lightweight, scalable, and flexible. It is similar to PostgREST, but does not require any installation or setup.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_console.png)
 
-Once satisfied with your query, press the "+ Weblite" button.
-A dialog will appear with the script to add to your web page and other details like the slug name (optional).
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_create.png)
+## Features
+#### Auto-generated
+- **Seamless Integration**: Weblite integrates directly into your SQLite Cloud, requiring no additional installations. It runs on your own nodes, ensuring that your environment is fully controlled and consistent with your infrastructure.
+- **Automatic Updates**: Changes made to your database schema are instantly available through the API, allowing for dynamic application development without downtime.
 
-The Weblite section lists all the Weblite created so far.
+#### Stateless and Scalable
+- **High Performance**: Weblite is designed to be as scalable as your cluster. The performance is only limited by your node’s capabilities and configuration, supporting extensive scalability without traditional bottlenecks.
+- **Stateless Architecture**: Ensures that each API call is independent, enhancing reliability and performance. For transaction-like functionality, developers can utilize [Edge Functions](/introduction/edge_functions) to encapsulate custom logic.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_list.png)
+#### Secure and Developer-Friendly
+- **Edge Functions**: Write server-side logic and directly within your API, enabling the creation of complex backend functionalities seamlessly integrated with your database operations.
+- **Developer Tools**: Includes built-in commands and support for any SQL statement and [SQLite Cloud command](https://docs.sqlitecloud.io/docs/commands).
 
-To test a Webliste query, just press the SQL statement, and a new panel will enable you to add values to your parameter and check the result of your query.
+#### Fast and Efficient
+- **Rapid Development**: Start interacting with your database immediately using the auto-generated REST endpoints. Ideal for developing proofs of concept or hobby projects quickly.
+- **Enhanced Data Handling**: Supports all CRUD operations and allows for complex SQL queries and commands to be executed via the REST API
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_weblite_check.png)
+## Security
+While Weblite does not implement row-level security to focus on performance and stateless operations, it ensures data integrity and secure access through controlled endpoint exposure and secure API gateways.
+
+## Getting Started
+Navigate to the ""Development" section in the SQLite Cloud console. From here, you have access to all weblite endpoints and can start interacting with your database via HTTP/JSON requests.
