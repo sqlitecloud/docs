@@ -1,0 +1,47 @@
+---
+title: "SQCloudVMIsExplain"
+description: SQCloud VM C/C++ Interface SQCloudVMIsExplain
+---
+
+```c
+int SQCloudVMIsExplain (SQCloudVM *vm);
+```
+
+### Description
+The **SQCloudVMIsExplain** interface returns 1 if the prepared statement S is an EXPLAIN statement, or 2 if the statement S is an EXPLAIN QUERY PLAN. **SQCloudVMIsExplain** interface returns 0 if the statement is an ordinary statement or a NULL pointer. This function resembles the [sqlite3_stmt_isexplain](https://www.sqlite.org/c3ref/stmt_isexplain.html) SQLite API.
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+### Return value
+An `int` value representing if the original statement was an EXPLAIN.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCloudResult *type = SQCloudVMStep(vm);
+
+    // check if vm is explain
+    int rc = SQCloudVMIsExplain(vm);
+}
+```

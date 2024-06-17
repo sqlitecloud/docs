@@ -1,0 +1,49 @@
+---
+title: "SQCloudVMIsFinalized"
+description: SQCloud VM C/C++ Interface SQCloudVMIsFinalized
+---
+
+```c
+bool SQCloudVMIsFinalized (SQCloudVM *vm);
+```
+
+### Description
+The **SQCloudVMIsFinalized** interface returns true if the prepared statement bound to the vm has been stepped at least once using [SQCloudVMStep](/docs/sdk/c/sqcloudvmstep) but has neither run to completion nor been reset. This function resembles the [sqlite3_stmt_busy](https://www.sqlite.org/c3ref/stmt_busy.html) SQLite API.
+
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+A `bool` value that indicates if the vm is finalized.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCloudResult *type = SQCloudVMStep(vm);
+
+    // check if vm is finalized
+    bool rc = SQCloudVMIsFinalized(vm);
+}
+```
