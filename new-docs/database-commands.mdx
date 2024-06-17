@@ -3,11 +3,6 @@ title: Database Commands
 description: Database commands are used to manage databases, such as creating, removing, and listing databases.
 ---
 ## CREATE DATABASE
-### Syntax
-
-CREATE DATABASE **database_name** [KEY **encryption_key**] [ENCODING **encoding_value**] [PAGESIZE **pagesize_value**] [IF NOT EXISTS]
-
-### Description
 
 The CREATE DATABASE command physically creates a new SQLite database using the name specified in the database_name parameter. OK is returned if another database with the same name exists, and the clause IF NOT EXISTS is specified. Otherwise, the correct error is generated.
 
@@ -15,6 +10,10 @@ You can supply additional optional parameters to the command:
 * The KEY parameter creates a new AES-256 encrypted database with the encryption key specified in **encryption_key**.
 * The ENCODING parameter can specify the encoding of the newly created database (default is UTF-8). Allowed values are UTF-8, UTF-16, UTF-16le or UTF-16be. Once an encoding is set for a database, it cannot be changed.
 * The PAGESIZE parameter specifies the page size of the newly created database (at the time of writing, the default value is 4096). The page size must be a power of two between 512 and 65536 inclusive.
+
+### Syntax
+
+CREATE DATABASE **database_name** [KEY **encryption_key**] [ENCODING **encoding_value**] [PAGESIZE **pagesize_value**] [IF NOT EXISTS]
 
 ### Privileges
 
@@ -38,13 +37,12 @@ OK
 ```
 
 ## DECRYPT DATABASE
+
+The DECRYPT DATABASE command removes encryption from a previously AES-256 encrypted database.
+
 ### Syntax
 
 DECRYPT DATABASE **database_name**
-
-### Description
-
-The DECRYPT DATABASE command removes encryption from a previously AES-256 encrypted database.
 
 ### Privileges
 
@@ -64,14 +62,12 @@ OK
 ```
 
 ## DISABLE DATABASE
+
+Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connections.
+
 ### Syntax
 
 DISABLE DATABASE **database_name**
-
-
-### Description
-
-Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connections.
 
 ### Privileges
 
@@ -91,13 +87,12 @@ OK
 ```
 
 ## ENCRYPT DATABASE
+
+The ENCRYPT DATABASE command adds an AES-256 encryption to an existing database. If the database was previously encrypted with another key, it is re-encrypted with the new key. Rekeying requires that every database file page be read, decrypted, re-encrypted with the new key, then written out again. Consequently, rekeying can take a long time on a larger database.
+
 ### Syntax
 
 ENCRYPT DATABASE **database_name** KEY **encryption_key**
-
-### Description
-
-The ENCRYPT DATABASE command adds an AES-256 encryption to an existing database. If the database was previously encrypted with another key, it is re-encrypted with the new key. Rekeying requires that every database file page be read, decrypted, re-encrypted with the new key, then written out again. Consequently, rekeying can take a long time on a larger database.
 
 ### Privileges
 
@@ -118,13 +113,11 @@ OK
 
 ## GET DATABASE
 
+Use this command to retrieve information about the currently used database. **key** parameter can be ID, SIZE, and NAME (default if **key** is not specified).
+
 ### Syntax
 
 GET DATABASE **[key]**
-
-### Description
-
-Use this command to retrieve information about the currently used database. **key** parameter can be ID, SIZE, and NAME (default if **key** is not specified).
 
 ### Privileges
 
@@ -156,13 +149,11 @@ mediastore.sqlite
 
 ## LIST DATABASE KEYS
 
+The LIST DATABASE KEYS command returns a list of settings for the **database_name** database.
+
 ### Syntax
 
 LIST DATABASE **database_name** KEYS
-
-### Description
-
-The LIST DATABASE KEYS command returns a list of settings for the **database_name** database.
 
 ### Privileges
 
@@ -189,13 +180,12 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the 
 ```
 
 ## LIST DATABASES
+
+The LIST DATABASES command return information and statistics about the databases currently available on the server.
+
 ### Syntax
 
 LIST DATABASES [DETAILED]
-
-### Description
-
-The LIST DATABASES command return information and statistics about the databases currently available on the server.
 
 ### Privileges
 
@@ -242,13 +232,11 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with only
 
 ## LIST DATABASE CONNECTIONS
 
+The LIST DATABASE CONNECTIONS command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The **database_name** parameter can also be a database_id if the ID flag is specified.
+
 ### Syntax
 
 LIST DATABASE **database_name** CONNECTIONS [ID]
-
-### Description
-
-The LIST DATABASE CONNECTIONS command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The **database_name** parameter can also be a database_id if the ID flag is specified.
 
 ### Privileges
 
@@ -281,13 +269,12 @@ OK
 ```
 
 ## REMOVE DATABASE
+
+The REMOVE DATABASE command permanently deletes a database from the cluster.
+
 ### Syntax
 
 REMOVE DATABASE **database_name** [IF EXISTS]
-
-### Description
-
-The REMOVE DATABASE command permanently deletes a database from the cluster.
 
 ### Privileges
 
@@ -307,13 +294,12 @@ OK
 ```
 
 ## USE DATABASE
+
+The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent SQL statements.
+
 ### Syntax
 
 USE DATABASE **database_name**
-
-### Description
-
-The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent SQL statements.
 
 ### Privileges
 
@@ -333,20 +319,18 @@ OK
 ```
 
 ## UNUSE DATABASE
+
+The UNUSE DATABASE statement tells SQLite Cloud to close the connection with the currently used database (previously set by a USE DATABASE statement). No error is returned if the current connection has no database set.
+
 ### Syntax
 
 UNUSE DATABASE
-
-### Description
-
-The UNUSE DATABASE statement tells SQLite Cloud to close the connection with the currently used database (previously set by a USE DATABASE statement). No error is returned if the current connection has no database set.
 
 ### Privileges
 
 ```
 READWRITE
 ```
-
 
 ### Return
 

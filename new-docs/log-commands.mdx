@@ -3,11 +3,6 @@ title: Log Commands
 description: Log commands are used to retrieve the logs generated on the server side.
 ---
 ## LIST LOG
-### Syntax
-
-LIST LOG [FROM **start_date**] [TO **end_date**] [LEVEL **log_level**] [TYPE **log_type**] [ID] [LIMIT **count**] [CURSOR **cursorid**] [NODE **nodeid**]
-
-### Description
 
 The LIST LOG command is used to retrieve the logs generated on server side. Logs can contain a huge number of entries. That's the reason why this command has so many filter options.
 The FROM/TO dates restrict the query to a specific date range.
@@ -34,6 +29,10 @@ The ID option instructs the rowset to add the unique ID column to the rowset.
 The LIMIT option sets a maximum number of rows to return.
 The CURSOR option is used to paginate and navigate the rowset.
 The NODE argument forces the execution of the command to a specific node of the cluster.
+
+### Syntax
+
+LIST LOG [FROM **start_date**] [TO **end_date**] [LEVEL **log_level**] [TYPE **log_type**] [ID] [LIMIT **count**] [CURSOR **cursorid**] [NODE **nodeid**]
 
 ### Privileges
 

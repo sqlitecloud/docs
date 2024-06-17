@@ -4,8 +4,6 @@ description: These commands are used to analyze the performance of queries execu
 ---
 ## ANALYZER PLAN ID
 
-### Description
-
 The ANALYZER PLAN ID command is used to gather information about the indexes used in the query plan of a query execution. Usually a SCAN tablename entry in the detail column, indicates that no indexes are found and a full table scan must be performed. The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ### Syntax
@@ -35,15 +33,12 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with an a
 
 ## ANALYZER RESET
 
-### Description
-
 The ANALYZER RESET command resets the statistics about a specific query, a group of queries or a database. When the command is called with the ALL argument, it resets all the statistics.
 The NODE argument forces the execution of the command to a specific node of the cluster.
 
 ### Syntax
 
 ANALYZER RESET [ID **query_id**] [GROUPID **query_id**] [DATABASE **database_name**] [ALL] [NODE **nodeid**]
-
 
 ### Privileges
 
@@ -64,8 +59,6 @@ OK
 
 ## ANALYZER SUGGEST ID
 
-### Description
-
 The ANALYZER SUGGEST ID command analyzes a query_id and returns a suggestion about the optimal index to use to speed up that query.
 The PERCENTAGE argument reduces the number of rows to analyze.
 The APPLY argument writes the suggested index into the database automatically.
@@ -74,7 +67,6 @@ The NODE argument forces the execution of the command to a specific node of the 
 ### Syntax
 
 ANALYZER SUGGEST ID **query_id** [PERCENTAGE **percentage**] [APPLY] [NODE **nodeid**]
-
 
 ### Privileges
 
@@ -104,8 +96,6 @@ statement | type  | report                                                      
 ```
 
 ## LIST ANALYZER
-
-### Description
 
 The LIST ANALYZER command returns a rowset with the slowest queries performed on the connected server.
 The result of the LIST ANALYZER command can be further filtered using the GROUPID, DATABASE, and GROUPED options.

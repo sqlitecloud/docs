@@ -4,13 +4,6 @@ description: Backup-related commands in SQLite Cloud
 ---
 
 ## APPLY BACKUP SETTINGS
-
-### Syntax
-
-APPLY BACKUP SETTINGS
-
-### Description
-
 Several backup-related settings can be applied using the SET DATABASE KEY command.
 
 The following keys affect the backup settings:
@@ -18,7 +11,11 @@ The following keys affect the backup settings:
 * **backup_retention**: affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
 * **backup_snapshot_interval**: specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply.
 
-All the above settings are not immediately applied up-until an APPLY BACKUP SETTINGS command is executed.
+All the above settings are not immediately applied up until an APPLY BACKUP SETTINGS command is executed.
+
+### Syntax
+
+APPLY BACKUP SETTINGS
 
 ### Privileges
 
@@ -33,6 +30,10 @@ OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/mas
 
 ## LIST BACKUP SETTINGS
 
+The LIST BACKUP SETTINGS command retrieves detailed information about the settings applied to each database previously enabled for a backup.
+The `backup_retention` setting affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
+The `backup_snapshot_interval` specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval, a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
+
 ### Syntax
 
 LIST BACKUP SETTINGS
@@ -42,12 +43,6 @@ LIST BACKUP SETTINGS
 ```
 BACKUP
 ```
-
-### Description
-
-The LIST BACKUP SETTINGS command retrieves detailed information about the settings applied to each database previously enabled for a backup.
-The `backup_retention` setting affects the disk space needed to store backup information about a specific database. You can specify a `backup_retention` settings using values like 24h, 2.5h, or 2h45m.
-The `backup_snapshot_interval` specifies how often new snapshots will be created. This setting reduces the time to restore since newer snapshots will have fewer WAL frames to apply. Retention still applies to these snapshots. If you do not set a snapshot interval, a new snapshot will be created whenever retention is performed. Retention occurs every 24 hours by default.
 
 ### Return
 
@@ -77,19 +72,13 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the 
 ------------------------|---------|------------------|--------------------------|
 ```
 
-
----
-title: 
-description: The LIST BACKUPS DATABASE command retrieves detailed information about which backups are available for a specific database
----
 ## LIST BACKUPS DATABASE
-### Syntax
-LIST BACKUPS DATABASE **database_name**
-
-### Description
 
 The LIST BACKUPS DATABASE command retrieves detailed information about which backups are available for a specific database.
 SQLite Cloud backup is a continuous backup system based on LiteStream that uses S3 as a storage option and can also backup AES-256 encrypted databases.
+
+### Syntax
+LIST BACKUPS DATABASE **database_name**
 
 ### Privileges
 
@@ -139,13 +128,11 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the 
 
 ## LIST BACKUPS
 
+The LIST BACKUPS command returns a rowset containing information about which databases have enabled backup.
+
 ### Syntax
 
 LIST BACKUPS
-
-### Description
-
-The LIST BACKUPS command returns a rowset containing information about which databases have enabled backup.
 
 ### Privileges
 
@@ -174,12 +161,11 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a si
 ```
 
 ## RESTORE BACKUP DATABASE
-### Syntax
-RESTORE BACKUP DATABASE **database_name** [GENERATION **generation**] [INDEX **index**] [TIMESTAMP **timestamp**]
-
-### Description
 
 Starting from the information returned by the `LIST BACKUP DATABASE` command, you can restore a database with the RESTORE BACKUP DATABASE command. During a RESTORE, the database **database_name** will not be available. The TIMESTAMP option is usually used to restore a specific database back in time, but the GENERATION and INDEX options can also be used.
+
+### Syntax
+RESTORE BACKUP DATABASE **database_name** [GENERATION **generation**] [INDEX **index**] [TIMESTAMP **timestamp**]
 
 ### Return
 

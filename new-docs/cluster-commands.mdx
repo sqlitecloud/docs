@@ -3,20 +3,17 @@ title: Cluster Commands
 description: Cluster commands are used to manage the cluster environment, such as listing nodes, getting the leader node, and transferring leadership to a specific node.
 ---
 ## GET LEADER
+In a cluster environment, the GET LEADER command returns the IP address and port of the Raft leader node. If the ID parameter is specified, then the nodeID of the leader node is returned.
+
 ### Syntax
 
 GET LEADER [ID]
-
-### Description
-
-In a cluster environment, the GET LEADER command returns the IP address and port of the Raft leader node. If the ID parameter is specified, then the nodeID of the leader node is returned.
 
 ### Privileges
 
 ```
 CLUSTERADMIN, CLUSTERMONITOR
 ```
-
 
 ### Return
 
@@ -33,18 +30,13 @@ If the ID parameter is specified then the [Integer](https://github.com/sqliteclo
 3
 ```
 
----
-title: 
-description: The LIST NODES command returns a rowset with information about all the nodes that compose the cluster environment
----
 ## LIST NODES
+
+The LIST NODES command returns a rowset with information about all the nodes that compose the cluster environment. In addition to static information, this command also reports up-to-date information about the Raft status of each node.
+
 ### Syntax
 
 LIST NODES
-
-### Description
-
-The LIST NODES command returns a rowset with information about all the nodes that compose the cluster environment. In addition to static information, this command also reports up-to-date information about the Raft status of each node.
 
 ### Privileges
 
@@ -76,11 +68,11 @@ A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the 
 ----|--------------------------|---------------------------|----------|-----------|-------|---------------------|
 
 ```
----
-title: 
-description: The TRANSFER LEADERSHIP TO NODE command is rarely used (debugging purposes), but it can force Raft to change its leader node to a specific nodeid.
----
+
 ## TRANSFER LEADERSHIP TO NODE
+
+The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid. The leader node is responsible for all the write operations, so it is wise to force the most powerful node to be the leader of a Raft cluster.
+
 ### Syntax
 
 TRANSFER LEADERSHIP TO NODE **nodeid**
@@ -90,10 +82,6 @@ TRANSFER LEADERSHIP TO NODE **nodeid**
 ```
 CLUSTERADMIN
 ```
-
-### Description
-
-The TRANSFER LEADERSHIP TO NODE command is rarely used (primarily for debugging purposes), but it can force Raft to change its leader node to a specific nodeid. The leader node is responsible for all the write operations, so it is wise to force the most powerful node to be the leader of a Raft cluster.
 
 ### Return
 
@@ -111,4 +99,3 @@ OK
 > GET LEADER ID
 3
 ```
-

@@ -41,7 +41,7 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Plugins",filePath: "new-docs/plugin-commands", type: "inner", level: 1 },
   { title: "Privileges", filePath: "new-docs/privilege-commands", type: "inner", level: 1 },
   { title: "Pub/Sub", filePath: "new-docs/pub-sub-commands", type: "inner", level: 1 },
-  // { title: "Query Analyzer", type: "inner", level: 1 },
+  { title: "Query Analyzer", filePath: "new-docs/query-analyzer-commands", type: "inner", level: 1 },
   // { title: "Roles", type: "inner", level: 1 },
   // { title: "Settings", type: "inner", level: 1 },
   // { title: "User", type: "inner", level: 1 },
