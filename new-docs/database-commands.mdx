@@ -1,0 +1,363 @@
+---
+title: Database Commands
+description: Database commands are used to manage databases, such as creating, removing, and listing databases.
+---
+## CREATE DATABASE
+### Syntax
+
+CREATE DATABASE **database_name** [KEY **encryption_key**] [ENCODING **encoding_value**] [PAGESIZE **pagesize_value**] [IF NOT EXISTS]
+
+### Description
+
+The CREATE DATABASE command physically creates a new SQLite database using the name specified in the database_name parameter. OK is returned if another database with the same name exists, and the clause IF NOT EXISTS is specified. Otherwise, the correct error is generated.
+
+You can supply additional optional parameters to the command:
+* The KEY parameter creates a new AES-256 encrypted database with the encryption key specified in **encryption_key**.
+* The ENCODING parameter can specify the encoding of the newly created database (default is UTF-8). Allowed values are UTF-8, UTF-16, UTF-16le or UTF-16be. Once an encoding is set for a database, it cannot be changed.
+* The PAGESIZE parameter specifies the page size of the newly created database (at the time of writing, the default value is 4096). The page size must be a power of two between 512 and 65536 inclusive.
+
+### Privileges
+
+```
+CREATE_DATABASE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> CREATE DATABASE test.sqlite
+OK
+
+> USE DATABASE test.sqlite
+OK
+
+```
+
+## DECRYPT DATABASE
+### Syntax
+
+DECRYPT DATABASE **database_name**
+
+### Description
+
+The DECRYPT DATABASE command removes encryption from a previously AES-256 encrypted database.
+
+### Privileges
+
+```
+CREATE_DATABASE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> DECRYPT DATABASE test.sqlite
+OK
+```
+
+## DISABLE DATABASE
+### Syntax
+
+DISABLE DATABASE **database_name**
+
+
+### Description
+
+Use this command to disable a database. Established connections will continue to have that database in use. The disabled database affects only new connections.
+
+### Privileges
+
+```
+DBADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> DISABLE DATABASE test.sqlite
+OK
+```
+
+## ENCRYPT DATABASE
+### Syntax
+
+ENCRYPT DATABASE **database_name** KEY **encryption_key**
+
+### Description
+
+The ENCRYPT DATABASE command adds an AES-256 encryption to an existing database. If the database was previously encrypted with another key, it is re-encrypted with the new key. Rekeying requires that every database file page be read, decrypted, re-encrypted with the new key, then written out again. Consequently, rekeying can take a long time on a larger database.
+
+### Privileges
+
+```
+CREATE_DATABASE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> ENCRYPT DATABASE test.sqlite KEY adkkhadsj-uidsaoiudsa-hdsadsakj
+OK
+```
+
+## GET DATABASE
+
+### Syntax
+
+GET DATABASE **[key]**
+
+### Description
+
+Use this command to retrieve information about the currently used database. **key** parameter can be ID, SIZE, and NAME (default if **key** is not specified).
+
+### Privileges
+
+```
+HOSTADMIN
+```
+
+### Return
+
+An [Integer](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)  if **key** is ID or SIZE.
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)  if **key** is NAME.
+
+### Example
+
+```bash
+> GET DATABASE ID
+9
+
+> GET DATABASE SIZE
+921600
+
+> GET DATABASE NAME
+mediastore.sqlite
+
+> GET DATABASE
+mediastore.sqlite
+
+```
+
+## LIST DATABASE KEYS
+
+### Syntax
+
+LIST DATABASE **database_name** KEYS
+
+### Description
+
+The LIST DATABASE KEYS command returns a list of settings for the **database_name** database.
+
+### Privileges
+
+```
+PRAGMA
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: database key
+* **value**:database value
+
+### Example
+
+```bash
+> LIST DATABASE mediastore.sqlite KEYS
+-----|-------|
+ key | value |
+-----|-------|
+ k1  | v1    |
+-----|-------|
+
+```
+
+## LIST DATABASES
+### Syntax
+
+LIST DATABASES [DETAILED]
+
+### Description
+
+The LIST DATABASES command return information and statistics about the databases currently available on the server.
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with only the column **name** if the DETAILED flag is omitted, otherwise several other columns:
+* **name**: database name
+* **size**: database size (in bytes)
+* **connections**: number of clients connected to the database
+* **encryption**: encryption algorithm (if any)
+* **backup**: 1 if database has backup enabled
+* **nread**: number of read operations
+* **nwrite**: number of write operations
+* **inbytes**: number of bytes received
+* **outbytes**: number of bytes sent
+* **fragmentation**: a number between 0 and 1 that represents the database fragmentation
+* **pagesize**: database default page size
+* **encoding**: database default encoding
+* **status**: database status (1 = OK, 2 = DISABLED, 3 = MAINTENANCE, 4 = ERROR)
+
+### Example
+
+```bash
+> LIST DATABASES DETAILED
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+ name                     | size      | connections | encryption | backup | nread | nwrite | inbytes | outbytes | fragmentation | pagesize | encoding | status |
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+ 555.sqlite               | 104992768 | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ cli-test-1.sqlite        | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ cli-test-2.sqlite        | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ images.sqlite            | 11409408  | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 1024     | UTF-8    | 1      |
+ mediastore.sqlite        | 921600    | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ multiple-commands.sqlite | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.33          | 4096     | UTF-8    | 1      |
+ numbers.sqlite           | 12288     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 4096     | UTF-8    | 1      |
+ pluto.sqlite             | 4246528   | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.00          | 1024     | UTF-8    | 1      |
+ test.sqlite              | 32768     | 0           | NULL       | 0      | 0     | 0      | 0       | 0        | 0.12          | 4096     | UTF-8    | 1      |
+--------------------------|-----------|-------------|------------|--------|-------|--------|---------|----------|---------------|----------|----------|--------|
+
+```
+
+## LIST DATABASE CONNECTIONS
+
+### Syntax
+
+LIST DATABASE **database_name** CONNECTIONS [ID]
+
+### Description
+
+The LIST DATABASE CONNECTIONS command retrieves a list of all clients connected to that specific database (connected means a connection who sent a USE DATABASE command). The **database_name** parameter can also be a database_id if the ID flag is specified.
+
+### Privileges
+
+```
+HOSTADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **id**: client ID
+* **address**: client IP address
+* **username**: username of the connected client
+* **database**: database name
+* **connection_date**: connection initial date/time (in UTC format)
+* **last_activity**: last client activity
+
+### Example
+
+```bash
+> USE DATABASE mediastore.sqlite
+OK
+
+> LIST DATABASE mediastore.sqlite CONNECTIONS
+----|-----------|----------|-------------------|---------------------|---------------------|
+ id | address   | username | database          | connection_date     | last_activity       |
+----|-----------|----------|-------------------|---------------------|---------------------|
+ 1  | 127.0.0.1 | admin    | mediastore.sqlite | 2023-02-14 16:00:52 | 2023-02-14 16:01:10 |
+----|-----------|----------|-------------------|---------------------|---------------------|
+```
+
+## REMOVE DATABASE
+### Syntax
+
+REMOVE DATABASE **database_name** [IF EXISTS]
+
+### Description
+
+The REMOVE DATABASE command permanently deletes a database from the cluster.
+
+### Privileges
+
+```
+DROP_DATABASE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE DATABASE mediastore.sqlite
+OK
+```
+
+## USE DATABASE
+### Syntax
+
+USE DATABASE **database_name**
+
+### Description
+
+The USE DATABASE statement tells SQLite Cloud to use the named database as the default (current) database for subsequent SQL statements.
+
+### Privileges
+
+```
+PRIVILEGE_DBADMIN or PRIVILEGE_PUBSUB, which means that the USE DATABASE command succeeds if any of the following Privileges is set: PRIVILEGE_READ, PRIVILEGE_INSERT, RIVILEGE_UPDATE, PRIVILEGE_DELETE, PRIVILEGE_PRAGMA, PRIVILEGE_CREATE_TABLE, PRIVILEGE_CREATE_INDEX, PRIVILEGE_CREATE_VIEW, PRIVILEGE_CREATE_TRIGGER, PRIVILEGE_DROP_TABLE, PRIVILEGE_DROP_INDEX, PRIVILEGE_DROP_VIEW, PRIVILEGE_DROP_TRIGGER, PRIVILEGE_ALTER_TABLE, PRIVILEGE_ANALYZE, PRIVILEGE_ATTACH, PRIVILEGE_DETACH PRIVILEGE_SUB, PRIVILEGE_PUB
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> USE DATABASE test.sqlite
+OK
+```
+
+## UNUSE DATABASE
+### Syntax
+
+UNUSE DATABASE
+
+### Description
+
+The UNUSE DATABASE statement tells SQLite Cloud to close the connection with the currently used database (previously set by a USE DATABASE statement). No error is returned if the current connection has no database set.
+
+### Privileges
+
+```
+READWRITE
+```
+
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> USE DATABASE test.sqlite
+OK
+
+> UNUSE DATABASE
+OK
+```

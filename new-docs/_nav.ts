@@ -34,9 +34,9 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Authentication", filePath: "new-docs/auth-commands", type: "inner", level: 1 },
   { title: "Backups", filePath: "new-docs/backup-commands", type: "inner", level: 1 },
   { title: "Cluster", filePath: "new-docs/cluster-commands", type: "inner", level: 1 },
-  // { title: "Database", type: "inner", level: 1 },
-  // { title: "General", type: "inner", level: 1 },
-  // { title: "IP Commands", type: "inner", level: 1 },
+  { title: "Database", filePath: "new-docs/database-commands", type: "inner", level: 1 },
+  { title: "General Info", filePath: "new-docs/general-commands", type: "inner", level: 1 },
+  { title: "IP Commands", filePath: "new-docs/ip-commands", type: "inner", level: 1 },
   // { title: "Log", type: "inner", level: 1 },
   // { title: "Plugin", type: "inner", level: 1 },
   // { title: "Privileges", type: "inner", level: 1 },
@@ -48,9 +48,6 @@ const sidebarNav: SidebarNavStruct = [
   // { title: "Environment Variables", type: "inner", level: 1 },
   // { title: "CLI", type: "inner", level: 0 },
   // { title: "SDKs", type: "inner", level: 0 },
-
-  
-  
 ];
 
 export default sidebarNav

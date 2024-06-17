@@ -1,0 +1,90 @@
+---
+title: IP Commands
+description: IP commands are used to manage the IP restrictions for users and roles.
+---
+## ADD ALLOWED IP
+### Syntax
+
+ADD ALLOWED IP **ip_address** [ROLE **role_name**] [USER **username**]
+
+### Description
+
+The ADD ALLOWED IP command restricts access for the role or user by allowing only some IP addresses. Ranges in CIDR notation like 10.10.10.0/24 can be used. IPv4 and IPv6 addresses are supported.
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> ADD ALLOWED IP 10.10.10.0/24 USER user1
+OK
+```
+
+## LIST ALLOWED IP
+
+### Syntax
+
+LIST ALLOWED IP [ROLE **role_name**] [USER **user_name**]
+
+### Description
+
+The LIST ALLOWED IP returns a rowset that contains all the IP restrictions associated with a given ROLE and/or USER. If no ROLE/USER is specified, then all the IP restrictions table is returned.
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **address**: IP address(es) allowed
+* **name**: user name or role name
+* **type**: user or role [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)
+
+### Example
+
+```bash
+> LIST ALLOWED IP
+------------|-------|------|
+ address    | name  | type |
+------------|-------|------|
+192.168.1.1 | user1 | user |
+------------|-------|------|
+
+```
+
+## REMOVE ALLOWED IP
+### Syntax
+
+REMOVE ALLOWED IP **ip_address** [ROLE **role_name**] [USER **username**]
+
+### Description
+
+The REMOVE ALLOWED IP command permanently removes the **ip_address** from the list of allowed IPs. You can specify a ROLE and/or a USER to restrict the filter further.
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> REMOVE ALLOWED IP 192.168.1.1
+OK
+```
