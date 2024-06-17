@@ -24,6 +24,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: "introduction/analyzer", type: "inner", level: 1 },
 	{ filePath: "introduction/webhooks", type: "inner", level: 1 },
 	{ filePath: "introduction/edge_functions", type: "inner", level: 1 },
+	{ filePath: "introduction/weblite", type: "inner", level: 1 },
 	{ filePath: "introduction/settings", type: "inner", level: 1 },
 	
 	//{ filePath: "introduction/plugins", type: "inner", level: 0 },
