@@ -1,0 +1,41 @@
+---
+title: Writing data to your database
+description: Learn how to write data to your SQLite Cloud cluster.
+---
+
+After you've created a database in SQLite Cloud, you can start writing data to it. You can write data to your cluster using the SQLite Cloud UI, API, or client libraries.
+
+## Writing data with the SQLite Cloud UI
+Navigate to the console tab in the left-hand navigation. From here, you can run SQL commands against your cluster. Use the optional dropdown menus to select a database and table.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_console.png)
+
+### Example
+```sql
+-- If you haven't selected a database yet, run the USE DATABASE command
+USE DATABASE mydatabase.sqlite; 
+-- Create your table
+CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_name TEXT NOT NULL, sc_year INTEGER NOT NULL, image BLOB);
+-- Insert data into your table
+INSERT INTO sports_cars (sc_name, sc_year, image) VALUES ('Ferrari', 2021, 'https://example.com/ferrari.jpg');
+```
+
+## Writing data with the API
+To write data to your cluster using the Weblite API, you can make a request with the following parameters:
+@TODO: Add API call
+
+## Writing data with client libraries
+To write data to your cluster using a client library, use the INSERT INTO SQL command. 
+
+```javascript
+import { Database } from '@sqlitecloud/drivers';
+
+const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+db.exec('USE DATABASE mydatabase.sqlite;')
+db.exec('CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_name TEXT NOT NULL, sc_year INTEGER NOT NULL, image BLOB);')
+db.commit()
+const insertData = async () => await db.sql`INSERT INTO sports_cars (sc_name, sc_year, image) VALUES ('Ferrari', 2021, 'https://example.com/ferrari.jpg');`;
+
+insertData().then((res) => console.log(res));
+// "OK"
+```
