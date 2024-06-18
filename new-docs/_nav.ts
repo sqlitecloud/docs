@@ -13,10 +13,10 @@ const sidebarNav: SidebarNavStruct = [
 
   // second header
   { title: "Database" , type: "secondary" },
-  // { title: "Fundamentals", type: "inner", level: 0 },
-  // { title: "Connecting", type: "inner", level: 1 },
-  // { title: "Importing data", type: "inner", level: 1 },
-  // { title: "Transactions", type: "inner", level: 1 },
+  { title: "Fundamentals", type: "inner", level: 0 },
+  { title: "Connecting", filePath: "new-docs/connect-cluster", type: "inner", level: 1 },
+  { title: "Creating a database", type: "inner", level: 1 },
+  { title: "Writing data", type: "inner", level: 1 },
   // { title: "Backups", type: "inner", level: 0 },
   // { title: "Storage", type: "inner", level: 0 },
   // { title: "Partitioning", type: "inner", level: 0 },
