@@ -1,0 +1,169 @@
+---
+title: Security and Access Control
+description: SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability.
+---
+
+## Users
+SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability. In SQLite Cloud, roles serve as the foundation blocks for user access, and the level of user access to the database system is determined by the assigned roles. Users have no access to the system outside the designated roles.
+
+To add new users to your cluster, simply click on the **Create User** button.
+
+![Dashboard Create User](@docs-website-assets/introduction/dashboard_create_user.png)
+
+Once a user is successfully created, you can assign one or more roles to them to determine their level of access to the system.
+
+## Roles
+In SQLite Cloud, a role is a set of permissions that allows a user to perform specific actions on a particular resource, such as a database or table. Users can have multiple roles, which determine their access to the system.
+
+You can assign roles to users in two ways: when creating a new user account, or when updating the roles of an existing user.
+
+There are two types of roles in SQLite Cloud:
+
+- **Built-In Roles.** These roles are pre-defined by SQLite Cloud to provide commonly needed privileges in a database system. Built-in roles grant permissions on any database.
+
+- **User-Defined Roles.** If the built-in roles do not provide the necessary privileges or if you need to grant permissions for a specific set of resources, you can define custom roles using the **CREATE ROLE** button. These roles are called user-defined roles.
+
+
+![Dashboard Roles](@docs-website-assets/introduction/dashboard_roles.png)
+
+## Built-in roles
+import Callout from "@commons-components/Information/Callout.astro"; 
+
+SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the [GRANT ROLE](https://docs.sqlitecloud.io/docs/commands/grant-role) command, and custom roles can be created with the [CREATE ROLE](https://docs.sqlitecloud.io/docs/commands/create-role) command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
+
+Here is an overview of the built-in roles:
+
+- **ADMIN**: This role possesses the highest level of privileges, with unrestricted access to all assigned permissions.
+- **READ**: Grants read-only access to a specified database or table.
+- **READANYDATABASE**: Provides read-only access to any database and table.
+- **READWRITE**: Offers both read and write functionality for a specified database or table.
+- **READWRITEANYDATABASE**: Grants read and write capabilities across any database and table.
+- **DBADMIN**: Allows for administrative tasks like indexing and statistics gathering but doesn't manage users or roles.
+- **DBADMINANYDATABASE**: Provides administrative functions for any database.
+- **USERADMIN**: Enables the creation and modification of roles and users.
+- **CLUSTERADMIN**: Empowers users to manage and monitor the cluster.
+- **CLUSTERMONITOR**: Offers read-only access to cluster monitoring commands.
+- **HOSTADMIN**: Allows monitoring and management of individual nodes.
+- **SUB**: Grants the subscribe privilege to a specified database, table, or channel.
+- **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
+- **PUB**: Offers the publish privilege to a specified database, table, or channel.
+- **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
+- **PUBSUB**: Combines subscribe and publish privileges for a specified database, table, or channel.
+- **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
+- **PUBSUBADMIN**: Allows the creation and removal of channel privileges for a specified database or channel.
+- **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
+
+
+<Callout type="note" title="Restrictions">
+To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/commands/create-role), [GRANT ROLE](/docs/commands/grant-role), [GRANT PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/grant-privilege) and [SET PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/set-privilege) commands, as well as during the [CREATE USER](https://docs.sqlitecloud.io/docs/commands/create-user) command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
+</Callout>
+
+```bash
+>> LIST ROLES
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+ rolename              | builtin | privileges                                                                                                                             | databasename | tablename |
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+ ADMIN                 | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,														  |              |           |
+                       |         | ATTACH,DETACH,DBADMIN,SUB,PUB,PUBSUB,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												  |              |           |
+                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,PUBSUBCREATE,PUBSUBADMIN,WEBLITE,ADMIN 				  | NULL         | NULL      |
+ READ                  | 1       | READ                                                                                                                                   | NULL         | NULL      |
+ READANYDATABASE       | 1       | READ                                                                                                                                   | *            | *         |
+ READWRITE             | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | NULL         | NULL      |
+ READWRITEANYDATABASE  | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | *            | *         |
+ DBADMIN               | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,ATTACH,DETACH,DBADMIN                                  | NULL         | NULL      |
+ DBADMINANYDATABASE    | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,													  |              |           |
+                       |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,ATTACH,DETACH,DBADMIN                                  | *            | *         |
+ USERADMIN             | 1       | USERADMIN                                                                                                                              | *            | *         |
+ CLUSTERADMIN          | 1       | CLUSTERADMIN                                                                                                                           | *            | *         |
+ CLUSTERMONITOR        | 1       | CLUSTERMONITOR                                                                                                                         | *            | *         |
+ HOSTADMIN             | 1       | BACKUP,RESTORE,DOWNLOAD,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN                                                                        | *            | *         |
+ SUB                   | 1       | SUB                                                                                                                                    | NULL         | NULL      |
+ SUBANYCHANNEL         | 1       | SUB                                                                                                                                    | *            | *         |
+ PUB                   | 1       | PUB                                                                                                                                    | NULL         | NULL      |
+ PUBANYCHANNEL         | 1       | PUB                                                                                                                                    | *            | *         |
+ PUBSUB                | 1       | SUB,PUB,PUBSUB                                                                                                                         | NULL         | NULL      |
+ PUBSUBANYCHANNEL      | 1       | SUB,PUB,PUBSUB                                                                                                                         | *            | *         |
+ PUBSUBADMIN           | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | NULL         | NULL      |
+ PUBSUBADMINANYCHANNEL | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | *            | *         |
+-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
+```
+
+## Privileges
+In a role-based access control system, a privilege represents a specific action or permission that a user or role is allowed to perform within the system.
+It defines what a user can or cannot do, such as reading, writing, or managing certain resources like tables, databases, or settings.
+Essentially, a privilege is a **right** or **ability** granted to a user or role, specifying their level of access and control over the system's resources.
+
+A privilege can be [granted](https://docs.sqlitecloud.io/docs/commands/grant-privilege), [revoked](https://docs.sqlitecloud.io/docs/commands/revoke-privilege) and [assigned](https://docs.sqlitecloud.io/docs/commands/set-privilege) to a given role.
+A role can contains any combination of privileges.
+
+```bash
+>> LIST PRIVILEGES
+-----------------|
+ name            |
+-----------------|
+ NONE            |
+ READ            |
+ INSERT          |
+ UPDATE          |
+ DELETE          |
+ READWRITE       |
+ PRAGMA          |
+ CREATE_TABLE    |
+ CREATE_INDEX    |
+ CREATE_VIEW     |
+ CREATE_TRIGGER  |
+ DROP_TABLE      |
+ DROP_INDEX      |
+ DROP_VIEW       |
+ DROP_TRIGGER    |
+ ALTER_TABLE     |
+ ANALYZE         |
+ ATTACH          |
+ DETACH          |
+ DBADMIN         |
+ SUB             |
+ PUB             |
+ PUBSUB          |
+ BACKUP          |
+ RESTORE         |
+ DOWNLOAD        |
+ PLUGIN          |
+ SETTINGS        |
+ USERADMIN       |
+ CLUSTERADMIN    |
+ CLUSTERMONITOR  |
+ CREATE_DATABASE |
+ DROP_DATABASE   |
+ HOSTADMIN       |
+ SWITCH_USER     |
+ PUBSUBCREATE    |
+ PUBSUBADMIN     |
+ WEBLITE         |
+ ADMIN           |
+-----------------|
+```
+
+
+## IP Restrictions
+The IP Restrictions panel enables the restriction of access for a role or user by allowing only specific IP addresses or ranges in [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) (for example 10.10.10.0/24). Both IPv4 and IPv6 addresses are supported.
+
+To add a new IP restriction to a user or role, click on the **Add IP** button.
+
+![Dashboard Create IP Restriction](@docs-website-assets/introduction/dashboard_create_ip.png)
+
+The IP Restrictions table will display all current IP restrictions for the selected user or role.
+
+![Dashboard List IP Restrictions](@docs-website-assets/introduction/dashboard_list_ip.png)
+
+## API KEYs 
+
+API KEYs can be used as an alternative authentication mechanism. Authentication through API keys ensures the same privileges as the user to which they are associated. API KEYs are recommended for all server-to-server authentication cases and are necessary for using the [REST APIs](/docs/introduction/api) and the [SDK](/docs/sdk) that uses the WebSocket APIs.
+
+To create an API key for a user, click on the **Create API KEY** button.
+
+![Dashboard Create APIKEY](@docs-website-assets/introduction/dashboard_create_apikey.png)
+
+The resulting table will display all the API keys associated with each user, along with their name and restrictions.
+![Dashboard List APIKEY](@docs-website-assets/introduction/dashboard_list_apikey.png)

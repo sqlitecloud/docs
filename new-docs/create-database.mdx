@@ -1,0 +1,50 @@
+---
+title: Creating a Database
+description: Learn how to import a database into SQLite Cloud.
+---
+
+Create a new database in SQLite Cloud by importing an existing SQLite database, or using the SQLite Cloud UI, API, or client libraries.
+
+## Importing an existing SQLite database
+SQLite Cloud allows you to import existing SQLite databases into the platform. 
+
+Note that you can download, modify, and re-upload the database file at any time. You can also upload encrypted SQLite databases if you used the official SEE SQLite encryption extension.
+
+To import a database from the UI, navigate to the Databases tab and click the "Upload Database" button.
+![Dashbord Upload Database](@docs-website-assets/introduction/dashboard_upload_db.png)
+
+Select the database file you want to upload, and click "Upload Database". The database will be available in your cluster within a few minutes.
+
+## Creating a new database
+### From the Dashboard
+
+To create a new database from the SQLite Cloud UI, navigate to the Databases tab and click the "Create Database" button.
+![Dashboard Create Database](@docs-website-assets/introduction/dashboard_create_database.png)
+
+The default encoding is set to UTF-8, and the default page size is 4096KB.
+
+### From the API
+To create a new database or upload an existing database via [Weblite](#), our REST API, you can make a request with the following parameters:
+```bash
+curl -X 'POST' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d ''
+```
+
+### From client libraries
+To create a new database from a client library, use the CREATE DATABASE command. 
+
+```javascript
+import { Database } from '@sqlitecloud/drivers';
+
+const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+
+const createDatabase = async () => await db.sql`CREATE DATABASE <database-name>;`;
+
+createDatabase().then((res) => console.log(res));
+
+// "OK"
+```
+

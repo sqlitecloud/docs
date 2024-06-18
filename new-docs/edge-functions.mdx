@@ -1,0 +1,104 @@
+---
+title: Edge Functions
+description: SQLite Cloud offers powerful edge functions for performant data processing and third-party integrations.
+---
+
+Edge Functions are server-side functions that run directly within your database environment. Edge functions in SQLite Cloud ensure maximum performance and minimal latency by running functions on the same server as your database.
+
+You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
+
+Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/introduction/webhooks). Each function runs in an isolated environment using the Bun runtime. 
+
+Turning on linearizable reads ensures strong consistency, but may introduce some latency. When eventual consistency is sufficient, we recommend leaving linearizable reads off.
+
+## Getting Started
+1. Navigate to the Edge Functions page from your dashboard.
+1. Under "Development", select "Edge Function", then click the "Create" button.
+1. Write and test your function.
+    1. Select the database you want to access and an API key if necessary
+    2. When you're finished, click deploy.
+
+#### Note:
+Functions should return a JSON-serializable object with a data field:
+```js
+return {
+  data: {
+    // your return object
+  }
+}
+```
+
+## Guides
+### Interacting with your Database
+Use the global `connection` object to access and manipulate your database.
+```js
+const customers = await connection.sql`SELECT * FROM customers;`
+return {
+  data: customers
+}
+```
+
+Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/commands/use-database).
+
+```js
+const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
+return {
+  data: customers
+}
+```
+
+### Storing and Accessing Environment Variables
+Environment variables can be accessed and stored with the ENV command. ENV variables are stored in the server settings file and are project-specific.
+Use the following commands to set and read values in your server settings file:
+
+* [LIST ENV](https://docs.sqlitecloud.io/docs/settings-commands#list-env)
+* [SET ENV](https://docs.sqlitecloud.io/docs/settings-commands#set-env) key VALUE value
+* [GET ENV](https://docs.sqlitecloud.io/docs/settings-commands#get-env) key
+* [REMOVE ENV](https://docs.sqlitecloud.io/docs/settings-commands#remove-env) key
+
+You can also add environment variables in the UI by navigating to the "Environment Variables" section and clicking the "Create" button.
+
+
+### Handling Errors
+In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
+
+## Examples
+
+### Assigning and Notifying a Support Rep on User Sign up
+
+```js
+// Get secret from database
+const slackWebhookEndpoint = await connection.sql`GET ENV slack_webhook_endpoint`;
+
+// Get record sent in body via webhook
+const content = request.data;
+const database = content.database;
+const primaryKey = content.data[0];
+const newCustomer = await connection.sql`USE DATABASE ${database}; SELECT * FROM customers WHERE CustomerId = ${primaryKey};`;
+
+// Sample business logic - assign and notify support rep
+// Get reps from database
+const reps = await connection.sql`SELECT id, name, country FROM reps`;
+const rep = reps.find(({ country }) => country === newCustomer.country.toLowerCase());
+
+// Define helpers to assign and notify
+const assignRep = async (repId, customerId) => await connection.sql`UPDATE customers SET SupportRepId = ${repId} WHERE CustomerId = ${customerId}`;
+const notifyRep = async (repName, customer) => {
+    const message = `@${repName}: New User Sign Up - ${JSON.stringify(customer)}`
+    try {
+        await fetch(slackWebhookEndpoint, { body: JSON.stringify({ text: message }), method: 'POST', 'Content-type': 'application/json'  });
+    } catch (err) {
+        await fetch(slackWebhookEndpoint, { body: JSON.stringify({ text: err }), method: 'POST', 'Content-type': 'application/json'  });
+    }
+} 
+
+// Call async functions
+await assignRep(rep.id, newCustomer.id);
+await notifyRep(rep.name, newCustomer);
+
+return {
+    data: 'OK'
+}
+```
+
+
