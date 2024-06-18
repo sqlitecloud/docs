@@ -1,0 +1,64 @@
+---
+title: Connecting to a Cluster
+description: Learn how to connect to a cluster in SQLite Cloud.
+---
+
+SQLite databases in SQLite Cloud are distributed across a cluster of nodes. Each cluster comes with a multi-region load balancer that routes traffic to the nearest appropriate node.
+
+For this reason, we strongly recommend connecting to your cluster via your project connection string. To retrive your project connection string, navigate to the **Nodes** page and click on any node. 
+![Project connection string modal](@docs-website-assets/connect-cluster-1.png)
+
+Copy the connection string and use it with a client library to connect to your cluster.
+
+## Connecting with JavaScript
+Here's an example of how you can connect to your cluster using the `@sqlitecloud/drivers` JavaScript client library:
+
+First, install the client library:
+
+```bash
+npm install @sqlitecloud/drivers
+```
+
+Then, connect to your cluster using the connection string:
+
+```javascript
+import { Database } from '@sqlitecloud/drivers';
+
+const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+
+const fetchAlbums = async () => await db.sql`USE DATABASE chinook.sqlite; SELECT * FROM albums;`;
+
+fetchAlbums().then((albums) => console.log(albums));
+
+// [{ Title: 'For Those About To Rock We Salute You', ... }, ...]
+```
+
+## Connecting with Python
+Install the Python client library:
+
+```bash
+pip install sqlitecloud
+```
+
+Then, connect to your cluster using the connection string:
+
+```python
+import sqlitecloud
+
+# Open the connection to SQLite Cloud
+# Note: Include your target database in the url to skip the USE DATABASE command
+conn = sqlitecloud.connect("sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>")
+
+cursor = conn.execute("SELECT * FROM albums WHERE AlbumId = ?", (1, ))
+result = cursor.fetchone()
+
+print(result)
+
+conn.close()
+
+# (1, 'For Those About To Rock We Salute You', 1)
+```
+
+## Next Steps
+- [Importing databases](#)
+- [Writing data](#)
