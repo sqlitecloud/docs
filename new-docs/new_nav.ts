@@ -1,6 +1,6 @@
-import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
+// import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
-const sidebarNav: SidebarNavStruct = [
+const sidebarNav = [
 	{ title: "", type: "primary" },
 	{ title: "Getting Started", type: "secondary" },
 	{ title: "Introduction", filePath: "new-docs/index", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
