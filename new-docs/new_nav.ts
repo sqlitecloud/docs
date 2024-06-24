@@ -1,6 +1,6 @@
-import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
+// import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
-const sidebarNav: SidebarNavStruct = [
+const sidebarNav = [
 	{ title: "", type: "primary" },
   // first header
 	{ title: "Getting Started", type: "secondary" },
