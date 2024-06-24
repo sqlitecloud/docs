@@ -158,7 +158,9 @@ const sidebarNav = [
 	{ filePath: 'new-docs/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 },
 
 	{ title: "Go", filePath: "new-docs/sdk-go/getting-started", type: "inner", level: 1 },
-	{ title: "Python", filePath: "new-docs/sdk-python/getting-started", type: "inner", level: 1 },
+	
+	{ title: "PHP", filePath: "new-docs/sdk-php/getting-started", type: "inner", level: 1 },
+	{ title: "Methods", filePath: "new-docs/sdk-php/methods", type: "inner", level: 2 },
 
 ];
 
