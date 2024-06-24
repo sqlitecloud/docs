@@ -1,0 +1,179 @@
+---
+title: PHP SDK Methods
+description: Methods available in the SQLite Cloud PHP SDK.
+---
+
+
+## Connect
+```php
+SQLiteCloudClient.connect($hostname, $port = 8860)
+SQLiteCloudClient.connectWithString('sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey')
+```
+
+To connect to SQLite Cloud, you need to first allocate an SQLiteCloud Client instance and then inizialize some mandatory public properties: connection string or username and password. The SQLiteCloud PHP class has the following properties:
+```php
+class SQLiteCloudClient {
+	public $username = '';
+	public $password = '';
+	public $database = '';
+	public $timeout = NULL;
+	public $connect_timeout = 20;
+	public $compression = false;
+    // ...and more
+}
+```
+
+### Example with Connection String
+
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudClient();
+
+try {
+	if ($sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey') == false) {
+		$msg = $sqlitecloud->errmsg;
+		return $msg;
+	}
+} catch (Exception $e) {
+	return $e->getMessage();
+}
+
+return true;
+```
+
+### Example with Username and Password
+
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->username = 'admin';
+$sqlitecloud->password = 'pass';
+
+try {
+	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+		$msg = $sqlitecloud->errmsg;
+		return $msg;
+	}
+} catch (Exception $e) {
+	return $e->getMessage();
+}
+
+return true;
+```
+
+## Execute
+```php
+SQLiteCloudClient.execute($command)
+```
+
+Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands).
+
+### Return value
+* `false` is returned in case of an error
+* `true` is returned in case of OK reply
+* `NULL` is returned in case of NULL reply
+* An `integer` or a `double` in case of numeric reply
+* A `string` if the reply is a string value
+* A PHP `array` if the reply contains multiple values
+* An `SQLiteCloudRowset` instance in case of a query reply
+
+### Example
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+
+$result = $sqlitecloud->execute('LIST INFO');
+
+$sqlitecloud->disconnect();
+```
+## Dump
+```php
+SQLiteCloudRowset.dump()
+```
+
+Print the Rowset on standard output.
+
+### Example
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudCient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+
+$result = $sqlitecloud->execute('LIST INFO');
+$result->dump();
+
+$sqlitecloud->disconnect();
+```
+## Name
+```php
+SQLiteCloudRowset.name($col)
+```
+
+Use the function to retrieve the name of a column in the Rowset at index $col (from 0 to SQLiteCloudRowset.ncols).
+
+## Return value
+A `string` with the column name.
+
+### Example
+```php
+use SQLiteCloud\SQLiteCloudClient;
+use SQLiteCloud\SQLiteCloudRowset;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+
+/** @var SQLiteCloudRowset */
+$result = $sqlitecloud->execute('LIST INFO');
+$col1name = $result->name(0);
+
+$sqlitecloud->disconnect();
+```
+## Value
+```php
+SQLiteCloudRowset.value($row, $col)
+```
+
+Use the function to retrieve the value of an item in the Rowset at row $row (from 0 to SQLiteCloudRowset.nrows) and column $col (from 0 to SQLiteCloudRowset.ncols).
+
+### Return value
+The column value.
+
+### Example
+```php
+use SQLiteCloud\SQLiteCloudClient;
+use SQLiteCloud\SQLiteCloudRowset;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+
+/** @var SQLiteCloudRowset */
+$result = $sqlitecloud->execute('LIST INFO');
+$col = 1;
+$row = 1;
+$value = $result->value($row, $col);
+
+$sqlitecloud->disconnect();
+```
+
+## Disconnect
+
+```php
+SQLiteCloudClient.disconnect()
+```
+
+The **disconnect** public method closes the connection with the server.
+
+### Example
+```php
+use SQLiteCloud\SQLiteCloudClient;
+
+$sqlitecloud = new SQLiteCloudClient();
+$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+
+$sqlitecloud->disconnect();
+```

@@ -48,7 +48,7 @@ const sidebarNav = [
   { title: "CLI", filePath: "new-docs/cli-commands", type: "inner", level: 0 },
 
   { title: "SDKs", type: "inner", level: 0 },
-  { title: "C/C++", type: "inner", filePath: 'new-docs/sdk-c', level: 1 },
+  { title: "C/C++", type: "inner", filePath: "new-docs/sdk-c/getting-started", level: 1 },
 	{ title: 'Basic APIs', type: "inner", level: 2 },
 	{ filePath: 'new-docs/sdk-c/SQCloudConnect', type: "inner", level: 3 },
 	{ filePath: 'new-docs/sdk-c/SQCloudConnectWithString', type: "inner", level: 3 },
@@ -144,7 +144,7 @@ const sidebarNav = [
 	{ filePath: 'new-docs/sdk-c/SQCloudUploadDatabase', type: "inner", level: 3 },
 	{ filePath: 'new-docs/sdk-c/SQCloudDownloadDatabase', type: "inner", level: 3 },
 
-  { title: "JavaScript", filePath: "new-docs/sdk-js", type: "inner", level: 3 },
+  { title: "JavaScript", filePath: "new-docs/sdk-js/getting-started", type: "inner", level: 1 },
 	{ title: "Modules", filePath: 'new-docs/sdk-js/modules', type: "inner", level: 2 },
 	{ title: "Classes", type: "inner", level: 2 },
 	{ filePath: 'new-docs/sdk-js/classes/Database', type: "inner", level: 3 },
@@ -155,7 +155,11 @@ const sidebarNav = [
 	{ filePath: 'new-docs/sdk-js/classes/Statement', type: "inner", level: 3 },
 	{ title: 'Interfaces', type: "inner", level: 2 },
 	{ filePath: 'new-docs/sdk-js/interfaces/SQLCloudRowsetMetadata', type: "inner", level: 3 },
-	{ filePath: 'new-docs/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 }
+	{ filePath: 'new-docs/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 },
+
+	{ title: "Go", filePath: "new-docs/sdk-go/getting-started", type: "inner", level: 1 },
+	{ title: "Python", filePath: "new-docs/sdk-python/getting-started", type: "inner", level: 1 },
+
 ];
 
 export default sidebarNav
