@@ -1,17 +1,12 @@
 import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
-  // no header
 	{ title: "", type: "primary" },
-  // first header
 	{ title: "Getting Started", type: "secondary" },
-  // first section
 	{ title: "Introduction", filePath: "new-docs/index", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
-  // { title: "Core Concepts", filePath: "new-docs/core-concepts", type: "inner", level: 0 }, // should remove new-docs
   { title: "Quick Start Guides", type: "inner", level: 0},
   { title: "React", filePath: "new-docs/quick-start-react", type: "inner", level: 1 },
 
-  // second header
   { title: "Database" , type: "secondary" },
   { title: "Fundamentals", type: "inner", level: 0 },
   { title: "Connecting", filePath: "new-docs/connect-cluster", type: "inner", level: 1 },
@@ -22,7 +17,6 @@ const sidebarNav: SidebarNavStruct = [
   // { title: "Partitioning", type: "inner", level: 0 },
   // { title: "Extensions", type: "inner", level: 0 },
 
-  // third header
   { title: "Platform" , type: "secondary" },
   // { title: "Overview", type: "inner", level: 0 },
   // { title: "Scaling", type: "inner", level: 0 },
@@ -33,7 +27,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Security and Access Control", filePath: "new-docs/security", type: "inner", level: 0 },
 	{ title: "Settings", filePath: "new-docs/settings", type: "inner", level: 0 },
 
-  // fourth header
   { title: "Reference" , type: "secondary" },
   { title: "Server-side Commands", type: "inner", filePath: "new-docs/server-side-commands", level: 0 },
   { title: "API Keys", filePath: "new-docs/api-key-commands", type: "inner", level: 1 },
