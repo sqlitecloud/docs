@@ -15,16 +15,16 @@ const sidebarNav = [
   { title: "Backups", filePath: "new-docs/backup", type: "inner", level: 0 },
   // { title: "Storage", type: "inner", level: 0 },
   // { title: "Partitioning", type: "inner", level: 0 },
-  // { title: "Extensions", type: "inner", level: 0 },
+  { title: "Extensions", filePath: "new-docs/extensions", type: "inner", level: 0 },
 
   { title: "Platform" , type: "secondary" },
   // { title: "Overview", type: "inner", level: 0 },
-  // { title: "Scaling", type: "inner", level: 0 },
   { title: "Edge Functions", filePath: "new-docs/edge-functions", type: "inner", level: 0 },
   { title: "Webhooks", filePath: "new-docs/webhooks", type: "inner", level: 0 },
   { title: "Pub/Sub", filePath: "new-docs/pub-sub", type: "inner", level: 0 },
-  { title: "Query Analyzer", filePath: "new-docs/analyzer", type: "inner", level: 0 },
+	{ title: "Scaling", type: "inner", filePath: "new-docs/scaling", level: 0 },
 	{ title: "Security and Access Control", filePath: "new-docs/security", type: "inner", level: 0 },
+	{ title: "Query Analyzer", filePath: "new-docs/analyzer", type: "inner", level: 0 },
 	{ title: "Settings", filePath: "new-docs/settings", type: "inner", level: 0 },
 
   { title: "Reference" , type: "secondary" },
@@ -158,7 +158,7 @@ const sidebarNav = [
 	{ filePath: 'new-docs/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 },
 
 	{ title: "Go", filePath: "new-docs/sdk-go/getting-started", type: "inner", level: 1 },
-	
+
 	{ title: "PHP", filePath: "new-docs/sdk-php/getting-started", type: "inner", level: 1 },
 	{ title: "Methods", filePath: "new-docs/sdk-php/methods", type: "inner", level: 2 },
 
