@@ -1,0 +1,50 @@
+---
+title: "SQCloudVMBindParameterCount"
+description: SQCloud VM C/C++ Interface SQCloudVMBindParameterCount
+---
+
+```c
+int SQCloudVMBindParameterCount (SQCloudVM *vm);
+```
+
+### Description
+This routine can be used to find the number of SQL parameters in a prepared statement. SQL parameters are tokens of the form "?", "?NNN", ":AAA", "$AAA", or "@AAA" that serve as placeholders for values that are bound to the parameters at a later time. This routine actually returns the index of the largest (rightmost) parameter. For all forms except ?NNN, this will correspond to the number of unique parameters. If parameters of the ?NNN form are used, there may be gaps in the list.
+
+This function resembles the [bind_parameter_count](https://www.sqlite.org/c3ref/bind_parameter_count.html) SQLite API. 
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+An `int` representing the number of SQL parameters in a prepared statement.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('?1');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCLOUD_RESULT_TYPE type = SQCloudVMStep(vm);
+
+    // count parameters
+    int counter = SQCloudVMBindParameterCount(vm);
+}
+```

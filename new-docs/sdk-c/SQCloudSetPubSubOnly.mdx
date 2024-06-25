@@ -1,0 +1,50 @@
+---
+title: "SQCloudSetPubSubOnly"
+description: SQCloud Pub/Sub C/C++ Interface SQCloudSetPubSubOnly
+---
+
+```c
+SQCloudResult *SQCloudSetPubSubOnly (SQCloudConnection *connection);
+```
+
+### Description
+When Pub/Sub is activated (after calling [SQCloudSetPubSubCallback](/docs/sdk/c/sqcloudsetpubsubcallback)) there are two sockets associated to the SQCloudConnection connection.  The **SQCloudSetPubSubOnly** function closes the **main** socket, leaving the **pub/sub** socket opened and ready to receive incoming notifications from subscripted channels and tables.
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+
+### Return value
+An OK result is succesfully executed, otherwise an error.
+
+### Example
+```c
+static my_callback(SQCloudConnection *connection, SQCloudResult *result, void *data) {
+    // dump JSON notification
+    // more about the JSON format: https://docs.sqlitecloud.io/docs/introduction/pubsub_payload
+    SQCloudResultDump(connection, result);
+}
+
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // set pub/sub callback
+    SQCloudSetPubSubCallback(conn, my_callback, NULL);
+
+    // start listening to a CHANNEL
+    SQCloudExec(conn, "LISTEN channel1;");
+
+    // close main socket
+    SQCloudSetPubSubOnly(conn);
+}
+```
