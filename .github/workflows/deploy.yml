@@ -1,0 +1,16 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+      - stage
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: trigger vercel deployment
+      run: curl ${{ secrets.VERCEL_WEBHOOK }}
+      shell: bash
