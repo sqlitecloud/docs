@@ -3,7 +3,7 @@ import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 const sidebarNav /*: SidebarNavStruct */ = [
 	{ title: "", type: "primary" },
 	{ title: "Getting Started", type: "secondary", icon: "docs-star" },
-	{ title: "Introduction", filePath: "sqlite-cloud/index", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
+	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 
