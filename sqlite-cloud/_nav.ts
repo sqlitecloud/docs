@@ -45,10 +45,12 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Settings", filePath: "sqlite-cloud/reference/settings-commands", type: "inner", level: 1 },
 	{ title: "User", filePath: "sqlite-cloud/reference/user-commands", type: "inner", level: 1 },
 
-	{ title: "CLI", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 0 },
+	{ title: "CLI",  type: "inner", level: 0 },
+	{ title: "Commands", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 1 },
 
 	{ title: "SDKs", type: "inner", level: 0 },
-	{ title: "C/C++", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 1 },
+	{ title: "C/C++", type: "inner", level: 1 },
+	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 2, }
 	{ title: 'Basic APIs', type: "inner", level: 2 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudConnect', type: "inner", level: 3 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudConnectWithString', type: "inner", level: 3 },
@@ -144,22 +146,14 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudUploadDatabase', type: "inner", level: 3 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudDownloadDatabase', type: "inner", level: 3 },
 
-	{ title: "JavaScript", filePath: "sqlite-cloud/reference/sdk-js/getting-started", type: "inner", level: 1 },
-	{ title: "Modules", filePath: 'sqlite-cloud/reference/sdk-js/modules', type: "inner", level: 2 },
-	{ title: "Classes", type: "inner", level: 2 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/Database', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/SQLiteCloudConnection', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/SQLiteCloudError', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/SQLiteCloudRow', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/SQLiteCloudRowset', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/classes/Statement', type: "inner", level: 3 },
-	{ title: 'Interfaces', type: "inner", level: 2 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/interfaces/SQLCloudRowsetMetadata', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/reference/sdk-js/interfaces/SQLiteCloudConfig', type: "inner", level: 3 },
+	{ title: "JavaScript", type: "inner", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-js/getting-started", level: 2 },
 
-	{ title: "Go", filePath: "sqlite-cloud/reference/sdk-go/getting-started", type: "inner", level: 1 },
+	{ title: "Go",  type: "inner", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-go/getting-started", level: 2 },
 
-	{ title: "PHP", filePath: "sqlite-cloud/reference/sdk-php/getting-started", type: "inner", level: 1 },
+	{ title: "PHP", type: "inner", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-php/getting-started", level: 2 },
 	{ title: "Methods", filePath: "sqlite-cloud/reference/sdk-php/methods", type: "inner", level: 2 },
 
 	{ title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite/" },
