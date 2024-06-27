@@ -154,7 +154,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "User", filePath: "sqlite-cloud/reference/user-commands", type: "inner", level: 1 },
 
 	{ title: "CLI",  type: "inner", level: 0 },
-	{ title: "Commands", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 1 },
+	{ title: "Introduction", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 1 },
 
 	{ title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite/" }
 
