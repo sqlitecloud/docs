@@ -50,7 +50,7 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "SDKs", type: "inner", level: 0 },
 	{ title: "C/C++", type: "inner", level: 1 },
-	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 2, }
+	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 2, },
 	{ title: 'Basic APIs', type: "inner", level: 2 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudConnect', type: "inner", level: 3 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudConnectWithString', type: "inner", level: 3 },
