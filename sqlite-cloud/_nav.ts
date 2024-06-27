@@ -27,28 +27,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Query Analyzer", filePath: "sqlite-cloud/platform/analyzer", type: "inner", level: 0 },
 	{ title: "Settings", filePath: "sqlite-cloud/platform/settings", type: "inner", level: 0 },
 
-	{ title: "Reference", type: "secondary", icon: "docs-ref" },
-	{ title: "Server-side Commands", type: "inner", filePath: "sqlite-cloud/reference/server-side-commands", level: 0 },
-	{ title: "API Keys", filePath: "sqlite-cloud/reference/api-key-commands", type: "inner", level: 1 },
-	{ title: "Authentication", filePath: "sqlite-cloud/reference/auth-commands", type: "inner", level: 1 },
-	{ title: "Backups", filePath: "sqlite-cloud/reference/backup-commands", type: "inner", level: 1 },
-	{ title: "Cluster", filePath: "sqlite-cloud/reference/cluster-commands", type: "inner", level: 1 },
-	{ title: "Database", filePath: "sqlite-cloud/reference/database-commands", type: "inner", level: 1 },
-	{ title: "General Info", filePath: "sqlite-cloud/reference/general-commands", type: "inner", level: 1 },
-	{ title: "IP", filePath: "sqlite-cloud/reference/ip-commands", type: "inner", level: 1 },
-	{ title: "Logs", filePath: "sqlite-cloud/reference/log-commands", type: "inner", level: 1 },
-	{ title: "Plugins", filePath: "sqlite-cloud/reference/plugin-commands", type: "inner", level: 1 },
-	{ title: "Privileges", filePath: "sqlite-cloud/reference/privilege-commands", type: "inner", level: 1 },
-	{ title: "Pub/Sub", filePath: "sqlite-cloud/reference/pub-sub-commands", type: "inner", level: 1 },
-	{ title: "Query Analyzer", filePath: "sqlite-cloud/reference/query-analyzer-commands", type: "inner", level: 1 },
-	{ title: "Roles", filePath: "sqlite-cloud/reference/role-commands", type: "inner", level: 1 },
-	{ title: "Settings", filePath: "sqlite-cloud/reference/settings-commands", type: "inner", level: 1 },
-	{ title: "User", filePath: "sqlite-cloud/reference/user-commands", type: "inner", level: 1 },
-
-	{ title: "CLI",  type: "inner", level: 0 },
-	{ title: "Commands", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 1 },
-
-	{ title: "SDKs", type: "inner", level: 0 },
+	{ title: "SDKs", type: "secondary", icon: "docs-ref", level: 0 },
 	{ title: "C/C++", type: "inner", level: 1 },
 	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 2, },
 	{ title: 'Basic APIs', type: "inner", level: 2 },
@@ -146,17 +125,39 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudUploadDatabase', type: "inner", level: 3 },
 	{ filePath: 'sqlite-cloud/reference/sdk-c/SQCloudDownloadDatabase', type: "inner", level: 3 },
 
-	{ title: "JavaScript", type: "inner", level: 1 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-js/getting-started", level: 2 },
+	{ title: "JavaScript", type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-js/getting-started", level: 1 },
 
-	{ title: "Go",  type: "inner", level: 1 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-go/getting-started", level: 2 },
+	{ title: "Go",  type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-go/getting-started", level: 1 },
 
-	{ title: "PHP", type: "inner", level: 1 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-php/getting-started", level: 2 },
-	{ title: "Methods", filePath: "sqlite-cloud/reference/sdk-php/methods", type: "inner", level: 2 },
+	{ title: "PHP", type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/reference/sdk-php/getting-started", level: 1 },
+	{ title: "Methods", filePath: "sqlite-cloud/reference/sdk-php/methods", type: "inner", level: 1 },
 
-	{ title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite/" },
+
+	{ title: "Reference", type: "secondary", icon: "docs-ref" },
+	{ title: "Server-side Commands", type: "inner", filePath: "sqlite-cloud/reference/server-side-commands", level: 0 },
+	{ title: "API Keys", filePath: "sqlite-cloud/reference/api-key-commands", type: "inner", level: 1 },
+	{ title: "Authentication", filePath: "sqlite-cloud/reference/auth-commands", type: "inner", level: 1 },
+	{ title: "Backups", filePath: "sqlite-cloud/reference/backup-commands", type: "inner", level: 1 },
+	{ title: "Cluster", filePath: "sqlite-cloud/reference/cluster-commands", type: "inner", level: 1 },
+	{ title: "Database", filePath: "sqlite-cloud/reference/database-commands", type: "inner", level: 1 },
+	{ title: "General Info", filePath: "sqlite-cloud/reference/general-commands", type: "inner", level: 1 },
+	{ title: "IP", filePath: "sqlite-cloud/reference/ip-commands", type: "inner", level: 1 },
+	{ title: "Logs", filePath: "sqlite-cloud/reference/log-commands", type: "inner", level: 1 },
+	{ title: "Plugins", filePath: "sqlite-cloud/reference/plugin-commands", type: "inner", level: 1 },
+	{ title: "Privileges", filePath: "sqlite-cloud/reference/privilege-commands", type: "inner", level: 1 },
+	{ title: "Pub/Sub", filePath: "sqlite-cloud/reference/pub-sub-commands", type: "inner", level: 1 },
+	{ title: "Query Analyzer", filePath: "sqlite-cloud/reference/query-analyzer-commands", type: "inner", level: 1 },
+	{ title: "Roles", filePath: "sqlite-cloud/reference/role-commands", type: "inner", level: 1 },
+	{ title: "Settings", filePath: "sqlite-cloud/reference/settings-commands", type: "inner", level: 1 },
+	{ title: "User", filePath: "sqlite-cloud/reference/user-commands", type: "inner", level: 1 },
+
+	{ title: "CLI",  type: "inner", level: 0 },
+	{ title: "Commands", filePath: "sqlite-cloud/reference/cli-commands", type: "inner", level: 1 },
+
+	{ title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite/" }
 
 ];
 
