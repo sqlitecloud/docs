@@ -27,7 +27,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Query Analyzer", filePath: "sqlite-cloud/platform/analyzer", type: "inner", level: 0 },
 	{ title: "Settings", filePath: "sqlite-cloud/platform/settings", type: "inner", level: 0 },
 
-	{ title: "SDKs", type: "secondary", icon: "docs-ref", level: 0 },
+	{ title: "SDKs", type: "secondary", icon: "docs-ref" },
 	{ title: "C/C++", type: "inner", level: 1 },
 	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/reference/sdk-c/getting-started", level: 2, },
 	{ title: 'Basic APIs', type: "inner", level: 2 },
