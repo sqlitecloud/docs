@@ -6,6 +6,9 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
+	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Django", filePath: "sqlite-cloud/quick-start-django", type: "inner", level: 1 },
+
 
 	{ title: "Database", type: "secondary", icon: "docs-db" },
 	{ title: "Fundamentals", type: "inner", level: 0 },
