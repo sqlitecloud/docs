@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: The WITH Clause
 description: Common Table Expressions or CTEs act like temporary views that exist only for the duration of a single SQL statement.
 statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHERE x<10) SELECT * FROM ten;

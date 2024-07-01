@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: UPDATE
 description: An UPDATE statement is used to modify a subset of the values stored in zero or more rows of the database table.
 statement: UPDATE Artist SET name = 'New Lady Gaga' WHERE name = 'Lady Gaga';

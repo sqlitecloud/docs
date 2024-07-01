@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: CREATE VIRTUAL TABLE
 description: A virtual table is an interface to an external storage or computation engine that appears to be a table but does not actually store information in the database file.
 statement: CREATE VIRTUAL TABLE MyNames USING fts5(content);

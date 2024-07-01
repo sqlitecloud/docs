@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: DELETE
 description: The DELETE command removes records from the table identified by the qualified-table-name.
 statement: DELETE FROM Artist WHERE name LIKE 'Z%';

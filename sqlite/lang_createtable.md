@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: CREATE TABLE
 description: The "CREATE TABLE" command is used to create a new table in an SQLite database.
 statement: CREATE TABLE IF NOT EXISTS Genre (GenreId INTEGER PRIMARY KEY, Name TEXT);

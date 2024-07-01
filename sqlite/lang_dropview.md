@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: DROP VIEW
 description: The DROP VIEW statement removes a view created by the CREATE VIEW statement.
 statement: DROP VIEW IF EXISTS view_names;

@@ -1,6 +1,7 @@
 ---
 title: SQLiteCloudRowset
 description: SQLite Cloud Javascript SDK
+customClass: sdk-doc js-doc 
 ---
 
 ## Hierarchy

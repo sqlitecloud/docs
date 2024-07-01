@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: RETURNING
 description: The RETURNING clause is not a statement itself, but a clause that can optionally appear near the end of top-level DELETE, INSERT, and UPDATE statements.
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') RETURNING Name, ArtistId;

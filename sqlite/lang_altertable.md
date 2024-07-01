@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: ALTER TABLE
 description: SQLite supports a limited subset of ALTER TABLE. The ALTER TABLE command in SQLite allows these alterations of an existing table.
 statement: ALTER TABLE Album ADD COLUMN year INTEGER;

@@ -1,6 +1,7 @@
 ---
 title: Modules
 description: SQLite Cloud Javascript SDK
+customClass: sdk-doc js-doc 
 ---
 
 ## Table of contents

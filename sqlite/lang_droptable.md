@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: DROP TABLE
 description: The DROP TABLE statement removes a table added with the CREATE TABLE statement.
 statement: DROP TABLE IF EXISTS Genre;

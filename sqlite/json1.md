@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: JSON Functions And Operators
 description: By default, SQLite supports twenty-nine functions and two operators for dealing with JSON values.
 statement: SELECT json_object('id' , ArtistId, 'name', name) FROM Artist;

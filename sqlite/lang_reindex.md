@@ -1,4 +1,5 @@
 ---
+customClass: sqlite-doc
 title: REINDEX
 description: The REINDEX command is used to delete and recreate indices from scratch.
 statement: REINDEX;
