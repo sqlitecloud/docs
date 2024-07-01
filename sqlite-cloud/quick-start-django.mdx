@@ -34,7 +34,7 @@ pip install sqlitecloud
 import sqlitecloud
 
 # Create your models here.
-db = sqlitecloud.connect('sqlitecloud://cpt96oeuik.sqlite.cloud:8860?apikey=EtgWVu9uxo2Cxag9fpAaPNwFvfGsrPTV4k4jsanxKRM')
+db = sqlitecloud.connect('<your-connection-string>')
 
 def get_albums():
   result = db.execute('''
