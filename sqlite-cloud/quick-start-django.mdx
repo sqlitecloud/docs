@@ -1,0 +1,75 @@
+---
+title: Django Quick Start Guide
+description: Get started with SQLite Cloud using Django.
+slug: django-quick-start
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Django by building a simple application that connects to and reads from a SQLite Cloud database, and returns the result to a lightweight client.
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a Django app**
+  - Create a Django app using the following command:
+```bash
+django-admin startproject sqlitecloud_quickstart
+```
+  - Create a new app within the project:
+```bash
+cd sqlitecloud_quickstart
+python manage.py startapp quickstart
+```
+
+3. **Install the SQLite Cloud SDK**
+```bash
+pip install sqlitecloud
+```
+
+4. **Query data**
+  - Grab a connection string by clicking on a node in your dashboard.
+  - Create a file `services.py` within the quickstart directory. Use the following code to display data from your database.
+
+```python
+import sqlitecloud
+
+# Create your models here.
+db = sqlitecloud.connect('sqlitecloud://cpt96oeuik.sqlite.cloud:8860?apikey=EtgWVu9uxo2Cxag9fpAaPNwFvfGsrPTV4k4jsanxKRM')
+
+def get_albums():
+  result = db.execute('''
+  USE DATABASE chinook.sqlite; 
+  SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
+  FROM albums 
+  INNER JOIN artists 
+  WHERE artists.ArtistId = albums.ArtistId
+  LIMIT 20;
+  ''')
+  return result.fetchall()
+
+```
+  - Use the following code to display the data in a Django view:
+```python
+from django.http import JsonResponse
+from .services import get_albums
+
+def albums(request):
+    data = get_albums()
+    return JsonResponse(data, safe=False)
+```
+  - Add the following URL pattern to your project's `urls.py` file:
+```python
+from django.urls import path
+from quickstart import albums
+
+urlpatterns = [
+    path('albums/', albums),
+]
+```
+  - Run the Django development server:
+```bash
+python manage.py runserver
+```
+  - Visit `http://localhost:8000/albums/` to see the data returned from your SQLite Cloud database.
+
+And that's it! You've successfully built a Django app that reads data from a SQLite Cloud database.
