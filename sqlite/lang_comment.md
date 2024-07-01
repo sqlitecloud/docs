@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: SQL Comment Syntax
 description: Comments are not SQL commands, but can occur within the text of SQL queries passed to sqlite3_prepare_v2() and related interfaces.
 statement: /* This is a comment */
+customClass: sqlite-doc
 --- 
 
 <!-- do-not-touch-svg-import: 'comment.svg' -->

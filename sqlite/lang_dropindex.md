@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: DROP INDEX
 description: The DROP INDEX statement removes an index added with the CREATE INDEX statement.
 statement: DROP INDEX IF EXISTS ArtistNameIdx;
+customClass: sqlite-doc
 ---
 
 <!-- do-not-touch-svg-import: 'dropindex.svg' -->

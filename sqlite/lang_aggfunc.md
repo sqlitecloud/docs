@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: Built-in Aggregate Functions
 description: The aggregate functions shown below are available by default. There are two more aggregates grouped with the JSON SQL functions.
 statement: SELECT COUNT(*) FROM Artist;
+customClass: sqlite-doc
 ---
 
 ## 1. Syntax

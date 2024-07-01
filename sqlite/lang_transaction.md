@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: Transaction
 description: Any command that accesses the database will automatically start a transaction if one is not already in effect.
 statement: BEGIN TRANSACTION;
+customClass: sqlite-doc
 ---
 
 ## 1. Transaction Control Syntax

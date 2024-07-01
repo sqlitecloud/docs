@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: EXPLAIN
 description: An SQL statement can be preceded by the keyword "EXPLAIN" or by the phrase "EXPLAIN QUERY PLAN".
 statement: EXPLAIN SELECT * FROM Artist;
+customClass: sqlite-doc
 ---
 
 ## 1. Syntax

@@ -1,7 +1,7 @@
 ---
-customClass: sqlite-doc
 title: The ON CONFLICT Clause
 description: The ON CONFLICT clause is a non-standard extension specific to SQLite that can appear in many other SQL commands.
+customClass: sqlite-doc
 ---
 
 <!-- do-not-touch-svg-import: 'conflict.svg' -->

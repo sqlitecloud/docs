@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: REPLACE
 description: The REPLACE command is an alias for the "INSERT OR REPLACE" variant of the INSERT command.
 statement: REPLACE INTO Artist (name) VALUES ('Taylor Swift');
+customClass: sqlite-doc
 ---
 
 The REPLACE command is an alias for the "[INSERT OR

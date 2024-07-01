@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: Built-In Mathematical SQL Functions
 description: The math functions shown below are a subgroup of scalar functions that are built into the SQLite amalgamation source file.
 statement: SELECT log(3.1415);
+customClass: sqlite-doc
 ---
 
 ## 1. Overview

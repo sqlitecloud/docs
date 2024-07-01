@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: Date And Time Functions
 description: SQLite supports seven scalar date and time functions  as follows in this page
 statement: SELECT DATE('now');
+customClass: sqlite-doc
 ---
 
 ## 1. Overview

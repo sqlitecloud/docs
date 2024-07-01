@@ -1,8 +1,8 @@
 ---
-customClass: sqlite-doc
 title: Database Object Name Resolution
 description: In SQLite, a database object (a table, index, trigger or view) is identified by the name of the object and the name of the database that it resides in.
 statement: SELECT column AS alias FROM table;
+customClass: sqlite-doc
 ---
 
 In SQLite, a database object (a table, index, trigger or view) is
