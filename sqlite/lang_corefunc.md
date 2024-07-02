@@ -3,6 +3,8 @@ title: Built-In Scalar SQL Functions
 description: The core functions shown below are available by default. Date & Time functions, aggregate functions, window functions, math functions, and JSON functions.
 statement: SELECT random();
 customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Overview

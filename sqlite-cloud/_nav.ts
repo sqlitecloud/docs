@@ -5,12 +5,13 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Getting Started", type: "secondary", icon: "docs-star" },
 	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
+	{ title: "Multi Code Example", filePath: "components/multicode", type: "inner", level: 1 },
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
-	{ title: "Django", filePath: "sqlite-cloud/quick-start-django", type: "inner", level: 1 },
+	{ title: "Django", filePath: "django-quick-start", type: "inner", level: 1 },
 
 
-	{ title: "Database", type: "secondary", icon: "docs-db" },
+	// { title: "Database", type: "secondary", icon: "docs-db" },
 	{ title: "Fundamentals", type: "inner", level: 0 },
 	{ title: "Connecting", filePath: "sqlite-cloud/database/connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "sqlite-cloud/database/create-database", type: "inner", level: 1 },

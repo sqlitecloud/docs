@@ -4,6 +4,8 @@ description: SQLite supports a limited subset of ALTER TABLE. The ALTER TABLE co
 statement: ALTER TABLE Album ADD COLUMN year INTEGER;
 success: SELECT * FROM Album;
 customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Overview

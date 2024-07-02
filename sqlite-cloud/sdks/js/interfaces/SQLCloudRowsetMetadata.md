@@ -2,6 +2,8 @@
 title: SQLCloudRowsetMetadata
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc
+category: sdks
+status: publish
 ---
 
 Metadata information for a set of rows resulting from a query

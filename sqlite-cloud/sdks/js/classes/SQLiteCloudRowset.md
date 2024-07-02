@@ -1,7 +1,9 @@
 ---
 title: SQLiteCloudRowset
 description: SQLite Cloud Javascript SDK
-customClass: sdk-doc badge-doc js-doc 
+customClass: sdk-doc badge-doc js-doc
+category: sdks
+status: publish
 ---
 
 ## Hierarchy

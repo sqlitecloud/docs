@@ -3,6 +3,8 @@ title: CREATE TRIGGER
 description: The CREATE TRIGGER statement is used to add triggers to the database schema.
 statement: CREATE TRIGGER IF NOT EXISTS validate_artist_name BEFORE INSERT ON Artist BEGIN SELECT CASE WHEN NEW.name LIKE 'Z%' THEN RAISE (ABORT,'Invalid artist name!') END; END;
 customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Syntax

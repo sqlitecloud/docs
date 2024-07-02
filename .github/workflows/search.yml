@@ -22,4 +22,4 @@ jobs:
           strip-md-titles: true
           strip-jsx: true
           strip-html: true
-          path-using-slug: false
+          path-using-slug: true

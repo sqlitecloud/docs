@@ -3,6 +3,8 @@ title: DROP TABLE
 description: The DROP TABLE statement removes a table added with the CREATE TABLE statement.
 statement: DROP TABLE IF EXISTS Genre;
 customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'droptable.svg' -->
