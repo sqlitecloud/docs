@@ -4,6 +4,7 @@ description: SQLite understands various operators, listed in this page of the SQ
 statement: SELECT (10 * (5 + 2) / 15) AS result;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Syntax

@@ -4,6 +4,7 @@ description: Any command that accesses the database will automatically start a t
 statement: BEGIN TRANSACTION;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Transaction Control Syntax

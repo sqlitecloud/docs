@@ -4,6 +4,7 @@ description: Common Table Expressions or CTEs act like temporary views that exis
 statement: WITH RECURSIVE ten(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM ten WHERE x<10) SELECT * FROM ten;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

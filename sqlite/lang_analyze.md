@@ -4,6 +4,7 @@ description: The ANALYZE command gathers statistics about tables and indices and
 statement: ANALYZE;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

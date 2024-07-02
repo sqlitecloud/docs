@@ -4,6 +4,7 @@ description: The REINDEX command is used to delete and recreate indices from scr
 statement: REINDEX;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'reindex.svg' -->

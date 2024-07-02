@@ -4,6 +4,7 @@ description: The aggregate functions shown below are available by default. There
 statement: SELECT COUNT(*) FROM Artist;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Syntax

@@ -3,6 +3,7 @@ title: SQLiteCloudConnection
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc
 category: sdks
+status: publish
 ---
 
 Base class for SQLiteCloudConnection handles basics and defines methods.

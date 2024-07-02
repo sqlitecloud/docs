@@ -4,6 +4,7 @@ description: The ATTACH DATABASE statement adds another database file to the cur
 statement: ATTACH DATABASE 'database_name' AS alias;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

@@ -3,6 +3,7 @@ title: SQLiteCloudRow
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc
 category: sdks
+status: publish
 ---
 
 A single row in a dataset with values accessible by column name

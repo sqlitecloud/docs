@@ -4,6 +4,7 @@ description: The VACUUM command rebuilds the database file, repacking it into a 
 statement: VACUUM;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Syntax

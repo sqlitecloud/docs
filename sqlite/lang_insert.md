@@ -4,6 +4,7 @@ description: The INSERT statement comes in three basic forms. INSERT INTO table 
 statement: INSERT INTO Artist (name) VALUES ('Rod Stewart');
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

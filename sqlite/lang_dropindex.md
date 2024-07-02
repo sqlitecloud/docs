@@ -4,6 +4,7 @@ description: The DROP INDEX statement removes an index added with the CREATE IND
 statement: DROP INDEX IF EXISTS ArtistNameIdx;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'dropindex.svg' -->

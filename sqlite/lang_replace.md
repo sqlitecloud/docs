@@ -4,6 +4,7 @@ description: The REPLACE command is an alias for the "INSERT OR REPLACE" variant
 statement: REPLACE INTO Artist (name) VALUES ('Taylor Swift');
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 The REPLACE command is an alias for the "[INSERT OR

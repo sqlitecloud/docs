@@ -4,6 +4,7 @@ description: The DROP TRIGGER statement removes a trigger created by the CREATE 
 statement: DROP TRIGGER IF EXISTS validate_artist_name;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'droptrigger.svg' -->

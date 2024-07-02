@@ -4,6 +4,7 @@ description: UPSERT is a clause added to INSERT that causes the INSERT to behave
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') ON CONFLICT (ArtistId) DO UPDATE SET name = 'New Lady Gaga';
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Syntax

@@ -4,6 +4,7 @@ description: In SQLite, a database object (a table, index, trigger or view) is i
 statement: SELECT column AS alias FROM table;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 In SQLite, a database object (a table, index, trigger or view) is

@@ -4,6 +4,7 @@ description: The core functions shown below are available by default. Date & Tim
 statement: SELECT random();
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

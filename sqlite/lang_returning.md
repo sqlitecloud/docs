@@ -4,6 +4,7 @@ description: The RETURNING clause is not a statement itself, but a clause that c
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') RETURNING Name, ArtistId;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

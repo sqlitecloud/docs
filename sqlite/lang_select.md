@@ -4,6 +4,7 @@ description: The SELECT statement is used to query the database. The result of a
 statement: SELECT * FROM Artist;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

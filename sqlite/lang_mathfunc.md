@@ -4,6 +4,7 @@ description: The math functions shown below are a subgroup of scalar functions t
 statement: SELECT log(3.1415);
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

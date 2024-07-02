@@ -4,6 +4,7 @@ description: By default, SQLite supports twenty-nine functions and two operators
 statement: SELECT json_object('id' , ArtistId, 'name', name) FROM Artist;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview

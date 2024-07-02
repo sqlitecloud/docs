@@ -4,6 +4,7 @@ description: An SQL statement can be preceded by the keyword "EXPLAIN" or by the
 statement: EXPLAIN SELECT * FROM Artist;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Syntax

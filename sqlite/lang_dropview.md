@@ -4,6 +4,7 @@ description: The DROP VIEW statement removes a view created by the CREATE VIEW s
 statement: DROP VIEW IF EXISTS view_names;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'dropview.svg' -->

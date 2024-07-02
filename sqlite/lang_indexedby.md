@@ -4,6 +4,7 @@ description: The INDEXED BY phrase forces the SQLite query planner to use a part
 statement: SELECT * FROM Artist INDEXED BY ArtistNameIdx;
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. How INDEXED BY Works

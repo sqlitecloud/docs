@@ -4,6 +4,7 @@ description: An UPDATE statement is used to modify a subset of the values stored
 statement: UPDATE Artist SET name = 'New Lady Gaga' WHERE name = 'Lady Gaga';
 customClass: sqlite-doc
 category: reference
+status: publish
 ---
 
 ## 1. Overview
