@@ -13,13 +13,13 @@ const sidebarNav: SidebarNavStruct = [
 
 	// { title: "Database", type: "secondary", icon: "docs-db" },
 	{ title: "Fundamentals", type: "inner", level: 0 },
-	{ title: "Connecting", filePath: "sqlite-cloud/database/connect-cluster", type: "inner", level: 1 },
-	{ title: "Creating a database", filePath: "sqlite-cloud/database/create-database", type: "inner", level: 1 },
-	{ title: "Writing data", filePath: "sqlite-cloud/database/write-data", type: "inner", level: 1 },
+	{ title: "Connecting", filePath: "sqlite-cloud/connect-cluster", type: "inner", level: 1 },
+	{ title: "Creating a database", filePath: "sqlite-cloud/create-database", type: "inner", level: 1 },
+	{ title: "Writing data", filePath: "sqlite-cloud/write-data", type: "inner", level: 1 },
 	{ title: "Backups", filePath: "/docs/backups", type: "inner", level: 0 },
 	// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
-	{ title: "Extensions", filePath: "sqlite-cloud/database/extensions", type: "inner", level: 0 },
+	{ title: "Extensions", filePath: "sqlite-cloud/platform/extensions", type: "inner", level: 0 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	// { title: "Overview", type: "inner", level: 0 },
