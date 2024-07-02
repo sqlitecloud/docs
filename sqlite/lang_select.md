@@ -3,6 +3,7 @@ title: SELECT
 description: The SELECT statement is used to query the database. The result of a SELECT is zero or more rows of data where each row has a fixed number of columns.
 statement: SELECT * FROM Artist;
 customClass: sqlite-doc
+category: reference
 ---
 
 ## 1. Overview

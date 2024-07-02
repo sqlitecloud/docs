@@ -3,6 +3,7 @@ title: Transaction
 description: Any command that accesses the database will automatically start a transaction if one is not already in effect.
 statement: BEGIN TRANSACTION;
 customClass: sqlite-doc
+category: reference
 ---
 
 ## 1. Transaction Control Syntax

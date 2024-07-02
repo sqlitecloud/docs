@@ -3,6 +3,7 @@ title: UPSERT
 description: UPSERT is a clause added to INSERT that causes the INSERT to behave as an UPDATE or a no-op if the INSERT would violate a uniqueness constraint.
 statement: INSERT INTO Artist (name) VALUES ('Lady Gaga') ON CONFLICT (ArtistId) DO UPDATE SET name = 'New Lady Gaga';
 customClass: sqlite-doc
+category: reference
 ---
 
 ## 1. Syntax

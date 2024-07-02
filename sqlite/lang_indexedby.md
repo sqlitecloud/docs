@@ -3,6 +3,7 @@ title: The INDEXED BY Clause
 description: The INDEXED BY phrase forces the SQLite query planner to use a particular named index on a DELETE, SELECT, or UPDATE statement.
 statement: SELECT * FROM Artist INDEXED BY ArtistNameIdx;
 customClass: sqlite-doc
+category: reference
 ---
 
 ## 1. How INDEXED BY Works

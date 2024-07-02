@@ -3,6 +3,7 @@ title: REINDEX
 description: The REINDEX command is used to delete and recreate indices from scratch.
 statement: REINDEX;
 customClass: sqlite-doc
+category: reference
 ---
 
 <!-- do-not-touch-svg-import: 'reindex.svg' -->

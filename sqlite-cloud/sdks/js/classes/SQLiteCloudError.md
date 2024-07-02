@@ -2,6 +2,7 @@
 title: SQLiteCloudError
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc 
+category: sdks
 ---
 
 Custom error reported by SQLiteCloud drivers

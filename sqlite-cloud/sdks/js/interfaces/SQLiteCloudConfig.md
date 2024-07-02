@@ -1,7 +1,8 @@
 ---
 title: SQLiteCloudConfig
 description: SQLite Cloud Javascript SDK
-customClass: sdk-doc badge-doc js-doc 
+customClass: sdk-doc badge-doc js-doc
+category: sdks
 ---
 
 Configuration for SQLite cloud connection

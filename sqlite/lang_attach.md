@@ -3,6 +3,7 @@ title: ATTACH DATABASE
 description: The ATTACH DATABASE statement adds another database file to the current database connection.
 statement: ATTACH DATABASE 'database_name' AS alias;
 customClass: sqlite-doc
+category: reference
 ---
 
 ## 1. Overview

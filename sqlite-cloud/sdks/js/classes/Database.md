@@ -2,6 +2,7 @@
 title: Database
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc 
+category: sdks
 ---
 
 Creating a Database object automatically opens a connection to the SQLite database.

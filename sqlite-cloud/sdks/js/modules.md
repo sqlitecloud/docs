@@ -2,6 +2,7 @@
 title: Modules
 description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc 
+category: sdks
 ---
 
 ## Table of contents
