@@ -8,7 +8,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Multi Code Example", filePath: "components/multicode", type: "inner", level: 1 },
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
-	{ title: "Django", filePath: "django-quick-start", type: "inner", level: 1 },
+	// { title: "Django", filePath: "django-quick-start", type: "inner", level: 1 },
 
 
 	// { title: "Database", type: "secondary", icon: "docs-db" },
@@ -16,7 +16,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Connecting", filePath: "sqlite-cloud/database/connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "sqlite-cloud/database/create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "sqlite-cloud/database/write-data", type: "inner", level: 1 },
-	{ title: "Backups", filePath: "sqlite-cloud/database/backup", type: "inner", level: 0 },
+	{ title: "Backups", filePath: "backups", type: "inner", level: 0 },
 	// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
 	{ title: "Extensions", filePath: "sqlite-cloud/database/extensions", type: "inner", level: 0 },
