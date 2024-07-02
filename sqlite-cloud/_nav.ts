@@ -137,7 +137,8 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Methods", filePath: "sqlite-cloud/sdks/php/methods", type: "inner", level: 1 },
 
 	{ title: "Reference", type: "secondary", icon: "docs-ref" },
-	{ title: "Server-side Commands", type: "inner", filePath: "server-side-commands", level: 0 },
+	{ title: "Server-side Commands", type: "inner", level: 0 },
+	{ title: "Overview", filePath: "server-side-commands", type: "inner", level: 1 },
 	{ title: "API Keys", filePath: "api-key-commands", type: "inner", level: 1 },
 	{ title: "Authentication", filePath: "auth-commands", type: "inner", level: 1 },
 	{ title: "Backups", filePath: "backup-commands", type: "inner", level: 1 },
