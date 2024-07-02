@@ -1,0 +1,119 @@
+---
+title: Multi Code Component Examples
+description: Multi Code Component Examples
+slug: components/multicode
+---
+import MultiCode from '@commons-components/Code/MultiCode.astro';
+
+
+In this examples, we will show how to use the `MultiCode` component:
+
+- [Here](https://github.com/sqlitecloud/website/blob/docs-stage/commons/components/Code/MultiCode.astro) the definition of the `MultiCode` component.
+- [Here](https://github.com/sqlitecloud/website/blob/docs-stage/commons/components/Code/Code.astro) the definition of the `Code` component that is used inside the `MultiCode` component.
+
+
+In these two files there are the TypeScript definitions usefull to know all the avaible properties.
+
+The MultiCode
+
+--- 
+## First example 
+
+export const WebliteSourceCode = `<script>
+  async function searchData(event) {
+    const query = document.getElementById('query').value;
+    const response = await fetch(
+      "https://abcdef123k.sqlite.cloud:8090/v2/functions/search-js?query=" + query
+    )
+    const data = await response.json();
+  }
+</script>
+
+<form onsubmit="searchData(event)">
+  <input type="text" id="query" name="query" required>
+  <button type="submit">Search</button>
+</form>`;
+
+export const SwiftSourceCode = `let configuration = SQLiteCloudConfig(connectionString: "sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey")
+let sqliteCloud = SQLiteCloud(configuration)
+
+do {
+	try await sqliteCloud.connect()
+	debugPrint("connected")
+} catch {
+	debugPrint("connection error: \(error)") // SQLiteCloudConnectionError
+}`;
+
+
+export const codeExamplesOne = [
+	{
+		sliderItem: "Web",
+		codeLines: WebliteSourceCode,
+		lang: "html",
+		// docHref: "htts://google.com",
+		gitHref: "htts://google.com",
+	},
+	{
+		sliderItem: "Swift",
+		lang: "swift",
+		codeLines: SwiftSourceCode,
+		docHref: "",
+		gitHref: "",
+	}
+];
+
+<MultiCode id="first" copyCode={true} codeItems={codeExamplesOne}  />
+
+---
+
+## Second example 
+
+
+export const PHPSourceCode = `$sqliteCloudConnectionString = 'sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey';
+$sqlite = new SQLiteCloudClient();
+$sqlite->connectWithString($sqliteCloudConnectionString);`;
+
+export const JSSourceCode = `import SQLiteCloud from 'sqlitecloud-sdk'
+const client = new SQLiteCloud(projectId, apikey, onErrorCallback, onCloseCallback);
+
+await client.connect();
+const database = "chinook.db"
+let name = 'Breaking The Rules'
+let results = await localClient.exec(\`USE DATABASE \${database}; SELECT * FROM tracks WHERE name = \${name}\`);`;
+
+export const NodeSourceCode = `import { Database } from 'sqlitecloud-js'
+
+let database = new Database('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+let name = 'Breaking The Rules'
+let results = await database.sql\`\`SELECT * FROM tracks WHERE name = \${name}\`\`
+`;
+
+export const codeExamplesTwo = [
+	{
+		sliderItem: "PHP",
+		codeLines: PHPSourceCode,
+		lang: "php",
+		// docHref: "htts://google.com",
+		gitHref: "htts://google.com",
+	},
+	{
+		sliderItem: "Web",
+		lang: "javascript",
+		codeLines: JSSourceCode,
+		docHref: "",
+		gitHref: "",
+	},
+	{
+		sliderItem: "NodeJS",
+		lang: "javascript",
+		codeLines: NodeSourceCode,
+		docHref: "",
+		gitHref: "",
+	}
+];
+
+
+Ciao sono tizinao
+
+<MultiCode id="second" copyCode={true} codeItems={codeExamplesTwo}  />
+
