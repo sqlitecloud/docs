@@ -11,9 +11,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
-	// { title: "Django", filePath: "django-quick-start", type: "inner", level: 1 },
-
-	// { title: "Database", type: "secondary", icon: "docs-db" },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
@@ -138,7 +135,7 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "Reference", type: "secondary", icon: "docs-ref" },
 	{ title: "Server-side Commands", type: "inner", level: 0 },
-	{ title: "Overview", filePath: "server-side-commands", type: "inner", level: 1 },
+	{ title: "Introduction", filePath: "server-side-commands", type: "inner", level: 1 },
 	{ title: "API Keys", filePath: "api-key-commands", type: "inner", level: 1 },
 	{ title: "Authentication", filePath: "auth-commands", type: "inner", level: 1 },
 	{ title: "Backups", filePath: "backup-commands", type: "inner", level: 1 },
