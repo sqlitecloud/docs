@@ -16,7 +16,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Connecting", filePath: "sqlite-cloud/database/connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "sqlite-cloud/database/create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "sqlite-cloud/database/write-data", type: "inner", level: 1 },
-	{ title: "Backups", filePath: "backups", type: "inner", level: 0 },
+	{ title: "Backups", filePath: "/docs/backups", type: "inner", level: 0 },
 	// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
 	{ title: "Extensions", filePath: "sqlite-cloud/database/extensions", type: "inner", level: 0 },
