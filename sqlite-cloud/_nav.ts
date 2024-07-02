@@ -21,7 +21,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Pub/Sub", filePath: "sqlite-cloud/platform/pub-sub", type: "inner", level: 0 },
 	{ title: "Scaling", type: "inner", filePath: "sqlite-cloud/platform/scaling", level: 0 },
 	{ title: "Security and Access Control", filePath: "sqlite-cloud/platform/security", type: "inner", level: 0 },
-	{ title: "Backups", filePath: "/docs/backups", type: "inner", level: 0 },
+	{ title: "Backups", filePath: "/backups", type: "inner", level: 0 },
 	{ title: "Query Analyzer", filePath: "sqlite-cloud/platform/analyzer", type: "inner", level: 0 },
 	{ title: "Extensions", filePath: "sqlite-cloud/platform/extensions", type: "inner", level: 0 },
 		// { title: "Storage", type: "inner", level: 0 },
