@@ -35,14 +35,14 @@ const app = express();
 const db = new Database('<your-connection-string>');
 
 app.get('/albums', async (req, res) => {
-  const result = await db.sql`
-  USE DATABASE chinook.sqlite; 
-  SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
-  FROM albums 
-  INNER JOIN artists 
-  WHERE artists.ArtistId = albums.ArtistId
-  LIMIT 20;`;
-  res.json(result);
+    const result = await db.sql`
+    USE DATABASE chinook.sqlite; 
+    SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
+    FROM albums 
+    INNER JOIN artists 
+    WHERE artists.ArtistId = albums.ArtistId
+    LIMIT 20;`;
+    res.json(result);
 });
 
 app.listen(3000, () => {
