@@ -127,7 +127,6 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "JavaScript", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/js/getting-started", level: 1 },
-	{ title: 'React Quick Start', type: "inner", filePath: "sqlite-cloud/quick-start-react", level: 1 },
 
 	{ title: "Python", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
