@@ -9,8 +9,11 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Creating a database", filePath: "sqlite-cloud/create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "sqlite-cloud/write-data", type: "inner", level: 1 },
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
+	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 }, 
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
+
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
