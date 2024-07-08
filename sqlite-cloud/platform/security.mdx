@@ -32,7 +32,7 @@ There are two types of roles in SQLite Cloud:
 ## Built-in roles
 import Callout from "@commons-components/Information/Callout.astro"; 
 
-SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the [GRANT ROLE](https://docs.sqlitecloud.io/docs/commands/grant-role) command, and custom roles can be created with the [CREATE ROLE](https://docs.sqlitecloud.io/docs/commands/create-role) command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
+SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the [GRANT ROLE](https://docs.sqlitecloud.io/docs/role-commands) command, and custom roles can be created with the [CREATE ROLE](https://docs.sqlitecloud.io/docs/role-commands) command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
 
 Here is an overview of the built-in roles:
 
@@ -58,7 +58,7 @@ Here is an overview of the built-in roles:
 
 
 <Callout type="note" title="Restrictions">
-To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/commands/create-role), [GRANT ROLE](/docs/commands/grant-role), [GRANT PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/grant-privilege) and [SET PRIVILEGE](https://docs.sqlitecloud.io/docs/commands/set-privilege) commands, as well as during the [CREATE USER](https://docs.sqlitecloud.io/docs/commands/create-user) command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
+To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/role-commands), [GRANT ROLE](/docs/role-commands), [GRANT PRIVILEGE](https://docs.sqlitecloud.io/docs/privilege-commands) and [SET PRIVILEGE](https://docs.sqlitecloud.io/docs/privilege-commands) commands, as well as during the [CREATE USER](https://docs.sqlitecloud.io/docs/user-commands) command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
 </Callout>
 
 ```bash
@@ -98,7 +98,7 @@ In a role-based access control system, a privilege represents a specific action 
 It defines what a user can or cannot do, such as reading, writing, or managing certain resources like tables, databases, or settings.
 Essentially, a privilege is a **right** or **ability** granted to a user or role, specifying their level of access and control over the system's resources.
 
-A privilege can be [granted](https://docs.sqlitecloud.io/docs/commands/grant-privilege), [revoked](https://docs.sqlitecloud.io/docs/commands/revoke-privilege) and [assigned](https://docs.sqlitecloud.io/docs/commands/set-privilege) to a given role.
+A privilege can be [granted](https://docs.sqlitecloud.io/docs/privilege-commands), [revoked](https://docs.sqlitecloud.io/docs/privilege-commands) and [assigned](https://docs.sqlitecloud.io/docs/privilege-commands) to a given role.
 A role can contains any combination of privileges.
 
 ```bash
@@ -162,7 +162,7 @@ The IP Restrictions table will display all current IP restrictions for the selec
 
 ## API KEYs 
 
-API KEYs can be used as an alternative authentication mechanism. Authentication through API keys ensures the same privileges as the user to which they are associated. API KEYs are recommended for all server-to-server authentication cases and are necessary for using the [REST APIs](/docs/introduction/api) and the [SDK](/docs/sdk) that uses the WebSocket APIs.
+API KEYs can be used as an alternative authentication mechanism. Authentication through API keys ensures the same privileges as the user to which they are associated. API KEYs are recommended for all server-to-server authentication cases and are necessary for using the REST APIs and the SDKs that uses the WebSocket APIs.
 
 To create an API key for a user, click on the **Create API KEY** button.
 

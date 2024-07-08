@@ -10,11 +10,11 @@ char *SQCloudArrayValue (SQCloudResult *result, uint32_t index, uint32_t *len);
 ```
 
 ### Description
-If the result of the function [SQCloudResultType](/docs/sdk/c/sqcloudresulttype) is RESULT_ARRAY then use this function to retrieve a pointer and a length for an array value.
+If the result of the function [SQCloudResultType](/docs/sdks/c/sqcloudresulttype) is RESULT_ARRAY then use this function to retrieve a pointer and a length for an array value.
 
 ### Parameters
 * **result**: A valid SQCloudResult pointer returned by an SQCloud function
-* **index**: An array index (from 0 to [SQCloudArrayCount](/docs/sdk/c/sqcloudarraycount)-1)
+* **index**: An array index (from 0 to [SQCloudArrayCount](/docs/sdks/c/sqcloudarraycount)-1)
 * **len**: On output the length of the returned buffer
 
 ### Return value
