@@ -1,0 +1,60 @@
+---
+title: "SQCloudSetPubSubCallback"
+description: SQCloud Pub/Sub C/C++ Interface SQCloudSetPubSubCallback
+category: sdks
+status: publish
+---
+
+```c
+void SQCloudSetPubSubCallback (SQCloudConnection *connection, SQCloudPubSubCB callback, void *data);
+```
+
+### Description
+By using **SQCloudSetPubSubCallback**, you can set a callback function that will be automatically triggered each time a notification is received. It's possible to call this function multiple times, but it will be executed only once. If you don't set a callback function, your C code won't be able to read any notifications sent by the Pub/Sub subsystem. The callback function is executed in an independent secondary thread, which allows the main thread to perform other commands without interruption.
+
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **callback**: the C callback to be called in each notification
+* **data**: custom data to be transparently passed to the callback
+
+### Callback
+```c
+void pubsub_callback (SQCloudConnection *connection, SQCloudResult *result, void *data);
+```
+
+### Return value
+Nothing.
+
+### Example
+```c
+
+static my_callback(SQCloudConnection *connection, SQCloudResult *result, void *data) {
+    // dump JSON notification
+    // more about the JSON format: https://docs.sqlitecloud.io/docs/introduction/pubsub_payload
+    SQCloudResultDump(connection, result);
+}
+
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // set pub/sub callback
+    SQCloudSetPubSubCallback(conn, my_callback, NULL);
+
+    // start listening to a CHANNEL
+    SQCloudExec(conn, "LISTEN channel1;");
+
+    // ...
+}
+```

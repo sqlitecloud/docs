@@ -1,0 +1,76 @@
+---
+title: "SQCloudArrayFloatValue"
+description: SQCloud Array C/C++ Interface SQCloudArrayFloatValue
+category: sdks
+status: publish
+---
+
+```c
+float SQCloudArrayFloatValue (SQCloudResult *result, uint32_t index);
+```
+
+### Description
+If the result of the function [SQCloudResultType](/docs/sdk/c/sqcloudresulttype) is RESULT_ARRAY then use this function to retrieve a float value.
+
+### Parameters
+* **result**: A valid SQCloudResult pointer returned by an SQCloud function.
+* **index**: An array index (from 0 to [SQCloudArrayCount](/docs/sdk/c/sqcloudarraycount)-1)
+
+### Return value
+A `float` value.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // execute a TEST ARRAY command
+    SQCloudResult *r = SQCloudExec(conn, "TEST ARRAY;");
+    if (SQCloudResultType(r) == RESULT_ARRAY) {
+        int count = SQCloudArrayCount(r);
+        for (int i=0; i<count; ++i) {
+            SQCLOUD_VALUE_TYPE type = SQCloudArrayValueType(r, i);
+            switch (type) {
+                case VALUE_NULL: {
+                    printf("NULL\n");
+                    break;
+                }
+                case VALUE_INTEGER: {
+                    int32_t value = SQCloudArrayInt32Value(r, i);
+                    printf("%d\n", value);
+                    // int64_t value = SQCloudArrayInt64Value(r, i);
+                    // printf("%lld\n", value);
+                    break;
+                }
+                case VALUE_FLOAT: {
+                    float value = SQCloudArrayFloatValue(r, i);
+                    printf("%f\n", value);
+                    // double value = SQCloudArrayDoubleValue(r, i);
+                    // printf("%f\n", value);
+                    break;
+                }
+                case VALUE_BLOB:
+                case VALUE_TEXT: {
+                    uint32_t len;
+                    char *value = SQCloudArrayValue(result, i, &len);
+                    if (type == VALUE_BLOB) printf("[%d] BLOB size %d\n", i, len);
+                    else printf("[%d] %.*s\n", i, len, value);
+                }
+            }
+        }
+    }
+
+    SQCloudResultFree(r);
+}
+```

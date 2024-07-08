@@ -2,6 +2,9 @@
 title: ANALYZE
 description: The ANALYZE command gathers statistics about tables and indices and stores the collected information in internal tables.
 statement: ANALYZE;
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Overview

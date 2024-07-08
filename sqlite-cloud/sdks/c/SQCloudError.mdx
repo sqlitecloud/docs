@@ -1,0 +1,65 @@
+---
+title: "Error APIs"
+description: SQCloud Error API C/C++ Interface
+category: sdks
+status: publish
+---
+
+```c
+bool SQCloudIsError (SQCloudConnection *connection);
+bool SQCloudIsSQLiteError (SQCloudConnection *connection);
+int SQCloudErrorCode (SQCloudConnection *connection);
+int SQCloudExtendedErrorCode (SQCloudConnection *connection);
+int SQCloudErrorOffset (SQCloudConnection *connection);
+const char *SQCloudErrorMsg (SQCloudConnection *connection);
+```
+
+### Description
+If the most recent API call associated with with database connection failed, then this APIs return information about the error.
+These functions resemble the [sqlite3_error_*](https://www.sqlite.org/c3ref/errcode.html) SQLite APIs. 
+
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+
+### Return value
+* **SQLiteIsError** returns `true` if the most recent API call failed.
+* **SQCloudIsSQLiteError** returns `true` if the most recent error is related to an SQLite operation.
+* **SQCloudErrorCode** returns the numeric error code (or 0 if no error).
+* **SQCloudExtendedErrorCode** returns the numeric [extended error code](https://www.sqlite.org/rescode.html#extrc) related to the failed SQLite operation.
+* **SQCloudErrorOffset** returns the byte offset of the start of the most recent error references a specific token in the input SQL (if any). If the most recent error does not reference a specific token in the input SQL, then the **SQCloudErrorOffset** function returns -1.
+* **SQCloudErrorMsg** return English-language text that describes the error.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // check errors
+    if (SQCloudIsError(conn)) {
+        int errcode = SQCloudErrorCode(conn);
+        const char *errmsg = SQCloudErrorMsg(conn);
+        printf("Err code: %d - Err msg: %s\n", errcode, errmsg);
+
+        if (SQCloudIsSQLiteError(conn)) {
+            int exterr = SQCloudExtendedErrorCode(conn);
+            int offerr = SQCloudErrorOffset(conn);
+            printf("Ext code: %d - Err offset: %d\n", exterr, offerr);
+        }
+    }
+}
+```

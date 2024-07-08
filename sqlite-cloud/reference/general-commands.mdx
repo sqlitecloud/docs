@@ -1,0 +1,821 @@
+---
+title: General Info Commands
+description: These commands provide general information about the server, such as the version, the number of databases, and the number of active connections.
+category: reference
+status: publish
+slug: general-commands
+---
+
+## CLOSE CONNECTION
+
+The CLOSE CONNECTION command closes the connection identified by the parameter connectionid. An optional NODE argument can be specified to force close a connection into the specified nodeid. The LIST CONNECTIONS command can be used to obtain a list of currently connected connection id(s).
+
+### Syntax
+
+CLOSE CONNECTION **connectionid** [NODE **nodeid**]
+
+### Privileges
+
+```
+USERADMIN
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> LIST CONNECTION
+----|-----------|----------|----------|---------------------|---------------------|
+ id | address   | username | database | connection_date     | last_activity       |
+----|-----------|----------|----------|---------------------|---------------------|
+ 1  | 127.0.0.1 | admin    | NULL     | 2023-02-03 10:08:20 | 2023-02-06 13:26:48 |
+----|-----------|----------|----------|---------------------|---------------------|
+
+> CLOSE CONNECTION 1
+OK
+```
+
+## GET INFO
+
+The GET INFO command retrieves a single specific information about a **key**. The NODE argument forces the execution of the command to a specific node of the cluster.
+
+### Syntax
+
+GET INFO **key** [NODE **nodeid**]
+
+### Privileges
+
+```
+CLUSTERADMIN, CLUSTERMONITOR
+```
+
+### Return
+
+A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **key**.
+
+### Example
+
+```bash
+> GET INFO sqlitecloud_version
+0.9.8
+```
+
+## GET SQL
+
+The GET SQL command retrieves the SQL statement used to generate the **table_name**.
+
+### Syntax
+
+GET SQL **table_name**
+
+### Privileges
+
+```
+READWRITE
+```
+
+### Return
+
+A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) set to the CREATE TABLE sql statement.
+
+### Example
+
+```bash
+> GET SQL table1
+CREATE TABLE table1 (id INTEGER PRIMARY KEY, name TEXT, surname TEXT, age INTEGER);
+```
+
+## LIST COMMANDS
+
+The LIST COMMANDS command returns a list of all supported built-in commands. It also returns information about how often each command was executed on the average execution time. The DETAILED flag adds a privileges column to the result.
+
+### Syntax
+
+LIST COMMANDS [DETAILED]
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **command**: command syntax
+* **count**: how many times the command was executed
+* **avgtime**: average command execution time
+
+### Example
+
+```bash
+> LIST COMMANDS
+----------------------------------------------------------------------|-------|---------|
+ command                                                              | count | avgtime |
+----------------------------------------------------------------------|-------|---------|
+ DECRYPT DATABASE <database_name>                                     | 0     | 0.0     |
+ DISABLE DATABASE <database_name>                                     | 0     | 0.0     |
+ DISABLE PLUGIN <plugin_name>                                         | 0     | 0.0     |
+ DISABLE USER <username>                                              | 0     | 0.0     |
+ DROP APIKEY <key>                                                    | 0     | 0.0     |
+ DROP CHANNEL <channel_name>                                          | 0     | 0.0     |
+ DROP CLIENT KEY <keyname>                                            | 0     | 0.0     |
+ DROP DATABASE <database_name> KEY <keyname>                          | 0     | 0.0     |
+ DROP DATABASE <database_name> [IF EXISTS]                            | 0     | 0.0     |
+ DROP KEY <keyname>                                                   | 0     | 0.0     |
+ DROP ROLE <role_name>                                                | 0     | 0.0     |
+ DROP USER <username>                                                 | 0     | 0.0     |
+ ENABLE DATABASE <database_name>                                      | 0     | 0.0     |
+ ENABLE PLUGIN <plugin_name>                                          | 0     | 0.0     |
+ ENABLE USER <username>                                               | 0     | 0.0     |
+ ENCRYPT DATABASE <database_name> WITH KEY <encryption_key>           | 0     | 0.0     |
+ GET CLIENT KEY <keyname>                                             | 0     | 0.0     |
+ GET DATABASE <database_name> KEY <keyname>                           | 0     | 0.0     |
+ GET DATABASE [<value>]                                               | 0     | 0.0     |
+ GET INFO <key> [NODE <nodeid>]                                       | 0     | 0.0     |
+ GET KEY <keyname>                                                    | 0     | 0.0     |
+ GET LEADER [ID]                                                      | 0     | 0.0     |
+ GET RUNTIME KEY <keyname>                                            | 0     | 0.0     |
+ GET SQL <table_name>                                                 | 0     | 0.0     |
+ GET USER                                                             | 0     | 0.0     |
+ ---------------------------------------------------------------------|-------|---------|
+```
+
+## LIST CONNECTIONS
+
+The LIST CONNECTIONS command returns information about the client connections server. The NODE argument forces the execution of the command to a specific node of the cluster.
+
+### Syntax
+
+LIST CONNECTIONS [NODE **nodeid**]
+
+### Privileges
+
+```
+USERADMIN, HOSTADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **id**: unique connection (client) ID
+* **address**: source connection IP address
+* **username**: username used to authenticate the connection
+* **connection_date**: original connection date and time
+* **last_activity**: last activity date and time
+* **address**: source connection IP address
+
+### Example
+
+```bash
+> LIST CONNECTIONS
+----|-----------|----------|----------|---------------------|---------------------|
+ id | address   | username | database | connection_date     | last_activity       |
+----|-----------|----------|----------|---------------------|---------------------|
+ 1  | 127.0.0.1 | admin    | NULL     | 2023-02-08 15:28:32 | 2023-02-08 15:34:51 |
+----|-----------|----------|----------|---------------------|---------------------|
+
+```
+
+## LIST INDEXES
+
+The LIST INDEXES command returns a list of all indexes defined inside the currently used database.
+
+### Syntax
+
+LIST INDEXES
+
+### Privileges
+
+```
+READWRITE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **name**: index name
+* **tbl_name**: table name
+
+### Example
+
+```bash
+> LIST INDEXES
+--------------------------|---------------|
+ name                     | tbl_name      |
+--------------------------|---------------|
+ IFK_AlbumArtistId        | Album         |
+ IFK_CustomerSupportRepId | Customer      |
+ IFK_EmployeeReportsTo    | Employee      |
+ IFK_InvoiceCustomerId    | Invoice       |
+ IFK_InvoiceLineInvoiceId | InvoiceLine   |
+ IFK_InvoiceLineTrackId   | InvoiceLine   |
+ IFK_PlaylistTrackTrackId | PlaylistTrack |
+ IFK_TrackAlbumId         | Track         |
+ IFK_TrackGenreId         | Track         |
+ IFK_TrackMediaTypeId     | Track         |
+--------------------------|---------------|
+```
+
+## LIST INFO
+
+The LIST INFO command retrieves general information about the server. To retrieve a single specific information, use the GET INFO **key** command.
+
+### Syntax
+
+LIST INFO
+
+### Privileges
+
+```
+CLUSTERADMIN, CLUSTERMONITOR
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **key**: server key
+* **value**: server value
+
+### Example
+
+```bash
+> LIST INFO
+--------------------------|------------------------------------------|
+ key                      | value                                    |
+--------------------------|------------------------------------------|
+ sqlitecloud_version      | 0.9.8                                    |
+ sqlite_version           | 3.39.3                                   |
+ sqlitecloud_build_date   | Feb 10 2023                              |
+ sqlitecloud_git_hash     | 9239313dc085cb787d25cf79424cefcf8ad17401 |
+ os                       | macOS 13.2 (22D49)                       |
+ arch_bits                | 64bit                                    |
+ multiplexing_api         | kqueue                                   |
+ listening_port           | 8860                                     |
+ process_id               | 64750                                    |
+ num_processors           | 10                                       |
+ startup_datetime         | 2023-02-10 14:36:37                      |
+ current_datetime         | 2023-02-10 14:36:45                      |
+ nocluster                | 1                                        |
+ nodeid                   | 0                                        |
+ load                     | 0.0021821100438153                       |
+ num_clients              | 1                                        |
+ running_clients          | 1                                        |
+ max_fd                   | 15824                                    |
+ num_fd                   | 35                                       |
+ mem_current              | 1729952                                  |
+ mem_max                  | 1840272                                  |
+ mem_total                | 17179869184                              |
+ disk_total               | 494384795648                             |
+ disk_free                | 296209416192                             |
+ disk_usage               | 198175379456                             |
+ disk_usage_perc          | 40.0852496275189                         |
+ cpu_load                 | 0.4262                                   |
+ num_connections          | 1                                        |
+ max_connections          | 10000                                    |
+ tls                      | LibreSSL 3.6.1                           |
+ tls_conn_version         | TLSv1.3                                  |
+ tls_conn_cipher          | TLS_CHACHA20_POLY1305_SHA256             |
+ tls_conn_cipher_strength | 256                                      |
+ tls_conn_alpn_selected   | NULL                                     |
+ tls_conn_servername      | localhost                                |
+ tls_peer_cert_provided   | 0                                        |
+ tls_peer_cert_subject    | NULL                                     |
+ tls_peer_cert_issuer     | NULL                                     |
+ tls_peer_cert_hash       | NULL                                     |
+ tls_peer_cert_notbefore  | NULL                                     |
+ tls_peer_cert_notafter   | NULL                                     |
+--------------------------|------------------------------------------|
+```
+
+## LIST KEYWORDS
+
+The LIST KEYWORDS command returns a rowset that contains a list of SQLite reserved keywords.
+
+### Syntax
+
+LIST KEYWORDS
+
+### Privileges
+
+```
+READWRITE, DBADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with one **key** column that returns all the reserved SQLite keywords.
+
+### Example
+
+```bash
+> LIST KEYWORDS
+-------------------|
+ key               |
+-------------------|
+ REINDEX           |
+ INDEXED           |
+ INDEX             |
+ DESC              |
+ ESCAPE            |
+ EACH              |
+ CHECK             |
+ KEY               |
+ BEFORE            |
+ FOREIGN           |
+ FOR               |
+ IGNORE            |
+ REGEXP            |
+ EXPLAIN           |
+ INSTEAD           |
+ ADD               |
+ DATABASE          |
+ AS                |
+ SELECT            |
+ TABLE             |
+ LEFT              |
+ THEN              |
+ END               |
+ DEFERRABLE        |
+ ELSE              |
+ EXCLUDE           |
+ DELETE            |
+ TEMPORARY         |
+ TEMP              |
+ OR                |
+ ISNULL            |
+ NULLS             |
+ SAVEPOINT         |
+ INTERSECT         |
+ TIES              |
+ NOTNULL           |
+ NOT               |
+ NO                |
+ NULL              |
+ LIKE              |
+ EXCEPT            |
+ TRANSACTION       |
+ ACTION            |
+ ON                |
+ NATURAL           |
+ ALTER             |
+ RAISE             |
+ EXCLUSIVE         |
+ EXISTS            |
+ CONSTRAINT        |
+ INTO              |
+ OFFSET            |
+ OF                |
+ SET               |
+ TRIGGER           |
+ RANGE             |
+ GENERATED         |
+ DETACH            |
+ HAVING            |
+ GLOB              |
+ BEGIN             |
+ INNER             |
+ REFERENCES        |
+ UNIQUE            |
+ QUERY             |
+ WITHOUT           |
+ WITH              |
+ OUTER             |
+ RELEASE           |
+ ATTACH            |
+ BETWEEN           |
+ NOTHING           |
+ GROUPS            |
+ GROUP             |
+ CASCADE           |
+ ASC               |
+ DEFAULT           |
+ CASE              |
+ COLLATE           |
+ CREATE            |
+ CURRENT_DATE      |
+ IMMEDIATE         |
+ JOIN              |
+ INSERT            |
+ MATCH             |
+ PLAN              |
+ ANALYZE           |
+ PRAGMA            |
+ MATERIALIZED      |
+ DEFERRED          |
+ DISTINCT          |
+ IS                |
+ UPDATE            |
+ VALUES            |
+ VIRTUAL           |
+ ALWAYS            |
+ WHEN              |
+ WHERE             |
+ RECURSIVE         |
+ ABORT             |
+ AFTER             |
+ RENAME            |
+ AND               |
+ DROP              |
+ PARTITION         |
+ AUTOINCREMENT     |
+ TO                |
+ IN                |
+ CAST              |
+ COLUMN            |
+ COMMIT            |
+ CONFLICT          |
+ CROSS             |
+ CURRENT_TIMESTAMP |
+ CURRENT_TIME      |
+ CURRENT           |
+ PRECEDING         |
+ FAIL              |
+ LAST              |
+ FILTER            |
+ REPLACE           |
+ FIRST             |
+ FOLLOWING         |
+ FROM              |
+ FULL              |
+ LIMIT             |
+ IF                |
+ ORDER             |
+ RESTRICT          |
+ OTHERS            |
+ OVER              |
+ RETURNING         |
+ RIGHT             |
+ ROLLBACK          |
+ ROWS              |
+ ROW               |
+ UNBOUNDED         |
+ UNION             |
+ USING             |
+ VACUUM            |
+ VIEW              |
+ WINDOW            |
+ DO                |
+ BY                |
+ INITIALLY         |
+ ALL               |
+ PRIMARY           |
+-------------------|
+```
+
+## LIST METADATA
+
+The LIST METADATA command retrieves detailed information about the internal structure of a table. The information returned can be further restricted by specifying a **table_name** and/or a **column_name**.
+
+### Syntax
+
+LIST METADATA [TABLE **table_name**] [COLUMN **column_name**]
+
+### Privileges
+
+```
+READWRITE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with several columns that depends on the filters used in the command. The output is similar to the one obtains by calling the [sqlite3_table_column_metadata](https://www.sqlite.org/c3ref/table_column_metadata.html) API.
+
+### Example
+
+```bash
+> LIST METADATA
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+ name              | data_type     | col_seq | not_null | primary_key | auto_inc | tablename     | affinity_type |
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+ TrackId           | INTEGER       | BINARY  | 1        | 1           | 0        | Track         | 1             |
+ Name              | NVARCHAR(200) | BINARY  | 1        | 0           | 0        | Track         | 3             |
+ AlbumId           | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ MediaTypeId       | INTEGER       | BINARY  | 1        | 0           | 0        | Track         | 1             |
+ GenreId           | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ Composer          | NVARCHAR(220) | BINARY  | 0        | 0           | 0        | Track         | 3             |
+ Milliseconds      | INTEGER       | BINARY  | 1        | 0           | 0        | Track         | 1             |
+ Bytes             | INTEGER       | BINARY  | 0        | 0           | 0        | Track         | 1             |
+ UnitPrice         | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | Track         | 3             |
+ PlaylistId        | INTEGER       | BINARY  | 1        | 1           | 0        | PlaylistTrack | 1             |
+ TrackId           | INTEGER       | BINARY  | 1        | 1           | 0        | PlaylistTrack | 1             |
+ PlaylistId        | INTEGER       | BINARY  | 1        | 1           | 0        | Playlist      | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Playlist      | 3             |
+ ArtistId          | INTEGER       | BINARY  | 1        | 1           | 0        | Artist        | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Artist        | 3             |
+ CustomerId        | INTEGER       | BINARY  | 1        | 1           | 0        | Customer      | 1             |
+ FirstName         | NVARCHAR(40)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ LastName          | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ Company           | NVARCHAR(80)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Address           | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ City              | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ State             | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Country           | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ PostalCode        | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Phone             | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Fax               | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Customer      | 3             |
+ Email             | NVARCHAR(60)  | BINARY  | 1        | 0           | 0        | Customer      | 3             |
+ SupportRepId      | INTEGER       | BINARY  | 0        | 0           | 0        | Customer      | 1             |
+ EmployeeId        | INTEGER       | BINARY  | 1        | 1           | 0        | Employee      | 1             |
+ LastName          | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Employee      | 3             |
+ FirstName         | NVARCHAR(20)  | BINARY  | 1        | 0           | 0        | Employee      | 3             |
+ Title             | NVARCHAR(30)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ ReportsTo         | INTEGER       | BINARY  | 0        | 0           | 0        | Employee      | 1             |
+ BirthDate         | DATETIME      | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ HireDate          | DATETIME      | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Address           | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ City              | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ State             | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Country           | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ PostalCode        | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Phone             | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Fax               | NVARCHAR(24)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ Email             | NVARCHAR(60)  | BINARY  | 0        | 0           | 0        | Employee      | 3             |
+ GenreId           | INTEGER       | BINARY  | 1        | 1           | 0        | Genre         | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | Genre         | 3             |
+ InvoiceId         | INTEGER       | BINARY  | 1        | 1           | 0        | Invoice       | 1             |
+ CustomerId        | INTEGER       | BINARY  | 1        | 0           | 0        | Invoice       | 1             |
+ InvoiceDate       | DATETIME      | BINARY  | 1        | 0           | 0        | Invoice       | 3             |
+ BillingAddress    | NVARCHAR(70)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingCity       | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingState      | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingCountry    | NVARCHAR(40)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ BillingPostalCode | NVARCHAR(10)  | BINARY  | 0        | 0           | 0        | Invoice       | 3             |
+ Total             | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | Invoice       | 3             |
+ AlbumId           | INTEGER       | BINARY  | 1        | 1           | 0        | Album         | 1             |
+ Title             | NVARCHAR(160) | BINARY  | 1        | 0           | 0        | Album         | 3             |
+ ArtistId          | INTEGER       | BINARY  | 1        | 0           | 0        | Album         | 1             |
+ InvoiceLineId     | INTEGER       | BINARY  | 1        | 1           | 0        | InvoiceLine   | 1             |
+ InvoiceId         | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ TrackId           | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ UnitPrice         | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        | InvoiceLine   | 3             |
+ Quantity          | INTEGER       | BINARY  | 1        | 0           | 0        | InvoiceLine   | 1             |
+ MediaTypeId       | INTEGER       | BINARY  | 1        | 1           | 0        | MediaType     | 1             |
+ Name              | NVARCHAR(120) | BINARY  | 0        | 0           | 0        | MediaType     | 3             |
+-------------------|---------------|---------|----------|-------------|----------|---------------|---------------|
+
+> LIST METADATA TABLE Track
+--------------|---------------|---------|----------|-------------|----------|
+ name         | data_type     | col_seq | not_null | primary_key | auto_inc |
+--------------|---------------|---------|----------|-------------|----------|
+ TrackId      | INTEGER       | BINARY  | 1        | 1           | 0        |
+ Name         | NVARCHAR(200) | BINARY  | 1        | 0           | 0        |
+ AlbumId      | INTEGER       | BINARY  | 0        | 0           | 0        |
+ MediaTypeId  | INTEGER       | BINARY  | 1        | 0           | 0        |
+ GenreId      | INTEGER       | BINARY  | 0        | 0           | 0        |
+ Composer     | NVARCHAR(220) | BINARY  | 0        | 0           | 0        |
+ Milliseconds | INTEGER       | BINARY  | 1        | 0           | 0        |
+ Bytes        | INTEGER       | BINARY  | 0        | 0           | 0        |
+ UnitPrice    | NUMERIC(10,2) | BINARY  | 1        | 0           | 0        |
+--------------|---------------|---------|----------|-------------|----------|
+```
+
+## LIST TABLES
+
+The LIST TABLES command retrieves the information about the tables available inside the current database. Note that the output of this command can change depending on the privileges associated with the currently connected username. If the PUBSUB parameter is used, then the output will contain the column chname only (to have the same format as the rowset returned by the LIST CHANNELS command).
+
+### Syntax
+
+LIST TABLES [PUBSUB]
+
+### Privileges
+
+```
+READWRITE
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **schema**: database schema name
+* **name**: table name
+* **type**: always 'table' in this version
+* **ncol**: number of columns
+* **wr**: without rowid flag
+* **name**: strict flag
+
+If the PUBSUB option is used then a single **chname** column is returned (to produce the same output as the LIST CHANNELS command).
+
+### Example
+
+```bash
+> LIST TABLES
+--------|---------------|-------|------|----|--------|
+ schema | name          | type  | ncol | wr | strict |
+--------|---------------|-------|------|----|--------|
+ main   | Track         | table | 9    | 0  | 0      |
+ main   | PlaylistTrack | table | 2    | 0  | 0      |
+ main   | Playlist      | table | 2    | 0  | 0      |
+ main   | Artist        | table | 2    | 0  | 0      |
+ main   | Customer      | table | 13   | 0  | 0      |
+ main   | Employee      | table | 15   | 0  | 0      |
+ main   | Genre         | table | 2    | 0  | 0      |
+ main   | Invoice       | table | 9    | 0  | 0      |
+ main   | Album         | table | 3    | 0  | 0      |
+ main   | InvoiceLine   | table | 5    | 0  | 0      |
+ main   | MediaType     | table | 2    | 0  | 0      |
+--------|---------------|-------|------|----|--------|
+```
+
+## LIST STATS
+
+The LIST STATS command retrieves statistic information from the connected node (or from a specific **nodeid** if the NODE parameter is used). If no range date is specified with the FROM/TO parameters, then stats from the last hour are returned. If the MEMORY argument is used, then a new PHYSICAL_MEMORY key is added to the result.
+
+### Syntax
+
+LIST STATS [FROM **start_date** TO **end_date**] [NODE **nodeid**] [MEMORY]
+
+### Privileges
+
+```
+CLUSTERADMIN
+```
+
+### Return
+
+A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+* **datetime**: the data time of the stat
+* **key**: stat name
+* **value**: stat value
+
+### Example
+
+```bash
+> LIST STATS
+---------------------|-----------------|--------------------|
+ datetime            | key             | value              |
+---------------------|-----------------|--------------------|
+ 2023-02-09 09:21:51 | BYTES_IN        | 312                |
+ 2023-02-09 09:21:51 | BYTES_OUT       | 943                |
+ 2023-02-09 09:21:51 | CPU_LOAD        | 0.0185958557811852 |
+ 2023-02-09 09:21:51 | CURRENT_CLIENTS | 1                  |
+ 2023-02-09 09:21:51 | CURRENT_MEMORY  | 1640640            |
+ 2023-02-09 09:21:51 | MAX_CLIENTS     | 1                  |
+ 2023-02-09 09:21:51 | MAX_MEMORY      | 1802512            |
+ 2023-02-09 09:21:51 | NUM_COMMANDS    | 7                  |
+ 2023-02-09 09:21:51 | NUM_READS       | 0                  |
+ 2023-02-09 09:21:51 | NUM_WRITES      | 0                  |
+ 2023-02-09 09:22:51 | BYTES_IN        | 312                |
+ 2023-02-09 09:22:51 | BYTES_OUT       | 943                |
+ 2023-02-09 09:22:51 | CPU_LOAD        | 0.0184632834613829 |
+ 2023-02-09 09:22:51 | CURRENT_CLIENTS | 1                  |
+ 2023-02-09 09:22:51 | CURRENT_MEMORY  | 1640640            |
+ 2023-02-09 09:22:51 | MAX_CLIENTS     | 1                  |
+ 2023-02-09 09:22:51 | MAX_MEMORY      | 1802512            |
+ 2023-02-09 09:22:51 | NUM_COMMANDS    | 7                  |
+ 2023-02-09 09:22:51 | NUM_READS       | 0                  |
+ 2023-02-09 09:22:51 | NUM_WRITES      | 0                  |
+ 2023-02-09 09:23:51 | BYTES_IN        | 312                |
+ 2023-02-09 09:23:51 | BYTES_OUT       | 943                |
+ 2023-02-09 09:23:51 | CPU_LOAD        | 0.0184403868930122 |
+ 2023-02-09 09:23:51 | CURRENT_CLIENTS | 1                  |
+ 2023-02-09 09:23:51 | CURRENT_MEMORY  | 1640640            |
+ 2023-02-09 09:23:51 | MAX_CLIENTS     | 1                  |
+ 2023-02-09 09:23:51 | MAX_MEMORY      | 1802512            |
+ 2023-02-09 09:23:51 | NUM_COMMANDS    | 7                  |
+ 2023-02-09 09:23:51 | NUM_READS       | 0                  |
+ 2023-02-09 09:23:51 | NUM_WRITES      | 0                  |
+ 2023-02-09 09:24:52 | BYTES_IN        | 312                |
+ 2023-02-09 09:24:52 | BYTES_OUT       | 943                |
+ 2023-02-09 09:24:52 | CPU_LOAD        | 0.0183631842713955 |
+ 2023-02-09 09:24:52 | CURRENT_CLIENTS | 1                  |
+ 2023-02-09 09:24:52 | CURRENT_MEMORY  | 1640640            |
+ 2023-02-09 09:24:52 | MAX_CLIENTS     | 1                  |
+ 2023-02-09 09:24:52 | MAX_MEMORY      | 1802512            |
+ 2023-02-09 09:24:52 | NUM_COMMANDS    | 7                  |
+ 2023-02-09 09:24:52 | NUM_READS       | 0                  |
+ 2023-02-09 09:24:52 | NUM_WRITES      | 0                  |
+---------------------|-----------------|--------------------|
+```
+## PING
+
+The PING command is provided to test whether a connection is still alive.
+
+This command is also useful for:
+1. Verifying the server's ability to serve data - an error is returned when this isn't the case.
+2. Measuring latency.
+
+### Syntax
+
+PING
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+It returns the "PONG" [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md). 
+
+### Example
+
+```bash
+> PING
+PONG
+```
+
+## SLEEP
+
+The SLEEP command forces the current connection to sleep on the server-side for a specified amount of milliseconds.
+
+### Syntax
+
+SLEEP **ms**
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+
+### Example
+
+```bash
+> SLEEP 100
+OK (after 100ms)
+```
+
+## TEST
+
+The TEST command is used for debugging purposes and can be used by developers while developing the SCSP for a new language.
+By specifying a different test_name, the server will reply with different responses so you can test the parsing capabilities of your new binding.
+Supported test_name are: STRING, STRING0, ZERO_STRING, ERROR, EXTERROR, INTEGER, FLOAT, BLOB, BLOB0, ROWSET, ROWSET_CHUNK, JSON, NULL, COMMAND, ARRAY, ARRAY0
+
+### Syntax
+
+TEST **test_name** [COMPRESSED]
+
+### Privileges
+
+```
+NONE
+```
+
+### Return
+
+Different output that depends on the **test_name** value.
+
+### Example
+
+```bash
+> TEST STRING
+Hello World, this is a test string.
+
+> TEST ERROR
+ERROR: This is a test error message with a devil error code. (66666 - -1)
+
+> TEST INTEGER
+123456
+
+> TEST FLOAT
+3.1415926
+
+> TEST ROWSET
+--------------------------|----------------------------------------------------|
+ key                      | value                                              |
+--------------------------|----------------------------------------------------|
+ sqlitecloud_version      | 0.9.8                                              |
+ sqlite_version           | 3.39.3                                             |
+ sqlitecloud_build_date   | Feb  7 2023                                        |
+ sqlitecloud_git_hash     | 24e2ec6b121f09313afa9dfa4c02e9c9cc372034           |
+ os                       | Linux on x86_64 (Kernel version 5.15.0-58-generic) |
+ arch_bits                | 64bit                                              |
+ multiplexing_api         | epool                                              |
+ listening_port           | 9960                                               |
+ process_id               | 182275                                             |
+ num_processors           | 1                                                  |
+ startup_datetime         | 2023-02-07 19:25:13                                |
+ current_datetime         | 2023-02-08 09:31:23                                |
+ nocluster                | 0                                                  |
+ nodeid                   | 1                                                  |
+ tls                      | LibreSSL 3.6.1                                     |
+ tls_conn_version         | TLSv1.3                                            |
+ tls_conn_cipher          | TLS_AES_256_GCM_SHA384                             |
+ tls_conn_cipher_strength | 256                                                |
+ tls_conn_alpn_selected   | NULL                                               |
+ tls_conn_servername      | dev1.sqlitecloud.io                                |
+ tls_peer_cert_provided   | 0                                                  |
+ tls_peer_cert_subject    | NULL                                               |
+ tls_peer_cert_issuer     | NULL                                               |
+ tls_peer_cert_hash       | NULL                                               |
+ tls_peer_cert_notbefore  | NULL                                               |
+ tls_peer_cert_notafter   | NULL                                               |
+--------------------------|----------------------------------------------------|
+
+> TEST ARRAY
+[0] Hello World
+[1] 123456
+[2] 3.1415
+[3] NULL
+[4] BLOB size 10
+
+```

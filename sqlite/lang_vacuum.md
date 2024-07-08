@@ -2,6 +2,9 @@
 title: VACUUM
 description: The VACUUM command rebuilds the database file, repacking it into a minimal amount of disk space.
 statement: VACUUM;
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Syntax

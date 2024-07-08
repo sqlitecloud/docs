@@ -1,0 +1,80 @@
+---
+title: React Native Quick Start Guide
+description: Get started with SQLite Cloud using React Native.
+category: getting-started
+status: publish
+---
+In this quickstart, we will show you how to get started with SQLite Cloud and React Native by building a simple application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+2. **Create a React Native app**
+    - Create a React Native app using officially recommended framework Expo with the following command:
+```bash
+  npx create-expo-app@latest
+```
+  - After creating your project, navigate to the project directory and install the SQLite Cloud SDK:
+```bash
+  npm install @sqlitecloud/drivers
+```
+
+3. **Add data and service layers**
+    - Create a folder named `db`, then create a file in that folder named `database.js`. This file will be responsible for instantiating the database connection:
+```javascript
+import { Database } from '@sqlitecloud/drivers';
+
+const db = new Database('<your-connection-string>');
+
+export default db;
+```
+  - Next, create a folder named `services` in the root directory of your project. Create a file named `albums.js` within the `services` folder. This file will be responsible for querying data from the database:
+```javascript
+import db from '../db/database';
+
+export const getAlbums = async () => {
+  const result = await db.exec`
+    USE DATABASE chinook.sqlite;
+    SELECT albums.AlbumId as id, albums.Title as title, albums.name as artist
+    FROM albums
+    INNER JOIN artists
+    WHERE artists.ArtistId = albums.ArtistId
+    LIMIT 20;`;
+  return result.fetchall();
+};
+```
+4. **Create a React Native component**
+  - Navigate to the index.js file in the /app/(tabs) directory and replace the existing code with the following code:
+```javascript
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { getAlbums } from './services/albums';
+
+export default function HomeScreen() {
+  const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    getAlbums().then((data) => setAlbums(data));
+  }, []);
+
+  return (
+    <View>
+      <Text>Albums</Text>
+      {albums.map((album) => (
+        <Text key={album.id}>{album.title} by {album.artist}</Text>
+      ))}
+    </View>
+  );
+}
+```
+
+5. **Run your app**
+  - Start your React Native app using the following command:
+```bash
+  npm start
+```
+  - Open your Expo Go app on your mobile device and scan the QR code to view your app.
+
+And that's it! You've successfully built a React Native app that reads data from a SQLite Cloud database.

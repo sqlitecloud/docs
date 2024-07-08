@@ -1,0 +1,28 @@
+---
+title: Scaling
+description: How to scale your SQLite Cloud cluster.
+category: platform
+status: publish
+slug: scaling
+---
+
+SQLite Cloud leverages a customized Raft algorithm to maintain a robust and highly available database cluster. Here’s an essential guide on the node types within SQLite Cloud and strategic tips for scaling your cluster effectively.
+
+## Overview of Node types
+
+### Leader Nodes
+The central command of your SQLite Cloud cluster is the Leader node, responsible for handling all write operations and coordinating updates across the cluster. This node replicates the changes to Follower and Learner nodes. Due to the unique role of the Leader node, increasing the number of Leader nodes is not a feasible method for scaling write operations.
+
+### Follower Nodes
+These nodes handle read requests and are necessary to maintain your cluster’s fault tolerance. Followers also participate in leader elections if the leader node becomes unavailable. It is recommended to maintain an odd number of Follower nodes to prevent split votes during elections, ensuring a majority is always possible, thus enhancing the cluster's stability and fault tolerance.
+
+### Learner Nodes
+Learners are special types of Follower nodes that do not participate in elections but help scale the cluster's read capacity without affecting write latency. Adding Learner nodes is a strategic way to boost read throughput, especially in geographically distributed environments.
+
+
+## Scaling Read Capacity
+To enhance read performance, simply add Learner nodes. These nodes increase the cluster’s ability to handle read requests without contributing to the consensus process, thus not impacting write latencies. 
+
+To enhance fault-tolerance, add follower nodes, but ensure that the number of follower nodes is odd to prevent split votes during leader elections.
+
+

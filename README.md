@@ -1,6 +1,8 @@
 ---
 title: SQLite Cloud Documentation
 description: Documentation files for docs.sqlitecloud.io
+category: getting-started
+status: publish
 ---
 
 # SQLite Cloud Documentation

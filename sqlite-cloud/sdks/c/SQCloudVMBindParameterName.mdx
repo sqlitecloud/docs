@@ -1,0 +1,55 @@
+---
+title: "SQCloudVMBindParameterName"
+description: SQCloud VM C/C++ Interface SQCloudVMBindParameterName
+category: sdks
+status: publish
+---
+
+```c
+const char *SQCloudVMBindParameterName (SQCloudVM *vm, int index);
+```
+
+### Description
+The **SQCloudVMBindParameterName** interface returns the name of the N-th SQL parameter in the prepared statement **vm**. SQL parameters of the form "?NNN" or ":AAA" or "@AAA" or "$AAA" have a name which is the string "?NNN" or ":AAA" or "@AAA" or "$AAA" respectively. In other words, the initial ":" or "$" or "@" or "?" is included as part of the name. Parameters of the form "?" without a following integer have no name and are referred to as "nameless" or "anonymous parameters".
+
+The first host parameter has an index of 1, not 0.
+If the value of index is out of range or if the N-th parameter is nameless, then NULL is returned.
+
+This function resembles the [bind_parameter_name](https://www.sqlite.org/c3ref/bind_parameter_name.html) SQLite API. 
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+* **index**: The SQL parameter index.
+
+### Return value
+A `const char *` NULL-terminated string representing the name of the parameter.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('?param1');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCLOUD_RESULT_TYPE type = SQCloudVMStep(vm);
+
+    // get the parameter name
+    const char *name = SQCloudVMBindParameterName(vm, 1);
+}
+```

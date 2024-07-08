@@ -1,0 +1,55 @@
+---
+title: "SQCloudVMChanges"
+description: SQCloud VM C/C++ Interface SQCloudVMChanges
+category: sdks
+status: publish
+---
+import Callout from "@commons-components/Information/Callout.astro"
+
+```c
+int64_t SQCloudVMChanges (SQCloudVM *vm);
+```
+
+### Description
+This function returns the number of rows modified, inserted or deleted by the most recently completed INSERT, UPDATE or DELETE statement. Executing any other type of SQL statement does not modify the value returned by **SQCloudVMChanges**. Only changes made directly by the INSERT, UPDATE or DELETE statement are considered, auxiliary changes caused by triggers, foreign key actions or REPLACE constraint resolution are not counted.
+
+<Callout type="warning" title="Count changes without a VM">
+If you need to get the changes from a SQCloudConnection object you can send a `DATABASE GET CHANGES` command.
+</Callout>
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+An `int64_t` with the number of changes.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCLOUD_RESULT_TYPE type = SQCloudVMStep(vm);
+
+    // count changes
+    int64_t changes = SQCloudVMChanges(vm);
+}
+```

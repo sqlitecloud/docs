@@ -1,0 +1,42 @@
+---
+title: "SQCloudResultFree"
+description: SQCloud Basic C/C++ Interface SQCloudResultFree
+category: sdks
+status: publish
+---
+
+```c
+void SQCloudResultFree (SQCloudResult *result);
+```
+
+### Description
+Frees the storage associated with a SQCloudResult. Every command result should be freed via SQCloudResultFree when it is no longer needed.
+
+### Parameters
+* **result**: A valid SQCloudResult pointer returned by an SQCloud function.
+
+### Return value
+None.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first (no error check)
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    SQCloudResultFree(r);
+}
+```

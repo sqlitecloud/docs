@@ -2,6 +2,9 @@
 title: DROP INDEX
 description: The DROP INDEX statement removes an index added with the CREATE INDEX statement.
 statement: DROP INDEX IF EXISTS ArtistNameIdx;
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'dropindex.svg' -->

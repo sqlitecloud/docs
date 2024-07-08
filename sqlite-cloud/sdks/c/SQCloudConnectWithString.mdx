@@ -1,0 +1,61 @@
+---
+title: "SQCloudConnectWithString"
+description: SQCloud Basic C/C++ Interface SQCloudConnectWithString
+category: sdks
+status: publish
+---
+import Callout from "@commons-components/Information/Callout.astro"
+
+```c
+SQCloudConnection *SQCloudConnectWithString (const char *s, SQCloudConfig *pconfig);
+```
+
+### Description
+Initiate a new connection to a database node specified by a connection string. This function will always return a non-null object pointer, unless there is too little memory even to allocate the **SQCloudConnection** object.
+
+String `s` must be an URL encoded string with the following format: `sqlitecloud://user:pass@host.com:port/dbname?timeout=10&key2=value2&key3=value3`.
+
+<Callout type="warning" title="Connection String">
+An easy way to obtain a valid connection string is to click on the node address in the [Dashboard Nodes](/docs/introduction/nodes) section. A valid connection string will be copied in your clipboard.
+</Callout>
+
+Key(s) can be:
+* timeout
+* compression
+* sqlite
+* zerotext
+* memory
+* create
+* noblob
+* maxdata
+* maxrows
+* maxrowset
+* root_certificate
+* client_certificate
+* client_certificate_key
+
+These key(s) are equivalent to the fields specified in the [SQCloudConfig struct](/docs/sdk/c/sqcloudconfig).
+
+### Parameters
+* **s**: an URL encoded NULL terminated string that contains connection info
+* **pconfig**: a pointer to a [SQCloudConfig struct](/docs/sdk/c/sqcloudconfig) (can be NULL) used to override configurations found in the connection string
+
+### Return value
+A pointer to an opaque **SQCloudConnection** struct.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    const char *conninfo = "sqlitecloud://admin:admin@myproject.sqlite.cloud/invoice.sqlite";
+
+    SQCloudConnection *conn = SQCloudConnectWithString(conninfo, NULL);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // do something with the conn object
+}
+```

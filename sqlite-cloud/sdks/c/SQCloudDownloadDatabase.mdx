@@ -1,0 +1,86 @@
+---
+title: "SQCloudDownloadDatabase"
+description: SQCloud Basic C/C++ Interface SQCloudDownloadDatabase
+category: sdks
+status: publish
+---
+
+```c
+bool SQCloudDownloadDatabase (SQCloudConnection *connection, const char *dbname, void *xdata,
+                              int (*xCallback)(void *xdata, const void *buffer, uint32_t blen, int64_t ntot, int64_t nprogress));
+```
+
+### Description
+Initiate an SQLite database download from an already connected SQLite Cloud node. 
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **dbname**: the name of the database to download
+* **xdata**: a pointer to an opaque datatype that will be passed as-is to the callback
+* **xcallback**: callback that will be automatically called to read from the input database file
+
+### Return value
+`true` if download is succesfully completed.
+
+### Example
+```c
+#define DATABASE_PATH "/full_path_to/database.sqlite"
+
+// convenient struct to be used with SQCloudDownloadDatabase
+typedef struct {
+    void            *ptr;
+    int             fd;
+} SQCloudData;
+
+static int do_internal_download_cb (void *xdata, const void *buffer, uint32_t blen, int64_t ntot, int64_t nprogress) {
+    if (blen) {
+        // retrieve file descriptor
+        int fd = ((SQCloudData *)xdata)->fd;
+
+        // write data
+        if (write(fd, buffer, (size_t)blen) != blen) {
+            printf("\nError while writing data to file.\n");
+            return -1;
+        }
+    }
+    
+    // display a simple text progress
+    printf("%.2f%% ", ((double)nprogress / (double)ntot) * 100.0);
+    
+    // check if it is final step
+    if (ntot == nprogress) printf("\n\n");
+    
+    // means no error and continue the loop
+    return 0;
+}
+
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // create file
+    int fd = file_create(DATABASE_PATH);
+    if (fd < 0) {
+        printf("Unable to create output file %s\n", DATABASE_PATH);
+        return false;
+    }
+    
+    SQCloudData data = {.ptr = NULL, .fd = fd};
+    bool result = SQCloudDownloadDatabase(conn, "database.sqlite", (void *)&data, do_internal_download_cb);
+    if (!result) {
+        // handle error here
+    }
+    
+    close(fd);
+}
+```

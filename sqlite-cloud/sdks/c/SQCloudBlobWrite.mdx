@@ -1,0 +1,53 @@
+---
+title: "SQCloudBlobWrite"
+description: SQCloud Blob C/C++ Interface SQCloudBlobWrite
+category: sdks
+status: publish
+---
+
+```c
+int SQCloudBlobWrite (SQCloudBlob *blob, const void *buffer, int blen, int offset);
+```
+
+### Description
+The **SQCloudBlobWrite** function is used to write data into an open BLOB handle from a caller-supplied buffer.
+**blen** bytes of data are copied from the buffer **buffer**into the open BLOB, starting at offset **offset**.
+
+This function resembles the [sqlite3_blob_write](https://www.sqlite.org/c3ref/blob_write.html) SQLite API. 
+
+### Parameters
+* **blob**: a valid SQCloudBlob opaque datatype obtained by [SQCloudBlobOpen](/docs/sdk/c/sqcloudblobopen)
+* **buffer**: an user-supplied pre-allocated buffer
+* **blen**: the length of the input buffer
+* **offset**: the offset value set to where to start the write operation
+
+### Return value
+-1 in case of error, otherwise 1
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // open a BLOB for writing
+    SQCloudBlobOpen *blob = SQCloudBlobOpen(conn, NULL, "mytable", "mycolumn", 1, 1);
+
+    // write in BLOB starting offset 0
+    char buffer[512] = {0};
+    int len = SQCloudBlobWrite(blob, buffer, (int)sizeof(buffer), 0);
+}
+```

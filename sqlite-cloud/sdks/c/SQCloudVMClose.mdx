@@ -1,0 +1,54 @@
+---
+title: "SQCloudVMClose"
+description: SQCloud VM C/C++ Interface SQCloudVMClose
+category: sdks
+status: publish
+---
+
+```c
+bool SQCloudVMClose (SQCloudVM *vm);
+```
+
+### Description
+Frees the storage associated with a SQCloudVM. The application must finalize every compiled statement in order to avoid resource leaks.
+This function resembles the [sqlite3_finalize](https://www.sqlite.org/c3ref/finalize.html) SQLite API. 
+
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+If the VM is successfully freed without any errors, the function will return `true`. If an error occurs during the freeing process, the function will return `false`.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCloudResult *type = SQCloudVMStep(vm);
+
+    // ...
+
+    // free resources associated with the VM
+    bool rc = SQCloudVMClose(vm);
+}
+```

@@ -2,6 +2,9 @@
 title: Savepoints
 description: SAVEPOINTs are a method of creating transactions, similar to BEGIN and COMMIT.
 statement: SAVEPOINT savepoint_name;
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Syntax

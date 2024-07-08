@@ -1,0 +1,47 @@
+---
+title: "SQCloudExec"
+description: SQCloud Basic C/C++ Interface SQCloudExec
+category: sdks
+status: publish
+---
+
+```c
+SQCloudResult *SQCloudExec (SQCloudConnection *connection, const char *command);
+```
+
+### Description
+Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands).
+
+### Parameters
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **command**: a NULL terminated string with the command to execute (multiple commands can be sent if separated by the semicolon character)
+
+### Return value
+A pointer to an opaque **SQCloudResult** struct that must be explicitly deallocated with [SQCloudResultFree](/docs/sdk/c/sqcloudresultfree)
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first (no error check here)
+    SQCloudResult *r1 = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // perform an SQL statement (no error check here)
+    SQCloudResult *r2 = SQCloudExec(conn, "SELECT * FROM mytable;");
+
+    // perform multiple SQL statements (no error check here)
+    SQCloudResult *r3 = SQCloudExec(conn, "INSERT INTO mytable (col1) VALUES ('value1'); INSERT INTO mytable (col1) VALUES ('value2'); SELECT * FROM mytable;");
+}
+```

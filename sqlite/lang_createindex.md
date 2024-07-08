@@ -2,6 +2,9 @@
 title: CREATE INDEX
 description: The CREATE INDEX command consists of the keywords "CREATE INDEX" followed by the name of the new index.
 statement: CREATE INDEX IF NOT EXISTS ArtistNameIdx ON Artist(Name);
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 ## 1. Syntax

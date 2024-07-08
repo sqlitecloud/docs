@@ -1,0 +1,100 @@
+---
+title: "SQCloudVMColumn"
+description: SQCloud VM C/C++ Interface SQCloudVMColumn
+category: sdks
+status: publish
+---
+
+```c
+const void *SQCloudVMColumnBlob (SQCloudVM *vm, int index, uint32_t *len);
+const char *SQCloudVMColumnText (SQCloudVM *vm, int index, uint32_t *len);
+double SQCloudVMColumnDouble (SQCloudVM *vm, int index);
+int SQCloudVMColumnInt32 (SQCloudVM *vm, int index);
+int64_t SQCloudVMColumnInt64 (SQCloudVM *vm, int index);
+int64_t SQCloudVMColumnLen (SQCloudVM *vm, int index);
+SQCLOUD_VALUE_TYPE SQCloudVMColumnType (SQCloudVM *vm, int index);
+```
+
+### Description
+These routines return information about a single column of the current result row of a query.
+These functions resemble the [sqlite3_column_*](https://www.sqlite.org/c3ref/column_blob.html) SQLite APIs. 
+
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+* **index**: The index of the column for which information should be returned. The leftmost column of the result set has the index 0. The number of columns in the result can be determined using [SQCloudVMColumnCount](/docs/sdk/c/sqcloudvmcolumncount).
+* **len**: The number of bytes of the returned value.
+
+The **SQCloudVMColumnType** routine returns the datatype code for the initial data type of the result column. The returned value is one of following:
+
+* VALUE_INTEGER
+* VALUE_FLOAT
+* VALUE_TEXT
+* VALUE_BLOB
+* VALUE_NULL
+
+The return value of **SQCloudVMColumnType** can be used to decide which of the first five interface should be used to extract the column value. The value returned by **SQCloudVMColumnType** is only meaningful if no automatic type conversions have occurred for the value in question.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "SELECT * FROM table1 LIMIT1;", -1, NULL);
+
+    // execute the query
+    SQCloudStep(vm);
+
+    // retrieve columns
+    int count = SQCloudVMColumnCount(vm);
+
+    for (int i=0; i<count; ++i) {
+        SQCLOUD_VALUE_TYPE type = SQCloudVMColumnType(vm, i);
+
+        switch(type) {
+            case VALUE_INTEGER: {
+                int64_t value = SQCloudVMColumnInt64(vm, i);
+                break;
+            }
+
+            case VALUE_FLOAT: {
+                double value = SQCloudVMColumnDouble(vm, i);
+                break;
+            }
+
+            case VALUE_TEXT: {
+                uint32_t len = 0;
+                const char *value = SQCloudVMColumnText(vm, i, &len);
+                break;
+            }
+
+            case VALUE_BLOB: {
+                uint32_t len = 0;
+                const void *value = SQCloudVMColumnBlob(vm, i, &len);
+                break;
+            }
+
+            case VALUE_NULL: {
+                void *value = NULL;
+            }
+        }
+    }
+
+    // ...
+}
+```

@@ -1,0 +1,73 @@
+---
+title: React Quick Start Guide
+description: Get started with SQLite Cloud using React.
+category: getting-started
+status: publish
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and React by building a simple application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+2. **Create a React app**
+   - Create a React app using a Vite template
+```bash
+npm create vite@latest sqlc-quickstart -- --template react
+```
+3. **Install the SQLite Cloud SDK**
+```bash
+cd sqlc-quickstart && npm install @sqlitecloud/drivers
+```
+4. **Query data**
+    - Grab a connection string by clicking on a node in your dashboard.
+    - Use the following code to display data from your database.
+  ```jsx
+import { useEffect, useState } from "react";
+import { Database } from '@sqlitecloud/drivers';
+
+const db = new Database('<your-connection-string>');
+
+function App() {
+  const [data, setData] = useState([]);
+
+  const getAlbums = async () => {
+    const result = await db.sql`
+    USE DATABASE chinook.sqlite; 
+    SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
+    FROM albums 
+    INNER JOIN artists 
+    WHERE artists.ArtistId = albums.ArtistId
+    LIMIT 20;`;
+    setData(result);
+  };
+
+  useEffect(() => {
+    getAlbums();
+  }, []);
+
+  return (
+    <div>
+      <h1>Albums</h1>
+      <ul>
+        {data.map((album) => (
+          <li key={album.id}>{album.title} by {album.artist}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App
+```
+5. **Run your app**
+```bash
+npm run dev
+```
+6. **View your app**
+   - Open your browser and navigate to `http://localhost:3000` to see your app in action.
+
+And that's it! You've successfully built a React app that reads data from a SQLite Cloud database.
+

@@ -1,0 +1,49 @@
+---
+title: "SQCloudBlobBytes"
+description: SQCloud Blob C/C++ Interface SQCloudBlobBytes
+category: sdks
+status: publish
+---
+
+```c
+int SQCloudBlobBytes (SQCloudBlob *blob);
+```
+
+### Description
+This function returns the size in bytes of the BLOB accessible via the successfully opened BLOB handle in its only argument.
+The incremental blob I/O routines can only read or overwriting existing blob content; they cannot change the size of a blob.
+
+This function resembles the [sqlite3_blob_bytes](https://www.sqlite.org/c3ref/blob_bytes.html) SQLite API. 
+
+### Parameters
+* **blob**: a valid SQCloudBlob opaque datatype obtained by [SQCloudBlobOpen](/docs/sdk/c/sqcloudblobopen)
+
+### Return value
+An `int` value with the size in bytes of the BLOB.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // open a BLOB for reading
+    SQCloudBlobOpen *blob = SQCloudBlobOpen(conn, NULL, "mytable", "mycolumn", 1, 0);
+
+    // get BLOB size
+    int size = SQCloudBlobBytes(blob);
+}
+```

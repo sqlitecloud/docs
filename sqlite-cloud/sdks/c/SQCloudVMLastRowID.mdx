@@ -1,0 +1,58 @@
+---
+title: "SQCloudVMLastRowID"
+description: SQCloud VM C/C++ Interface SQCloudVMLastRowID
+category: sdks
+status: publish
+---
+import Callout from "@commons-components/Information/Callout.astro"
+
+```c
+int64_t SQCloudVMLastRowID (SQCloudVM *vm);
+```
+
+### Description
+Each entry in most SQLite tables (except for WITHOUT ROWID tables) has a unique 64-bit signed integer key called the "rowid". The rowid is always available as an undeclared column named ROWID, OID, or _ROWID_ as long as those names are not also used by explicitly declared columns. If the table has a column of type INTEGER PRIMARY KEY then that column is another alias for the rowid.
+
+The **SQCloudVMLastRowID** interface usually returns the rowid of the most recent successful INSERT into a rowid table or virtual table. Inserts into WITHOUT ROWID tables are not recorded. If no successful INSERTs into rowid tables have ever occurred on the database connection, then **SQCloudVMLastRowID** returns zero.
+
+
+<Callout type="warning" title="Getting a rowid without a VM">
+If you need to get the last inserted rowid from a SQCloudConnection object you can send a `DATABASE GET ROWID` command.
+</Callout>
+
+### Parameters
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+
+
+### Return value
+An `int64_t` with the most recent rowid.
+
+### Example
+```c
+int main (int argc, const char * argv[]) {
+    // setup config
+    SQCloudConfig config = {0};
+    config.username = "myusername";
+    config.password = "mypassword"
+
+    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    if (SQCloudIsError(conn)) {
+        printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
+        return -1;
+    } else {
+        printf("Connection to host OK...\n\n");
+    }
+
+    // choose a database first
+    SQCloudResult *r = SQCloudExec(conn, "USE DATABASE mydatabase.sqlite;");
+
+    // compile the INSERT SQL statement
+    SQCloudVM *vm = SQCloudVMCompile(conn, "INSERT INTO table1 (col1) VALUES ('Hello World');", -1, NULL);
+
+    // execute the previously compiled statement
+    SQCLOUD_RESULT_TYPE type = SQCloudVMStep(vm);
+
+    // get the rowid
+    int64_t rowid = SQCloudVMLastRowID(vm);
+}
+```

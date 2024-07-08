@@ -2,6 +2,9 @@
 title: DETACH
 description: This statement detaches an additional database connection previously attached using the ATTACH statement.
 statement: DETACH DATABASE database_name;
+customClass: sqlite-doc
+category: reference
+status: publish
 ---
 
 <!-- do-not-touch-svg-import: 'detach.svg' -->
