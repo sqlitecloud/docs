@@ -4,6 +4,7 @@ description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc 
 category: sdks
 status: publish
+slug: sdk-js-modules
 ---
 
 ## Table of contents
