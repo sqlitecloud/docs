@@ -10,10 +10,10 @@ SQCloudResult *SQCloudExecArray (SQCloudConnection *connection, const char *comm
 ```
 
 ### Description
-Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands). This function is equivalent to the [SQCloudExec](/docs/sdk/c/sqcloudexec) function but special placeholders can be used to bind values to the statement (most of the time avoiding the need to perform copies and to encode data).
+Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands). This function is equivalent to the [SQCloudExec](/docs/sdks/c/sqcloudexec) function but special placeholders can be used to bind values to the statement (most of the time avoiding the need to perform copies and to encode data).
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 * **command**: a NULL terminated string with the command to execute
 * **values**: an array of n values
 * **len**: an array of n length
@@ -21,7 +21,7 @@ Submits a command to the server and waits for the result. The command can be any
 * **n** number of array elements
 
 ### Return value
-A pointer to an opaque **SQCloudResult** struct that must be explicitly deallocated with [SQCloudResultFree](/docs/sdk/c/sqcloudresultfree)
+A pointer to an opaque **SQCloudResult** struct that must be explicitly deallocated with [SQCloudResultFree](/docs/sdks/c/sqcloudresultfree)
 
 ### Example
 ```c

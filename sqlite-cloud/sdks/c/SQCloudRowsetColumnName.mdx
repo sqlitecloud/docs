@@ -10,11 +10,11 @@ char *SQCloudRowsetColumnName (SQCloudResult *result, uint32_t col, uint32_t *le
 ```
 
 ### Description
-If the result of the function [SQCloudResultType](/docs/sdk/c/sqcloudresulttype) is RESULT_ROWSET then use this function to retrieve the name of a column.
+If the result of the function [SQCloudResultType](/docs/sdks/c/sqcloudresulttype) is RESULT_ROWSET then use this function to retrieve the name of a column.
 
 ### Parameters
 * **result**: A valid SQCloudResult pointer returned by an SQCloud function.
-* **col**: A column index (from 0 to [SQCloudRowsetCols](/docs/sdk/c/sqcloudrowsetcols)-1)
+* **col**: A column index (from 0 to [SQCloudRowsetCols](/docs/sdks/c/sqcloudrowsetcols)-1)
 * **len**: On output the column name length
 
 ### Return value

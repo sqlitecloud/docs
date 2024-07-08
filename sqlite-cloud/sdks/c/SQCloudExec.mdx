@@ -13,11 +13,11 @@ SQCloudResult *SQCloudExec (SQCloudConnection *connection, const char *command);
 Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands).
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 * **command**: a NULL terminated string with the command to execute (multiple commands can be sent if separated by the semicolon character)
 
 ### Return value
-A pointer to an opaque **SQCloudResult** struct that must be explicitly deallocated with [SQCloudResultFree](/docs/sdk/c/sqcloudresultfree)
+A pointer to an opaque **SQCloudResult** struct that must be explicitly deallocated with [SQCloudResultFree](/docs/sdks/c/sqcloudresultfree)
 
 ### Example
 ```c

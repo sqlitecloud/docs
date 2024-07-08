@@ -13,7 +13,7 @@ int SQCloudVMIsExplain (SQCloudVM *vm);
 The **SQCloudVMIsExplain** interface returns 1 if the prepared statement S is an EXPLAIN statement, or 2 if the statement S is an EXPLAIN QUERY PLAN. **SQCloudVMIsExplain** interface returns 0 if the statement is an ordinary statement or a NULL pointer. This function resembles the [sqlite3_stmt_isexplain](https://www.sqlite.org/c3ref/stmt_isexplain.html) SQLite API.
 
 ### Parameters
-* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdks/c/sqcloudvmcompile).
 
 ### Return value
 An `int` value representing if the original statement was an EXPLAIN.

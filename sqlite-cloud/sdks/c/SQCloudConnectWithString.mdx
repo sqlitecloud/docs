@@ -16,7 +16,7 @@ Initiate a new connection to a database node specified by a connection string. T
 String `s` must be an URL encoded string with the following format: `sqlitecloud://user:pass@host.com:port/dbname?timeout=10&key2=value2&key3=value3`.
 
 <Callout type="warning" title="Connection String">
-An easy way to obtain a valid connection string is to click on the node address in the [Dashboard Nodes](/docs/introduction/nodes) section. A valid connection string will be copied in your clipboard.
+An easy way to obtain a valid connection string is to click on the node address in the [Dashboard Nodes](/docs/scaling) section. A valid connection string will be copied in your clipboard.
 </Callout>
 
 Key(s) can be:
@@ -34,11 +34,11 @@ Key(s) can be:
 * client_certificate
 * client_certificate_key
 
-These key(s) are equivalent to the fields specified in the [SQCloudConfig struct](/docs/sdk/c/sqcloudconfig).
+These key(s) are equivalent to the fields specified in the [SQCloudConfig struct](/docs/sdks/c/sqcloudconfig).
 
 ### Parameters
 * **s**: an URL encoded NULL terminated string that contains connection info
-* **pconfig**: a pointer to a [SQCloudConfig struct](/docs/sdk/c/sqcloudconfig) (can be NULL) used to override configurations found in the connection string
+* **pconfig**: a pointer to a [SQCloudConfig struct](/docs/sdks/c/sqcloudconfig) (can be NULL) used to override configurations found in the connection string
 
 ### Return value
 A pointer to an opaque **SQCloudConnection** struct.
