@@ -41,7 +41,7 @@ return {
 }
 ```
 
-Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/commands/use-database).
+Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/database-commands).
 
 ```js
 const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
