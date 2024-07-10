@@ -12,6 +12,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
+	// { title: "Prisma ORM", filePath: "quick-start-prisma", type: "inner", level: 1 },
 
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
