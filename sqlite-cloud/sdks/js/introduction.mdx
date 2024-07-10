@@ -4,6 +4,7 @@ description: SQLite Cloud Javascript SDK
 customClass: sdk-doc badge-doc js-doc
 category: sdks
 status: publish
+slug: sdk-js-introduction
 ---
 
 [![npm package][npm-img]][npm-url]
@@ -31,7 +32,7 @@ let results = await database.sql`SELECT * FROM tracks WHERE name = ${name}`
 // => returns [{ AlbumId: 1, Name: 'Breaking The Rules', Composer: 'Angus Young... }]
 ```
 
-Use [Database.sql](/docs/sdk/js/classes/database#sql) to execute prepared statements or plain SQL queries asynchronously. This method returns an array of rows for SELECT queries and supports the standard syntax for UPDATE, INSERT, and DELETE.
+Use [Database.sql](/docs/sdks/js/classes/database#sql) to execute prepared statements or plain SQL queries asynchronously. This method returns an array of rows for SELECT queries and supports the standard syntax for UPDATE, INSERT, and DELETE.
 
 We aim for full compatibility with the established [sqlite3 API](https://www.npmjs.com/package/sqlite3), with the primary distinction being that our driver connects to SQLiteCloud databases. This allows you to migrate your [SQLite to the cloud](https://sqlitecloud.io) while continuing to use your existing codebase.
 

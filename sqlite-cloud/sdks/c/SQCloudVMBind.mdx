@@ -17,7 +17,7 @@ bool SQCloudVMBindZeroBlob (SQCloudVM *vm, int index, int64_t len);
 
 ### Description
 Bind a value to a compiled SQL statement.
-In the SQL statement text input to [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile), literals may be replaced by a parameter that matches one of following templates:
+In the SQL statement text input to [SQCloudVMCompile](/docs/sdks/c/sqcloudvmcompile), literals may be replaced by a parameter that matches one of following templates:
 * ?
 * ?NNN
 * :VVV
@@ -29,8 +29,8 @@ These functions resemble the [sqlite3_bind_*](https://www.sqlite.org/c3ref/bind_
 
 
 ### Parameters
-* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdk/c/sqcloudvmcompile).
-* **index**: Represents the index of the SQL parameter to be set. The leftmost SQL parameter has an index of 1. When the same named SQL parameter is used more than once, second and subsequent occurrences have the same index as the first occurrence. The index for named parameters can be looked up using the [SQCloudVMBindParameterIndex](/docs/sdk/c/sqcloudvmbindparameterindex) API if desired. The index for "?NNN" parameters is the value of NNN.
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdks/c/sqcloudvmcompile).
+* **index**: Represents the index of the SQL parameter to be set. The leftmost SQL parameter has an index of 1. When the same named SQL parameter is used more than once, second and subsequent occurrences have the same index as the first occurrence. The index for named parameters can be looked up using the [SQCloudVMBindParameterIndex](/docs/sdks/c/sqcloudvmbindparameterindex) API if desired. The index for "?NNN" parameters is the value of NNN.
 * **value**: The the value to bind to the parameter.
 * **len**: The number of bytes in the parameter. To be clear: the value is the number of bytes in the value, not the number of characters. 
 

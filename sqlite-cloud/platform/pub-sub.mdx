@@ -47,7 +47,7 @@ JSON is used to deliver payload to all listening clients. JSON format depends on
     sender: "UUID",
     channel: "tablename",
     type: "TABLE",
-    pk: ["id", col1"]      // array of primary key name(s)
+    pk: ["id", "col1"],    // array of primary key name(s)
     payload: [             // array of operations that affect table name
         {
             type: "INSERT",
@@ -57,17 +57,16 @@ JSON is used to deliver payload to all listening clients. JSON format depends on
         },
         {
             type: "DELETE",
-            pv: [13]       // primary key value (s) in the same order as the pk array
+            pv: [13],    // primary key value (s) in the same order as the pk array
         },
         {
             type: "UPDATE",
             id: 15,        // new value
             col1: "newvalue",
-            col2: 0.0
+            col2: 0.0,
             // if primary key is updated during this update then add it to:
             // UPDATE TABLE SET col1='newvalue', col2=0.0, id = 15 WHERE id=14
             pv: [14]       // primary key value (s) set prior to this UPDATE operation
-           ]
         }
     ]
 }

@@ -1,0 +1,60 @@
+---
+title: Node.js Quick Start Guide
+description: Get started with SQLite Cloud using Node.js and Express.
+category: getting-started
+status: publish
+slug: quick-start-node
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Node.js by building a simple web server that connects to and reads from a SQLite Cloud database, then serves that data to the client.
+
+---
+
+1. **Set up a SQLite Cloud account**
+   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+2. **Create a Node.js app**
+   - Navigate to your target directory and run the following command to initialize your Node.js app and install the necessary depedencies:
+```bash
+npm init
+``` 
+  - After creating your project, install the SQLite Cloud SDK:
+```bash
+npm install express @sqlitecloud/drivers --save
+```
+  - Create a file named `index.js` in the root directory of your project.
+
+3. **Query data**
+    - Grab a connection string by clicking on a node in your dashboard.
+    - Paste the following into your `index.js` file:
+
+```javascript
+const express = require('express');
+const { Database } = require('@sqlitecloud/drivers');
+
+const app = express();
+const db = new Database('<your-connection-string>');
+
+app.get('/albums', async (req, res) => {
+    const result = await db.sql`
+    USE DATABASE chinook.sqlite; 
+    SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
+    FROM albums 
+    INNER JOIN artists 
+    WHERE artists.ArtistId = albums.ArtistId
+    LIMIT 20;`;
+    res.json(result);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+```
+5. **Run your app**
+```bash
+node app.js
+```
+6. **View your web server response**
+   - Open your browser and navigate to `http://localhost:3000/albums` to see your app in action.
+
+And that's it! You've successfully built a Node.js app that reads and serves data from a SQLite Cloud database.

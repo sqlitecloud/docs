@@ -14,7 +14,7 @@ By using **SQCloudSetPubSubCallback**, you can set a callback function that will
 
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 * **callback**: the C callback to be called in each notification
 * **data**: custom data to be transparently passed to the callback
 
@@ -31,7 +31,6 @@ Nothing.
 
 static my_callback(SQCloudConnection *connection, SQCloudResult *result, void *data) {
     // dump JSON notification
-    // more about the JSON format: https://docs.sqlitecloud.io/docs/introduction/pubsub_payload
     SQCloudResultDump(connection, result);
 }
 

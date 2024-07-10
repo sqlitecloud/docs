@@ -14,7 +14,7 @@ bool SQCloudDownloadDatabase (SQCloudConnection *connection, const char *dbname,
 Initiate an SQLite database download from an already connected SQLite Cloud node. 
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 * **dbname**: the name of the database to download
 * **xdata**: a pointer to an opaque datatype that will be passed as-is to the callback
 * **xcallback**: callback that will be automatically called to read from the input database file

@@ -14,7 +14,7 @@ bool SQCloudUploadDatabase (SQCloudConnection *connection, const char *dbname, c
 Initiate an SQLite database upload to an already connected SQLite Cloud node. 
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 * **dbname**: the name of the database on server-side once uploaded will be completed
 * **key**: encryption database key (if any)
 * **xdata**: a pointer to an opaque datatype that will be passed as-is to the callback

@@ -5,12 +5,14 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Getting Started", type: "secondary", icon: "docs-star" },
 	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
 	{ title: "Fundamentals", type: "inner", level: 0 },
-	{ title: "Connecting", filePath: "sqlite-cloud/connect-cluster", type: "inner", level: 1 },
-	{ title: "Creating a database", filePath: "sqlite-cloud/create-database", type: "inner", level: 1 },
-	{ title: "Writing data", filePath: "sqlite-cloud/write-data", type: "inner", level: 1 },
+	{ title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
+	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
+	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
-	{ title: "React", filePath: "sqlite-cloud/quick-start-react", type: "inner", level: 1 },
-	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
+	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
+	// { title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
+	// { title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	// { title: "Prisma ORM", filePath: "quick-start-prisma", type: "inner", level: 1 },
 
@@ -30,7 +32,7 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "SDKs", type: "secondary", icon: "docs-sdk" },
 	{ title: "C/C++", type: "inner", level: 0 },
-	{ title: "Introduction", type: "inner", filePath: "sqlite-cloud/sdks/c/getting-started", level: 1, },
+	{ title: "Introduction", type: "inner", filePath: "sdk-c-introduction", level: 1, },
 	{ title: 'Basic APIs', type: "inner", level: 1 },
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudConnect', type: "inner", level: 2 },
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudConnectWithString', type: "inner", level: 2 },
@@ -127,14 +129,17 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudDownloadDatabase', type: "inner", level: 2 },
 
 	{ title: "JavaScript", type: "inner", level: 0 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/js/getting-started", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-js-introduction", level: 1 },
+
+	{ title: "Python", type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
 
 	{ title: "Go",  type: "inner", level: 0 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/go/getting-started", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-go-introduction", level: 1 },
 
 	{ title: "PHP", type: "inner", level: 0 },
-	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/php/getting-started", level: 1 },
-	{ title: "Methods", filePath: "sqlite-cloud/sdks/php/methods", type: "inner", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-php-introduction", level: 1 },
+	{ title: "Methods", filePath: "sdk-php-methods", type: "inner", level: 1 },
 
 	{ title: "Reference", type: "secondary", icon: "docs-ref" },
 	{ title: "Server-side Commands", type: "inner", level: 0 },

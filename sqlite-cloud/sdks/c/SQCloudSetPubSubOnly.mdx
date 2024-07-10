@@ -10,10 +10,10 @@ SQCloudResult *SQCloudSetPubSubOnly (SQCloudConnection *connection);
 ```
 
 ### Description
-When Pub/Sub is activated (after calling [SQCloudSetPubSubCallback](/docs/sdk/c/sqcloudsetpubsubcallback)) there are two sockets associated to the SQCloudConnection connection.  The **SQCloudSetPubSubOnly** function closes the **main** socket, leaving the **pub/sub** socket opened and ready to receive incoming notifications from subscripted channels and tables.
+When Pub/Sub is activated (after calling [SQCloudSetPubSubCallback](/docs/sdks/c/sqcloudsetpubsubcallback)) there are two sockets associated to the SQCloudConnection connection.  The **SQCloudSetPubSubOnly** function closes the **main** socket, leaving the **pub/sub** socket opened and ready to receive incoming notifications from subscripted channels and tables.
 
 ### Parameters
-* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdk/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdk/c/sqcloudconnectwithstring)
+* **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
 
 ### Return value
 An OK result is succesfully executed, otherwise an error.

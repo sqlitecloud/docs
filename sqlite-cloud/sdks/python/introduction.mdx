@@ -1,0 +1,78 @@
+---
+title: Python SDK Introduction
+description: SQLite Cloud Python SDK
+customClass: sdk-doc badge-doc js-doc
+category: sdks
+status: publish
+slug: sdk-python-introduction
+---
+
+## Install
+
+```bash
+pip install sqlitecloud
+```
+
+## Basic Usage
+
+We aim for full compatibility with the established [sqlite3 API](https://docs.python.org/3/library/sqlite3.html), with the primary distinction being that our driver connects to SQLite Cloud databases. This allows you to migrate your [SQLite to the cloud](https://sqlitecloud.io) while continuing to use your existing codebase.
+
+```python
+import sqlitecloud
+
+# Open the connection to SQLite Cloud
+conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey")
+
+# You can autoselect the database during the connect call
+# by adding the database name as path of the SQLite Cloud
+# connection string, eg:
+# conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey")
+db_name = "chinook.sqlite"
+conn.execute(f"USE DATABASE {db_name}")
+
+cursor = conn.execute("SELECT * FROM albums WHERE AlbumId = ?", (1, ))
+result = cursor.fetchone()
+
+print(result)
+
+conn.close()
+```
+
+## Using SQLite Cloud with Pandas
+  
+```python 
+import io
+
+import pandas as pd
+
+import sqlitecloud
+
+dfprices = pd.read_csv(
+    io.StringIO(
+        """DATE,CURRENCY,PRICE
+    20230504,USD,201.23456
+    20230503,USD,12.34567
+    20230502,USD,23.45678
+    20230501,USD,34.56789"""
+    )
+)
+
+conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860/mydatabase.sqlite?apikey=myapikey")
+
+conn.executemany("DROP TABLE IF EXISTS ?", [("PRICES",)])
+
+# Write the dataframe to the SQLite Cloud database as a table PRICES
+dfprices.to_sql("PRICES", conn, index=False)
+
+# Create the dataframe from the table PRICES on the SQLite Cloud database
+df_actual_prices = pd.read_sql("SELECT * FROM PRICES", conn)
+
+# Inspect the dataframe
+print(df_actual_prices.head())
+
+# Perform a simple query on the dataframe
+query_result = df_actual_prices.query("PRICE > 50.00")
+
+print(query_result)
+```
+
