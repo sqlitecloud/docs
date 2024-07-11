@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: sqlitecloud/docsearch-action@v3
+      - uses: sqlitecloud/docsearch-action@v4
         with:
           project-string: ${{ secrets.PROJECT_STRING }}
           base-url: ${{ vars.BASE_URL }}
           database: documentation.sqlite
-          strip-astro-header: true
+          use-front-matter: true
           strip-md-titles: true
           strip-jsx: true
           strip-html: true
