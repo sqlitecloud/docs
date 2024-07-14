@@ -6,72 +6,150 @@ status: publish
 slug: quick-start-django
 ---
 
-In this quickstart, we will show you how to get started with SQLite Cloud and Django by building a simple application that connects to and reads from a SQLite Cloud database, and returns the result to a lightweight client.
+In this quickstart, we will show you how to get started with SQLite Cloud and Django by building a simple application that connects to and reads from a SQLite Cloud database.
 
 1. **Set up a SQLite Cloud account**
   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
 
 2. **Create a Django app**
-  - Create a Django app using the following command:
+  - If you haven't already done so, [install Python and Django](https://docs.djangoproject.com/en/5.0/intro/install/).
+  - The following command creates an outer directory (the container for your project) AND an inner directory (the Python package for your project). Both directories will be named `sqlitecloud_quickstart`.
+
 ```bash
 django-admin startproject sqlitecloud_quickstart
 ```
-  - Create a new app within the project:
+  - The following command creates your app as a separate package within the project container directory.
+
 ```bash
 cd sqlitecloud_quickstart
-python manage.py startapp quickstart
+python manage.py startapp albums
 ```
 
-3. **Install the SQLite Cloud SDK**
+3. **Install the SQLite Cloud Python SDK**
+  - Run this command from your current directory (i.e. the outer `sqlitecloud_quickstart`).
+
 ```bash
 pip install sqlitecloud
 ```
 
-4. **Query data**
-  - Grab a connection string by clicking on a node in your dashboard.
-  - Create a file `services.py` within the quickstart directory. Use the following code to display data from your database.
+4. **App setup**
+  - Create a new file `albums/services.py` and copy in the following code.
+  - In your SQLite Cloud account dashboard, click your Project name, copy the Connection String, and replace `<your-connection-string>` below.
 
 ```python
 import sqlitecloud
 
-# Create your models here.
-db = sqlitecloud.connect('<your-connection-string>')
-
 def get_albums():
-  result = db.execute('''
-  USE DATABASE chinook.sqlite; 
-  SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
-  FROM albums 
-  INNER JOIN artists 
-  WHERE artists.ArtistId = albums.ArtistId
-  LIMIT 20;
-  ''')
-  return result.fetchall()
+  conn = sqlitecloud.connect('<your-connection-string>')
 
+  db_name = "chinook.sqlite"
+  db_query = "SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20"
+
+  conn.execute(f"USE DATABASE {db_name}")
+
+  cursor = conn.execute(db_query)
+
+  conn.close()
+
+  result = cursor.fetchall()
+
+  return result
 ```
-  - Use the following code to display the data in a Django view:
+
+  - Copy the following code into `albums/views.py`. This view function invokes the `get_albums()` function defined in `services.py` to connect to the database and return album and artist information.
+  - The view function converts each returned row from a list to an object to more easily access the information in our HTML template (will discuss further later).
+
 ```python
-from django.http import JsonResponse
+from django.http import HttpResponse
+from django.template import loader
 from .services import get_albums
 
-def albums(request):
-    data = get_albums()
-    return JsonResponse(data, safe=False)
+def index(request):
+  albumsList = get_albums()
+
+  albumObjsList = [{'album': row[1], 'artist': row[2]} for row in albumsList]
+
+  template = loader.get_template("albums/index.html")
+  context = {
+      "albumObjsList": albumObjsList,
+  }
+  return HttpResponse(template.render(context, request))
 ```
-  - Add the following URL pattern to your project's `urls.py` file:
+
+  - Create a new file `albums/urls.py` and copy in the following code. This URL configuration (URLconf) maps the above view to a URL so we can access the view in the browser.
+
 ```python
 from django.urls import path
-from quickstart import albums
+from . import views
 
 urlpatterns = [
-    path('albums/', albums),
+    path("", views.index, name="index")
 ]
 ```
-  - Run the Django development server:
+
+  - Adjust the code in `sqlitecloud_quickstart/urls.py` to be as follows. We must configure this global URLconf in the inner `sqlitecloud_quickstart` to include the URLconf we defined above in our app.
+
+```python
+from django.contrib import admin
+from django.urls import include, path
+
+# global URLconfs
+urlpatterns = [
+    path("albums/", include("albums.urls")),
+    path('admin/', admin.site.urls),
+]
+```
+
+  - Now we'll create a Django template the view can use to render HTML. Under `albums`, create a new file at `templates/albums/index.html` and copy in the following code.
+    - Bear in mind, there are now 2 (outer and inner) `albums` directories.
+    - The `index` view function above is already set up to load and render the template `albums/index.html`. (NOTE: `albums` here is the inner `albums` dir.)
+
+```html
+<div>
+    <h1>Albums</h1>
+    <ul>
+    {% for row in albumObjsList %}
+        <li>{{ row.album }} by {{ row.artist }}</li>
+    {% endfor %}
+    </ul>
+</div>
+```
+  - Lastly, in `sqlitecloud_quickstart/settings.py`, configure `DIRS` in `TEMPLATES` as follows.
+    - `'APP_DIRS': True` tells Django's templating engine to look for template source files inside project apps.
+    - `DIRS` provides the filepath to the correct app's `templates` dir.
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['albums/templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+5. **Run the Django dev server**
+
 ```bash
 python manage.py runserver
 ```
-  - Visit `http://localhost:8000/albums/` to see the data returned from your SQLite Cloud database.
+
+  - Visit `http://127.0.0.1:8000/albums/` to see your app data.
+
+6. **FOLLOW-UP:**
+This Quickstart goes a bit deeper into the framework than the other Quickstarts since Django requires more boilerplate to get up-and-running with a simple app.
+
+If you're new to Django and want to learn more, we referenced the following Django Tutorial pages extensively when writing this Quickstart:
+  - [Part 1](https://docs.djangoproject.com/en/5.0/intro/tutorial01)
+  - [Part 3](https://docs.djangoproject.com/en/5.0/intro/tutorial03)
 
 And that's it! You've successfully built a Django app that reads data from a SQLite Cloud database.
