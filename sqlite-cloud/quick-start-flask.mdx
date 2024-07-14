@@ -1,0 +1,80 @@
+---
+title: Flask Quick Start Guide
+description: Get started with SQLite Cloud using Flask.
+category: getting-started
+status: publish
+slug: quick-start-flask
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Flask by building a simple application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a Flask app**
+  - You should have the latest Python version (3) installed locally.
+
+```bash
+mkdir sqlc-quickstart
+cd sqlc-quickstart
+
+python3 -m venv .venv
+. .venv/bin/activate
+
+pip install flask
+```
+
+3. **Install the SQLite Cloud SDK**
+
+```bash
+pip install sqlitecloud
+```
+
+4. **Query data**
+  - Copy the following code into a new `app.py` file.
+  - In your SQLite Cloud account dashboard, click your Project name, copy the Connection String, and replace `<your-connection-string>` below.
+
+```py
+from flask import Flask
+import sqlitecloud
+
+app = Flask(__name__)
+
+@app.route('/')
+def get_albums():
+    conn = sqlitecloud.connect('<your-connection-string>')
+
+    db_name = 'chinook.sqlite'
+    db_query = "SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20"
+
+    conn.execute(f"USE DATABASE {db_name}")
+
+    cursor = conn.execute(db_query)
+
+    conn.close()
+
+    result = '<div><h1>Albums</h1>'
+
+    for row in cursor:
+        album = f"{row[1]} by {row[2]}"
+        result += f"<li>{album}</li>"
+
+    return result + '</div>'
+```
+
+5. **Run your app**
+  - If you're using port 5000 or on MacOS, also pass the `--port` option to provdie an open port.
+  - Pass the --debug option to enable hot reloading and interactive debugging on your dev server.
+
+```bash
+flask run --port 3000 --debug
+```
+
+6. **View your app**
+  - Open your browser and navigate to `http://127.0.0.1:3000/` to see your app data.
+  - If you're unfamiliar with Flask, the code above calls the `get_albums` function when you load the root URL. The function returns a string with HTML for the browser to render.
+
+And that's it! You've successfully built a Flask app that reads data from a SQLite Cloud database.

@@ -12,8 +12,9 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "CDN", filePath: "quick-start-cdn", type: "inner", level: 1 },
 	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
 	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
-	{ title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
+	{ title: "React Native", filePath: "quick-start-react-native", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
+  { title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
