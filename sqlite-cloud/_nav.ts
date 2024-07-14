@@ -9,13 +9,13 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
+	{ title: "CDN", filePath: "quick-start-cdn", type: "inner", level: 1 },
 	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
 	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
-	// { title: "React Native", filePath: "sqlite-cloud/quick-start-react-native", type: "inner", level: 1 },
-	// { title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
-	// { title: "Prisma ORM", filePath: "quick-start-prisma", type: "inner", level: 1 },
-
+	{ title: "React Native", filePath: "quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
+  	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
@@ -129,7 +129,8 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudDownloadDatabase', type: "inner", level: 2 },
 
 	{ title: "JavaScript", type: "inner", level: 0 },
-	{ title: 'Introduction', type: "inner", filePath: "sdk-js-introduction", level: 1 },
+	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/js/getting-started", level: 1 },
+	{ title: "React", ref: "/docs/sqlite-cloud/quick-start-react", type: "inner", level: 1 },
 
 	{ title: "Python", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
