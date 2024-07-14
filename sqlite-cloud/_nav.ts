@@ -9,6 +9,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
 	{ title: "Quick Start Guides", type: "inner", level: 0 },
+	{ title: "CDN", filePath: "quick-start-cdn", type: "inner", level: 1 },
 	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
 	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "quick-start-react-native", type: "inner", level: 1 },

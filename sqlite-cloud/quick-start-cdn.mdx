@@ -1,0 +1,175 @@
+---
+title: CDN Quick Start Guide
+description: Get started with SQLite Cloud using a Content Delivery Network
+category: getting-started
+status: publish
+slug: quick-start-cdn
+---
+
+In this quickstart, we demonstrate how to locally serve the SQLite Cloud JS Drivers from a CDN.
+
+---
+
+1. **Set up a SQLite Cloud account**
+   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a JavaScript / TypeScript app**
+    - The following commands bootstrap a TypeScript app.
+```bash
+mkdir sqlc-quickstart
+cd sqlc-quickstart
+
+npm init -y
+npm install typescript ts-node @types/node --save-dev
+npx tsc --init
+```
+
+3. **Install the SQLite Cloud JS SDK**
+```bash
+npm install @sqlitecloud/drivers
+```
+
+4. **Load our example in your browser**
+
+Copy the following to your ```index.html``` file:
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SQLite Cloud CDN Quickstart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sqlitecloud/drivers@1.0.178/lib/sqlitecloud.drivers.js"></script>
+  </head>
+
+  <body class="p-4 bg-[#cfe1f8] mx-auto my-10 w-8/12">
+    <h1 class="text-4xl mb-6">
+      SQLite Cloud Example: Checking Chinook Customers
+    </h1>
+
+    <div class="pb-2">
+      <label for="connectionStringInput" class="text-lg"
+        >Database Connection String:</label
+      >
+      <input
+        type="text"
+        id="connectionStringInput"
+        class="border rounded w-full pl-2 pr-2 mb-3"
+      />
+      <label for="messageInput" class="text-lg">SQL Query:</label>
+      <input
+        type="text"
+        id="messageInput"
+        value="USE DATABASE chinook.sqlite; select * from customers limit 3"
+        class="border rounded w-full pl-2 pr-2 mb-3"
+      />
+    </div>
+    <button
+      id="sendButton"
+      class="text-white border-black rounded-br-3xl rounded-tl-3xl rounded-tr-3xl bg-black w-32 h-10 mb-6"
+    >
+      Send!
+    </button>
+
+    <h2 class="pb-4 text-2xl">Results:</h2>
+    <ul id="messages" class="pl-4"></ul>
+
+    <script type="module">
+      const status = document.getElementById('status');
+      const messages = document.getElementById('messages');
+
+      const appendMessage = (content) => {
+        const item = document.createElement('li');
+        item.classList.add('pb-4');
+        item.classList.add('text-sm');
+        item.textContent = content;
+        messages.prepend(item);
+      };
+
+      var database = null;
+
+      sendButton.addEventListener('click', () => {
+        if (!database) {
+          var connectionStringinputElement = document.getElementById(
+            'connectionStringInput'
+          );
+          var connectionstring = connectionStringinputElement.value;
+          const connectionConfig = {
+            gatewayUrl: `${
+              window.location.protocol === 'https:' ? 'wss' : 'ws'
+            }://${window.location.hostname}:4000`,
+            connectionstring: connectionstring,
+          };
+          database = new window.sqlitecloud.Database(
+            connectionConfig,
+            (error) => {
+              if (error) {
+                database = null;
+                appendMessage(`Connection Error:  ${error}`);
+              } else {
+                console.log('connected');
+                appendMessage(`Connected!`);
+              }
+            }
+          );
+        }
+
+        var messageInputElement = document.getElementById('messageInput');
+        const sql = messageInputElement.value;
+        const startTime = Date.now();
+
+        database.all(sql, (error, rows) => {
+          if (error) {
+            console.error(`sql: ${sql}, error: ${error}`, error);
+            appendMessage(`sql: ${sql}, error: ${error}`);
+          } else {
+            console.debug(`sql: ${sql}, (${Date.now() - startTime}ms)`, rows);
+            // list raw data
+            // for (const row of rows) {
+            //   appendMessage(JSON.stringify(row));
+            // }
+
+            for (const {
+              FirstName,
+              LastName,
+              Address,
+              City,
+              Country,
+              Phone,
+              Email,
+            } of rows) {
+              appendMessage(
+                `${FirstName} ${LastName} lives at ${Address}, ${City}, ${Country} and may be reached at ${Phone} or ${Email}.`
+              );
+            }
+          }
+          appendMessage('----------');
+        });
+      });
+    </script>
+  </body>
+</html>
+```
+
+    - This HTML form sends a query to the `chinook.sqlite` database. You can load the form by simply dragging and dropping the file into your browser.
+    - To use SQLite Cloud's JS drivers, the example includes an additional script in the `<head>` tag: `<script src="https://cdn.jsdelivr.net/npm/@sqlitecloud/drivers@{version}/lib/sqlitecloud.drivers.js"></script>`. Update `{version}` with the most recent repo release.
+
+5. **Query data**
+    - There are 2 ways to query data.
+        1. In your SQLite Cloud account dashboard, click your Project name, copy the Connection String, and paste it into the form's `Database Connection String` input. The expected string format is: `sqlitecloud://{host}.sqlite.cloud:8860?apikey={apikey}`.
+        
+        - Since this Connection String format does NOT contain the database to query, you MUST include the database name in your query. The expected query format is: `USE DATABASE {database}; select * from {table}`.
+            - IMPORTANT: The example SQL we provide (`USE DATABASE chinook.sqlite; select * from customers limit 3`) queries the `customers` table in the `chinook` database. The results are specifically parsed to be more readable. To display raw data from any table, uncomment the `index.html` code starting after `// list raw data` and comment out the later `for` loop.
+
+        2. An alternative Connection String format is: `sqlitecloud://{username}:{password}@{host}.sqlite.cloud:8860/{database}`.
+
+        - Since this Connection String format DOES contain the database to query, you can exclude the database name from your query: `select * from {table}`.
+        - To get your admin username, go to your SQLite Cloud account dashboard. In the left nav, open Security and select Users. Your admin username has already been created. Replace `{username}` the connection string.
+        - To set your admin user's password, click the row's down chevron and select Edit. Enter a new Password and click Save. Replace `{password}` in the connection string.
+        - To get the host, see under your Project name `{host}.sqlite.cloud`.
+        - To get the database name, in the left nav, open Databases and select Tables. All of your databases are listed in the Select Database dropdown.
+    
+    - Send your query! Returned results will be listed, from most to least recent, below the form inputs.
+
+And that's it! You've successfully submitted a simple form to read data from a SQLite Cloud database.
