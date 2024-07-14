@@ -1,7 +1,7 @@
 ---
 name: Documentation Update
 about: Suggest updates, additions, or improvements to the documentation
-title: '[Update] '
+title: '[Docs Update] '
 labels: 'documentation'
 assignees: ''
 ---
