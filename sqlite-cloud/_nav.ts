@@ -146,6 +146,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: 'Interfaces', type: "inner", level: 1 },
 	{ title: "SQLCloudRowsetMetadata", filePath: 'sdks/js/interfaces/SQLCloudRowsetMetadata', type: "inner", level: 2 },
 	{ title: "SQLiteCloudConfig", filePath: 'sdks/js/interfaces/SQLiteCloudConfig', type: "inner", level: 2 },
+	{ title: "Modules", filePath: "sdks/js/modules", type: "inner", level: 1 },
 
 
 	{ title: "Python", type: "inner", level: 0 },
