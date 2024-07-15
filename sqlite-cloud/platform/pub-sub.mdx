@@ -140,3 +140,27 @@ OK
 	}]
 }
 ```
+
+## Client Library Examples
+
+```javascript
+import { Database } from '@sqlitecloud/drivers'
+import { PubSub, PUBSUB_ENTITY_TYPE } from '@sqlitecloud/drivers/lib/drivers/pubsub'
+
+let database = new Database('sqlitecloud://user:password@xxx.sqlite.cloud:8860/chinook.sqlite')
+// or use sqlitecloud://xxx.sqlite.cloud:8860?apikey=xxxxxxx
+
+const pubSub: PubSub = await database.getPubSub()
+
+await pubSub.listen(PUBSUB_ENTITY_TYPE.TABLE, 'albums', (error, results, data) => {
+  if (results) {
+    // Changes on albums table will be received here as JSON object
+    console.log('Received message:', results)
+  }
+})
+
+await database.sql`INSERT INTO albums (Title, ArtistId) values ('Brand new song', 1)`
+
+// Stop listening changes on the table
+await pubSub.unlisten(PUBSUB_ENTITY_TYPE.TABLE, 'albums')
+```
