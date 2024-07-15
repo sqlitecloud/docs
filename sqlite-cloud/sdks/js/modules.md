@@ -11,7 +11,7 @@ slug: sdk-js-modules
 
 ### Classes
 
-- [Database](classes/database)
+- [Database](docs/sqlite-cloud/sdks/js/database)
 - [SQLiteCloudConnection](classes/sqlitecloudconnection)
 - [SQLiteCloudError](classes/sqliteclouderror)
 - [SQLiteCloudRow](classes/sqlitecloudrow)
