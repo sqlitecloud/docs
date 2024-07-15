@@ -131,7 +131,22 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "JavaScript", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sqlite-cloud/sdks/js/getting-started", level: 1 },
-	{ title: "React", ref: "/docs/sqlite-cloud/quick-start-react", type: "inner", level: 1 },
+	{ title: "Quick Starts", type: "inner", level: 1 },
+	{ title: "React", ref: "/docs/sqlite-cloud/quick-start-react", type: "inner", level: 2 },
+	{ title: "Node.js", ref: "/docs/sqlite-cloud/quick-start-node", type: "inner", level: 2 },
+	{ title: "Next.js", ref: "/docs/sqlite-cloud/quick-start-next", type: "inner", level: 2 },
+	{ title: "Classes", type: "inner", level: 1 },
+	{ title: "Database", filePath: 'sdks/js/classes/Database', type: "inner", level: 2 },
+	{ title: "SQLiteCloudConnection", filePath: 'sdks/js/classes/SQLiteCloudConnection', type: "inner", level: 2 },
+	{ title: "SQLiteCloudError", filePath: 'sdks/js/classes/SQLiteCloudError', type: "inner", level: 2 },
+	{ title: "SQLiteCloudRow", filePath: 'sdks/js/classes/SQLiteCloudRow', type: "inner", level: 2 },
+	{ title: "SQLiteCloudRowset", filePath: 'sdks/js/classes/SQLiteCloudRowset', type: "inner", level: 2 },
+	{ title: "SQLiteCloudStatement", filePath: 'sdks/js/classes/Statement', type: "inner", level: 2 },
+
+	{ title: 'Interfaces', type: "inner", level: 1 },
+	{ title: "SQLCloudRowsetMetadata", filePath: 'sdks/js/interfaces/SQLCloudRowsetMetadata', type: "inner", level: 2 },
+	{ title: "SQLiteCloudConfig", filePath: 'sdks/js/interfaces/SQLiteCloudConfig', type: "inner", level: 2 },
+
 
 	{ title: "Python", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
