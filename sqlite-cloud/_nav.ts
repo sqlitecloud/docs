@@ -151,6 +151,8 @@ const sidebarNav: SidebarNavStruct = [
 
 	{ title: "Python", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
+	{ title: "Django", ref: "/docs/quick-start-django", type: "inner", level: 1 },
+	{ title: "Flask", ref: "/docs/quick-start-flask", type: "inner", level: 1 },
 
 	{ title: "Go",  type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-go-introduction", level: 1 },
