@@ -11,17 +11,17 @@ slug: sdk-js-modules
 
 ### Classes
 
-- [Database](classes/database)
-- [SQLiteCloudConnection](classes/sqlitecloudconnection)
-- [SQLiteCloudError](classes/sqliteclouderror)
-- [SQLiteCloudRow](classes/sqlitecloudrow)
-- [SQLiteCloudRowset](classes/sqlitecloudrowset)
-- [Statement](classes/statement)
+- [Database](sqlite-cloud/sdks/js/classes/database)
+- [SQLiteCloudConnection](sqlite-cloud/sdks/js/classes/sqlitecloudconnection)
+- [SQLiteCloudError](sqlite-cloud/sdks/js/classes/sqliteclouderror)
+- [SQLiteCloudRow](sqlite-cloud/sdks/js/classes/sqlitecloudrow)
+- [SQLiteCloudRowset](sqlite-cloud/sdks/js/classes/sqlitecloudrowset)
+- [Statement](sqlite-cloud/sdks/js/classes/statement)
 
 ### Interfaces
 
-- [SQLCloudRowsetMetadata](interfaces/sqlcloudrowsetmetadata)
-- [SQLiteCloudConfig](interfaces/sqlitecloudconfig)
+- [SQLCloudRowsetMetadata](sqlite-cloud/sdks/js/interfaces/sqlcloudrowsetmetadata)
+- [SQLiteCloudConfig](sqlite-cloud/sdks/js/interfaces/sqlitecloudconfig)
 
 ### Type Aliases
 
