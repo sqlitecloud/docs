@@ -157,7 +157,7 @@ Copy the following to your ```index.html``` file:
 
 5. **Query data**
     - There are 2 ways to query data.
-        1. In your SQLite Cloud account dashboard, click your Project name, copy the Connection String, and paste it into the form's `Database Connection String` input. The expected string format is: `sqlitecloud://{host}.sqlite.cloud:8860?apikey={apikey}`.
+        1. In your SQLite Cloud account dashboard, click on a Node, copy the Connection String, and paste it into the form's `Database Connection String` input. The expected string format is: `sqlitecloud://{host}.sqlite.cloud:8860?apikey={apikey}`.
         
         - Since this Connection String format does NOT contain the database to query, you MUST include the database name in your query. The expected query format is: `USE DATABASE {database}; select * from {table}`.
             - IMPORTANT: The example SQL we provide (`USE DATABASE chinook.sqlite; select * from customers limit 3`) queries the `customers` table in the `chinook` database. The results are specifically parsed to be more readable. To display raw data from any table, uncomment the `index.html` code starting after `// list raw data` and comment out the later `for` loop.
