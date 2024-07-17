@@ -10,11 +10,11 @@ bool SQCloudVMIsFinalized (SQCloudVM *vm);
 ```
 
 ### Description
-The **SQCloudVMIsFinalized** interface returns true if the prepared statement bound to the vm has been stepped at least once using [SQCloudVMStep](/docs/sdks/c/sqcloudvmstep) but has neither run to completion nor been reset. This function resembles the [sqlite3_stmt_busy](https://www.sqlite.org/c3ref/stmt_busy.html) SQLite API.
+The **SQCloudVMIsFinalized** interface returns true if the prepared statement bound to the vm has been stepped at least once using [SQCloudVMStep](/docs/sqlite-cloud/sdks/c/sqcloudvmstep) but has neither run to completion nor been reset. This function resembles the [sqlite3_stmt_busy](https://www.sqlite.org/c3ref/stmt_busy.html) SQLite API.
 
 
 ### Parameters
-* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdks/c/sqcloudvmcompile).
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sqlite-cloud/sdks/c/sqcloudvmcompile).
 
 
 ### Return value
