@@ -1,0 +1,147 @@
+---
+title: PHP / Laravel Quick Start Guide
+description: Get started with SQLite Cloud using PHP and Laravel.
+category: getting-started
+status: publish
+slug: quick-start-php-laravel
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and PHP by building a simple Laravel application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a Laravel app**
+  - If you haven't already done so, install PHP, Laravel, and Composer.
+    - If you use macOS, you can install all 3 in 1 click by [downloading Laravel Herd](https://herd.laravel.com/docs/1/getting-started/installation#installation), a PHP dev environment.
+  - Create a new Laravel project.
+
+```bash
+composer create-project laravel/laravel sqlc-quickstart
+```
+
+  - In the project directory, start Laravel's local dev server.
+
+```bash
+cd sqlc-quickstart
+php artisan serve
+```
+
+  - Visit `http://127.0.0.1:8000` to see your Laravel app.
+
+3. **Configure a Blade frontend**
+  - Open another terminal. Again in your project dir, install Laravel Breeze.
+    - By default, Breeze uses simple Blade templates for your app's view layer. Blade is a templating engine included with Laravel. HTML is rendered server-side so you can include dynamic content from your database.
+
+```bash
+composer require laravel/breeze --dev
+php artisan breeze:install blade
+```
+
+  - Start a Vite dev server that will hot reload updates to your app. (No need to load the provided localhost link, just keep the Vite server running.)
+
+```bash
+npm run dev
+```
+
+  - Refresh your app in the browser. Click the "Register" link at the top right. Register an account and log in. Save your credentials.
+
+4. **App setup**
+
+  - Open another terminal. Again in your project dir, run `php artisan make:model -rc Album` to create an Eloquent Model (which we'll ignore) and a HTTP resource controller: `app/Http/Controllers/AlbumController.php`. We'll add functionality to this file to process app requests and return responses later.
+  - Replace the code in `routes/web.php` with the following snippet to add a route named `albums.index`.
+    - Run `php artisan route:list` to view all your app routes.
+    - `albums.index` will route GET requests to the `albums` endpoint to `AlbumController`'s `index` method (will set up later).
+
+```php
+<?php
+
+use App\Http\Controllers\AlbumController;
+use Illuminate\Support\Facades\Route;
+
+Route::resource('albums', AlbumController::class)
+    ->only(['index']);
+```
+
+  - Create a new file `resources/views/albums/index.blade.php` and copy in the following code to create your Blade view template.
+
+```php
+<h1>Albums</h1>
+<ul>
+@foreach ($albums as $album)
+    <li>{{ $album['albumTitle'] }} by {{ $album['artistName'] }}</li>
+@endforeach
+</ul>
+```
+
+5. **Install the SQLite Cloud SDK**
+
+```bash
+composer require sqlitecloud/sqlitecloud
+```
+
+6. **Query data**
+
+  - Replace the code in `app/Http/Controllers/AlbumController.php` with the following snippet.
+  - In your SQLite Cloud account dashboard, click on a Node, copy the Connection String, and replace `<your-connection-string>` below.
+  - The `index` method will:
+    - connect to and query the database,
+    - create an array of arrays `albums` containing each returned album's title and artist,
+    - use the global `view` helper to pass `albums` to your view template stored at `resources/views/albums/index.blade.php` (and already set up to list the data), and
+    - return the completed Blade view to the browser.
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\View\View;
+use SQLiteCloud\SQLiteCloudClient;
+use SQLiteCloud\SQLiteCloudRowset;
+
+class AlbumController extends Controller
+{
+    public function index(): View
+    {
+        $sqlite = new SQLiteCloudClient();
+        $sqlite->connectWithString('<your-connection-string>');
+
+        $db_name = 'chinook.sqlite';
+        $db_query = 'SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20';
+
+        $sqlite->execute("USE DATABASE {$db_name}");
+        
+        $rowset = $sqlite->execute($db_query);
+
+        $sqlite->disconnect();
+
+        $albums = [];
+
+        for($i = 0; $i < $rowset->nrows; $i++) {
+            $albums[] = [
+                'albumTitle' => $rowset->value($i, 1),
+                'artistName' => $rowset->value($i, 2),
+            ];
+        }
+        
+        return view('albums.index', [ 
+            'albums' => $albums
+        ]);
+    }
+}
+```
+
+7. **View your app**
+  - Visit `http://127.0.0.1:8000/albums` to see your app data.
+
+8. **FOLLOW-UP:**
+This Quickstart goes a bit deeper into the framework than the other Quickstarts since Laravel requires more boilerplate to get up-and-running with a simple app.
+
+If you're new to Laravel and want to learn more, we referenced the following Laravel Tutorial pages extensively when writing this Quickstart:
+  - [Installation](https://bootcamp.laravel.com/blade/installation)
+  - [Controllers, Routing, Blade](https://bootcamp.laravel.com/blade/creating-chirps)
+
+And that's it! You've successfully built a PHP / Laravel app that reads data from a SQLite Cloud database.
