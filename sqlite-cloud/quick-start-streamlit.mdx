@@ -1,0 +1,66 @@
+---
+title: Streamlit Quick Start Guide
+description: Get started with SQLite Cloud using Streamlit.
+category: getting-started
+status: publish
+slug: quick-start-streamlit
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Streamlit by building a simple application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a Streamlit app**
+  - You should have the latest Python version (3) installed locally.
+
+```bash
+mkdir sqlc-quickstart
+cd sqlc-quickstart
+
+python3 -m venv .venv
+. .venv/bin/activate
+
+pip install streamlit
+```
+
+1. **Install the SQLite Cloud SDK**
+
+```bash
+pip install sqlitecloud
+```
+
+4. **Query data**
+  - Copy the following code into a new `app.py` file.
+  - In your SQLite Cloud account dashboard, click your Project name, copy the Connection String, and replace `<your-connection-string>` below.
+
+```py
+import streamlit as st
+import sqlitecloud
+import pandas as pd
+
+st.header('Invoices')
+
+conn = sqlitecloud.connect('<your-connection-string>')
+
+db_name = "chinook.sqlite"
+conn.execute(f"USE DATABASE {db_name}")
+
+invoices = pd.read_sql("SELECT * FROM invoices LIMIT 20", conn)
+
+st.dataframe(invoices, hide_index=True)
+```
+
+5. **Run your app**
+
+```bash
+streamlit run app.py
+```
+
+1. **View your app**
+  - Open your browser and navigate to the localhost link provided by the previous command to see your app data.
+
+And that's it! You've successfully built a Streamlit app that reads data from a SQLite Cloud database.
