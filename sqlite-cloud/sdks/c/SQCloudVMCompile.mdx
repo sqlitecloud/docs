@@ -14,7 +14,7 @@ Compile an SQL statement into a byte-code virtual machine.
 This function resembles the [sqlite3_prepare](https://www.sqlite.org/c3ref/prepare.html) SQLite API. 
 
 ### Parameters
-* **connection**: A valid connection object obtained by [SQCloudConnect](/docs/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sdks/c/sqcloudconnectwithstring)
+* **connection**: A valid connection object obtained by [SQCloudConnect](/docs/sqlite-cloud/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sqlite-cloud/sdks/c/sqcloudconnectwithstring)
 * **sql**: The statement to be compiled. 
 * **len**: If the len argument is negative, then sql is read up to the first zero terminator. If len is positive, then it is the number of bytes read from sql.
 * **tail**: If the tail argument is not NULL then *tail is made to point to the first byte past the end of the first SQL statement in sql. SQCloudVMCompile compiles only the first statement in sql, so *tail is left pointing to what remains uncompiled.

@@ -21,8 +21,8 @@ These functions resemble the [sqlite3_column_*](https://www.sqlite.org/c3ref/col
 
 
 ### Parameters
-* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sdks/c/sqcloudvmcompile).
-* **index**: The index of the column for which information should be returned. The leftmost column of the result set has the index 0. The number of columns in the result can be determined using [SQCloudVMColumnCount](/docs/sdks/c/sqcloudvmcolumncount).
+* **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sqlite-cloud/sdks/c/sqcloudvmcompile).
+* **index**: The index of the column for which information should be returned. The leftmost column of the result set has the index 0. The number of columns in the result can be determined using [SQCloudVMColumnCount](/docs/sqlite-cloud/sdks/c/sqcloudvmcolumncount).
 * **len**: The number of bytes of the returned value.
 
 The **SQCloudVMColumnType** routine returns the datatype code for the initial data type of the result column. The returned value is one of following:
