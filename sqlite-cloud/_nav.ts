@@ -16,6 +16,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
+	{ title: "Streamlit", filePath: "quick-start-streamlit", type: "inner", level: 1 },
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
