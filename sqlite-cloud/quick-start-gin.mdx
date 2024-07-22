@@ -1,0 +1,141 @@
+---
+title: Gin Quick Start Guide
+description: Get started with SQLite Cloud using Gin.
+category: getting-started
+status: publish
+slug: quick-start-gin
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Go by building a simple Gin application that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new database.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a Gin app**
+  - You should have [Go installed](https://go.dev/doc/install) locally.
+  - Set up your Go workspace.
+```bash
+mkdir sqlc-quickstart
+cd sqlc-quickstart
+
+go mod init example.com/sqlc-quickstart
+```
+  - Create a file called `app.go`.
+  - Add the following code to your `app.go` file.
+```go
+package main
+
+import "fmt"
+```
+  - Import the Gin package in your Go source code.
+```go
+import "github.com/gin-gonic/gin"
+```
+  - Run the `go mod tidy` command to synchronize your module's dependencies.
+```bash
+$ go mod tidy
+go: finding module for package github.com/gin-gonic/gin
+go: found github.com/gin-gonic/gin in github.com/gin-gonic/gin v1.10.0
+go: downloading github.com/google/go-cmp v0.5.5
+```
+
+3. **Install the SQLite Cloud package**
+- Import the package in your Go source code.
+```go
+import sqlitecloud "github.com/sqlitecloud/sqlitecloud-go"
+```
+- Download the package, and run the `go mod tidy` command to synchronize your module’s dependencies.
+```bash
+$ go mod tidy 
+go: downloading github.com/sqlitecloud/sqlitecloud-go v1.0.0
+```
+
+4. **Connect with a valid SQLite Cloud connection string**
+```go 
+sqlitecloud://{username}:{password}@{host}.sqlite.cloud:8860/{database}
+```
+- To get your admin username, go to your SQLite Cloud account dashboard. In the left nav, open Security and select Users. Your admin username has already been created. Replace `{username}` in the connection string.
+- To set your admin user’s password, click the row’s down chevron and select Edit. Enter a new Password and click Save. Replace `{password}` in the connection string.
+- To get the host, see under your Project name `{host}.sqlite.cloud`.
+- To get the database name, in the left nav, open Databases and select Tables. All of your databases are listed in the Select Database dropdown.
+
+
+5. **Query data**
+  - Copy the following code into the `app.go` file. 
+  - Replace `<your-connection-string>`.
+
+```go
+type Artist struct {
+	ArtistID int64  `json:"artist id"`
+	Name     string `json:"name"`
+}
+
+func readArtists(resultSet *sqlitecloud.Result) ([]Artist, error) {
+	var artists []Artist
+
+	for r := uint64(0); r < resultSet.GetNumberOfRows(); r++ {
+		id, err := resultSet.GetInt64Value(r, 0)
+		if err != nil {
+			return nil, err
+		}
+
+		name, err := resultSet.GetStringValue(r, 1)
+		if err != nil {
+			return nil, err
+		}
+
+		artists = append(artists, Artist{
+			ArtistID: id,
+			Name:     name,
+		})
+	}
+
+	return artists, nil
+}
+
+func main() {
+	r := gin.Default()
+
+	r.GET("/artists", func(c *gin.Context) {
+		const connectionString = "<your-connection-string>"
+
+		db, err := sqlitecloud.Connect(connectionString)
+		if err != nil {
+			fmt.Println("Connect error: ", err)
+			panic("Connect error")
+		}
+
+		dbResult, err := db.Select("SELECT * FROM artists LIMIT 10;")
+		if err != nil {
+			fmt.Println("Select error: ", err)
+			panic("Select error")
+		}
+
+		artists, err := readArtists(dbResult)
+		if err != nil {
+			fmt.Println("Read artists error: ", err)
+			panic("Read artists error")
+		}
+
+		c.JSON(200, artists)
+
+	})
+
+	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+```
+
+6. **Run your app**
+
+```bash
+$ go run app.go
+```
+
+7. **View your app**
+  - Open your browser and navigate to localhost:8080.
+
+And that's it! You've successfully built a Gin app that reads data from a SQLite Cloud database.
