@@ -163,6 +163,9 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: 'Introduction', type: "inner", filePath: "sdk-php-introduction", level: 1 },
 	{ title: "Methods", filePath: "sdk-php-methods", type: "inner", level: 1 },
 
+	{ title: "Swift", type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-swift-introduction", level: 1 },
+
 	{ title: "Reference", type: "secondary", icon: "docs-ref" },
 	{ title: "Server-side Commands", type: "inner", level: 0 },
 	{ title: "Introduction", filePath: "server-side-commands", type: "inner", level: 1 },
