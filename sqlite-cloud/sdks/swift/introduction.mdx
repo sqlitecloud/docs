@@ -6,11 +6,12 @@ status: publish
 slug: sdk-swift-introduction
 ---
 
-This powerful package provides methods that perform database operations and enable real-time notifications in Swift apps, making it easier than ever to work with SQLite in the cloud.
+This powerful package provides methods that perform DB operations and enables real-time notifications in Swift apps, making it easier than ever to work with SQLite in the cloud. We encourage all users to log encountered issues in the [SDK's issues backlog](https://github.com/sqlitecloud/sqlitecloud-swift/issues).
 
 ## Install
 
-  - In `Package.swift`, add the `swift` package to `dependencies`. The following example snippet is from a project using the Vapor framework.
+  - In `Package.swift`, add the `swift` package to `dependencies`. 
+    - The following example snippet is from a Swift app using the Vapor framework.
 
 ```swift
 let package = Package(
@@ -34,32 +35,64 @@ let package = Package(
 
 ## Basic Usage
 
-  - 
+  - Currently, there are 2 ways to configure your database connection:
+
+    - 1. Explicitly passing string params: `SQLiteCloudConfig(hostname: {hostname}, username: {username}, password: {password}, port: .default)`
+      - In your SQLite Cloud account dashboard, click on a Node, copy the Deployment string, and replace `{hostname}` in `configuration` below.
+      - In your dashboard left nav, select Settings, then Users. Copy your username and replace `{username}`.
+      - In your User's row, click the down chevron, then Edit. Enter a Password and Save. Replace `{password}`.
 
 ```swift
 import SQLiteCloud
 
-# explicit 
-let configuration = SQLiteCloudConfig(hostname: "<see-project-deployment>", username: "<see-settings-users>", password: "<edit-your-user>", port: .default)
+let configuration: SQLiteCloudConfig = SQLiteCloudConfig(hostname: "<see-project-deployment>", username: "<see-settings-users>", password: "<edit-your-user>", port: .default)
+
+let sqliteCloud: SQLiteCloud = SQLiteCloud(config: configuration)
+
+do {
+    try await sqliteCloud.connect()
+    debugPrint("connected")
+
+    let sqlQuery: String = "USE DATABASE chinook.sqlite; SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20;"
+
+    let result: SQLiteCloudResult = try await sqliteCloud.execute(query: sqlQuery)
+
+    try await sqliteCloud.disconnect()
+
+    return result.stringValue!
+} catch {
+    return "Connection error: \(error)"
+}
 ```
 
-```python
-import sqlitecloud
+    - 2. Using a connection string: `SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:{port}/{database})`
 
-# Open the connection to SQLite Cloud
-conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey")
+```swift
+import SQLiteCloud
 
-# You can autoselect the database during the connect call
-# by adding the database name as path of the SQLite Cloud
-# connection string, eg:
-# conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey")
-db_name = "chinook.sqlite"
-conn.execute(f"USE DATABASE {db_name}")
+let configuration: SQLiteCloudConfig? = SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:8860/chinook.sqlite")
 
-cursor = conn.execute("SELECT * FROM albums WHERE AlbumId = ?", (1, ))
-result = cursor.fetchone()
+let sqliteCloud: SQLiteCloud = SQLiteCloud(config: configuration!)
 
-print(result)
+do {
+    try await sqliteCloud.connect()
+    debugPrint("connected")
 
-conn.close()
+    let sqlQuery: String = "USE DATABASE chinook.sqlite; SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20;"
+
+    let result: SQLiteCloudResult = try await sqliteCloud.execute(query: sqlQuery)
+
+    try await sqliteCloud.disconnect()
+
+    return result.stringValue!
+} catch {
+    return "Connection error: \(error)"
+}
 ```
+
+    - The above snippets include variable types, which may be optional for your app.
+
+## Troubleshooting
+
+  - If you get errors indicating SQLite Cloud-specific constructs are out of scope (i.e. `error: cannot find 'SQLiteCloudConfig' in scope`), verify the `SQLiteCloud` package is correctly imported.
+    - Confirm `https://github.com/sqlitecloud/swift` package is listed in `Package.resolved`.
