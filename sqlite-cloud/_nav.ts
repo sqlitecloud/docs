@@ -13,6 +13,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
 	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Apollo / GraphQL", filePath: "quick-start-apollo-graphql", type: "inner", level: 1 },
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
