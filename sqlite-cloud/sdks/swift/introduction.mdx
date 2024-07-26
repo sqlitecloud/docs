@@ -6,71 +6,59 @@ status: publish
 slug: sdk-swift-introduction
 ---
 
-This powerful package provides methods that perform DB operations and enables real-time notifications in Swift apps, making it easier than ever to work with SQLite in the cloud. We encourage all users to log encountered issues in the [SDK's issues backlog](https://github.com/sqlitecloud/sqlitecloud-swift/issues).
+This powerful package provides methods that perform DB operations, and enables real-time notifications in Swift apps, making it easier than ever to work with SQLite in the cloud. We encourage all users to log encountered issues in the [SDK's issues backlog](https://github.com/sqlitecloud/sqlitecloud-swift/issues).
 
 ## Install
 
-  - In `Package.swift`, add the `swift` package to `dependencies`. 
-    - The following example snippet is from a Swift app using the Vapor framework.
+  - In `Package.swift`, add the `swift` package to `dependencies`.
 
 ```swift
 let package = Package(
-    ...
+  ...,
   dependencies: [
-    ...
+    ...,
     .package(url: "https://github.com/sqlitecloud/swift.git", from: "0.2.1")
   ],
-  targets: [
-    .executableTarget(
-      ...
-      dependencies: [
-          ...
-          .product(name: "SQLiteCloud", package: "swift")
-      ],
-      ...
-    ),
-  ]
+  ...
 )
 ```
 
-## Basic Usage
+## 3 ways to configure your database connection
 
-  - Currently, there are 2 ways to configure your database connection:
+1. **RECOMMENDED**: Use the `apikey` connection string.
 
-    - 1. Explicitly passing string params: `SQLiteCloudConfig(hostname: {hostname}, username: {username}, password: {password}, port: .default)`
-      - In your SQLite Cloud account dashboard, click on a Node, copy the Deployment string, and replace `{hostname}` in `configuration` below.
-      - In your dashboard left nav, select Settings, then Users. Copy your username and replace `{username}`.
-      - In your User's row, click the down chevron, then Edit. Enter a Password and Save. Replace `{password}`.
+In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Connection String, and replace `<your-connection-string>` below.
 
 ```swift
-import SQLiteCloud
-
-let configuration: SQLiteCloudConfig = SQLiteCloudConfig(hostname: "<see-project-deployment>", username: "<see-settings-users>", password: "<edit-your-user>", port: .default)
-
-let sqliteCloud: SQLiteCloud = SQLiteCloud(config: configuration)
-
-do {
-    try await sqliteCloud.connect()
-    debugPrint("connected")
-
-    let sqlQuery: String = "USE DATABASE chinook.sqlite; SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20;"
-
-    let result: SQLiteCloudResult = try await sqliteCloud.execute(query: sqlQuery)
-
-    try await sqliteCloud.disconnect()
-
-    return result.stringValue!
-} catch {
-    return "Connection error: \(error)"
-}
+let configuration = SQLiteCloudConfig(connectionString: "<your-connection-string>")
 ```
 
-    - 2. Using a connection string: `SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:{port}/{database})`
+2. Use a parameterized connection string.
+
+    - In your SQLite Cloud account dashboard, click on a Node, copy the Deployment string, and replace `{hostname}` below.
+    - In your dashboard left nav, select Settings, then Users. Copy your username and replace `{username}`.
+    - In your User's row, click the down chevron, then Edit. Enter a Password and Save. Replace `{password}`.
+    - The provided port and database will query the sample dataset that comes pre-loaded with SQLite Cloud. Replace both for your own datasets.
+
+```swift
+let configuration = SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:8860/chinook.sqlite")
+```
+    
+3. Pass each connection string parameter.
+
+```swift
+let configuration = SQLiteCloudConfig(hostname: {hostname}, username: {username}, password: {password}, port: .default)
+```
+
+## Connect and query
+
+  - The following snippet includes variable types, which may be optional for your app.
+  - Once you've incorporated the following, build and run your app!
 
 ```swift
 import SQLiteCloud
 
-let configuration: SQLiteCloudConfig? = SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:8860/chinook.sqlite")
+let configuration: SQLiteCloudConfig? = SQLiteCloudConfig(connectionString: "<your-connection-string>")
 
 let sqliteCloud: SQLiteCloud = SQLiteCloud(config: configuration!)
 
@@ -86,11 +74,9 @@ do {
 
     return result.stringValue!
 } catch {
-    return "Connection error: \(error)"
+    return "Connection error"
 }
 ```
-
-    - The above snippets include variable types, which may be optional for your app.
 
 ## Troubleshooting
 
