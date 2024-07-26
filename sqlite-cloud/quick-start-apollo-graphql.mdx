@@ -1,0 +1,187 @@
+---
+title: Apollo / GraphQL Quick Start Guide
+description: Get started with SQLite Cloud using Apollo and GraphQL.
+category: getting-started
+status: publish
+slug: quick-start-apollo-graphql
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and Apollo/GraphQL by writing a simple GraphQL wrapper around a SQLite Cloud database connection.
+
+1. **Set up a SQLite Cloud account**
+   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new project.
+   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Install the necessary dependencies**
+   - In your terminal run the following commands to install a new Apollo Server app.
+ 
+```bash
+mkdir sqlc-quickstart
+cd sqlc-quickstart
+npm install apollo-server graphql
+```
+
+3. **Create a new Apollo Server app**
+   - Create a new file called `server.js` and add the following code.
+   - Import the necessary packages, and instantiate a new Database connection.
+```js
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { Database } from '@sqlitecloud/drivers';
+
+const connStr = '<your-connection-string>'
+
+const db = new Database(connStr)
+```
+- Next, define your GraphQL schema and resolvers.
+```js
+const typeDefs = `#graphql
+  type Album {
+    AlbumId: Int
+    Title: String
+    ArtistId: Int
+  }
+
+  type Artist {
+    ArtistId: Int
+    Name: String
+  }
+
+  type Track {
+    TrackId: Int
+    Name: String
+    AlbumId: Int
+    MediaTypeId: Int
+    GenreId: Int
+    Composer: String
+    Milliseconds: Int
+    Bytes: Int
+    UnitPrice: Float
+  }
+
+  type Genre {
+    GenreId: Int
+    Name: String
+  }
+
+  type MediaType {
+    MediaTypeId: Int
+    Name: String
+  }
+
+  type Join {
+    AlbumId: Int
+    Title: String
+    ArtistName: String
+  }
+
+  type Query {
+    albums: [Album]
+    artists: [Artist]
+    tracks: [Track]
+    genres: [Genre]
+    mediaTypes: [MediaType]
+    joins: [Join]
+    artist(name: String): Artist
+    albumsByArtist(artistId: Int): [Album]
+  }
+
+  type Mutation {
+    createArtist(name: String): Artist
+    createAlbum(title: String, artistId: Int): Album
+  }
+`;
+
+const resolvers = {
+  Query: {
+    albums: async () => {
+      return await db.sql`SELECT * FROM albums`;
+    },
+    artists: async () => {
+      return await db.sql`SELECT * FROM artists`;
+    },
+    tracks: async () => {
+      return await db.sql`SELECT * FROM tracks`;
+    },
+    genres: async () => {
+      return await db.sql`SELECT * FROM genres`;
+    },
+    mediaTypes: async () => {
+      return await db.sql`SELECT * FROM media_types`;
+    },
+    artist: async (_, { name }) => {
+      const res = await db.sql`SELECT * FROM artists WHERE Name LIKE ${name};`;
+      if (res.length === 0) return null;
+      return res[0];
+    },
+    albumsByArtist: async (_, { artistId }) => {
+      return await db.sql`SELECT albums.AlbumId, albums.Title FROM albums INNER JOIN artists ON albums.ArtistId = artists.ArtistId WHERE artists.ArtistId = ${artistId}`;
+    },
+  },
+  Mutation: {
+    createArtist: async (_, { name }) => {
+      const res =
+        await db.sql`INSERT INTO artists (Name) VALUES (${name})`;
+      if (res.changes === 0) return null;
+      return { ArtistId: res.lastID, Name: name };
+    },
+    createAlbum: async (_, { title, artistId }) => {
+      const res =
+        await db.sql`INSERT INTO albums (Title, ArtistId) VALUES (${title}, ${artistId})`;
+      if (res.changes === 0) return null;
+      return {
+        AlbumId: res.lastID,
+        Title: title,
+        ArtistId: artistId,
+      };
+    },
+  },
+};
+```
+
+- Lastly, pass the GraphQLL type definitions and resolvers into a new ApolloServer instance, and start the server.
+```js
+const server = new ApolloServer({ typeDefs, resolvers });
+
+const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+    context: async () => ({ db })
+});
+  
+console.log(`🚀  Server ready at: ${url}`);
+```
+
+4. **Run your app**
+   - In your terminal, run the following command to start your Apollo Server.
+```bash
+node server.js
+```
+
+5. **Query your data**
+   - Open your browser and navigate to `http://localhost:4000` to access the Apollo GraphQL Playground.
+   - Use the following queries to interact with your SQLite Cloud database.
+
+Read operation:
+```graphql
+query {
+  albums {
+    AlbumId
+    Title
+    ArtistId
+  }
+}
+```
+
+Write operation:
+```graphql
+mutation {
+  createArtist(name: "New Artist") {
+    ArtistId
+    Name
+  }
+}
+```
+
+And that's it! You've successfully built an Apollo/GraphQL server that reads and writes data to a SQLite Cloud database.
+
+For the full code example, see the [SQLite Cloud Apollo/GraphQL example repo]().
