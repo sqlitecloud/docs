@@ -59,14 +59,14 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudResultDump', type: "inner", level: 2 },
 
 	{ title: "Rowset APIs", type: "inner", level: 1 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValueType', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetColumnName', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt32Value', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt64Value', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetFloatValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDoubleValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDump', type: "inner", level: 3 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValueType', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetColumnName', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt32Value', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt64Value', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetFloatValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDoubleValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDump', type: "inner", level: 2 },
 
 
 	{ title: "Array APIs", type: "inner", level: 1 },
