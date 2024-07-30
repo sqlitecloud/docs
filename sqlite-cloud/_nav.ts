@@ -19,6 +19,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
 	{ title: "Streamlit", filePath: "quick-start-streamlit", type: "inner", level: 1 },
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
+	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
