@@ -13,6 +13,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Node.js", filePath: "quick-start-node", type: "inner", level: 1 },
 	{ title: "React", filePath: "quick-start-react", type: "inner", level: 1 },
 	{ title: "React Native", filePath: "quick-start-react-native", type: "inner", level: 1 },
+	{ title: "Apollo / GraphQL", filePath: "quick-start-apollo-graphql", type: "inner", level: 1 },
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
@@ -59,14 +60,14 @@ const sidebarNav: SidebarNavStruct = [
 	{ filePath: 'sqlite-cloud/sdks/c/SQCloudResultDump', type: "inner", level: 2 },
 
 	{ title: "Rowset APIs", type: "inner", level: 1 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValueType', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetColumnName', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt32Value', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt64Value', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetFloatValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDoubleValue', type: "inner", level: 3 },
-	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDump', type: "inner", level: 3 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValueType', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetColumnName', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt32Value', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetInt64Value', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetFloatValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDoubleValue', type: "inner", level: 2 },
+	{ filePath: 'sqlite-cloud/sdks/c/SQCloudRowsetDump', type: "inner", level: 2 },
 
 
 	{ title: "Array APIs", type: "inner", level: 1 },
@@ -163,6 +164,9 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "PHP", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-php-introduction", level: 1 },
 	{ title: "Methods", filePath: "sdk-php-methods", type: "inner", level: 1 },
+
+	{ title: "Swift", type: "inner", level: 0 },
+	{ title: 'Introduction', type: "inner", filePath: "sdk-swift-introduction", level: 1 },
 
 	{ title: "Reference", type: "secondary", icon: "docs-ref" },
 	{ title: "Server-side Commands", type: "inner", level: 0 },

@@ -50,7 +50,7 @@ int main (int argc, const char * argv[]) {
         // print column names
         for (uint32_t i=0; i<ncols; ++i) {
             uint32_t len;
-            char *value = SQCloudRowsetColumnName(result, i, &len);
+            char *value = SQCloudRowsetColumnName(r, i, &len);
             printf("%.*s\n", len, value);
         }
 
@@ -72,7 +72,7 @@ int main (int argc, const char * argv[]) {
                     break;
                 }
                 case VALUE_FLOAT: {
-                    float value = SQCloudRowsetFloatValue(r, i);
+                    float value = SQCloudRowsetFloatValue(r, i, j);
                     printf("%f\n", value);
                     // double value = SQCloudRowsetDoubleValue(r, i, j);
                     // printf("%f\n", value);
@@ -81,7 +81,7 @@ int main (int argc, const char * argv[]) {
                 case VALUE_BLOB:
                 case VALUE_TEXT: {
                     uint32_t len;
-                    char *value = SQCloudRowsetValue(result, i, j, &len);
+                    char *value = SQCloudRowsetValue(r, i, j, &len);
                     if (type == VALUE_BLOB) printf("[%d] BLOB size %d\n", i, len);
                     else printf("[%d] %.*s\n", i, len, value);
                     break;
