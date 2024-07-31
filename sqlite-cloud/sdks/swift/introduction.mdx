@@ -27,24 +27,30 @@ let package = Package(
 
 1. **RECOMMENDED**: Use the `apikey` connection string.
 
-In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Connection String, and replace `<your-connection-string>` below.
+  - In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Connection String, and replace `<your-connection-string>` below.
 
 ```swift
 let configuration = SQLiteCloudConfig(connectionString: "<your-connection-string>")
 ```
 
+  - You can modify the connection string to include the name of the database to query.
+
+```swift
+let configuration = SQLiteCloudConfig(connectionString: "sqlitecloud://{hostname}:8860/{database}?apikey={apikey}")
+``` 
+
 2. Use a parameterized connection string.
 
-    - In your SQLite Cloud account dashboard, click on a Node, copy the Deployment string, and replace `{hostname}` below.
+    - In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Deployment string, and replace `{hostname}` below.
     - In your dashboard left nav, select Settings, then Users. Copy your username and replace `{username}`.
     - In your User's row, click the down chevron, then Edit. Enter a Password and Save. Replace `{password}`.
-    - The provided port and database will query the sample dataset that comes pre-loaded with SQLite Cloud. Replace both for your own datasets.
+    - Here, the provided port (`8860`) and database (`chinook.sqlite`) will query the sample dataset that comes pre-loaded with SQLite Cloud. Replace to query your own datasets.
 
 ```swift
 let configuration = SQLiteCloudConfig(connectionString: "sqlitecloud://{username}:{password}@{hostname}:8860/chinook.sqlite")
 ```
     
-3. Pass each connection string parameter.
+3. Pass each connection string parameter explicitly.
 
 ```swift
 let configuration = SQLiteCloudConfig(hostname: {hostname}, username: {username}, password: {password}, port: .default)
@@ -53,6 +59,7 @@ let configuration = SQLiteCloudConfig(hostname: {hostname}, username: {username}
 ## Connect and query
 
   - The following snippet includes variable types, which may be optional for your app.
+  - NOTE: `USE DATABASE chinook.sqlite;` is only necessary in the query if your `configuration` does not specify the name of the database to query.
   - Once you've incorporated the following, build and run your app!
 
 ```swift

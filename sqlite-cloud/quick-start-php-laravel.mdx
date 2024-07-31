@@ -86,7 +86,7 @@ composer require sqlitecloud/sqlitecloud
 6. **Query data**
 
   - Replace the code in `app/Http/Controllers/AlbumController.php` with the following snippet.
-  - In your SQLite Cloud account dashboard, click on a Node, copy the Connection String, and replace `<your-connection-string>` below.
+  - In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Connection String, and replace `<your-connection-string>` below.
   - The `index` method will:
     - connect to and query the database,
     - create an array of arrays `albums` containing each returned album's title and artist,
