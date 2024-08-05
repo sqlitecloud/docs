@@ -25,6 +25,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
 	{ title: "Webhooks", filePath: "webhooks", type: "inner", level: 0 },
 	{ title: "Pub/Sub", filePath: "pub-sub", type: "inner", level: 0 },
+	{ title: "Vector", filePath: "vector", type: "inner", level: 0 },
 	{ title: "Scaling", type: "inner", filePath: "scaling", level: 0 },
 	{ title: "Security and Access Control", filePath: "security", type: "inner", level: 0 },
 	{ title: "Backups", filePath: "backups", type: "inner", level: 0 },
