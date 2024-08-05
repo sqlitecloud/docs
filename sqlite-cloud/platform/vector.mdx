@@ -1,0 +1,109 @@
+---
+title: SQLite Cloud Vector Search
+description: Vector storage extension for similarity search in SQLite Cloud.
+category: platform
+status: publish
+slug: vector
+---
+Every SQLite Cloud database comes with the `sqlite-vec` extension pre-installed. This allows you to store and query vectors in your database, which enables similarity search functionality.
+
+## Overview
+`sqlite-vec` is a no-dependency SQLite extension for vector search, written entirely in a single C file. It's extremely portable, works in most operating systems and environments, and is MIT/Apache-2 dual licensed.
+
+Using sqlite-vec is similar to using full-text search in SQLite. Declare a "virtual table" with vector columns, insert data with normal INSERT INTO statements, and query with normal SELECT statements.
+
+`sqlite-vec` is currently built and optimized for brute-force vector search. This means there is no approximate nearest neighbor search available, limiting the number of vectors that can be searched in a reasonable amount of time.
+
+## Usage
+### Create a vector table
+
+To create a virtual vector table, use vec0 and the following syntax:
+
+```sql
+create virtual table vec_table_name using vec0(
+  id integer primary key autoincrement,
+  embedding float[384]
+--   other columns like:
+--   text text,
+--   metadata blob,
+);
+```
+
+### Insert vectors
+Insert vectors as you would with any other data:
+
+```sql
+insert into vec_table_name(embedding) values
+   ('[0.1, 0.2, ...]'),
+   ('[0.3, 0.4, ...]'),
+   ('[0.5, 0.6, ...]');
+```
+### Execute a similarity search query
+To search for similar vectors, use the following syntax:
+
+```sql
+select
+	rowid,
+	distance
+from vec_table_name
+where embedding match <your query embedding>
+  and k = 20;
+```
+
+The value of k sets the number of nearest neighbors to return. For more on nearest neighbor searches, check out our article on the topic.
+
+## Quantization
+Vector quantization is a category of techniques to compress the individual elements inside of a floating point vector. In a float vector, each element is stored as a 32-bit floating point number. For longer vectors, this will quickly require a large amount of storage.
+
+To reduce storage requirements with minimal loss of accuracy, we recommend using bit vectors as a method of quantization. With bit vector, each dimension in the vector takes up 1 bit. This method delivers up to a 32x reduction in storage requirements.
+
+When using bit vectors, we recommend using embedding models that are trained on binary quantization loss. This will help maintain accuracy even after converting to binary.
+
+To convert a float vector to a binary vector, use the vec_quantize_binary() function:
+
+```sql
+create virtual table vec_table using vec0(
+  embedding float[1536]
+);
+
+-- slim because "embedding_coarse" is quantized 32x to a bit vector
+create virtual table vec_table_slim using vec0(
+  embedding_coarse bit[1536]
+);
+
+insert into vec_table_slim
+  select rowid, vec_quantize_binary(embedding) from vec_table;
+```
+## Matryoshka embeddings
+sqlite-vec also supports Matryoshka embeddings, a technique in some embeddings models that allows you to "truncate" excess dimensions of a given vector, without a significant loss in quality. 
+
+Matryoshka embedding save on storage and result in faster queries.
+
+To create a Matryoshka embedding, use the vec_slice() function:
+
+```sql
+
+create virtual table vec_items using vec0(
+  embedding float[1536]
+);
+
+-- slim because "embedding" is a truncated version of the full vector
+create virtual table vec_items_slim using vec0(
+  embedding_coarse float[512]
+);
+
+insert into vec_items_slim
+  select
+    rowid,
+    vec_normalize(vec_slice(embedding, 0, 512))
+  from vec_items;
+```
+
+## Performance considerations
+Free SQLite Cloud plans are not optimized for vector workloads. To speak to the team about upgrading your plan, [please reach out](https://www.sqlitecloud.io/support).
+
+## Next Steps
+Combined with [edge functions](/docs/edge-functions), SQLite Cloud's vector search capabilities make it a great choice for serverless RAG applications.
+
+
+
