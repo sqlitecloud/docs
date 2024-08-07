@@ -1,0 +1,801 @@
+---
+title: SQLite Spotlight - Geopoly Extension
+description: Build a local attractions finder app using SQLite Cloud, SQLite's built-in Geopoly extension, Mapbox, and React.
+category: getting-started
+status: publish
+slug: tutorial-geopoly
+---
+
+This tutorial demonstrates how to build a local attractions finder app. The app uses:
+- GeoJSON data
+- a SQLite Cloud database
+- Mapbox JavaScript Graphics Library (GL JS)
+  - user has to create an account/ get a token!
+- React
+- SQLite's built-in Geopoly extension
+
+Time to complete: ~15-20 mins.
+
+If you get stuck in the tutorial or prefer to play with the finished product, check out [the example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly).
+
+---
+
+1. **Initialize your app**
+  - Create a new directory `sqlc-geopoly-demo`. From this directory, bootstrap a Node.js project.
+
+```bash
+mkdir sqlc-geopoly-demo
+cd sqlc-geopoly-demo
+npm init -y
+```
+
+2. **Curate your GeoJSON data**
+
+  - We will leverage the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) (an open-source, read-only API for fetching OpenStreetMap data) to query NYC attractions.
+
+  - Visit [Overpass Turbo](https://overpass-turbo.eu/), the Overpass GUI. Copy and paste in the below query which:
+    - defines New York as the area of interest;
+    - fetches nodes in the specified area that are tagged with the keys `amenity`, `historic`, `tourism`, `leisure`, etc.; and
+    - outputs the data.
+
+```c
+[out:json][timeout:25];
+
+area[name="New York"]->.newyork;
+
+(
+  node["amenity"="events_venue"](area.newyork);
+  node["amenity"="exhibition_centre"](area.newyork);
+  node["amenity"="music_venue"](area.newyork);
+  node["amenity"="social_centre"](area.newyork);
+  node["amenity"="marketplace"](area.newyork);
+  node["building"="museum"](area.newyork);
+  node["historic"="building"](area.newyork);
+  node["tourism"="attraction"](area.newyork);
+  node["leisure"="park"](area.newyork);
+  node["natural"="beach"](area.newyork);
+  node["shop"="coffee"](area.newyork);
+  node["sport"="yoga"](area.newyork);
+);
+
+out body;
+>;
+out skel qt;
+```
+
+  - Run the query.
+
+  - Click Export. Under Data, copy the GeoJSON.
+
+  - Use [a JSON formatter](https://jsonformatter.org/) to correctly format the copied JSON.
+
+  - Back in your project dir, create `data/geodata.json`. Paste the formatted GeoJSON into the file. It should look as follows:
+
+```json
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2024-08-05T23:56:57Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/43058007",
+        "ele": "190",
+        "gnis:feature_id": "968527",
+        "leisure": "park",
+        "name": "Kibler Park"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.6723302, 43.1655945]
+      },
+      "id": "node/43058007"
+    },
+    ...,
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/12093603396",
+        "amenity": "events_venue",
+        "name": "Azteca Venue Party Center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1244477, 40.6338683]
+      },
+      "id": "node/12093603396"
+    }
+  ]
+}
+```
+
+  - To pull other types of attractions or any other kind of location data in an area of interest to you, refer to [OpenStreetMap's Map features documentation](https://wiki.openstreetmap.org/wiki/Map_features) and modify the above query's area and key-value pairs.
+
+  - NOTE: The app currently only works with Point features (represented in the [doc's](https://wiki.openstreetmap.org/wiki/Map_features) Element column by an icon containing a dot), so be sure to query only:
+    - nodes, and
+    - the key-value pairs that can return Point data. For example, don't use most values available for the Boundary key.
+
+  - To implement more complex or granular Point queries, refer to the [Overpass QL documentation](https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL).
+
+3. **Create a new / empty SQLite Cloud database**
+
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new project.
+
+  - In your account dashboard's left nav, click Databases, then the Create Database button. To minimize code changes, name your new database `geopoly-demo`.
+
+4. **Set an environment variable**
+
+  - In your project dir, create a `.env` file with a new environment variable `REACT_APP_CONNECTION_STRING`. Copy your connection string from your account dashboard and assign it to the variable.
+    - CONTEXT: This app will use `react-scripts`, which leverages Create React App under-the-hood. Create React App offers built-in support for env vars. You will not need to manually configure `webpack` or another bundler, but all vars must be prefixed with `REACT_APP_`.
+
+  - Install the SQLite Cloud JS SDK and dotenv package as dependencies:
+
+```bash
+npm i @sqlitecloud/drivers
+npm i -D dotenv
+```
+
+5. **Create your DB tables**
+
+  - In your project dir, create `src/helpers/createDatabase.js`. Copy and paste in the following code:
+
+```js
+import { Database } from '@sqlitecloud/drivers';
+import 'dotenv/config';
+import geodata from '../../data/geodata.json' assert { type: 'json' };
+
+async function createDatabase() {
+  const db = new Database(process.env.REACT_APP_CONNECTION_STRING);
+
+  const db_name = 'geopoly-demo';
+  await db.sql`USE DATABASE ${db_name};`;
+
+  await db.sql`CREATE VIRTUAL TABLE polygons USING geopoly()`;
+
+  await db.sql`CREATE TABLE attractions (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, lng REAL NOT NULL, lat REAL NOT NULL, coordinates TEXT NOT NULL)`;
+
+  for (const feature of geodata['features']) {
+    const { name } = feature.properties;
+    const { coordinates } = feature.geometry;
+    const [lng, lat] = coordinates;
+
+    await db.sql`INSERT INTO attractions(name, lng, lat, coordinates) VALUES(${name}, ${lng}, ${lat}, ${JSON.stringify(
+      coordinates
+    )})`;
+  }
+
+  db.close();
+
+  console.log('Geodata inserted!');
+}
+
+createDatabase();
+```
+
+  - The `createDatabase` function:
+    - connects to your `geopoly-demo` database
+    - creates a virtual Geopoly table with 2 columns: `rowid` (which does not display in SQLite Cloud's Console but can be queried) and `_shape`
+    - creates an `attractions` table with 5 columns: `id`, `name`, `lng`, `lat`, and `coordinates`
+    - populates the `attractions` table using the GeoJSON FeatureCollection you generated earlier
+    - closes the database connection.
+  
+  - Add the following script to your `package.json`:
+
+```json
+"scripts": {
+  "create-tables": "node src/helpers/createDatabase.js"
+}
+```
+
+  - Run `npm run create-tables`.
+
+    - The time it will take for the command to finish creating tables and inserting the geodata will depend on the size of your FeatureCollection. The example Overpass query provided above returns ~2000 NYC Point features and takes a couple of minutes.
+
+    - As an aside: To see the inserted attractions geodata, in your SQLite Cloud account dashboard's left nav, click Console. Copy, paste in, and run the following query:
+
+```sql
+SELECT * FROM attractions ORDER BY id DESC;
+```
+      - If you used the provided Overpass query, ~2000 rows are added.
+
+6. **Setup the frontend**
+
+  - In your project dir, create `public/index.html`. Copy and paste in the following code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Create a React web app that uses Mapbox GL JS to render a map"
+    />
+    <title>Local Attraction Finder</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+  - In the `src` dir, add 3 files: `index.css` (for app styling), `index.js` (the app entrypoint file), and `App.js` (the one-and-only component). Copy and paste in the following code for each file:
+
+`index.css`
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 400 15px/22px 'Inter Tight', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.legend {
+  padding: 10px;
+  background-color: #23374b;
+  color: #fff;
+  font-family: monospace;
+}
+
+.sidebar {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-container {
+  position: absolute;
+  left: 25%;
+  width: 75%;
+  top: 0;
+  bottom: 0;
+}
+
+.heading {
+  padding: 0 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.listings {
+  height: 72%;
+  overflow: auto;
+  padding-bottom: 15px;
+}
+
+.listings .item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.listings .item.active {
+  background-color: #cfe1f8;
+}
+
+.listings .item:last-child {
+  border-bottom: none;
+}
+
+.listings .item .title {
+  color: #5a5877;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.listings .item.active .title,
+.listings .item .title:hover {
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23374b;
+}
+
+.mapboxgl-popup {
+  padding-bottom: 20px;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+}
+
+.mapboxgl-popup-content h3 {
+  background: #cfe1f8;
+  color: #000;
+  margin: 0;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.marker {
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 34px;
+  background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png');
+}
+
+.mapboxgl-ctrl-geocoder {
+  border: 0;
+  border-radius: 0;
+  position: relative;
+  top: 0;
+  width: 800px;
+  margin-top: 0;
+}
+
+.mapboxgl-ctrl-geocoder > div {
+  min-width: 100%;
+  margin-left: 0;
+}
+```
+
+  - NOTE: To simplify this tutorial, `.marker.background-image` uses a custom Mapbox marker for the map pins marking attractions. [The example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly) uses a custom marker image included in the repo's `images` dir (excluded here).
+
+`index.js`
+```js
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './index.css';
+import App from './App.js';
+
+const container = document.querySelector('#root');
+const root = createRoot(container);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+`App.js`
+```js
+import { useState, useEffect, useRef } from 'react';
+import mapboxgl from 'mapbox-gl';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { point, distance } from '@turf/turf';
+import { Database } from '@sqlitecloud/drivers';
+import { getBbox } from './helpers/getBbox.js';
+
+mapboxgl.accessToken =
+  'pk.eyJ1IjoidW5hdGFyYWphbiIsImEiOiJjbDFpcW82MGYxeDE1M2RwNjU4MmZ1YndsIn0.HyxwEtZz-pQ_7R6e48l0-g';
+
+function App() {
+  const mapContainerRef = useRef();
+  const mapRef = useRef();
+
+  const [lng, setLng] = useState(-73.9654897);
+  const [lat, setLat] = useState(40.7824635);
+  const [zoom, setZoom] = useState(12);
+
+  const [places, setPlaces] = useState([]);
+  const [geometry, setGeometry] = useState([]);
+
+  const units = 'miles';
+
+  async function queryGeopoly(searchedLng, searchedLat) {
+    const db = new Database(process.env.REACT_APP_CONNECTION_STRING);
+
+    const db_name = 'geopoly-demo';
+
+    const radius = 0.05;
+    const sides = 50;
+
+    const polygonCoords =
+      await db.sql`USE DATABASE ${db_name}; INSERT INTO polygons(_shape) VALUES(geopoly_regular(${searchedLng}, ${searchedLat}, ${radius}, ${sides})) RETURNING geopoly_json(_shape);`;
+
+    const attractionsInPolygon =
+      await db.sql`USE DATABASE ${db_name}; SELECT name, coordinates FROM attractions WHERE geopoly_contains_point(${polygonCoords[0]['geopoly_json(_shape)']}, lng, lat);`;
+
+    db.close();
+
+    const namedAttractions = attractionsInPolygon.filter(
+      (attraction) => attraction.name !== null
+    );
+
+    const attractionFeatures = namedAttractions.map((attraction, index) => {
+      const attractionCoordinates = JSON.parse(attraction['coordinates']);
+
+      const attractionFeature = {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: attractionCoordinates,
+        },
+        properties: {
+          id: index,
+          title: attraction['name'],
+          distance: distance(
+            point([searchedLng, searchedLat]),
+            point(attractionCoordinates),
+            {
+              units,
+            }
+          ),
+        },
+      };
+
+      const marker = document.createElement('div');
+      marker.key = `marker-${attractionFeature.properties.id}`;
+      marker.id = `marker-${attractionFeature.properties.id}`;
+      marker.className = 'marker';
+
+      marker.addEventListener('click', (e) => {
+        handleClick(attractionFeature);
+      });
+
+      new mapboxgl.Marker(marker)
+        .setLngLat(attractionCoordinates)
+        .addTo(mapRef.current);
+
+      return attractionFeature;
+    });
+
+    attractionFeatures.sort((a, b) => {
+      if (a.properties.distance > b.properties.distance) {
+        return 1;
+      }
+      if (a.properties.distance < b.properties.distance) {
+        return -1;
+      }
+      return 0;
+    });
+
+    setPlaces(attractionFeatures);
+
+    if (attractionFeatures[0]) {
+      const bbox = getBbox(attractionFeatures, searchedLng, searchedLat);
+      mapRef.current.fitBounds(bbox, {
+        padding: 100,
+      });
+
+      new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat(attractionFeatures[0].geometry.coordinates)
+        .setHTML(
+          `<h3>${
+            attractionFeatures[0].properties.title
+          }</h3><h4>${attractionFeatures[0].properties.distance.toFixed(
+            2
+          )} ${units} away</h4>`
+        )
+        .addTo(mapRef.current);
+    }
+
+    setGeometry([
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Polygon',
+          coordinates: [JSON.parse(polygonCoords[0]['geopoly_json(_shape)'])],
+        },
+      },
+      ...attractionFeatures,
+    ]);
+  }
+
+  function drawFeatureCollection() {
+    const sourceId = 'newyork';
+
+    if (!mapRef.current.getSource(sourceId)) {
+      mapRef.current.addSource(sourceId, {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: geometry,
+        },
+      });
+
+      mapRef.current.addLayer({
+        id: 'polygon',
+        type: 'fill',
+        source: sourceId,
+        paint: {
+          'fill-color': '#888888',
+          'fill-opacity': 0.4,
+        },
+        filter: ['==', '$type', 'Polygon'],
+      });
+
+      mapRef.current.addLayer({
+        id: 'outline',
+        type: 'line',
+        source: sourceId,
+        layout: {},
+        paint: {
+          'line-color': '#000',
+          'line-width': 1,
+        },
+      });
+    } else {
+      mapRef.current.getSource(sourceId).setData({
+        type: 'FeatureCollection',
+        features: geometry,
+      });
+    }
+  }
+
+  function handleClick(feature) {
+    const center = feature.geometry.coordinates;
+    const { id, title, distance } = feature.properties;
+
+    mapRef.current.flyTo({
+      center,
+      zoom: 15,
+    });
+
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) {
+      popUps[0].remove();
+    }
+
+    new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(center)
+      .setHTML(`<h3>${title}</h3><h4>${distance.toFixed(2)} ${units} away</h4>`)
+      .addTo(mapRef.current);
+
+    const activeItem = document.getElementsByClassName('active');
+    if (activeItem[0]) {
+      activeItem[0].classList.remove('active');
+    }
+
+    const listing = document.getElementById(`listing-${id}`);
+    listing.classList.add('active');
+  }
+
+  useEffect(() => {
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [lng, lat],
+      zoom,
+    });
+
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl,
+      zoom: 12,
+    });
+
+    const fullscreenCtrl = new mapboxgl.FullscreenControl({
+      container: mapContainerRef.current,
+    });
+
+    const geolocateCtrl = new mapboxgl.GeolocateControl({
+      fitBoundsOptions: {
+        maxZoom: 12,
+      },
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    });
+
+    mapRef.current.addControl(geocoder);
+    mapRef.current.addControl(fullscreenCtrl);
+    mapRef.current.addControl(geolocateCtrl);
+
+    function updateCoordinates() {
+      const { lng, lat } = mapRef.current.getCenter();
+      setLng(lng.toFixed(4));
+      setLat(lat.toFixed(4));
+      setZoom(mapRef.current.getZoom().toFixed(2));
+    }
+
+    mapRef.current.on('move', updateCoordinates);
+
+    geocoder.on('result', (e) => {
+      const existingMarkers = document.getElementsByClassName('marker');
+      while (existingMarkers[0]) {
+        existingMarkers[0].remove();
+      }
+
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      while (popUps[0]) {
+        popUps[0].remove();
+      }
+
+      const [lng, lat] = e.result.geometry.coordinates;
+      queryGeopoly(lng, lat);
+    });
+
+    return () => {
+      mapRef.current.removeControl(geocoder);
+      mapRef.current.removeControl(fullscreenCtrl);
+      mapRef.current.removeControl(geolocateCtrl);
+      mapRef.current.off('move', updateCoordinates);
+      mapRef.current.remove();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (geometry.length !== 0) {
+      drawFeatureCollection();
+    }
+  }, [geometry]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <>
+      <div className="sidebar">
+        <div className="legend">
+          <p>Center Lat: {lat}</p>
+          <p>Center Long: {lng}</p>
+          <p>Current Zoom: {zoom}</p>
+        </div>
+        <div className="heading">
+          <h2>Attractions Nearby:</h2>
+        </div>
+
+        <div className="listings">
+          {places.map((place, index) => (
+            <div
+              key={index}
+              id={`listing-${place.properties.id}`}
+              className={`item ${index === 0 && 'active'}`}
+            >
+              <a href="#" className="title" onClick={() => handleClick(place)}>
+                {place.properties.title}
+              </a>
+              <div>
+                {place.properties.distance.toFixed(2)} {units} away
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div ref={mapContainerRef} className="map-container" />
+    </>
+  );
+}
+
+export default App;
+```
+
+  - To understand how the app works, let's break down this monster component: 
+
+7. **Create the last helper function**
+
+  - Create `src/helpers/getBbox.js`. Copy and paste in the following code:
+
+```js
+export function getBbox(sortedEvents, locationLng, locationLat) {
+  const lons = [
+    sortedEvents[0].geometry.coordinates[0],
+    locationLng,
+  ];
+  const lats = [
+    sortedEvents[0].geometry.coordinates[1],
+    locationLat,
+  ];
+  const sortedLons = lons.sort((a, b) => {
+    if (a > b) {
+      return 1;
+    }
+    if (a.distance < b.distance) {
+      return -1;
+    }
+    return 0;
+  });
+  const sortedLats = lats.sort((a, b) => {
+    if (a > b) {
+      return 1;
+    }
+    if (a.distance < b.distance) {
+      return -1;
+    }
+    return 0;
+  });
+  return [
+    [sortedLons[0], sortedLats[0]],
+    [sortedLons[1], sortedLats[1]],
+  ];
+}
+```
+
+8. **Run your app!**
+
+  - Replace your `package.json` code with the following, which includes all dependencies needed to run the app:
+
+```json
+{
+  "name": "geopoly-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "create-tables": "node src/helpers/createDatabase.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.2",
+    "@sqlitecloud/drivers": "^1.0.193",
+    "@turf/turf": "^7.0.0",
+    "mapbox-gl": "^3.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "dotenv": "^16.4.5"
+  }
+}
+```  
+
+  - From your project dir, install the dependencies and start your local dev server.
+
+```bash
+npm i
+npm start
+```
+
+  - Visit `http://localhost:3000/` (adjust the port as-needed) in your browser to view the application.
+
+9. **Find attractions near you!**
+
+  - USE CASE 1: You used the NYC geodata fetched with the provided Overpass query.
+
+    - On app load, the map is centered on Central Park, NYC.
+
+    - In the geocoder (i.e. search input) at the top right of the map, enter "Empire" and select the "Empire State Building" search result.
+
+    - When you select a geocoder result:
+      - a polygon is generated by Geopoly, added to your `polygons` table, and displayed on the map.
+
+      - all attractions from your `attractions` table calculated to be inside the polygon area (outline inclusive) are listed in the left sidebar AND marked on the map. NOTE: the sidebar upsorts attractions nearest the searched location.
+
+    - As an aside: To see the inserted polygon data, in your SQLite Cloud account dashboard's left nav, click Console. Copy, paste in, and run the following query:
+
+```sql
+SELECT rowid, geopoly_json(_shape) FROM polygons;
+```
+      - `geopoly_json()` parses the Array(buffer) data into an array of coordinate pairs representing the polygon vertices. The array should contain (1 + # of polygon sides) coordinate pairs.
+
+    - The map will zoom in to the closest attraction to your searched location, in this case the "Empire State Building". However, you can click any attraction listing or marker to zoom in to that attraction on the map.
+
+  - USE CASE 2: If you used a custom Overpass query to fetch geodata near your location, then after the map loads, click on the map's GeolocateControl and allow the browser to use your IP to locate you on the map. The map will fly to and center on your location. This way you will get more relevant results from the geocoder search and your polygon will contain (more) attractions.
