@@ -1,26 +1,20 @@
 ---
-title: SQLite Spotlight - Geopoly Extension
+title: Using SQLite Extensions - Geopoly
 description: Build a local attractions finder app using SQLite Cloud, SQLite's built-in Geopoly extension, Mapbox, and React.
 category: getting-started
 status: publish
 slug: tutorial-geopoly
 ---
 
-This tutorial demonstrates how to build a local attractions finder app. The app uses:
-- GeoJSON data
-- a SQLite Cloud database
-- Mapbox JavaScript Graphics Library (GL JS)
-  - user has to create an account/ get a token!
-- React
-- SQLite's built-in Geopoly extension
+In this tutorial you will build a local attractions finder map-plication using GeoJSON data, a SQLite Cloud database, [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides) (JavaScript Graphics Library), React, and SQLite's built-in [Geopoly extension](https://devdocs.io/sqlite/geopoly).
 
-Time to complete: ~15-20 mins.
+**Time to complete: 15-20 mins.**
 
-If you get stuck in the tutorial or prefer to play with the finished product, check out [the example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly).
+If you get stuck in the tutorial or prefer to play with the finished product, check out [the example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly-demo).
 
 ---
 
-1. **Initialize your app**
+**1. Initialize your app**
   - Create a new directory `sqlc-geopoly-demo`. From this directory, bootstrap a Node.js project.
 
 ```bash
@@ -29,11 +23,11 @@ cd sqlc-geopoly-demo
 npm init -y
 ```
 
-2. **Curate your GeoJSON data**
+**2. Curate your GeoJSON data**
 
-  - We will leverage the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) (an open-source, read-only API for fetching OpenStreetMap data) to query NYC attractions.
+  - We will leverage the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) (an open-source, read-only API for fetching OpenStreetMap data) to query NY attractions.
 
-  - Visit [Overpass Turbo](https://overpass-turbo.eu/), the Overpass GUI. Copy and paste in the below query which:
+  - Visit [Overpass Turbo](https://overpass-turbo.eu/), the Overpass GUI. Copy and paste in the below query, which:
     - defines New York as the area of interest;
     - fetches nodes in the specified area that are tagged with the keys `amenity`, `historic`, `tourism`, `leisure`, etc.; and
     - outputs the data.
@@ -67,9 +61,7 @@ out skel qt;
 
   - Click Export. Under Data, copy the GeoJSON.
 
-  - Use [a JSON formatter](https://jsonformatter.org/) to correctly format the copied JSON.
-
-  - Back in your project dir, create `data/geodata.json`. Paste the formatted GeoJSON into the file. It should look as follows:
+  - Back in your project dir, create `data/geodata.json`. Paste the formatted GeoJSON into the file. It should look similar to the following:
 
 ```json
 {
@@ -110,34 +102,35 @@ out skel qt;
   ]
 }
 ```
+  - For this tutorial, we'll use the NY geodata. Once you have the app up-and-running, you can run your own Overpass queries to customize the geodata per your needs. See **Additional Guidance on Overpass** at the end of this tutorial.
 
-  - To pull other types of attractions or any other kind of location data in an area of interest to you, refer to [OpenStreetMap's Map features documentation](https://wiki.openstreetmap.org/wiki/Map_features) and modify the above query's area and key-value pairs.
-
-  - NOTE: The app currently only works with Point features (represented in the [doc's](https://wiki.openstreetmap.org/wiki/Map_features) Element column by an icon containing a dot), so be sure to query only:
-    - nodes, and
-    - the key-value pairs that can return Point data. For example, don't use most values available for the Boundary key.
-
-  - To implement more complex or granular Point queries, refer to the [Overpass QL documentation](https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL).
-
-3. **Create a new / empty SQLite Cloud database**
+**3. Create a new SQLite Cloud database**
 
   - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new project.
 
-  - In your account dashboard's left nav, click Databases, then the Create Database button. To minimize code changes, name your new database `geopoly-demo`.
+  - In your account dashboard's left nav, click Databases, then Create Database. Name your new database `geopoly-demo`.
 
-4. **Set an environment variable**
+**4. Create a Mapbox account**
 
-  - In your project dir, create a `.env` file with a new environment variable `REACT_APP_CONNECTION_STRING`. Copy your connection string from your account dashboard and assign it to the variable.
-    - CONTEXT: This app will use `react-scripts`, which leverages Create React App under-the-hood. Create React App offers built-in support for env vars. You will not need to manually configure `webpack` or another bundler, but all vars must be prefixed with `REACT_APP_`.
+  - [Sign up](https://account.mapbox.com/auth/signup/) for an Individual Mapbox account. (We'll stay on the free tier.)
 
-  - Install the SQLite Cloud JS SDK and dotenv package as dependencies:
+**5. Set your environment variables**
+
+  - In your project dir, create a `.env` file.
+    - This app will use `react-scripts`, which leverages Create React App under-the-hood. Create React App offers built-in support for env vars. You will not need to manually configure `webpack` or another bundler, but all vars will need to be prefixed with `REACT_APP_`.
+
+  - Add 2 env vars to the file:
+    - `REACT_APP_CONNECTION_STRING`. Copy and paste your connection string from your SQLite Cloud account dashboard.
+    - `REACT_APP_MAPBOX_TOKEN`. In your Mapbox account dashboard's nav, click Tokens. Copy and paste your default public token.
+
+  - Install the SQLite Cloud JS SDK and `dotenv` package as dependencies:
 
 ```bash
 npm i @sqlitecloud/drivers
 npm i -D dotenv
 ```
 
-5. **Create your DB tables**
+**6. Create your database tables**
 
   - In your project dir, create `src/helpers/createDatabase.js`. Copy and paste in the following code:
 
@@ -175,32 +168,31 @@ createDatabase();
 ```
 
   - The `createDatabase` function:
-    - connects to your `geopoly-demo` database
-    - creates a virtual Geopoly table with 2 columns: `rowid` (which does not display in SQLite Cloud's Console but can be queried) and `_shape`
-    - creates an `attractions` table with 5 columns: `id`, `name`, `lng`, `lat`, and `coordinates`
-    - populates the `attractions` table using the GeoJSON FeatureCollection you generated earlier
-    - closes the database connection.
+    - connects to your `geopoly-demo` database;
+    - creates a virtual `polygons` table with 2 columns: `rowid` and `_shape`;
+    - creates an `attractions` table with 5 columns: `id`, `name`, `lng`, `lat`, and `coordinates`; and
+    - populates the `attractions` table using the GeoJSON FeatureCollection in `geodata.json`.
   
-  - Add the following script to your `package.json`:
+  - Add the following to your `package.json`:
 
 ```json
 "scripts": {
   "create-tables": "node src/helpers/createDatabase.js"
-}
+},
+"type": "module",
 ```
 
   - Run `npm run create-tables`.
 
-    - The time it will take for the command to finish creating tables and inserting the geodata will depend on the size of your FeatureCollection. The example Overpass query provided above returns ~2000 NYC Point features and takes a couple of minutes.
+    - The time it will take for the command to finish creating the tables and inserting the geodata will depend on the size of your FeatureCollection. The NY Overpass query returns ~2000 Point features, so row insertion takes a couple of minutes.
 
-    - As an aside: To see the inserted attractions geodata, in your SQLite Cloud account dashboard's left nav, click Console. Copy, paste in, and run the following query:
+    - To see the inserted NY attractions geodata, in your SQLite Cloud account dashboard's left nav, click Console. In the database dropdown, select `geopoly-demo`. Copy, paste in, and run the following query:
 
 ```sql
 SELECT * FROM attractions ORDER BY id DESC;
 ```
-      - If you used the provided Overpass query, ~2000 rows are added.
 
-6. **Setup the frontend**
+**7. Set up the frontend**
 
   - In your project dir, create `public/index.html`. Copy and paste in the following code:
 
@@ -214,7 +206,7 @@ SELECT * FROM attractions ORDER BY id DESC;
       name="description"
       content="Create a React web app that uses Mapbox GL JS to render a map"
     />
-    <title>Local Attraction Finder</title>
+    <title>Local Attractions Finder</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -223,7 +215,7 @@ SELECT * FROM attractions ORDER BY id DESC;
 </html>
 ```
 
-  - In the `src` dir, add 3 files: `index.css` (for app styling), `index.js` (the app entrypoint file), and `App.js` (the one-and-only component). Copy and paste in the following code for each file:
+  - In the `src` dir, add 3 files: `index.css` (for app styling), `index.js` (the app entrypoint file), and `App.js` (the app's sole component). Copy and paste in the following code for each file:
 
 `index.css`
 ```css
@@ -340,8 +332,8 @@ body {
 .marker {
   border: none;
   cursor: pointer;
-  width: 26px;
-  height: 34px;
+  width: 32px;
+  height: 40px;
   background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png');
 }
 
@@ -360,7 +352,7 @@ body {
 }
 ```
 
-  - NOTE: To simplify this tutorial, `.marker.background-image` uses a custom Mapbox marker for the map pins marking attractions. [The example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly) uses a custom marker image included in the repo's `images` dir (excluded here).
+  - NOTE: To simplify this tutorial, `.marker.background-image` uses a custom Mapbox marker for the pins marking attractions on the map. [The example app on GitHub](https://github.com/sqlitecloud/examples/tree/main/geopoly) uses a custom marker image included in the repo's `images` dir (excluded here).
 
 `index.js`
 ```js
@@ -389,8 +381,7 @@ import { point, distance } from '@turf/turf';
 import { Database } from '@sqlitecloud/drivers';
 import { getBbox } from './helpers/getBbox.js';
 
-mapboxgl.accessToken =
-  'pk.eyJ1IjoidW5hdGFyYWphbiIsImEiOiJjbDFpcW82MGYxeDE1M2RwNjU4MmZ1YndsIn0.HyxwEtZz-pQ_7R6e48l0-g';
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function App() {
   const mapContainerRef = useRef();
@@ -682,9 +673,29 @@ function App() {
 export default App;
 ```
 
-  - To understand how the app works, let's break down this monster component: 
+  - To understand how the app works, let's break down this monster component's core functionality: 
 
-7. **Create the last helper function**
+    - The first `useEffect`:
+      - creates, styles, and centers the map;
+      - applies 3 controls to the top right of the map: a geocoder (i.e. address search input), an icon to toggle the map to fullscreen mode, and an icon to locate the app user on the map;
+      - sets an event listener to track the map center coordinates and zoom level, all displayed on the top left of the app; and
+      - sets an event listener on the geocoder to call the `queryGeopoly` function when the user clicks a geocoder result.
+
+    - The `queryGeopoly` function:
+      - connects to your `geopoly-demo` database;
+      - uses the `geopoly_regular` function to generate a polygon and adds it to the `polygons` table (set a positive `radius` and up to 1000 `sides`);
+      - returns all named attractions in the polygon area;
+      - uses Turf.js to calculate the distance between the searched location and each attraction (set `units` to be miles or kilometers);
+      - applies clickable markers for all attractions on the map;
+      - upsorts attractions nearest the user's searched location;
+      - uses the `getBbox` helper function (defined in the next step) to zoom the map to the attraction nearest the searched location; and
+      - updates the `geometry` state to hold the returned Polygon and attraction Point features.
+
+    - The second `useEffect`:
+      - is triggered by the `geometry` state update; and
+      - calls the `drawFeatureCollection` function to draw the returned Polygon, its outline, and attraction Points on the map. 
+
+**8. Create a helper function**
 
   - Create `src/helpers/getBbox.js`. Copy and paste in the following code:
 
@@ -723,13 +734,17 @@ export function getBbox(sortedEvents, locationLng, locationLat) {
 }
 ```
 
-8. **Run your app!**
+  - The `getBbox` function:
+    - generates a bounding box, defined by a southwest coordinate pair and northeast coordinate pair; and
+    - is used in `queryGeopoly` to fit/ zoom the map view to a user's searched location and its nearest attraction.
+
+**9. Run your app!**
 
   - Replace your `package.json` code with the following, which includes all dependencies needed to run the app:
 
 ```json
 {
-  "name": "geopoly-demo",
+  "name": "sqlc-geopoly-demo",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -774,28 +789,46 @@ npm i
 npm start
 ```
 
-  - Visit `http://localhost:3000/` (adjust the port as-needed) in your browser to view the application.
+  - Visit `http://localhost:3000/` (adjust the port as-needed) in your browser to view the app.
 
-9. **Find attractions near you!**
+**10. Find attractions!**
 
-  - USE CASE 1: You used the NYC geodata fetched with the provided Overpass query.
+  - On app load, the map is centered on Central Park, NY.
 
-    - On app load, the map is centered on Central Park, NYC.
+  - In the geocoder (i.e. search input) at the top right of the map, enter "Empire" and click on the "Empire State Building" result. You can also search coordinates (see [reverse geocoding](https://docs.mapbox.com/api/search/geocoding/)).
 
-    - In the geocoder (i.e. search input) at the top right of the map, enter "Empire" and select the "Empire State Building" search result.
+  - When you select a geocoder result:
+    - a polygon is generated by Geopoly, added to your `polygons` table, and displayed on the map; and
 
-    - When you select a geocoder result:
-      - a polygon is generated by Geopoly, added to your `polygons` table, and displayed on the map.
+    - all attractions in your `attractions` table inside the polygon area are listed in the left sidebar AND marked on the map. NOTE: the sidebar upsorts attractions nearest your searched location, in this case the "Empire State Building".
 
-      - all attractions from your `attractions` table calculated to be inside the polygon area (outline inclusive) are listed in the left sidebar AND marked on the map. NOTE: the sidebar upsorts attractions nearest the searched location.
+  - To see the inserted polygon data, in your SQLite Cloud account dashboard's left nav, click Console. In the database dropdown, select `geopoly-demo`. Copy, paste in, and run the following query.
 
-    - As an aside: To see the inserted polygon data, in your SQLite Cloud account dashboard's left nav, click Console. Copy, paste in, and run the following query:
+    - The `geopoly_json` function parses the `_shape` column's `[object ArrayBuffer]` data into an array of coordinate pairs representing the polygon's vertices: `[[-73.9355,40.7485],[-73.9359,40.7547], ...,[-73.9359,40.7422],[-73.9355,40.7485]]`. The array should contain (1 + # of polygon sides) coordinate pairs. The polygon is closed, so the first and last pairs both represent the same vertex.
 
 ```sql
 SELECT rowid, geopoly_json(_shape) FROM polygons;
 ```
-      - `geopoly_json()` parses the Array(buffer) data into an array of coordinate pairs representing the polygon vertices. The array should contain (1 + # of polygon sides) coordinate pairs.
 
-    - The map will zoom in to the closest attraction to your searched location, in this case the "Empire State Building". However, you can click any attraction listing or marker to zoom in to that attraction on the map.
+  - The map zooms in to the nearest attraction to your searched location and highlights its corresponding top listing in the sidebar.
+    
+    - You can click on any attraction listing or marker to fly/ zoom to and center on that attraction on the map.
 
-  - USE CASE 2: If you used a custom Overpass query to fetch geodata near your location, then after the map loads, click on the map's GeolocateControl and allow the browser to use your IP to locate you on the map. The map will fly to and center on your location. This way you will get more relevant results from the geocoder search and your polygon will contain (more) attractions.
+    - Turf.js calculates straight-line distances between your searched location and each attraction. Expect discrepancies between this app's calculated distances vs, say, Google or Apple Maps.
+
+And that’s it! You’ve successfully built a local attractions finder app that utilizes Geopoly to write geodata to and read from a SQLite Cloud database.
+
+### Additional Guidance on Overpass:
+  - To fetch other attractions or any other kind of location data in NY or another area of interest to you, refer to [OpenStreetMap's Map features documentation](https://wiki.openstreetmap.org/wiki/Map_features). As a starting point, modify the area or key-value pairs in the NY query.
+
+  - NOTE: The app works only with Point features (represented in the [Map features](https://wiki.openstreetmap.org/wiki/Map_features) tables' `Element` columns by an icon with a single dot). Be sure to query only nodes and the key-value pairs that can return Point data. For example, don't use most of the values available for the Boundary key.
+
+  - To implement more complex or granular Point queries, refer to the [Overpass QL documentation](https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL).
+
+  - If you run a custom Overpass query:
+    - Add to or replace the FeatureCollection in `geodata.json`.
+    - In your SQLite Cloud account dashboard's left nav, click Databases. In the `geopoly-demo` row, click the down chevron and then Delete Database.
+    - Create Database with the same name.
+    - From your project dir, run `npm run create-tables`. Your database tables will be re-created, and the `attractions` table will be populated with your updated geodata.
+  
+  - If you queried and stored attractions near your location, then after the app's initial load, click on the [GeolocateControl icon](https://docs.mapbox.com/mapbox-gl-js/example/locate-user/) at the top right of the map and allow the browser to quickly center the map on your location. Search away!

@@ -21,7 +21,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
 	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
 	{ title: "Tutorials", type: "inner", level: 0 },
-	{ title: "SQLite Spotlight: Geopoly Extension", filePath: "tutorial-geopoly", type: "inner", level: 1 },
+	{ title: "Using SQLite Extensions - Geopoly", filePath: "tutorial-geopoly", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
@@ -143,7 +143,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Node.js", ref: "/docs/quick-start-node", type: "inner", level: 2 },
 	{ title: "Next.js", ref: "/docs/quick-start-next", type: "inner", level: 2 },
 	{ title: "Tutorials", type: "inner", level: 1 },
-	{ title: "SQLite Spotlight: Geopoly Extension", ref: "/docs/tutorial-geopoly", type: "inner", level: 2 },
+	{ title: "Using SQLite Extensions - Geopoly", ref: "/docs/tutorial-geopoly", type: "inner", level: 2 },
 	{ title: "Classes", type: "inner", level: 1 },
 	{ title: "Database", filePath: 'sqlite-cloud/sdks/js/classes/Database', type: "inner", level: 2 },
 	{ title: "SQLiteCloudConnection", filePath: 'sqlite-cloud/sdks/js/classes/SQLiteCloudConnection', type: "inner", level: 2 },
