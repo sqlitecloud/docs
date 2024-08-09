@@ -140,15 +140,19 @@ import 'dotenv/config';
 import geodata from '../../data/geodata.json' assert { type: 'json' };
 
 async function createDatabase() {
+  // open a connection to your `geopoly-demo` database
   const db = new Database(process.env.REACT_APP_CONNECTION_STRING);
 
   const db_name = 'geopoly-demo';
   await db.sql`USE DATABASE ${db_name};`;
 
+  // create a table with 2 columns: `rowid` and `_shape`
   await db.sql`CREATE VIRTUAL TABLE polygons USING geopoly()`;
 
+  // create a table with 5 columns: `id`, `name`, `lng`, `lat`, and `coordinates`
   await db.sql`CREATE TABLE attractions (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, lng REAL NOT NULL, lat REAL NOT NULL, coordinates TEXT NOT NULL)`;
 
+  // populate the `attractions` table using the GeoJSON FeatureCollection in `geodata.json`
   for (const feature of geodata['features']) {
     const { name } = feature.properties;
     const { coordinates } = feature.geometry;
@@ -166,12 +170,6 @@ async function createDatabase() {
 
 createDatabase();
 ```
-
-  - The `createDatabase` function:
-    - connects to your `geopoly-demo` database;
-    - creates a virtual `polygons` table with 2 columns: `rowid` and `_shape`;
-    - creates an `attractions` table with 5 columns: `id`, `name`, `lng`, `lat`, and `coordinates`; and
-    - populates the `attractions` table using the GeoJSON FeatureCollection in `geodata.json`.
   
   - Add the following to your `package.json`:
 
@@ -397,21 +395,25 @@ function App() {
   const units = 'miles';
 
   async function queryGeopoly(searchedLng, searchedLat) {
+    // open a connection to your `geopoly-demo` database
     const db = new Database(process.env.REACT_APP_CONNECTION_STRING);
 
     const db_name = 'geopoly-demo';
 
-    const radius = 0.05;
-    const sides = 50;
+    const radius = 0.05; // must be a positive number
+    const sides = 50; // 3-1000
 
+    // generate a new polygon to be added to your `polygons` table
     const polygonCoords =
       await db.sql`USE DATABASE ${db_name}; INSERT INTO polygons(_shape) VALUES(geopoly_regular(${searchedLng}, ${searchedLat}, ${radius}, ${sides})) RETURNING geopoly_json(_shape);`;
 
+    // point-in-polygon query to get all attractions in the generated polygon's area
     const attractionsInPolygon =
       await db.sql`USE DATABASE ${db_name}; SELECT name, coordinates FROM attractions WHERE geopoly_contains_point(${polygonCoords[0]['geopoly_json(_shape)']}, lng, lat);`;
 
     db.close();
 
+    // remove unnamed attractions
     const namedAttractions = attractionsInPolygon.filter(
       (attraction) => attraction.name !== null
     );
@@ -428,16 +430,18 @@ function App() {
         properties: {
           id: index,
           title: attraction['name'],
+          // use Turf.js to calculate the distance between the searched location and the current attraction
           distance: distance(
             point([searchedLng, searchedLat]),
             point(attractionCoordinates),
             {
-              units,
+              units, // either miles or kilometers
             }
           ),
         },
       };
 
+      // apply clickable markers for all attractions
       const marker = document.createElement('div');
       marker.key = `marker-${attractionFeature.properties.id}`;
       marker.id = `marker-${attractionFeature.properties.id}`;
@@ -454,6 +458,7 @@ function App() {
       return attractionFeature;
     });
 
+    // upsort attractions nearest the user's searched location
     attractionFeatures.sort((a, b) => {
       if (a.properties.distance > b.properties.distance) {
         return 1;
@@ -466,6 +471,7 @@ function App() {
 
     setPlaces(attractionFeatures);
 
+    // use a helper function (defined in the next step) to fit/ zoom the map view to the searched location and its nearest attraction
     if (attractionFeatures[0]) {
       const bbox = getBbox(attractionFeatures, searchedLng, searchedLat);
       mapRef.current.fitBounds(bbox, {
@@ -484,6 +490,7 @@ function App() {
         .addTo(mapRef.current);
     }
 
+    // update the `geometry` state to hold the returned Polygon and attraction Point features
     setGeometry([
       {
         type: 'Feature',
@@ -566,6 +573,7 @@ function App() {
   }
 
   useEffect(() => {
+    // create, style, and center the map
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -573,16 +581,20 @@ function App() {
       zoom,
     });
 
+    // apply 3 controls to the top right of the map
+    // an address search input
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl,
       zoom: 12,
     });
 
+    // toggle fullscreen mode
     const fullscreenCtrl = new mapboxgl.FullscreenControl({
       container: mapContainerRef.current,
     });
 
+    // locate the user on the map
     const geolocateCtrl = new mapboxgl.GeolocateControl({
       fitBoundsOptions: {
         maxZoom: 12,
@@ -597,6 +609,7 @@ function App() {
     mapRef.current.addControl(fullscreenCtrl);
     mapRef.current.addControl(geolocateCtrl);
 
+    // track the map center coordinates and zoom level (displayed on the top left of the app)
     function updateCoordinates() {
       const { lng, lat } = mapRef.current.getCenter();
       setLng(lng.toFixed(4));
@@ -606,6 +619,7 @@ function App() {
 
     mapRef.current.on('move', updateCoordinates);
 
+    // call the `queryGeopoly` function when the user clicks a geocoder result
     geocoder.on('result', (e) => {
       const existingMarkers = document.getElementsByClassName('marker');
       while (existingMarkers[0]) {
@@ -630,8 +644,10 @@ function App() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // triggered by a `geometry` state update
   useEffect(() => {
     if (geometry.length !== 0) {
+      // draw the returned Polygon, its outline, and attraction Points on the map
       drawFeatureCollection();
     }
   }, [geometry]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -673,28 +689,6 @@ function App() {
 export default App;
 ```
 
-  - To understand how the app works, let's break down this monster component's core functionality: 
-
-    - The first `useEffect`:
-      - creates, styles, and centers the map;
-      - applies 3 controls to the top right of the map: a geocoder (i.e. address search input), an icon to toggle the map to fullscreen mode, and an icon to locate the app user on the map;
-      - sets an event listener to track the map center coordinates and zoom level, all displayed on the top left of the app; and
-      - sets an event listener on the geocoder to call the `queryGeopoly` function when the user clicks a geocoder result.
-
-    - The `queryGeopoly` function:
-      - connects to your `geopoly-demo` database;
-      - uses the `geopoly_regular` function to generate a polygon and adds it to the `polygons` table (set a positive `radius` and up to 1000 `sides`);
-      - returns all named attractions in the polygon area;
-      - uses Turf.js to calculate the distance between the searched location and each attraction (set `units` to be miles or kilometers);
-      - applies clickable markers for all attractions on the map;
-      - upsorts attractions nearest the user's searched location;
-      - uses the `getBbox` helper function (defined in the next step) to zoom the map to the attraction nearest the searched location; and
-      - updates the `geometry` state to hold the returned Polygon and attraction Point features.
-
-    - The second `useEffect`:
-      - is triggered by the `geometry` state update; and
-      - calls the `drawFeatureCollection` function to draw the returned Polygon, its outline, and attraction Points on the map. 
-
 **8. Create a helper function**
 
   - Create `src/helpers/getBbox.js`. Copy and paste in the following code:
@@ -727,16 +721,14 @@ export function getBbox(sortedEvents, locationLng, locationLat) {
     }
     return 0;
   });
+
+  // return a bounding box, defined by a southwest coordinate pair and northeast coordinate pair
   return [
     [sortedLons[0], sortedLats[0]],
     [sortedLons[1], sortedLats[1]],
   ];
 }
 ```
-
-  - The `getBbox` function:
-    - generates a bounding box, defined by a southwest coordinate pair and northeast coordinate pair; and
-    - is used in `queryGeopoly` to fit/ zoom the map view to a user's searched location and its nearest attraction.
 
 **9. Run your app!**
 
@@ -814,11 +806,12 @@ SELECT rowid, geopoly_json(_shape) FROM polygons;
     
     - You can click on any attraction listing or marker to fly/ zoom to and center on that attraction on the map.
 
-    - Turf.js calculates straight-line distances between your searched location and each attraction. Expect discrepancies between this app's calculated distances vs, say, Google or Apple Maps.
+    - [Turf.js uses the Haversine formula](https://turfjs.org/docs/api/distance) to account for global curvature when calculating the distance between your searched location and each attraction. However, you should still expect discrepancies between this app's calculated distances vs, say, Google or Apple Maps.
 
 And that’s it! You’ve successfully built a local attractions finder app that utilizes Geopoly to write geodata to and read from a SQLite Cloud database.
 
 ### Additional Guidance on Overpass:
+
   - To fetch other attractions or any other kind of location data in NY or another area of interest to you, refer to [OpenStreetMap's Map features documentation](https://wiki.openstreetmap.org/wiki/Map_features). As a starting point, modify the area or key-value pairs in the NY query.
 
   - NOTE: The app works only with Point features (represented in the [Map features](https://wiki.openstreetmap.org/wiki/Map_features) tables' `Element` columns by an icon with a single dot). Be sure to query only nodes and the key-value pairs that can return Point data. For example, don't use most of the values available for the Boundary key.
