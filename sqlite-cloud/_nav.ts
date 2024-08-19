@@ -21,7 +21,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
 	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
 	{ title: "Tutorials", type: "inner", level: 0 },
-	{ title: "Using SQLite Extensions - Geopoly", filePath: "tutorial-geopoly", type: "inner", level: 1 },
+	{ title: "Geopoly", filePath: "tutorial-geopoly", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
