@@ -1,0 +1,195 @@
+---
+title: SQLAlchemy ORM Quick Start Guide
+description: Get started with SQLite Cloud using SQLAlchemy ORM in FastAPI.
+category: getting-started
+status: publish
+slug: quick-start-sqlalchemy-orm
+---
+
+In this quickstart, we will show you how to get started with SQLite Cloud and SQLAlchemy by building a FastAPI backend that connects to and reads from a SQLite Cloud database.
+
+---
+
+1. **Set up a SQLite Cloud account**
+  - If you haven't already, [sign up for a SQLite Cloud account](https://sqlitecloud.io/register) and create a new project.
+  - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+2. **Create a new Python project**
+  - You should have the latest Python version (3) installed locally.
+
+```bash
+mkdir sqlalchemy-quickstart
+cd sqlalchemy-quickstart
+
+# open the project in VSCode
+# code .
+
+python3 -m venv .venv
+. .venv/bin/activate
+```
+
+3. **Install dependencies**
+  - Run this command from your current directory:
+
+```bash
+pip install "fastapi[standard]" sqlalchemy sqlalchemy-sqlitecloud
+```
+
+  - Do NOT remove the quotes around the FastAPI package.
+  - `sqlalchemy-sqlitecloud` includes `sqlitecloud`, so no need to install the latter separately.
+  - Update `.venv/lib/python{version}/site-packages/sqlitecloud/__init__.py`:
+
+```py
+from .dbapi2 import *
+
+# from .dbapi2 import (
+#     PARSE_COLNAMES,
+#     ...
+# )
+```
+
+4. **App setup**
+  - From your current directory, create a sub-directory `fastapi_sqlc_app` with an empty `__init__.py` file to indicate the new sub-dir is a package.
+    - NOTE: Create the remaining project files in this sub-dir as well.
+
+```bash
+mkdir fastapi_sqlc_app
+cd fastapi_sqlc_app
+touch __init__.py
+```
+
+  - Create a new file `database.py` and copy in the following code.
+    - In your SQLite Cloud account dashboard, click on `Show connection strings`, copy the Connection String, and replace `<your-connection-string>` below. Modify your string to include the name of the DB we'll query: `sqlitecloud://{hostname}:8860/chinook.sqlite?apikey={apikey}`.
+
+```py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+engine = create_engine('<your-connection-string>')
+
+SessionLocal = sessionmaker(bind=engine)
+
+Base = declarative_base()
+```
+
+  - Create a new file `models.py` and copy in the following code defining 2 SQLAlchemy ORM "models", or classes, to interact with the DB.
+    - `__tablename__` is the name of a model's corresponding DB table.
+    - Most class attributes/ table `Column`s below are passed a class type as the first argument. NOTE: The `Album` class' `id` attribute passes `AlbumId` as the first arg.
+    - We use the `relationship` function to create an explicit, bidirectional link between the 2 models. Let's say:
+      - We have an instance of the `Artist` class called `taylor_swift`. Accessing the attribute `taylor_swift.albums` would return:
+        - a list of `Album` SQLAlchemy models from the `albums` DB table, whose foreign key `ArtistId` points to the `taylor_swift` record in the `artists` table.
+        - Or simply put, a list of Taylor Swift's albums.
+      - We have an instance of the `Album` class called `fearless`. Accessing the attribute `fearless.artist` would return:
+        - an `Artist` SQLAlchemy model from the `artists` DB table, again using the foreign key `ArtistId` to get the right record.
+        - Or simply put, the creator of the album Fearless (also Taylor Swift).
+
+```py
+from .database import Base
+
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
+class Artist(Base):
+    __tablename__ = "artists"
+
+    ArtistId = Column(Integer, primary_key=True)
+    Name = Column(String)
+
+    albums = relationship("Album", back_populates="artist")
+
+class Album(Base):
+    __tablename__ = "albums"
+
+    id = Column("AlbumId", Integer, primary_key=True)
+    Title = Column(String)
+    ArtistId = Column(Integer, ForeignKey('artists.ArtistId'))
+
+    artist = relationship("Artist", back_populates="albums")
+```
+
+  - Create a new file `schemas.py` and copy in the following code defining 2 Pydantic models, or "schemas", to validate the shapes of the response data.
+    - NOTE: The `Album` Pydantic model checks for `ArtistName` rather than `ArtistId` defined in the `Album` SQLAlchemy model in `models.py`.
+    - By default, SQLAlchemy "lazy loads", i.e. it only gets relationship data from the DB when we access the model's attribute containing that data.`orm_mode = True` enables the Pydantic model to read a returned ORM (in this case, SQLAlchemy) model and include relationship data.
+
+```py
+from pydantic import BaseModel
+
+class Album(BaseModel):
+    id: int
+    Title: str
+    ArtistName: str
+
+    class Config:
+        orm_mode = True
+
+class Artist(BaseModel):
+    ArtistId: int
+    Name: str
+    albums: list[Album] = []
+
+    class Config:
+        orm_mode = True
+```
+
+  - Create a new file `read.py` and copy in the following code creating a reusable utility function to read album data.
+
+```py
+from . import models
+
+from sqlalchemy.orm import Session
+
+def get_albums(db: Session, skip: int = 0, num: int = 20):
+    return db.query(models.Album.id, models.Album.Title, models.Artist.Name.label('ArtistName')).join(models.Artist).offset(skip).limit(num).all()
+```
+
+  - Create a new file `main.py` and copy in the following code.
+    - The `get_db` function handles creating and closing a new `SessionLocal` instance, or DB connection/ session, for every request.
+    - NOTE: The function below returns a list of SQLAlchemy `Album` models. However, only the data declared in the Pydantic schemas will be returned to the client.
+
+```py
+from .database import SessionLocal
+from . import read, schemas
+
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+
+app = FastAPI()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@app.get("/albums/", response_model=list[schemas.Album])
+def read_albums(skip: int = 0, num: int = 20, db: Session = Depends(get_db)):
+    albums = read.get_albums(db, skip=skip, num=num)
+    return albums
+```
+
+5. **Run your FastAPI app**
+  - From your `sqlalchemy-quickstart` directory, run the following command:
+
+```bash
+uvicorn fastapi_sqlc_app.main:app --reload
+```
+
+  - Visit `http://127.0.0.1:8000/albums/` to see your app data.
+
+6. **Troubleshooting**
+
+  - If you encounter the following error, restart your IDE and re-run your app.
+
+```bash
+AttributeError: module 'sqlitecloud.dbapi2' has no attribute 'sqlite_version_info'`
+```
+
+7. **References**
+
+If you're new to FastAPI and/or want to learn more about how to work with ORMs in FastAPI, we referenced FastAPI's [SQL Databases Tutorial](https://fastapi.tiangolo.com/tutorial/sql-databases/) extensively when writing this Quickstart.
+
+If you're new to SQLAlchemy, refer to [their latest docs](https://docs.sqlalchemy.org/en/20/).
+
+And that's it! You've successfully built a FastAPI app that uses SQLAlchemy ORM to read data from a SQLite Cloud database.
