@@ -17,6 +17,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
+	{ title: "SQLAlchemy", filePath: "quick-start-sqlalchemy-orm", type: "inner", level: 1 },
 	{ title: "Streamlit", filePath: "quick-start-streamlit", type: "inner", level: 1 },
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
 	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
@@ -162,6 +163,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
 	{ title: "Django", ref: "/docs/quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", ref: "/docs/quick-start-flask", type: "inner", level: 1 },
+	{ title: "SQLAlchemy", ref: "/docs/quick-start-sqlalchemy-orm", type: "inner", level: 1 },
 
 	{ title: "Go",  type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-go-introduction", level: 1 },
