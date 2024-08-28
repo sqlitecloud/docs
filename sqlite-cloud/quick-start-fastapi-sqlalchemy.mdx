@@ -6,7 +6,7 @@ status: publish
 slug: quick-start-sqlalchemy-orm
 ---
 
-In this quickstart, we will show you how to get started with SQLite Cloud and SQLAlchemy by building a FastAPI backend that connects to and reads from a SQLite Cloud database.
+In this quickstart, we will show you how to get started with SQLite Cloud by building a FastAPI backend that connects to and reads from a SQLite Cloud database using SQLAlchemy.
 
 ---
 
@@ -37,20 +37,10 @@ pip install "fastapi[standard]" sqlalchemy sqlalchemy-sqlitecloud
 
   - Do NOT remove the quotes around the FastAPI package.
   - `sqlalchemy-sqlitecloud` includes `sqlitecloud`, so no need to install the latter separately.
-  - Update `.venv/lib/python{version}/site-packages/sqlitecloud/__init__.py`:
-
-```py
-from .dbapi2 import *
-
-# from .dbapi2 import (
-#     PARSE_COLNAMES,
-#     ...
-# )
-```
 
 4. **App setup**
-  - From your current directory, create a sub-directory `fastapi_sqlc_app` with an empty `__init__.py` file to indicate the new sub-dir is a package.
-    - NOTE: Create the remaining project files in this sub-dir as well.
+  - From your current directory, create a sub-directory `fastapi_sqlc_app` with an empty `__init__.py` file to indicate the new sub-directory is a package.
+    - NOTE: We will create all remaining project files in this sub-directory.
 
 ```bash
 mkdir fastapi_sqlc_app
@@ -75,20 +65,12 @@ Base = declarative_base()
 
   - Create a new file `models.py` and copy in the following code defining 2 SQLAlchemy ORM "models", or classes, to interact with the DB.
     - `__tablename__` is the name of a model's corresponding DB table.
-    - Most class attributes/ table `Column`s below are passed a class type as the first argument. NOTE: The `Album` class' `id` attribute passes `AlbumId` as the first arg.
-    - We use the `relationship` function to create an explicit, bidirectional link between the 2 models. Let's say:
-      - We have an instance of the `Artist` class called `taylor_swift`. Accessing the attribute `taylor_swift.albums` would return:
-        - a list of `Album` SQLAlchemy models from the `albums` DB table, whose foreign key `ArtistId` points to the `taylor_swift` record in the `artists` table.
-        - Or simply put, a list of Taylor Swift's albums.
-      - We have an instance of the `Album` class called `fearless`. Accessing the attribute `fearless.artist` would return:
-        - an `Artist` SQLAlchemy model from the `artists` DB table, again using the foreign key `ArtistId` to get the right record.
-        - Or simply put, the creator of the album Fearless (also Taylor Swift).
+    - The `Album` class' `id` attribute maps to the `AlbumId` column in the `albums` table. All other class attribute names match their corresponding table column names.
 
 ```py
 from .database import Base
 
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
 
 class Artist(Base):
     __tablename__ = "artists"
@@ -96,40 +78,23 @@ class Artist(Base):
     ArtistId = Column(Integer, primary_key=True)
     Name = Column(String)
 
-    albums = relationship("Album", back_populates="artist")
-
 class Album(Base):
     __tablename__ = "albums"
 
     id = Column("AlbumId", Integer, primary_key=True)
     Title = Column(String)
     ArtistId = Column(Integer, ForeignKey('artists.ArtistId'))
-
-    artist = relationship("Artist", back_populates="albums")
 ```
 
-  - Create a new file `schemas.py` and copy in the following code defining 2 Pydantic models, or "schemas", to validate the shapes of the response data.
-    - NOTE: The `Album` Pydantic model checks for `ArtistName` rather than `ArtistId` defined in the `Album` SQLAlchemy model in `models.py`.
-    - By default, SQLAlchemy "lazy loads", i.e. it only gets relationship data from the DB when we access the model's attribute containing that data.`orm_mode = True` enables the Pydantic model to read a returned ORM (in this case, SQLAlchemy) model and include relationship data.
+  - Create a new file `schemas.py` and copy in the following code defining a Pydantic model, or "schema", to validate the shape of the response data.
 
 ```py
 from pydantic import BaseModel
 
-class Album(BaseModel):
+class AlbumResponse(BaseModel):
     id: int
     Title: str
     ArtistName: str
-
-    class Config:
-        orm_mode = True
-
-class Artist(BaseModel):
-    ArtistId: int
-    Name: str
-    albums: list[Album] = []
-
-    class Config:
-        orm_mode = True
 ```
 
   - Create a new file `read.py` and copy in the following code creating a reusable utility function to read album data.
@@ -145,7 +110,9 @@ def get_albums(db: Session, skip: int = 0, num: int = 20):
 
   - Create a new file `main.py` and copy in the following code.
     - The `get_db` function handles creating and closing a new `SessionLocal` instance, or DB connection/ session, for every request.
-    - NOTE: The function below returns a list of SQLAlchemy `Album` models. However, only the data declared in the Pydantic schemas will be returned to the client.
+    - A GET request to the `/albums/` endpoint calls the `read_albums` function, which returns a list of SQLAlchemy `Album` models. The `response_model` ensures only data declared in the Pydantic schema is returned to the client.
+      - The `AlbumResponse` Pydantic model in `schemas.py` has `ArtistName`, as opposed to `ArtistId` defined in the `Album` SQLAlchemy model in `models.py`.
+      - `read_albums` calls the `get_albums` function in `read.py`. `get_albums` queries the `Album` ORM model/ `albums` DB table for the first 20 albums, and joins the `Artist` ORM model/ `artists` DB table to retrieve the `Artist.Name` (re-labeled `ArtistName`) expected by the `AlbumResponse` Pydantic model.
 
 ```py
 from .database import SessionLocal
@@ -163,7 +130,7 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/albums/", response_model=list[schemas.Album])
+@app.get("/albums/", response_model=list[schemas.AlbumResponse])
 def read_albums(skip: int = 0, num: int = 20, db: Session = Depends(get_db)):
     albums = read.get_albums(db, skip=skip, num=num)
     return albums
@@ -188,8 +155,7 @@ AttributeError: module 'sqlitecloud.dbapi2' has no attribute 'sqlite_version_inf
 
 7. **References**
 
-If you're new to FastAPI and/or want to learn more about how to work with ORMs in FastAPI, we referenced FastAPI's [SQL Databases Tutorial](https://fastapi.tiangolo.com/tutorial/sql-databases/) extensively when writing this Quickstart.
-
-If you're new to SQLAlchemy, refer to [their latest docs](https://docs.sqlalchemy.org/en/20/).
+  - If you're new to FastAPI and/or want to learn more about how to work with ORMs in FastAPI, we referenced FastAPI's [introductory example](https://fastapi.tiangolo.com/#example) and [SQL Databases tutorial](https://fastapi.tiangolo.com/tutorial/sql-databases/) extensively when writing this Quickstart.
+  - If you're new to SQLAlchemy, refer to [their latest docs](https://docs.sqlalchemy.org/en/20/).
 
 And that's it! You've successfully built a FastAPI app that uses SQLAlchemy ORM to read data from a SQLite Cloud database.
