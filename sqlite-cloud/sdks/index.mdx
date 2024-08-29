@@ -1,0 +1,53 @@
+---
+title: SDKs 
+description: Index page for sdks section
+category: sdks
+status: publish
+icon: docs-sdks
+slug: sdks
+---
+import IndexPage from "@docs-website-components/Docs/IndexPage.astro"
+
+export const introduction = "SQLite Cloud is a distributed relational database system built on top of the SQLite database engine. It has been specifically designed from the ground up to ensure the strong consistency of your data across all nodes in a cluster while simultaneously managing the technical aspects of scaling, security, and data distribution."
+
+export const sections = [
+    {
+        icon: "docsSdkC",
+        title: "C/C++",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-c-introduction",
+    },
+    {
+        icon: "docsSdkJs",
+        title: "JavaScript",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-js-introduction",
+    },
+    {
+        icon: "docsSdkPython",
+        title: "Python",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-python-introduction",
+    },
+    {
+        icon: "docsSdkGo",
+        title: "Go",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-go-introduction",
+    },
+    {
+        icon: "docsSdkPhp",
+        title: "PHP",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-php-introduction",
+    },
+    {
+        icon: "docsSdkSwift",
+        title: "Swift",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        href: "/docs/sdk-swift-introduction",
+    },
+]
+
+
+<IndexPage introduction={introduction} sections={sections} />
