@@ -6,7 +6,12 @@ status: publish
 slug: quick-start-sqlalchemy-orm
 ---
 
-In this quickstart, we will show you how to get started with SQLite Cloud by building a FastAPI backend that connects to and reads from a SQLite Cloud database using SQLAlchemy.
+In this Quick Start, we will show you how to get started with SQLite Cloud by building a FastAPI backend that connects to and reads from a SQLite Cloud database using SQLAlchemy.
+
+NOTE that FastAPI framework:
+  - does NOT require you to use a relational database or any database at all.
+  - CAN work with any ORM library (including SQLAlchemy) or database (including SQLite, which comes pre-installed in Python and is a database supported by SQLAlchemy).
+  - code is MINIMAL in the example below. Most of the code is standard SQLAlchemy and framework-agnostic.
 
 ---
 
@@ -21,8 +26,8 @@ In this quickstart, we will show you how to get started with SQLite Cloud by bui
 mkdir sqlalchemy-quickstart
 cd sqlalchemy-quickstart
 
-# open the project in VSCode
-# code .
+# open the project in VSCode / another editor
+code .
 
 python3 -m venv .venv
 . .venv/bin/activate
@@ -155,7 +160,8 @@ AttributeError: module 'sqlitecloud.dbapi2' has no attribute 'sqlite_version_inf
 
 7. **References**
 
-  - If you're new to FastAPI and/or want to learn more about how to work with ORMs in FastAPI, we referenced FastAPI's [introductory example](https://fastapi.tiangolo.com/#example) and [SQL Databases tutorial](https://fastapi.tiangolo.com/tutorial/sql-databases/) extensively when writing this Quickstart.
-  - If you're new to SQLAlchemy, refer to [their latest docs](https://docs.sqlalchemy.org/en/20/).
+  - [FastAPI introductory example](https://fastapi.tiangolo.com/#example)
+  - [FastAPI SQL Databases tutorial](https://fastapi.tiangolo.com/tutorial/sql-databases/)
+  - [Latest SQLAlchemy docs](https://docs.sqlalchemy.org/en/20/)
 
 And that's it! You've successfully built a FastAPI app that uses SQLAlchemy ORM to read data from a SQLite Cloud database.
