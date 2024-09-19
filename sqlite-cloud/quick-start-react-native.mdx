@@ -26,10 +26,10 @@ cd sqlc-quickstart
 eas init --id {id}
 ```
 
-3. **Install the SQLite Cloud JS SDK**
+3. **Install the SQLite Cloud JS SDK and peer dependencies**
 
 ```bash
-npm install @sqlitecloud/drivers
+npm install @sqlitecloud/drivers react-native-tcp-socket react-native-fast-base64
 ```
 
 4. **Query data**
@@ -46,13 +46,14 @@ export default function App() {
 
   useEffect(() => {
     async function getAlbums() {
-      const db = new Database({
-        connectionstring: '<your-connection-string>',
-        usewebsocket: true,
-      });
+      const db = new Database('<your-connection-string>');
 
       const result =
-        await db.sql`USE DATABASE chinook.sqlite; SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist FROM albums INNER JOIN artists WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`;
+        await db.sql`USE DATABASE chinook.sqlite; 
+        SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist 
+        FROM albums 
+        INNER JOIN artists 
+        WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`;
 
       setAlbums(result);
     }
@@ -93,13 +94,14 @@ const styles = StyleSheet.create({
 
 5. **Run your app**
 
+Expo run iOS
 ```bash
-npm start
+npx expo prebuild && npx expo run:ios
 ```
 
-  - To see your app:
-    - On iOS, use the Camera app to scan the QR code.
-    - On Android, download and use the Expo Go app to scan the QR code.
-    - On web, visit the localhost link.
+Expo run Android
+```bash
+npx expo prebuild && npx expo run:android
+```
 
 And that's it! You've successfully built a React Native app that reads data from a SQLite Cloud database.
