@@ -32,27 +32,20 @@ return {
 ```
 
 ### Authorization
-When creating an edge function, you have the option to assign an API key. If an API key is assigned, any calls to the edge function will automatically authenticate access to the associated database using that API key.
+Edge functions that access your SQLite databases must be authorized via API key. You can automatically authorize an edge function on every call by assigning an API key in the "API KEY" dropdown. 
 
-If you don't assign an API key during creation, you must include an API key with each request to the edge function's URL. In this case, you have two options for adding the API key:
-- As a query parameter: Add `?apikey=YOUR_API_KEY` to the URL
-- In the request body: Include `apikey` as a variable in your request data
+If no API key is assigned, an API key must be sent in the request url as a query parameter (`?apikey=YOUR_API_KEY`) or as an attribute in the request body (`{ apikey: YOUR_API_KEY }`).
 
 ### Execution
-When it comes to executing an edge function, you have two HTTP methods at your disposal: GET and POST. Your choice between these methods should be based on whether you need to include a request body. Use GET for simple requests without a body, and POST when you need to send data in the request body.
 
-Edge functions are highly flexible. Unlike traditional REST APIs, the HTTP method you use (GET or POST) doesn't determine the function's behavior. Instead, think of an edge function as a piece of code that runs close to your database and can perform any operation you define. The edge function's behavior is determined by your code, not the HTTP method used to call it.
-
-Within your edge function, you have access to two key pieces of information:
+Edge functions can be called via HTTP GET and POST methods. You can pass additional values to your edge function in two ways:
 - Query parameters: Accessible via `request.params`
 - Request body: Accessible via `request.data`
 
-This allows you to work with any data sent along with the request, giving you full control over your function's inputs.
-
 ### Testing
-When testing your edge function in the dashboard, you'll notice that the "Test" button works even without an API key selected. This is because it uses your dashboard user privileges. 
+You may test the execution of edge functions by clicking the "Test" command. 
 
-If you try to access the edge function's URL directly from a browser without including an API key, you'll receive an "Unauthorized" error. Always ensure you're including proper authorization in your requests to avoid this issue.
+You are not required to supply an API key when testing your edge function in the console. The function will run using the dashboard user privileges. 
 
 
 
