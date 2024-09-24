@@ -1,0 +1,135 @@
+---
+title: Knex.js Integration
+description: Integrate SQLite Cloud with Knex.js, a popular SQL query builder.
+category: getting-started
+status: publish
+slug: knex-integration
+---
+
+In this tutorial, we'll show you how to connect your TypeScript application to a SQLite Cloud database using the popular SQL builder, [Knex.js](https://knexjs.org/).
+
+---
+
+**Prerequisites**
+
+- Node.js and npm installed on your system
+- A SQLite Cloud account (you can sign up for a free account [here](https://sqlitecloud.io/register))
+
+**1. How to connect**
+
+- Create a Knex.js instance that uses the SQLite Cloud JavaScript driver to connect to your database.
+
+```TypeScript
+import 'dotenv/config'
+import { knex } from 'knex'
+
+const Client_SQLite3 = require('knex/lib/dialects/sqlite3')
+
+// client will have sqlite3 dialect, but will use sqlitecloud-js driver
+class Client_Libsql extends Client_SQLite3 {
+  _driver() {
+    return require('@sqlitecloud/drivers')
+  }
+}
+
+// Create a Knex.js instance with the custom SQLite3 client
+const db = knex({
+    client: Client_Libsql as any,
+    connection: {
+        filename: process.env.DATABASE_URL as string
+    }
+})
+```
+
+**2. Basic Usage**
+
+In this example, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
+- Initialize a new Node project:
+
+```bash
+npm init -y
+```
+
+- Install the required dependencies:
+
+```bash
+npm install @sqlitecloud/drivers knex dotenv --save
+```
+
+- Install the necessary development dependencies:
+
+```bash
+npm install @types/node nodemon ts-node typescript --save-dev
+```
+
+- Create a `.env` file in the root of your project and add your SQLite Cloud connection string:
+
+```bash
+DATABASE_URL="sqlitecloud://{USER}:{PASSWORD}@{HOST}.sqlite.cloud:8860"
+```
+
+Replace `{USER}`, `{PASSWORD}`, and `{HOST}` with your actual SQLite Cloud credentials and server hostname.
+
+- Create a `tsconfig.json` file to configure your TypeScript compiler:
+
+```bash
+tsc --init
+```
+
+- Create a new file called `example.ts` and add the following code:
+
+```TypeScript
+import 'dotenv/config'
+import { knex } from 'knex'
+
+const Client_SQLite3 = require('knex/lib/dialects/sqlite3')
+
+class Client_Libsql extends Client_SQLite3 {
+  _driver() {
+    return require('@sqlitecloud/drivers')
+  }
+}
+
+console.assert(process.env.DATABASE_URL, 'Define DATABASE_URL environment variable')
+
+const db = knex({
+  client: Client_Libsql as any,
+  connection: {
+    filename: process.env.DATABASE_URL as string
+  }
+})
+
+db.raw('USE DATABASE chinook.sqlite; SELECT * FROM customers')
+  .then(result => {
+    console.log(`Connected to database via knex and received ${result.length} rows`)
+    console.log(JSON.stringify(result, null, 2))
+    db.destroy()
+  })
+  .catch(err => {
+    console.error(err)
+    db.destroy()
+  })
+```
+
+- Update your `package.json` file to include a script for running the example:
+
+```bash
+{
+  "scripts": {
+    "dev": "nodemon --exec ts-node example.ts"
+  }
+}
+```
+
+- Start the development server:
+
+```bash
+npm run dev
+```
+
+This will run the `example.ts` file using `ts-node` and automatically restarting the server when you make changes to your code.
+
+- Observe the output in the console, which should display the customer data fetched from the SQLite Cloud database.
+
+And that's it! You've successfully connected your TypeScript application to a SQLite Cloud database using Knex.js.
