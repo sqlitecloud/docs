@@ -24,7 +24,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Tutorials", type: "inner", level: 0 },
 	{ title: "Geopoly", filePath: "tutorial-geopoly", type: "inner", level: 1 },
 	{ title: "Integrations", type: "inner", level: 0 },
-	{ title: "Knex", filePath: "knex-integration", type: "inner", level: 1 },
+	{ title: "Knex.js", filePath: "knex-integration", type: "inner", level: 1 },
 
 	{ title: "Platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },

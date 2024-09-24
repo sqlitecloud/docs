@@ -15,11 +15,11 @@ In this tutorial, we'll show you how to connect your TypeScript application to a
 - Node.js and npm installed on your system
 - A SQLite Cloud account (you can sign up for a free account [here](https://sqlitecloud.io/register))
 
-**1. How to connect**
+1. **How to connect**
 
 - Create a Knex.js instance that uses the SQLite Cloud JavaScript driver to connect to your database.
 
-```TypeScript
+```typescript
 import 'dotenv/config'
 import { knex } from 'knex'
 
@@ -41,7 +41,7 @@ const db = knex({
 })
 ```
 
-**2. Basic Usage**
+2. **Basic Usage**
 
 In this example, we will use the sample datasets that come pre-loaded with SQLite Cloud.
 
@@ -79,7 +79,7 @@ tsc --init
 
 - Create a new file called `example.ts` and add the following code:
 
-```TypeScript
+```typescript
 import 'dotenv/config'
 import { knex } from 'knex'
 
@@ -128,8 +128,27 @@ db.raw('USE DATABASE chinook.sqlite; SELECT * FROM customers')
 npm run dev
 ```
 
-This will run the `example.ts` file using `ts-node` and automatically restarting the server when you make changes to your code.
+This will run the `example.ts` file using `ts-node` and will automatically restart the server when you make changes to your code.
 
 - Observe the output in the console, which should display the customer data fetched from the SQLite Cloud database.
+```bash
+ [
+  {
+    "CustomerId": 1,
+    "FirstName": "Luís",
+    "LastName": "Gonçalves",
+    "Company": "Embraer - Empresa Brasileira de Aeronáutica S.A.",
+    "Address": "Av. Brigadeiro Faria Lima, 2170",
+    "City": "São José dos Campos",
+    "State": "SP",
+    "Country": "Brazil",
+    "PostalCode": "12227-000",
+    "Phone": "+55 (12) 3923-5555",
+    "Fax": "+55 (12) 3923-5566",
+    "Email": "luisg@embraer.com.br",
+    "SupportRepId": 3
+  },
+ ]
+```
 
 And that's it! You've successfully connected your TypeScript application to a SQLite Cloud database using Knex.js.
