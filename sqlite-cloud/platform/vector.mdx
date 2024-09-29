@@ -12,7 +12,7 @@ Every SQLite Cloud database comes with the `sqlite-vec` extension pre-installed.
 
 Using sqlite-vec is similar to using full-text search in SQLite. Declare a "virtual table" with vector columns, insert data with normal INSERT INTO statements, and query with normal SELECT statements.
 
-`sqlite-vec` is currently built and optimized for brute-force vector search. This means there is no approximate nearest neighbor search available, limiting the number of vectors that can be searched in a reasonable amount of time.
+`sqlite-vec` is currently built and optimized for brute-force vector search. This means there is no approximate nearest neighbor search available at this time.
 
 ## Usage
 ### Create a vector table
@@ -100,7 +100,7 @@ insert into vec_items_slim
 ```
 
 ## Performance considerations
-Free SQLite Cloud plans are not optimized for vector workloads. To speak to the team about upgrading your plan, [please reach out](https://www.sqlitecloud.io/support).
+Free SQLite Cloud plans are not optimized for large-scale vector workloads. To speak to the team about upgrading your plan, [please reach out](https://www.sqlitecloud.io/support).
 
 ## Next Steps
 Combined with [edge functions](/docs/edge-functions), SQLite Cloud's vector search capabilities make it a great choice for serverless RAG applications.
