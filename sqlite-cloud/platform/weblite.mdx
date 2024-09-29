@@ -19,3 +19,131 @@ From here, you'll find a list of APIs you can use to interact with your SQLite C
 - **Functions**: Endpoints for executing SQLite functions.
 - **Webhooks**: Endpoints for creating and managing webhooks.
 - **Files**: Endpoints for uploading and downloading files.
+
+## Services
+Services are endpoints for health checks, server information, and more.
+
+### Health Check
+Example request:
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/health' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+```
+
+Example response:
+```json
+{
+  "data": {
+    "name": "@sqlitecloud/gateway",
+    "version": "x.x.x",
+    "project": "xxxxxxxxxx",
+    "node": "xxxxxxxxxx",
+    "hostname": "xxxxxxxxxx",
+    "started": "YYYY-MM-DDTHH:mm:ss.sssZ",
+    "uptime": "XXh:XXm:XXs"
+  },
+  "metadata": {
+    "connectedMs": "XX",
+    "executedMs": "X",
+    "elapsedMs": "XX"
+  }
+}
+```
+
+### Info 
+Example request:
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/info' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+```
+
+Example response:
+```json
+{
+  "data": {
+    "name": "@sqlitecloud/gateway",
+    "version": "x.x.x",
+    "project": "xxxxxxxxxx",
+    "node": "xxxxxxxxxx",
+    "hostname": "xxxxxxxxxx",
+    "started": "YYYY-MM-DDTHH:mm:ss.sssZ",
+    "uptime": "XXh:XXm:XXs",
+    "drivers": {
+      "name": "@sqlitecloud/drivers",
+      "version": "x.x.x"
+    },
+    "runtime": {
+      "name": "xxxxxxx",
+      "version": "x.x.x",
+      "path": "/path/to/runtime",
+      "main": "/path/to/main/file"
+    },
+    "environment": {
+      "events": true,
+      "settings": true,
+      "stats": true,
+      "logs": true
+    },
+    "metrics": {
+      "js_heap_size": 00000000,
+      "js_heap_capacity": 00000000,
+      "js_heap_object_count": 000000,
+      "cpu_user": 00.0,
+      "cpu_system": 0.00,
+      "http_requests": 00000,
+      "http_get": 00000,
+      "http_completed": 00000,
+      "http_options": 00,
+      "ws_requests": 00,
+      "ws_get": 00,
+      "ws_completed": 00,
+      "http_patch": 0,
+      "http_post": 0
+    },
+    "internetAccess": true
+  },
+  "metadata": {
+    "connectedMs": 00,
+    "executedMs": 00,
+    "elapsedMs": 00
+  }
+}
+```
+
+## Stats 
+Example request:
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/stats' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+```
+
+Example response:
+```json
+{
+  "data": {
+    "physicalMemory": 0000000000,
+    "bytesIn": 00000,
+    "bytesOut": 000000,
+    "cpuLoad": 0.00000000000000,
+    "currentClients": 0,
+    "currentMemory": 0000000,
+    "maxClients": 0,
+    "maxMemory": 0000000,
+    "numCommands": 000,
+    "numReads": 00,
+    "numWrites": 0
+  },
+  "metadata": {
+    "connectedMs": 00,
+    "executedMs": 00,
+    "elapsedMs": 00
+  }
+}
+```
+
