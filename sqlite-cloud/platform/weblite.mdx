@@ -188,14 +188,14 @@ Example response:
     { "ArtistId": 3, "Name": "Aerosmith" }
   ],
   "metadata": {
-    "connectedMs": X,
-    "executedMs": XX,
-    "elapsedMs": XX,
+    "connectedMs": "X",
+    "executedMs": "XX",
+    "elapsedMs": "XX",
     "database": "chinook.sqlite",
     "sql": "SELECT * FROM artists LIMIT 3",
-    "version": X,
-    "numberOfRows": X,
-    "numberOfColumns": X,
+    "version": "X",
+    "numberOfRows": "X",
+    "numberOfColumns": "X",
     "columns": [
       {
         "name": "ArtistId",
@@ -252,14 +252,14 @@ Example response:
     { "AlbumId": 5, "Title": "Big Ones", "ArtistId": 3 }
   ],
   "metadata": {
-    "connectedMs": XX,
-    "executedMs": XX,
-    "elapsedMs": XX,
+    "connectedMs": "XX",
+    "executedMs": "XX",
+    "elapsedMs": "XX",
     "database": "chinook.sqlite",
     "sql": "SELECT * FROM albums LIMIT 5",
-    "version": X,
-    "numberOfRows": X,
-    "numberOfColumns": X,
+    "version": "X",
+    "numberOfRows": "X",
+    "numberOfColumns": "X",
     "columns": [
       {
         "name": "AlbumId",
@@ -315,18 +315,18 @@ Example response:
     {
       "type": "database",
       "name": "chinook.sqlite",
-      "size": XXXXXX,
-      "connections": X,
+      "size": "XXXXXX",
+      "connections": "X",
       "encryption": null,
-      "backup": X,
-      "nread": X,
-      "nwrite": X,
-      "inbytes": X,
-      "outbytes": X,
+      "backup": "X",
+      "nread": "X",
+      "nwrite": "X",
+      "inbytes": "X",
+      "outbytes": "X",
       "fragmentation": "X.XX",
-      "pagesize": XXXX,
+      "pagesize": "XXXX",
       "encoding": "UTF-8",
-      "status": X
+      "status": "X"
     },
   ],
   "metadata": {
@@ -458,18 +458,18 @@ Example response:
 {
   "data": {
     "name": "newchinook.sqlite",
-    "size": XXXXXX,
-    "connections": X,
+    "size": "XXXXXX",
+    "connections": "X",
     "encryption": null,
-    "backup": X,
-    "nread": X,
-    "nwrite": X,
-    "inbytes": X,
-    "outbytes": X,
+    "backup": "X",
+    "nread": "X",
+    "nwrite": "X",
+    "inbytes": "X",
+    "outbytes": "X",
     "fragmentation": "X.XX",
-    "pagesize": XXXX,
+    "pagesize": "XXXX",
     "encoding": "UTF-8",
-    "status": X
+    "status": "X"
   },
   "metadata": {
     "connectedMs": "XX",
@@ -497,18 +497,18 @@ Example response:
 {
   "data": {
     "name": "chinook.sqlite",
-    "size": XXXXXX,
-    "connections": X,
+    "size": "XXXXXX",
+    "connections": "X",
     "encryption": null,
-    "backup": X,
-    "nread": X,
-    "nwrite": X,
-    "inbytes": X,
-    "outbytes": X,
+    "backup": "X",
+    "nread": "X",
+    "nwrite": "X",
+    "inbytes": "X",
+    "outbytes": "X",
     "fragmentation": "X.XX",
-    "pagesize": XXXX,
+    "pagesize": "XXXX",
     "encoding": "UTF-8",
-    "status": X
+    "status": "X"
   },
   "metadata": {
     "connectedMs": "XX",
@@ -591,7 +591,7 @@ curl -X 'POST' \
 
 Example response:
 
-`````json
+```json
 {
   "data": "OK",
   "metadata": {
@@ -600,6 +600,7 @@ Example response:
     "elapsedMs": "XX"
   }
 }
+```
 
 ### Delete all rows in a table (or only those rows specified in search string parameters)
 
@@ -614,7 +615,7 @@ curl -X 'DELETE' \
 
 Example response:
 
-````json
+```json
 {
   "data": "OK",
   "metadata": {
@@ -623,6 +624,7 @@ Example response:
     "elapsedMs": "XX"
   }
 }
+```
 
 ### Select single row by row id
 
@@ -633,7 +635,7 @@ curl -X 'GET' \
   'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
-`````
+```
 
 Example response:
 
@@ -668,13 +670,13 @@ Example response:
 ```json
 {
   "data": {
-    "type": XX,
-    "index": X,
-    "lastID": XXX,
+    "type": "XX",
+    "index": "X",
+    "lastID": "XXX",
     "changes": 1,
     "totalChanges": 1,
     "finalized": 1,
-    "rowId": X
+    "rowId": "X"
   },
   "metadata": {
     "connectedMs": "XX",
@@ -701,13 +703,13 @@ Example response:
 ```json
 {
   "data": {
-    "type": XX,
-    "index": X,
-    "lastID": 276,
+    "type": "XX",
+    "index": "X",
+    "lastID": "XXX",
     "changes": 1,
     "totalChanges": 1,
     "finalized": 1,
-    "rowId": X
+    "rowId": "X"
   },
   "metadata": {
     "connectedMs": "XX",
@@ -733,13 +735,13 @@ Example response:
 ```json
 {
   "data": {
-    "type": XX,
-    "index": X,
-    "lastID": X,
+    "type": "XX",
+    "index": "X",
+    "lastID": "X",
     "changes": 1,
     "totalChanges": 1,
     "finalized": 1,
-    "rowId": X
+    "rowId": "X"
   },
   "metadata": {
     "connectedMs": "XX",
