@@ -6,22 +6,7 @@ status: publish
 slug: write-data
 ---
 
-After you've created a database in SQLite Cloud, you can start writing data to it. You can write data to your cluster using the SQLite Cloud UI, API, or client libraries.
-
-## Upload an existing SQLite Database
-You can upload an existing SQLite database to your cluster using the SQLite Cloud UI or the Weblite API.
-
-To upload a local SQLite database via weblite, make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint.
-
-```bash
-curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key' \
-  -d ''
-```
-
-To upload a local SQLite database via the SQLite Cloud UI, navigate to the Database tab in the left-hand navigation. Click the "Upload Database" button and select your local SQLite database.
+After you've created a database in SQLite Cloud, you can start writing data to it.
 
 ## Writing data with the SQLite Cloud UI
 Navigate to the console tab in the left-hand navigation. From here, you can run SQL commands against your cluster. Use the optional dropdown menus to select a database and table.
@@ -39,7 +24,7 @@ INSERT INTO sports_cars (sc_name, sc_year, image) VALUES ('Ferrari', 2021, 'http
 ```
 
 ## Writing data with the Weblite API
-You can use the API to run SQL commands against your cluster. 
+You can use the [Weblite API](/docs/weblite) to run SQL commands against your cluster. Here is an example cURL request:
 
 ```bash
 curl -X 'POST' \
@@ -57,7 +42,7 @@ import { Database } from '@sqlitecloud/drivers';
 
 const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
 db.exec('USE DATABASE mydatabase.sqlite;')
-db.exec('CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_name TEXT NOT NULL, sc_year INTEGER NOT NULL, image BLOB);')
+db.exec('CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_name TEXT NOT NULL, sc_year INTEGER NOT NULL, image_url text);')
 db.commit()
 const insertData = async () => await db.sql`INSERT INTO sports_cars (sc_name, sc_year, image) VALUES ('Ferrari', 2021, 'https://example.com/ferrari.jpg');`;
 
