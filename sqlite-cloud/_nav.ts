@@ -37,7 +37,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Weblite", filePath: "weblite", type: "inner", level: 0 },
 		// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
-	{ title: "Settings", filePath: "settings", type: "inner", level: 0 },
 
 	{ title: "SDKs", type: "secondary", icon: "docs-sdk" },
 	{ title: "C/C++", type: "inner", level: 0 },
