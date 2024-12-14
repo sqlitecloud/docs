@@ -8,8 +8,6 @@ status: publish
 ## Overview
 **SQLite Cloud** is a managed, distributed relational database system built on top of the SQLite database engine. It is written in ANSI C and GO, and it works on most POSIX systems like Linux, *BSD, and Mac OS X (Windows is supported too). You can use SQLite Cloud from the most popular programming languages or its REST API.
 
----
-
 ### Multi-node Architecture
 Every SQLite Cloud project is powered by a multi-node cluster, where each node is running the official SQLite database engine. The cluster uses the [Raft](https://raft.github.io) consensus algorithm to keep your underlying database files in sync across nodes. All of this happens in the background, so you can interact with your database as if it were a single, local database.
 
