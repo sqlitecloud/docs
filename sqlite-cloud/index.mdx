@@ -5,22 +5,45 @@ category: getting-started
 status: publish
 ---
 
-**SQLite Cloud** is a managed, distributed relational database system built on top of the SQLite database engine. It is written in ANSI C and GO, and it works on most POSIX systems like Linux, *BSD, and Mac OS X (Windows is supported too). You can use SQLite Cloud from the most popular programming languages or its REST API.
+**SQLite Cloud** is a managed, distributed relational database system built on top of the [SQLite](https://www.sqlite.org/) database engine. It is written in ANSI C and GO, and it works on most POSIX systems like Linux, *BSD, and Mac OS X (Windows is supported too). You can use SQLite Cloud from the most popular programming languages or its REST API.
 
-## Multi-node Architecture
-Every SQLite Cloud project is powered by a multi-node cluster, where each node is running the official SQLite database engine. The cluster uses the [Raft](https://raft.github.io) consensus algorithm to keep your underlying database files in sync across nodes. All of this happens in the background, so you can interact with your database as if it were a single, local database.
+## Architecture
+SQLite is a lightweight, serverless database engine designed for single-user applications. Its databases are self-contained in single files, making them ideal for embedded systems and local applications.
+
+SQLite Cloud brings multi-user, multi-device, and global distribution capabilities to SQLite by running SQLite in a multi-node cluster environment. Each node runs the official SQLite database engine. The databases (files) in the cluster stay synchronized through the [Raft](https://raft.github.io) consensus algorithm - an industry-standard protocol that ensures all nodes maintain consistent copies of your data.. Synchronization happens automatically and in the background.
+
+SQLite Cloud exposes identical APIs to SQLite, so you can interact with your cloud database files like you would if they were stored on your local file system.
 
 SQLite Cloud supports both strong and eventual consistency, and comes with a multi-region load balancer to ensure optimal performance.
 
-## The Official SQLite
-When you interact with a SQLite Cloud database, you are interacting with the official open source SQLite engine. This means SQLite Cloud supports all the same features as SQLite. It is fully ACID compliant, supports non-deterministic SQL statements, and is compatible with the SQLite extension ecosystem.\
+### The Official SQLite
+SQLite Cloud is built on the open source SQLite engine, ensuring complete feature parity. You get all of SQLite's core strengths: ACID compliance, support for complex SQL operations, and compatibility with the rich SQLite extension ecosystem.
 
-It also means that you can have as many or as few databases as you want - each database is a file. This means SQLite Cloud can be used for both multi-tenant applications (single-user database), and as a multi-tenant database (one database, many users).
+Like SQLite, each database in SQLite Cloud is a separate file, giving you flexible deployment options:
 
-## CloudSync and Row-level Security (in alpha)
-We are currently in the process of building a local-first SQLite extension called "CloudSync". Once installed, you can use any driver you'd like - simply execute a custom SQL function passing in your cloud connection string, and any changes to your local database are automatically synchronized with the cloud and across devices. Offline-first comes "out of the box", and CRDTs are used to ensure merges are conflict-free.
+* Create separate databases for each customer in a multi-tenant application
+* Share a single database among multiple users with built-in access controls
+* Mix both approaches based on your application's needs
 
-CloudSync will also bring row-level security to SQLite for the first time, giving you control over what data is synced to a given user's device.
+
+## CloudSync: Enabling Local-First Applications (Alpha Preview)
+
+We're developing CloudSync, a powerful SQLite extension that brings local-first capabilities to your applications. This feature is currently in alpha testing with select partners.
+
+Here's how it works:
+
+1. Create a connection to a local SQLite database using any language and driver you'd like.
+2. Install the CloudSync extension.
+3. Execute a special SQL function to initialize tracking of specific tables.
+4. Execute another SQL function, passing in your cloud connection string to establish a relationship between your local database file and your cloud database file.
+4. Define row-level security rules to control what data is synced to a given user's device.
+5. Run a read query to sync your local database with the cloud.
+
+Then, whenever you write to your local database, changes are automatically synchronized with the cloud, and distributed to any other devices that have access to the changed rows. 
+
+No network connection? No problem. Changes from multiple users or devices are synced conflict-free when the network connection is restored thanks to [CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type). 
+
+We are excited to bring this extension to the SQLite community, and are actively looking for private beta testers. Please [contact us](https://sqlitecloud.io/support) if you'd like to learn more.
 
 ## A Complete Toolbox
 SQLite Cloud also provides a comprehensive suite of tools for building realtime, local-first applications.
