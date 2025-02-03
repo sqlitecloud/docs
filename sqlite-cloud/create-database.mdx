@@ -8,11 +8,23 @@ slug: create-database
 
 SQLite Cloud allows you to import existing SQLite Databases, or create a new database in SQLite Cloud by importing an existing SQLite database, or using the SQLite Cloud UI, API, or client libraries.
 
-## Importing an existing SQLite database
-SQLite Cloud allows you to import existing SQLite databases into the platform. 
+## Uploading an existing SQLite Database
+### Via HTTP API
+You can upload an existing SQLite database to your cluster using the SQLite Cloud UI or the Weblite API.
 
-Note that you can download, modify, and re-upload the database file at any time. You can also upload encrypted SQLite databases if you used the official SEE SQLite encryption extension.
+To upload a local SQLite database via weblite, make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint.
 
+```bash
+curl -X 'POST' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d ''
+```
+
+To upload a local SQLite database via the SQLite Cloud UI, navigate to the Database tab in the left-hand navigation. Click the "Upload Database" button and select your local SQLite database.
+
+### Via Dashboard UI
 To import a database from the UI, navigate to the Databases tab and click the "Upload Database" button.
 ![Dashbord Upload Database](@docs-website-assets/introduction/dashboard_upload_db.png)
 
@@ -51,3 +63,5 @@ createDatabase().then((res) => console.log(res));
 // "OK"
 ```
 
+## Next Steps
+- [Writing data](/docs/write-data)

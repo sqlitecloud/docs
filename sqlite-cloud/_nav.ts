@@ -4,7 +4,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "", type: "primary" },
 	{ title: "Introduction", type: "secondary", icon: "docs-star" },
 	{ title: "Getting Started", href: "/docs/sqlite-cloud", type: "inner", level: 0 },
-	{ title: "Fundamentals", type: "inner", level: 0 },
 	{ title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
