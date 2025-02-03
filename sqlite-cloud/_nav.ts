@@ -2,8 +2,8 @@ import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
 	{ title: "", type: "primary" },
-	{ title: "Getting Started", type: "secondary", icon: "docs-star" },
-	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
+	{ title: "Introduction", type: "secondary", icon: "docs-star" },
+	{ title: "Getting Started", href: "/docs/sqlite-cloud", type: "inner", level: 0 },
 	{ title: "Fundamentals", type: "inner", level: 0 },
 	{ title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
