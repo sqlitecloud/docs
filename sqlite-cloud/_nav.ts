@@ -2,9 +2,8 @@ import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
 	{ title: "", type: "primary" },
-	{ title: "Getting Started", filePath:"getting-started", type: "secondary", icon: "docs-star" },
-	{ title: "Introduction", filePath:"introduction", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
-	{ title: "Fundamentals", type: "inner", level: 0 },
+	{ title: "Introduction", type: "secondary", icon: "docs-star" },
+	{ title: "Getting Started", href: "/docs/sqlite-cloud", type: "inner", level: 0 },
 	{ title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
@@ -17,11 +16,14 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Next.js", filePath: "quick-start-next", type: "inner", level: 1 },
 	{ title: "Django", filePath: "quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", filePath: "quick-start-flask", type: "inner", level: 1 },
+	{ title: "SQLAlchemy", filePath: "quick-start-sqlalchemy-orm", type: "inner", level: 1 },
 	{ title: "Streamlit", filePath: "quick-start-streamlit", type: "inner", level: 1 },
 	{ title: "PHP / Laravel", filePath: "quick-start-php-laravel", type: "inner", level: 1 },
 	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
 	{ title: "Tutorials", type: "inner", level: 0 },
 	{ title: "Geopoly", filePath: "tutorial-geopoly", type: "inner", level: 1 },
+	{ title: "Integrations", type: "inner", level: 0 },
+	{ title: "Knex.js", filePath: "knex-integration", type: "inner", level: 1 },
 
 	{ title: "Platform", filePath:"platform", type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
@@ -36,7 +38,6 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Weblite", filePath: "weblite", type: "inner", level: 0 },
 		// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
-	{ title: "Settings", filePath: "settings", type: "inner", level: 0 },
 
 	{ title: "SDKs", filePath:"sdks", type: "secondary", icon: "docs-sdk" },
 	{ title: "C/C++", type: "inner", level: 0 },
@@ -162,6 +163,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: 'Introduction', type: "inner", filePath: "sdk-python-introduction", level: 1 },
 	{ title: "Django", ref: "/docs/quick-start-django", type: "inner", level: 1 },
 	{ title: "Flask", ref: "/docs/quick-start-flask", type: "inner", level: 1 },
+	{ title: "SQLAlchemy", ref: "/docs/quick-start-sqlalchemy-orm", type: "inner", level: 1 },
 
 	{ title: "Go",  type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-go-introduction", level: 1 },

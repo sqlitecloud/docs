@@ -6,13 +6,25 @@ status: publish
 slug: create-database
 ---
 
-SQLite Cloud allows you to import existing SQLite Databases, or create a new database in SQLite Cloud by importing an existing SQLite database, or using the SQLite Cloud UI, API, or client libraries.
+You can import an existing SQLite databases, or create new databases using the SQLite Cloud UI, API, or client libraries.
 
-## Importing an existing SQLite database
-SQLite Cloud allows you to import existing SQLite databases into the platform. 
+## Uploading an existing SQLite Database
+### Via HTTP API
+You can upload an existing SQLite database to your cluster using the SQLite Cloud UI or the Weblite API.
 
-Note that you can download, modify, and re-upload the database file at any time. You can also upload encrypted SQLite databases if you used the official SEE SQLite encryption extension.
+To upload a local SQLite database via weblite, make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint.
 
+```bash
+curl -X 'POST' \
+  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d ''
+```
+
+To upload a local SQLite database via the SQLite Cloud UI, navigate to the Database tab in the left-hand navigation. Click the "Upload Database" button and select your local SQLite database.
+
+### Via Dashboard UI
 To import a database from the UI, navigate to the Databases tab and click the "Upload Database" button.
 ![Dashbord Upload Database](@docs-website-assets/introduction/dashboard_upload_db.png)
 
@@ -27,7 +39,7 @@ To create a new database from the SQLite Cloud UI, navigate to the Databases tab
 The default encoding is set to UTF-8, and the default page size is 4096KB.
 
 ### From the API
-To create a new database or upload an existing database via [Weblite](#), our REST API, you can make a request with the following parameters:
+To create a new database or upload an existing database via [Weblite](/docs/weblite), our REST API, you can make a request with the following parameters:
 ```bash
 curl -X 'POST' \
   'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
@@ -37,11 +49,15 @@ curl -X 'POST' \
 ```
 
 ### From client libraries
-To create a new database from a client library, use the CREATE DATABASE command. 
+To create a new database from a client library, connect to your cluster using a connection string without a specified database.
+
+Then, use the CREATE DATABASE command to create a new database. 
+
+To start using the database within the connection, you can use the `USE DATABASE` command.
 
 ```javascript
 import { Database } from '@sqlitecloud/drivers';
-
+// note that no database name is specified in the connection string path
 const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
 
 const createDatabase = async () => await db.sql`CREATE DATABASE <database-name>;`;
@@ -49,5 +65,16 @@ const createDatabase = async () => await db.sql`CREATE DATABASE <database-name>;
 createDatabase().then((res) => console.log(res));
 
 // "OK"
+
+db.exec('USE DATABASE <database-name>;')
+
+// now you can use the database
+const fetchAlbums = async () => await db.exec`SELECT * FROM albums;`;
+
+fetchAlbums().then((albums) => console.log(albums));
+
+// [{ Title: 'For Those About To Rock We Salute You', ... }, ...]
 ```
 
+## Next Steps
+- [Writing data](/docs/write-data)

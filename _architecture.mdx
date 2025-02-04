@@ -1,11 +1,13 @@
----
-title: Scaling
-description: How to scale your SQLite Cloud cluster.
-category: platform
-status: publish
-slug: scaling
----
 
+
+## Architecture
+SQLite Cloud uses the [Raft](https://raft.github.io) consensus algorithm to distribute your data changes across a cluster of computing systems, ensuring that each node in the cluster agrees upon the same series of state transitions. Raft implements consensus with a leader approach.
+
+SQLite Cloud is written in ANSI C and GO, and it works on most POSIX systems (Linux, *BSD, Mac OS X) and Windows. 
+
+SQLite Cloud supports all the SQLite features without any limitations, including ACID compliance and non-deterministic SQL statements.
+
+## Scaling your cluster
 SQLite Cloud leverages a customized Raft algorithm to maintain a robust and highly available database cluster. Here’s an essential guide on the node types within SQLite Cloud and strategic tips for scaling your cluster effectively.
 
 ## Overview of Node types
