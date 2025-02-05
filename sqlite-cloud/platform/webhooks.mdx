@@ -6,14 +6,10 @@ status: publish
 slug: webhooks
 ---
 
-Utilize the Webhooks panel to effortlessly establish real-time notifications for write operations within your SQLite database. In this instance, we'll seamlessly notify a webhook.site service each time a write operation occurs within the albums table of the chinook.sqlite database.
+Webhooks in SQLite Cloud are a powerful way to receive and send event-based notifications.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create.png)
+## Change Data Capture
+With change data webhooks, you can send notifications from SQLite Cloud to any HTTP endpoint when an insert, update or delete operation occurs on a specified database and/or table. The webhook payload includes the database name, table name, and the row data that was changed.
 
-Upon creation, you'll receive a secret value that ensures the authenticity of each notification request.
-
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create2.png)
-
-Additionally, access a comprehensive list of all enabled webhooks for your project.
-
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_list.png)
+## Trigger Edge Functions
+Webhooks can also be used to trigger your edge functions, either via HTTP or Websockets request, or on a database event.

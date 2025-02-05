@@ -2,9 +2,9 @@ import type { SidebarNavStruct } from "@docs-website/types/sidebar-navigation";
 
 const sidebarNav: SidebarNavStruct = [
 	{ title: "", type: "primary" },
-	{ title: "Getting Started", type: "secondary", icon: "docs-star" },
-	{ title: "Introduction", href: "/docs/sqlite-cloud", type: "inner", level: 0 }, // should be index page for /docs and highlight "introduction" in nav
-	{ title: "Fundamentals", type: "inner", level: 0 },
+	{ title: "Introduction", type: "secondary", icon: "docs-star" },
+	{ title: "Overview", href: "/docs/sqlite-cloud", type: "inner", level: 0 },
+	{ title: "Getting Started", type: "inner", level: 0 },
 	{ title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
 	{ title: "Creating a database", filePath: "create-database", type: "inner", level: 1 },
 	{ title: "Writing data", filePath: "write-data", type: "inner", level: 1 },
@@ -26,7 +26,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Integrations", type: "inner", level: 0 },
 	{ title: "Knex.js", filePath: "knex-integration", type: "inner", level: 1 },
 
-	{ title: "Platform", type: "secondary", icon: "docs-plat" },
+	{ title: "Platform",  type: "secondary", icon: "docs-plat" },
 	{ title: "Edge Functions", filePath: "edge-functions", type: "inner", level: 0 },
 	{ title: "Webhooks", filePath: "webhooks", type: "inner", level: 0 },
 	{ title: "Pub/Sub", filePath: "pub-sub", type: "inner", level: 0 },
@@ -39,9 +39,8 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Weblite", filePath: "weblite", type: "inner", level: 0 },
 		// { title: "Storage", type: "inner", level: 0 },
 	// { title: "Partitioning", type: "inner", level: 0 },
-	{ title: "Settings", filePath: "settings", type: "inner", level: 0 },
 
-	{ title: "SDKs", type: "secondary", icon: "docs-sdk" },
+	{ title: "SDKs",  type: "secondary", icon: "docs-sdk" },
 	{ title: "C/C++", type: "inner", level: 0 },
 	{ title: "Introduction", type: "inner", filePath: "sdk-c-introduction", level: 1, },
 	{ title: 'Basic APIs', type: "inner", level: 1 },
@@ -177,7 +176,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Swift", type: "inner", level: 0 },
 	{ title: 'Introduction', type: "inner", filePath: "sdk-swift-introduction", level: 1 },
 
-	{ title: "Reference", type: "secondary", icon: "docs-ref" },
+	{ title: "Reference",  type: "secondary", icon: "docs-ref" },
 	{ title: "Server-side Commands", type: "inner", level: 0 },
 	{ title: "Introduction", filePath: "server-side-commands", type: "inner", level: 1 },
 	{ title: "API Keys", filePath: "api-key-commands", type: "inner", level: 1 },
