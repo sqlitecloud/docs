@@ -4,11 +4,10 @@ const sidebarNav: SidebarNavStruct = [
   { title: "", type: "primary" },
   {
     title: "Introduction",
-    filePath: "overview",
     type: "secondary",
     icon: "docs-star",
   },
-  { title: "Overview", href: "/docs/sqlite-cloud", type: "inner", level: 0 },
+  { title: "Overview", filePath: "overview", type: "inner", level: 0 },
   { title: "Getting Started", type: "inner", level: 0 },
   { title: "Connecting", filePath: "connect-cluster", type: "inner", level: 1 },
   {
