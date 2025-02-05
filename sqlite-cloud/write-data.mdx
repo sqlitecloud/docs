@@ -44,7 +44,7 @@ const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host
 db.exec('USE DATABASE <your-database-name>.sqlite;')
 db.exec('CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_make TEXT NOT NULL, sc_year INTEGER NOT NULL);')
 db.commit()
-const insertData = async () => await db.sql`INSERT INTO sports_cars (sc_make, sc_year) VALUES ('Ferrari', 2021);`;
+const insertData = async () => await db.sql('INSERT INTO sports_cars (sc_make, sc_year) VALUES (?, ?)', 'Ferrari', 2021);
 
 insertData().then((res) => console.log(res));
 // "OK"
