@@ -29,25 +29,43 @@ npm install express @sqlitecloud/drivers --save
     - Paste the following into your `index.js` file:
 
 ```javascript
-const express = require('express');
-const { Database } = require('@sqlitecloud/drivers');
+const express = require("express");
+const { Database } = require("@sqlitecloud/drivers");
 
 const app = express();
-const db = new Database('<your-connection-string>');
+let db;
 
-app.get('/albums', async (req, res) => {
-    const result = await db.sql`
-    USE DATABASE chinook.sqlite; 
-    SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
-    FROM albums 
-    INNER JOIN artists 
-    WHERE artists.ArtistId = albums.ArtistId
-    LIMIT 20;`;
+function getDatabase() {
+  if (!db || !db.isConnected()) {
+    db = new Database("<connection-string>", (error) => {
+      if (error) {
+        console.log("Error during the connection", error);
+      } else {
+        console.log("Connected to the database");
+      }
+    });
+  }
+
+  return db;
+}
+
+app.get("/albums", async (req, res) => {
+  try {
+    const result = await getDatabase().sql(`
+            USE DATABASE chinook.sqlite; 
+            SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
+            FROM albums 
+            INNER JOIN artists 
+            WHERE artists.ArtistId = albums.ArtistId
+            LIMIT 20;`);
     res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+  console.log("Server running on port 3000");
 });
 ```
 5. **Run your app**

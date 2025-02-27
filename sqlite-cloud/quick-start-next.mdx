@@ -53,7 +53,7 @@ export function DatabaseProvider({ children, config }: DatabaseProviderProps) {
   const dbRef = useRef<Database | null>(null);
 
   useEffect(() => {
-    if (dbRef.current) return; // Connection already exists
+    if (dbRef.current && dbRef.current.isConnected()) return; // Connection already exists
 
     try {
       dbRef.current = new Database(config.connectionString);
