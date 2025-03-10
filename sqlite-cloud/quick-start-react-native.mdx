@@ -49,11 +49,11 @@ export default function App() {
       const db = new Database('<your-connection-string>');
 
       const result =
-        await db.sql`USE DATABASE chinook.sqlite; 
+        await db.sql(`USE DATABASE chinook.sqlite; 
         SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist 
         FROM albums 
         INNER JOIN artists 
-        WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`;
+        WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`);
 
       setAlbums(result);
     }
