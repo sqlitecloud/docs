@@ -36,8 +36,9 @@ const connectionString = process.env.SQLITECLOUD_CONNECTION_STRING
 const app = express();
 
 app.get("/albums", async (req, res) => {
+  const db;
   try {
-    const db = new Database(connectionString)
+    db = new Database(connectionString)
     const result = await db.sql(`
             USE DATABASE chinook.sqlite; 
             SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
@@ -48,6 +49,8 @@ app.get("/albums", async (req, res) => {
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  } finally {
+    db?.close();
   }
 });
 

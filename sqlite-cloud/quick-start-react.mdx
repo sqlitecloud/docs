@@ -35,8 +35,9 @@ function App() {
   const [data, setData] = useState([]);
 
   const getAlbums = async () => {
+    const db;
     try {
-      const db = new Database(connectionString)
+      db = new Database(connectionString)
       const result = await db.sql(`
         USE DATABASE chinook.sqlite; 
         SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
@@ -46,7 +47,10 @@ function App() {
         LIMIT 20;`);
       setData(result);
     } catch (err) {
-      // manage error case
+      // manage error state
+      console.error(`getAlbums - ${error}`, error);
+    } finally {
+      db?.close();
     }
   };
 

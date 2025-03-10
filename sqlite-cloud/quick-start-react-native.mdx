@@ -46,16 +46,24 @@ export default function App() {
 
   useEffect(() => {
     async function getAlbums() {
-      const db = new Database('<your-connection-string>');
+      const db;
+      try {
+        db = new Database('<your-connection-string>');
 
-      const result =
-        await db.sql(`USE DATABASE chinook.sqlite; 
-        SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist 
-        FROM albums 
-        INNER JOIN artists 
-        WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`);
+        const result =
+          await db.sql(`USE DATABASE chinook.sqlite; 
+          SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist 
+          FROM albums 
+          INNER JOIN artists 
+          WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`);
 
-      setAlbums(result);
+        setAlbums(result);
+      }
+    } catch (error) {
+      // manage error state
+      console.error(`getAlbums - ${error}`, error)
+    } finally {
+      db?.close();
     }
 
     getAlbums();
