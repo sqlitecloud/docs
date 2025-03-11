@@ -23,154 +23,61 @@ npx create-next-app@latest sqlc-quickstart --js --no-tailwind --eslint --app --s
 cd sqlc-quickstart && npm install @sqlitecloud/drivers
 ```
 4. **Instantiate a connection**
+  - Create a `.env.local` file in the root of your Next.js project and add your SQLiteCloud connection string:
+``bash
+SQLITECLOUD_URL=your_connection_string_here
+```
   - The Database driver establishes a TLS connection when used in Node.js, and a websocket connection when used in the browser. 
-  - It is recommended that you use the Database driver in client-side components.
-  - To share the connection across pages, you can instantiate the connection in a context provider with the ```use client``` directive. Below is a simplified sample implementation.
 
+
+--- 
+
+### Using SQLiteCloud in Next.js (App Router)
+
+#### Fetching Data in a Server Component
+
+If you want to fetch data directly from the server and render it in a Server Component, you can do:
+
+**app/albums/page.tsx (Server Component)**
 ```tsx
-// src/app/context/DatabaseContext.tsx
-'use client';
+import { Database } from "sqlitecloud";
+import { unstable_noStore as noStore } from "next/cache";
 
-import { Database } from '@sqlitecloud/drivers';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
-
-interface DatabaseContextType {
-  db: Database | null;
-  isConnecting: boolean;
-  error: Error | null;
-}
-
-const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);
-
-interface DatabaseProviderProps {
-  children: React.ReactNode;
-  config: { connectionString: string }
-}
-
-export function DatabaseProvider({ children, config }: DatabaseProviderProps) {
-  const [isConnecting, setIsConnecting] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const dbRef = useRef<Database | null>(null);
-
-  useEffect(() => {
-    try {
-      dbRef.current = new Database(config.connectionString);
-
-      // Handle connection events
-      dbRef.current.on('open', () => {
-        console.log('open')
-        setIsConnecting(false);
-        setError(null);
-      });
-
-      dbRef.current.on('error', (err: Error) => {
-        console.log('error')
-        setError(err);
-        setIsConnecting(false);
-      });
-
-      dbRef.current.on('close', () => {
-        console.log('closing')
-        setIsConnecting(false);
-        dbRef.current = null;
-      });
-
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error('Failed to initialize database'));
-      setIsConnecting(false);
-    }
-
-    // Cleanup function
-    return () => {
-      if (dbRef.current) {
-        dbRef.current.close();
-        dbRef.current = null;
-      }
-    };
-  }, [config]);
-
-  return (
-    <DatabaseContext.Provider 
-      value={{
-        db: dbRef.current,
-        isConnecting,
-        error
-      }}
-    >
-      {children}
-    </DatabaseContext.Provider>
-  );
-}
-
-export function useDatabaseConnection() {
-  const context = useContext(DatabaseContext);
-
-  if (context === undefined) {
-    throw new Error('useDatabaseConnection must be used within a DatabaseProvider');
-  }
-
-  return context;
-}
-```
-5. **Query data**
-  - Click the ```Connect``` button in your account dashboard and copy the connection string. Replace ```<your-connection-string>``` in ```page.js``` with your connection string.
-  - Replace the code in ```layout.js``` and ```page.js``` with the following snippets.
-
-```jsx
-// src/app/layout.js
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <DatabaseProvider config={{ connectionString: '<your-connection-string>' }}>
-          {children}
-        </DatabaseProvider>
-      </body>
-    </html>
-  );
-}
-```
-
-```jsx
-// src/app/page.js
-import { useDatabaseConnection } from './context/DatabaseContext';
-import { useEffect, useState } from "react";
-import { useDatabaseConnection } from "./useDatabaseConnection";
-
-export default function Home() {
-  const { db } = useDatabaseConnection();
-  const [albums, setAlbums] = useState<any[]>([]);
-
-  useEffect(() => {
-    const getAlbums = async () => {
-      const result = await db.sql`USE DATABASE chinook.sqlite; 
+export default async function AlbumsPage() {
+  noStore(); // Prevents Next.js from caching the database request
+  const db = new Database(process.env.SQLITECLOUD_URL!);
+  
+  try {
+    const result = await db.sql(`
+      USE DATABASE chinook.sqlite; 
       SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
       FROM albums 
       INNER JOIN artists 
       WHERE artists.ArtistId = albums.ArtistId
-      LIMIT 20;`;
-      return result;
-    };
-
-    if (db) {
-      getAlbums().then((result) => {
-        setAlbums(result);
-      });
-    }
-  }, [db]);
-
-  return (
-    <div>
-      <h1>Albums</h1>
-      <ul>
-        {albums.map((album) => (
-          <div key={album.id}>{album.title}</div>
-        ))}
-      </ul>
-    </div>
-  );
+      LIMIT 20;
+    `);
+    
+    return (
+      <div>
+        <h1>Albums</h1>
+        <ul>
+          {result.map((album: any) => (
+            <li key={album.id}>
+              {album.title} - {album.artist}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  } catch (error) {
+    return <p>Error loading albums: {error.message}</p>;
+  } finally {
+    db.close();
+  }
 }
 ```
+
+
 
 5. **Run your app**
 ```bash
