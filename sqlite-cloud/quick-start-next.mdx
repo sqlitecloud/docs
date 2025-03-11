@@ -36,16 +36,16 @@ NEXT_PUBLIC_SQLITECLOUD_URL=sqlitecloud://abcd1234.global1.qwerty.sqlite.cloud:8
 
 5.  **Set Up the Folder Structure**
 ```bash
-mkdir -p sqlc-quickstart/src/app/api/albums \
-         sqlc-quickstart/src/app/components \
-         sqlc-quickstart/src/constants
+mkdir -p src/app/api/albums
+mkdir -p src/app/components
+mkdir -p src/constants
 
-touch sqlc-quickstart/src/app/api/albums/route.ts \
-      sqlc-quickstart/src/app/components/GetAlbumsClient.tsx \
-      sqlc-quickstart/src/app/components/GetAlbumsServer.tsx \
-      sqlc-quickstart/src/app/components/UpdateAlbumsClient.tsx \
-      sqlc-quickstart/src/constants/queries.ts \
-      sqlc-quickstart/src/types.ts
+touch src/app/api/albums/route.ts
+touch src/app/components/GetAlbumsClient.tsx
+touch src/app/components/GetAlbumsServer.tsx
+touch src/app/components/UpdateAlbumsClient.tsx
+touch src/constants/queries.ts
+touch src/types.ts
 ```
 
 6. **Define Data Types**
