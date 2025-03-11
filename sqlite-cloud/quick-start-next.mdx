@@ -6,84 +6,431 @@ status: publish
 slug: quick-start-next
 ---
 
-In this quickstart, we will show you how to get started with SQLite Cloud and Next.js by building a simple application that connects to and reads from a SQLite Cloud database.
+This quick start guide will walk you through setting up a Next.js application that connects to and queries a SQLite Cloud database.
 
 ---
 
 1. **Set up a SQLite Cloud account**
    - If you haven't already, [sign up for a SQLite Cloud account](https://dashboard.sqlitecloud.io/auth/sign-in) and create a new project.
-   - In this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+   - For this guide, we will use the sample datasets that come pre-loaded with SQLite Cloud.
+
 2. **Create a Next.js app**
-   - Create a Next app using ```create-next-app```. The following command creates a very simple app (JS, no Tailwind, uses the latest App Router) to keep the focus on querying the data. 
+   - Use ```create-next-app``` to set up a new Next.js project. The following command creates a minimal app with TypeScript and the latest App Router, keeping the focus on querying data.
 ```bash
-npx create-next-app@latest sqlc-quickstart --js --no-tailwind --eslint --app --src-dir --import-alias "@/*" --use-npm
+npx create-next-app@latest sqlc-quickstart --ts --no-tailwind --eslint --app --src-dir --import-alias "@/*" --use-npm
 ```
+
 3. **Install the SQLite Cloud SDK**
 ```bash
 cd sqlc-quickstart && npm install @sqlitecloud/drivers
 ```
-4. **Instantiate a connection**
-  - Create a `.env.local` file in the root of your Next.js project and add your SQLiteCloud connection string:
-``bash
-SQLITECLOUD_URL=your_connection_string_here
+
+4. **Configure the Database Connection**
+  - Create a `.env.local` file in the root of your Next.js project and add your SQLite Cloud connection string:
+```bash
+SQLITECLOUD_URL=sqlitecloud://abcd1234.global1.qwerty.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
+NEXT_PUBLIC_SQLITECLOUD_URL=sqlitecloud://abcd1234.global1.qwerty.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
 ```
-  - The Database driver establishes a TLS connection when used in Node.js, and a websocket connection when used in the browser. 
+  - The database driver establishes a TLS connection in Node.js and a WebSocket connection in the browser. 
 
 
---- 
+5.  **Set Up the Folder Structure**
+```bash
+mkdir -p sqlc-quickstart/src/app/api/albums \
+         sqlc-quickstart/src/app/components \
+         sqlc-quickstart/src/constants
 
-### Using SQLiteCloud in Next.js (App Router)
+touch sqlc-quickstart/src/app/api/albums/route.ts \
+      sqlc-quickstart/src/app/components/GetAlbumsClient.tsx \
+      sqlc-quickstart/src/app/components/GetAlbumsServer.tsx \
+      sqlc-quickstart/src/app/components/UpdateAlbumsClient.tsx \
+      sqlc-quickstart/src/constants/queries.ts \
+      sqlc-quickstart/src/types.ts
+```
 
-#### Fetching Data in a Server Component
+6. **Define Data Types**
+```ts
+//
+// src/type.ts (Server Component)
+//
 
-If you want to fetch data directly from the server and render it in a Server Component, you can do:
+export interface Album {
+  id: number;
+  title: string;
+  artist: string;
+}
 
-**app/albums/page.tsx (Server Component)**
+```
+
+7. **Define Queries**
+```ts
+//
+// src/constants/queries.ts
+//
+
+export const GET_ALBUMS = `
+  USE DATABASE chinook.sqlite; 
+  SELECT albums.AlbumId AS id, albums.Title AS title, artists.Name AS artist
+  FROM albums
+  INNER JOIN artists ON albums.ArtistId = artists.ArtistId
+  LIMIT 20;
+`;
+
+export const GET_LAST_TEN_ALBUMS = `
+  USE DATABASE chinook.sqlite; 
+  SELECT albums.AlbumId AS id, albums.Title AS title, artists.Name AS artist
+  FROM albums
+  INNER JOIN artists ON albums.ArtistId = artists.ArtistId
+  ORDER BY albums.AlbumId DESC
+  LIMIT 10;
+`;
+
+export const INSERT_ALBUM = `
+  USE DATABASE chinook.sqlite; 
+  INSERT INTO albums (Title, ArtistId) VALUES (?, ?);
+`;
+```
+
+8. **Fetch Data via a Route Handler**
+
+You can create a route handler for handling `GET` and `POST` requests.
+
+```ts
+//
+// src/app/api/albums/route.ts (Route Handler)
+//
+
+import { NextResponse } from "next/server";
+import { Database } from "@sqlitecloud/drivers";
+import { GET_LAST_TEN_ALBUMS, INSERT_ALBUM } from "@/constants/queries";
+
+export async function GET() {
+  let db;
+
+  try {
+    db = new Database(process.env.SQLITECLOUD_URL!);
+    const result = await db.sql(GET_LAST_TEN_ALBUMS);
+
+    return NextResponse.json(result);
+  } catch (error) {
+    let message = "An unknown error occurred";
+
+    if (error instanceof Error) {
+      message = error.message;
+    }
+
+    return NextResponse.json({ error: message }, { status: 500 });
+  } finally {
+    db?.close();
+  }
+}
+
+export async function POST(req: Request) {
+  const { title, artistId } = await req.json();
+  let db;
+
+  try {
+    db = new Database(process.env.SQLITECLOUD_URL!);
+    await db.sql(INSERT_ALBUM, ...[title, artistId]);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    let message = "An unknown error occurred";
+
+    if (error instanceof Error) {
+      message = error.message;
+    }
+
+    return NextResponse.json({ error: message }, { status: 500 });
+  } finally {
+    db?.close();
+  }
+}
+```
+
+9. **Fetch Data in a Server Component**
+
+To fetch data directly from the server and render it in a Server Component:
+
 ```tsx
-import { Database } from "sqlitecloud";
+//
+// src/app/components/GetAlbumsServer.tsx (Server Component)
+//
+
+import { GET_ALBUMS } from "@/constants/queries";
+import { Album } from "@/types";
+import { Database } from "@sqlitecloud/drivers";
 import { unstable_noStore as noStore } from "next/cache";
 
-export default async function AlbumsPage() {
+export default async function GetAlbumsServer() {
   noStore(); // Prevents Next.js from caching the database request
-  const db = new Database(process.env.SQLITECLOUD_URL!);
-  
+  let db;
+
   try {
-    const result = await db.sql(`
-      USE DATABASE chinook.sqlite; 
-      SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
-      FROM albums 
-      INNER JOIN artists 
-      WHERE artists.ArtistId = albums.ArtistId
-      LIMIT 20;
-    `);
-    
+    db = new Database(process.env.SQLITECLOUD_URL!);
+    const result = await db.sql(GET_ALBUMS);
+
     return (
       <div>
-        <h1>Albums</h1>
-        <ul>
-          {result.map((album: any) => (
-            <li key={album.id}>
-              {album.title} - {album.artist}
+        <h2 className="text-xl font-semibold mb-2">
+          Albums (Server Component)
+        </h2>
+        <ul className="space-y-2">
+          {result.map((album: Album) => (
+            <li key={album.id} className="p-2 bg-gray-200 rounded-lg shadow-sm">
+              {album.title} -{" "}
+              <span className="font-medium">{album.artist}</span>
             </li>
           ))}
         </ul>
       </div>
     );
   } catch (error) {
-    return <p>Error loading albums: {error.message}</p>;
+    let message = "An unknown error occurred";
+
+    if (error instanceof Error) {
+      message = error.message;
+    }
+    return <p>Error loading albums: {message}</p>;
   } finally {
-    db.close();
+    db?.close();
   }
 }
 ```
 
+10. **Fetch Data in a Client Component** 
+Since the SQLite Cloud driver can run in the browser, you can use it directly in a Client Component without needing an API route.
 
+```tsx
+//
+// src/app/components/GetAlbumsClient.tsx (Client Component)
+//
 
-5. **Run your app**
+"use client";
+
+import { useEffect, useState } from "react";
+import { Database } from "@sqlitecloud/drivers";
+import { Album } from "@/types";
+import { GET_ALBUMS } from "@/constants/queries";
+
+export default function GetAlbumsClient() {
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchAlbums() {
+      let db;
+      try {
+        console.log(process.env.NEXT_PUBLIC_SQLITECLOUD_URL);
+        db = new Database(process.env.NEXT_PUBLIC_SQLITECLOUD_URL!);
+        const result = await db.sql(GET_ALBUMS);
+        setAlbums(result);
+      } catch (error) {
+        let message = "An unknown error occurred";
+
+        if (error instanceof Error) {
+          message = error.message;
+        }
+        setError(message);
+      } finally {
+        db?.close();
+      }
+    }
+
+    fetchAlbums();
+  }, []);
+
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div>
+      <h2 className="text-xl font-semibold mb-2">Albums (Client Component)</h2>
+      {error ? (
+        <p className="text-red-500">Error: {error}</p>
+      ) : (
+        <ul className="space-y-2">
+          {albums.map((album) => (
+            <li key={album.id} className="p-2 bg-gray-200 rounded-lg shadow-sm">
+              {album.title} -{" "}
+              <span className="font-medium">{album.artist}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+11. **Update Data in a Client Component** 
+You can also update data directly from a Client Component:
+
+```tsx
+//
+// src/app/components/UpdateAlbumsClient.tsx (Client Component)
+//
+
+"use client";
+
+import { useState, useEffect } from "react";
+
+export default function UpdateAlbumsClient() {
+  const [albums, setAlbums] = useState<
+    { id: number; title: string; artist: string }[]
+  >([]);
+  const [loading, setLoading] = useState(false);
+
+  // Function to fetch albums from the API route
+  async function fetchAlbums() {
+    try {
+      const res = await fetch("/api/albums");
+      if (!res.ok) throw new Error("Failed to fetch albums");
+      const data = await res.json();
+      setAlbums(data);
+    } catch (error) {
+      console.error("Error fetching albums:", error);
+    }
+  }
+
+  // Function to add a new album and then reload the albums list
+  async function addAlbum() {
+    setLoading(true);
+
+    try {
+      // Generate a random album name
+      const randomAlbumTitle = `Album ${Math.random()
+        .toString(36)
+        .substring(7)}`;
+
+      // Generate a random artist ID between 1 and 100
+      const randomArtistId = Math.floor(Math.random() * 100) + 1;
+
+      const res = await fetch("/api/albums", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: randomAlbumTitle,
+          artistId: randomArtistId,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to add album");
+
+      await fetchAlbums(); // Refresh album list after adding
+    } catch (error) {
+      console.error("Error adding album:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Fetch albums when component mounts
+  useEffect(() => {
+    fetchAlbums();
+  }, []);
+
+  return (
+    <div className="">
+      <button
+        onClick={addAlbum}
+        disabled={loading}
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition disabled:bg-gray-400"
+      >
+        {loading ? "Adding..." : "Add Album"}
+      </button>
+
+      <h2 className="text-xl font-semibold mt-4">Latest Albums</h2>
+      {albums.length === 0 ? (
+        <p className="text-gray-500">No albums found.</p>
+      ) : (
+        <ul className="mt-2 space-y-2">
+          {albums.map((album) => (
+            <li key={album.id} className="p-2 bg-gray-200 rounded-lg shadow-sm">
+              {album.title} -{" "}
+              <span className="font-medium">{album.artist}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+```
+
+12. **Create a Page to Display Components**
+
+Replace the content of `page.tsx` with:
+
+```tsx
+//
+// src/app/page.tsx (Unified Page)
+//
+
+import GetAlbumsClient from "./components/GetAlbumsClient";
+import GetAlbumsServer from "./components/GetAlbumsServer";
+import UpdateAlbumsClient from "./components/UpdateAlbumsClient";
+
+export default function page() {
+  return (
+    <div className="min-h-screen bg-gray-100 text-gray-900 p-6">
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 className="text-2xl font-bold mb-4 text-center">Albums Overview</h1>
+
+        <div className="border-b pb-4 mb-4">
+          <UpdateAlbumsClient />
+        </div>
+
+        <div className="border-b pb-4 mb-4">
+          <GetAlbumsServer />
+        </div>
+
+        <div className="border-b pb-4 mb-4">
+          <GetAlbumsClient />
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+Replace the content of `layout.tsx` with:
+
+```tsx
+//
+// src/app/layout.tsx
+//
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <head>
+        {/* ✅ Add Tailwind CDN */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        />
+      </head>
+      <body className="bg-gray-100 text-gray-900">{children}</body>
+    </html>
+  );
+}
+
+```
+
+13. **Run Your App**
 ```bash
 npm run dev
 ```
-6. **View your app**
-   - Open your browser and navigate to the localhost link provided by the previous command to see your app data.
 
-And that's it! You've successfully built a Next app that reads data from a SQLite Cloud database.
+14. **View Your App**
+   - Open your browser and navigate to the provided localhost link to see your app in action.
+
+
+--- 
+
+Congratulations! You’ve successfully built a Next.js app that interacts with a SQLite Cloud database.
