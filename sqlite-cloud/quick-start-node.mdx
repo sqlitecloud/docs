@@ -32,26 +32,14 @@ npm install express @sqlitecloud/drivers --save
 const express = require("express");
 const { Database } = require("@sqlitecloud/drivers");
 
+const connectionString = process.env.SQLITECLOUD_CONNECTION_STRING
 const app = express();
-let db;
-
-function getDatabase() {
-  if (!db || !db.isConnected()) {
-    db = new Database("<connection-string>", (error) => {
-      if (error) {
-        console.log("Error during the connection", error);
-      } else {
-        console.log("Connected to the database");
-      }
-    });
-  }
-
-  return db;
-}
 
 app.get("/albums", async (req, res) => {
+  let db = null;
   try {
-    const result = await getDatabase().sql(`
+    db = new Database(connectionString)
+    const result = await db.sql(`
             USE DATABASE chinook.sqlite; 
             SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist
             FROM albums 
@@ -61,6 +49,8 @@ app.get("/albums", async (req, res) => {
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  } finally {
+    db?.close();
   }
 });
 
