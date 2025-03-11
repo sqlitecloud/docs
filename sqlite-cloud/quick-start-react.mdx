@@ -29,15 +29,13 @@ cd sqlc-quickstart && npm install @sqlitecloud/drivers
 import { useEffect, useState } from "react";
 import { Database } from '@sqlitecloud/drivers';
 
-const connectionString = process.env.SQLITECLOUD_CONNECTION_STRING
-
 function App() {
   const [data, setData] = useState([]);
 
   const getAlbums = async () => {
-    const db;
+    let db = null;
     try {
-      db = new Database(connectionString)
+      db = new Database('<connection-string>')
       const result = await db.sql(`
         USE DATABASE chinook.sqlite; 
         SELECT albums.AlbumId as id, albums.Title as title, artists.name as artist

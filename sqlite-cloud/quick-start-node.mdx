@@ -36,7 +36,7 @@ const connectionString = process.env.SQLITECLOUD_CONNECTION_STRING
 const app = express();
 
 app.get("/albums", async (req, res) => {
-  const db;
+  let db = null;
   try {
     db = new Database(connectionString)
     const result = await db.sql(`

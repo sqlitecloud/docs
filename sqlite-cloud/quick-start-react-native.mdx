@@ -46,9 +46,9 @@ export default function App() {
 
   useEffect(() => {
     async function getAlbums() {
-      const db;
+      let db = null;
       try {
-        db = new Database('<your-connection-string>');
+        db = new Database('<connection-string>');
 
         const result =
           await db.sql(`USE DATABASE chinook.sqlite; 
@@ -58,12 +58,12 @@ export default function App() {
           WHERE artists.ArtistId = albums.ArtistId LIMIT 20;`);
 
         setAlbums(result);
-      }
-    } catch (error) {
+      } catch (error) {
       // manage error state
       console.error(`getAlbums - ${error}`, error)
-    } finally {
-      db?.close();
+      } finally {
+        db?.close();
+      }
     }
 
     getAlbums();
