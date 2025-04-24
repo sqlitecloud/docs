@@ -12,8 +12,8 @@ jobs:
     environment: ${{ github.ref_name }}
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: sqlitecloud/docsearch-action@v4
+      - uses: actions/checkout@v4
+      - uses: sqlitecloud/docsearch-action@v5
         with:
           project-string: ${{ secrets.PROJECT_STRING }}
           base-url: ${{ vars.BASE_URL }}
