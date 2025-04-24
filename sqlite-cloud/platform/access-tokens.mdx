@@ -1,0 +1,238 @@
+---
+title: Access Tokens
+description: Grant to your users, devices, tenant, access to SQLite Cloud services.
+category: platform
+status: publish
+slug: access-tokens
+---
+
+# Access Token API
+
+Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation.
+All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
+
+---
+
+## Create a New Access Token
+
+### `POST /v2/tokens`
+
+Creates a new Access Token for a specific entity.   
+The `entityId` refers to any kind of resource you want to associate the Access Token with. It must be a unique ID in your system.  
+The `expiresAt` is a date time value to set an expiration, or `null` if it doesn't expire.
+
+>[!note] Store the Access Token securely. It will not be shown again.
+
+- **Authentication**: API Key  
+
+#### Example
+
+```bash
+curl -X 'POST' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d '{
+    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "name": "user-token",
+    "expiresAt": "2023-10-01 10:11:12"
+  }'
+```
+
+#### Example Response
+
+```json
+{
+  "data": {
+    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
+    "access_token_id": 134,
+    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "name": "user-token",
+    "expiresAt": "2023-10-01 10:11:12",
+    "createdAt": "2023-09-01 10:11:12"
+  }
+}
+```
+
+---
+
+## Get Current Token Details (Access Token Only)
+
+### `GET /v2/tokens/details`
+
+Retrieves metadata about the token used to authenticate the request.
+
+- **Authentication**: Access Token
+
+#### Example
+
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/details' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
+```
+
+#### Example Response
+
+```json
+{
+  "data": {
+    "access_token_id": 134,
+    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "name": "user-token",
+    "expiresAt": "2023-10-01 10:11:12",
+    "createdAt": "2023-09-01 10:11:12"
+  }
+}
+```
+
+---
+
+## Get Token Details (Using API Key)
+
+### `POST /v2/tokens/details`
+
+Lets you inspect an Access Token using your API Key.
+
+- **Authentication**: API Key  
+
+#### Example
+
+```bash
+curl -X 'POST' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/details' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d '{
+    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
+  }'
+```
+
+#### Example Response
+
+```json
+{
+  "data": {
+    "access_token_id": 134,
+    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "name": "user-token",
+    "expiresAt": "2023-10-01 10:11:12",
+    "createdAt": "2023-09-01 10:11:12"
+  }
+}
+```
+
+---
+
+## Check Token Validity
+
+### `GET /v2/tokens/authorized`
+
+Checks whether the provided Access Token is valid and not expired.
+
+- **Authentication**: API Key or Access Token
+
+#### Example
+
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/authorized' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
+```
+
+---
+
+## Update an Access Token
+
+### `PATCH /v2/tokens`
+
+Updates information of an Access Token.
+The The `token` field is required; it specifies the Access Token to update.
+Fields that can be updated: 
+- `name`.
+- `expiresAt`: date time value or `null` to set no expiration.
+
+- **Authentication**: API Key  
+
+#### Example
+
+```bash
+curl -X 'PATCH' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d '{
+    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
+    "name": "updated-user-token",
+    "expiresAt": "2024-12-31T23:59:59"
+  }'
+```
+
+---
+
+## Revoke a Token
+
+### `DELETE /v2/tokens`
+
+Revokes the given token, making it immediately unusable.
+
+- **Authentication**: API Key, Access Token
+
+The `token` in the request is optional when the Access Token is used for the authentication.
+
+#### Example
+
+```bash
+curl -X 'DELETE' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -d '{
+    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
+  }'
+```
+
+---
+
+## List Tokens by Entity
+
+### `GET /v2/tokens/entities/{entityId}`
+
+Returns all non-expired tokens associated with the specified entity.
+
+- **Authentication**: API Key  
+- **Path Parameter**: `entityId`
+
+#### Example
+
+```bash
+curl -X 'GET' \
+  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/entities/0195fc5b-96a6-7000-8b17-fd2420499c2c' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "name": "sqlitesync-user",
+      "expiresAt": "2024-11-01 00:00:00",
+      "createdAt": "2024-10-01 10:11:12"
+    },
+    {
+      "name": "sqlitesync-user",
+      "expiresAt": null,
+      "createdAt": "2024-09-01 10:11:12"
+    }
+  ]
+}
+```
+
+---
