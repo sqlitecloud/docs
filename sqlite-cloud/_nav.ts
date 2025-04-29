@@ -70,7 +70,7 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Webhooks", filePath: "webhooks", type: "inner", level: 0 },
   { title: "Pub/Sub", filePath: "pub-sub", type: "inner", level: 0 },
   { title: "Vector", filePath: "vector", type: "inner", level: 0 },
-  { title: "Scaling", type: "inner", filePath: "scaling", level: 0 },
+  { title: "Scaling", type: "inner", filePath: "architecture", level: 0 },
   {
     title: "Security and Access Control",
     filePath: "security",
@@ -81,8 +81,7 @@ const sidebarNav: SidebarNavStruct = [
   { title: "Query Analyzer", filePath: "analyzer", type: "inner", level: 0 },
   { title: "Extensions", filePath: "extensions", type: "inner", level: 0 },
   { title: "Weblite", filePath: "weblite", type: "inner", level: 0 },
-  // { title: "Storage", type: "inner", level: 0 },
-  // { title: "Partitioning", type: "inner", level: 0 },
+  { title: "AI - Model Context Protocol (MCP)", filePath: "mcp-server", type: "inner", level: 0 },
 
   { title: "SDKs", type: "secondary", icon: "docs-sdk" },
   { title: "C/C++", type: "inner", level: 0 },

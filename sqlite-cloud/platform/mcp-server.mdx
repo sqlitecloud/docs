@@ -1,0 +1,147 @@
+---
+title: AI - Model Context Protocol (MCP)
+description: MCP Server for SQLite Cloud to interact with SQLite Cloud databases using the AI models
+category: platform
+status: publish
+slug: mcp-server
+---
+
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is a standard for connecting various data sources (like your SQLite Cloud database) to Large Language Models (LLMs). The MCP Server for SQLite Cloud provides tools for executing queries, managing schemas, and analyzing query performance.
+
+## Features
+
+- **Query Execution**: Perform `SELECT`, `INSERT`, `UPDATE`, and `DELETE` SQL operations on SQLite Cloud databases.
+- **Schema Management**: Create tables, list existing ones, and retrieve schema details.
+- **Command Execution**: Run predefined commands supported by SQLite Cloud.
+- **Performance Analysis**: Identify slow queries, analyze query plans, and reset query statistics.
+
+[Explore the available tools here](https://github.com/sqlitecloud/sqlitecloud-mcp-server).
+
+## Getting Started
+
+To use the MCP Server, create a [free account on SQLite Cloud](https://sqlitecloud.io) and obtain your **Connection String**.
+
+### Requirements
+
+You need [Node.js](https://nodejs.org) installed on your computer to run the MCP Server. To check if Node.js is installed, open a terminal:
+
+- **Linux**: Open the terminal from the Applications menu.
+- **macOS**: Open the Terminal app from the Applications folder or use Spotlight Search (`Cmd+Space`) and type "Terminal."
+- **Windows**: Press `Win + R`, type `cmd`, and press Enter to open the Command Prompt. Alternatively, search for "Command Prompt" in the Start menu.
+
+Then type the following command and press Enter:
+
+```bash
+node --version
+```
+
+If the command returns a version number, Node.js is installed. If you see an error like "command not found" or "node is not recognized," download and install Node.js from [nodejs.org](https://nodejs.org).
+
+## Configure the AI Agent
+
+This guide explains how to connect the MCP Server for SQLite Cloud to common AI agents that support MCP.   
+[Find a list of supported tools and IDEs here](https://modelcontextprotocol.io/clients).
+
+After configuring your AI agent, try asking it questions about your SQLite Cloud database, such as:
+
+> What’s in my database on SQLite Cloud?"  
+"What are the three most popular tracks by revenue in my SQLite Cloud database?
+
+Explore or manipulate your database using natural language queries.
+
+### Claude Desktop
+
+Refer to the [official documentation](https://modelcontextprotocol.io/quickstart/user) for detailed instructions.
+
+1. Open Claude Desktop and navigate to **Settings**.
+2. Go to the **Developer** section and click on **Edit Config** to open the configuration file.
+3. Add the following configuration:
+
+   ```json
+   {
+     "mcpServers": {
+       "sqlitecloud-mcp-server": {
+         "type": "stdio",
+         "command": "npx",
+         "args": [
+           "-y",
+           "@sqlitecloud/mcp-server",
+           "--connectionString",
+           "<CONNECTION_STRING>"
+         ]
+       }
+     }
+   }
+   ```
+
+   Replace `<CONNECTION_STRING>` with your Connection String.
+
+4. Save the configuration file and restart Claude Desktop.
+5. You should see a _Hammer_ icon in the bottom-right corner of the input box. Click the icon to view the list of discovered tools.
+
+### Cursor
+
+Refer to the [official documentation](https://docs.cursor.com/context/model-context-protocol#configuring-mcp-servers) for detailed instructions.
+
+1. In the root of your project, create the file `.cursor/mcp.json`.
+2. Add the following configuration:
+
+   ```json
+   {
+     "mcpServers": {
+       "sqlitecloud-mcp-server": {
+         "type": "stdio",
+         "command": "npx",
+         "args": [
+           "-y",
+           "@sqlitecloud/mcp-server",
+           "--connectionString",
+           "<CONNECTION_STRING>"
+         ]
+       }
+     }
+   }
+   ```
+
+   Replace `<CONNECTION_STRING>` with your Connection String.
+
+3. Save the `mcp.json` file.
+4. Open the **Settings** page and navigate to the **MCP** section. You should see the MCP server with a green status indicator.
+5. In the Chat panel, select the "Agent" mode to interact with the AI model using the MCP Server.
+
+### VSCode Copilot
+
+Refer to the [official documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) for detailed instructions.
+
+1. In the root of your project, create the file `.vscode/mcp.json`.
+2. Add the following configuration:
+
+   ```json
+   {
+     "mcp": {
+       "inputs": [
+         {
+           "type": "promptString",
+           "id": "sqlitecloud-connection-string",
+           "description": "Set the SQLite Cloud Connection String",
+           "password": true
+         }
+       ],
+       "servers": {
+         "sqlitecloud-mcp-server": {
+           "type": "stdio",
+           "command": "npx",
+           "args": [
+             "-y",
+             "@sqlitecloud/mcp-server",
+             "--connectionString",
+             "${input:sqlitecloud-connection-string}"
+           ]
+         }
+       }
+     }
+   }
+   ```
+
+3. Save the `mcp.json` file.
+4. Open Copilot Chat and select the **Agent** mode from the menu near the **Send** button. A tool icon will appear, showing the discovered tools. Before starting the server, VSCode will prompt you to enter your Connection String.
