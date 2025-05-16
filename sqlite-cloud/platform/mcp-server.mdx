@@ -39,13 +39,13 @@ If the command returns a version number, Node.js is installed. If you see an err
 
 ## Configure the AI Agent
 
-This guide explains how to connect the MCP Server for SQLite Cloud to common AI agents that support MCP.   
+This guide explains how to connect the MCP Server for SQLite Cloud to common AI agents that support MCP.  
 [Find a list of supported tools and IDEs here](https://modelcontextprotocol.io/clients).
 
 After configuring your AI agent, try asking it questions about your SQLite Cloud database, such as:
 
 > What’s in my database on SQLite Cloud?"  
-"What are the three most popular tracks by revenue in my SQLite Cloud database?
+> "What are the three most popular tracks by revenue in my SQLite Cloud database?
 
 Explore or manipulate your database using natural language queries.
 
@@ -61,20 +61,18 @@ Refer to the [official documentation](https://modelcontextprotocol.io/quickstart
    {
      "mcpServers": {
        "sqlitecloud-mcp-server": {
-         "type": "stdio",
-         "command": "npx",
-         "args": [
-           "-y",
-           "@sqlitecloud/mcp-server",
-           "--connectionString",
-           "<CONNECTION_STRING>"
-         ]
+         "type": "sse",
+         "url": "https://<SERVER_URL>/v1/mcp/sse",
+         "headers": {
+           "Authorization": "Bearer <CONNECTION_STRING>"
+         }
        }
      }
    }
    ```
 
-   Replace `<CONNECTION_STRING>` with your Connection String.
+   Replace `<SERVER_URL>` with the `Servers` url in the **Weblite** section on the Dashboard.
+   Replace `<CONNECTION_STRING>` with your **Connection String** in the **Connect** section on the Dashboard.
 
 4. Save the configuration file and restart Claude Desktop.
 5. You should see a _Hammer_ icon in the bottom-right corner of the input box. Click the icon to view the list of discovered tools.
@@ -90,20 +88,18 @@ Refer to the [official documentation](https://docs.cursor.com/context/model-cont
    {
      "mcpServers": {
        "sqlitecloud-mcp-server": {
-         "type": "stdio",
-         "command": "npx",
-         "args": [
-           "-y",
-           "@sqlitecloud/mcp-server",
-           "--connectionString",
-           "<CONNECTION_STRING>"
-         ]
+         "type": "sse",
+         "url": "https://<SERVER_URL>/v1/mcp/sse",
+         "headers": {
+           "Authorization": "Bearer <CONNECTION_STRING>"
+         }
        }
      }
    }
    ```
 
-   Replace `<CONNECTION_STRING>` with your Connection String.
+   Replace `<SERVER_URL>` with the `Servers` url in the **Weblite** section on the Dashboard.
+   Replace `<CONNECTION_STRING>` with your **Connection String** in the **Connect** section on the Dashboard.
 
 3. Save the `mcp.json` file.
 4. Open the **Settings** page and navigate to the **MCP** section. You should see the MCP server with a green status indicator.
@@ -129,19 +125,38 @@ Refer to the [official documentation](https://code.visualstudio.com/docs/copilot
        ],
        "servers": {
          "sqlitecloud-mcp-server": {
-           "type": "stdio",
-           "command": "npx",
-           "args": [
-             "-y",
-             "@sqlitecloud/mcp-server",
-             "--connectionString",
-             "${input:sqlitecloud-connection-string}"
-           ]
+           "type": "sse",
+           "url": "https://<SERVER_URL>/v1/mcp/sse",
+           "headers": {
+             "Authorization": "Bearer ${input:sqlitecloud-connection-string}"
+           }
          }
        }
      }
    }
    ```
 
+   Replace `<SERVER_URL>` with the `Servers` url in the **Weblite** section on the Dashboard.
+   Get your **Connection String** in the **Connect** section on the Dashboard.
+
 3. Save the `mcp.json` file.
 4. Open Copilot Chat and select the **Agent** mode from the menu near the **Send** button. A tool icon will appear, showing the discovered tools. Before starting the server, VSCode will prompt you to enter your Connection String.
+
+## Local MCP Server
+
+Run the MCP server locally by using this configuration:
+
+  ```json
+  "sqlitecloud-mcp-server": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@sqlitecloud/mcp-server",
+      "--connectionString",
+      "<CONNECTION_STRING>"
+    ]
+  }
+  ```
+  
+   Replace `<CONNECTION_STRING>` with your **Connection String** in the **Connect** section on the Dashboard.
