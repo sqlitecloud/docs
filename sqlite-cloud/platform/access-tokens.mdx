@@ -1,6 +1,6 @@
 ---
 title: Access Tokens
-description: Grant to your users, devices, tenant, access to SQLite Cloud services.
+description: Grant to your users, devices, tenant, access to SQLite Cloud database and services.
 category: platform
 status: publish
 slug: access-tokens
@@ -8,7 +8,7 @@ slug: access-tokens
 
 # Access Token API
 
-Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation.
+Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud database and services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation.
 All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
 
 ---
@@ -17,9 +17,9 @@ All endpoints require authentication. Use an **API Key** or an **Access Token** 
 
 ### `POST /v2/tokens`
 
-Creates a new Access Token for a specific entity.   
-The `entityId` refers to any kind of resource you want to associate the Access Token with. It must be a unique ID in your system.  
-The `expiresAt` is a date time value to set an expiration, or `null` if it doesn't expire.
+Creates a new Access Token for a specific user.   
+The `userId` refers to your user's id or any kind of resource you want to associate the Access Token to. It must be a unique ID in your system.  
+The `expiresAt` is a date time value to set expiration, or `null` if it doesn't expire.
 
 >[!note] Store the Access Token securely. It will not be shown again.
 
@@ -29,12 +29,13 @@ The `expiresAt` is a date time value to set an expiration, or `null` if it doesn
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{
-    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
     "name": "user-token",
+    "attributes": "{\"role\":\"myrole\"}",
     "expiresAt": "2023-10-01 10:11:12"
   }'
 ```
@@ -46,8 +47,9 @@ curl -X 'POST' \
   "data": {
     "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
     "access_token_id": 134,
-    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
     "name": "user-token",
+    "attributes": "{\"role\":\"myrole\"}",
     "expiresAt": "2023-10-01 10:11:12",
     "createdAt": "2023-09-01 10:11:12"
   }
@@ -68,7 +70,7 @@ Retrieves metadata about the token used to authenticate the request.
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/details' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens/details' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
 ```
@@ -79,8 +81,9 @@ curl -X 'GET' \
 {
   "data": {
     "access_token_id": 134,
-    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
     "name": "user-token",
+    "attributes": null,
     "expiresAt": "2023-10-01 10:11:12",
     "createdAt": "2023-09-01 10:11:12"
   }
@@ -101,9 +104,9 @@ Lets you inspect an Access Token using your API Key.
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/details' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens/details' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{
     "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
   }'
@@ -115,8 +118,9 @@ curl -X 'POST' \
 {
   "data": {
     "access_token_id": 134,
-    "entityId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
+    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
     "name": "user-token",
+    "attributes": null,
     "expiresAt": "2023-10-01 10:11:12",
     "createdAt": "2023-09-01 10:11:12"
   }
@@ -137,10 +141,14 @@ Checks whether the provided Access Token is valid and not expired.
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/authorized' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens/authorized' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
 ```
+
+#### Example Response
+
+HTTP Status **204** or **401** if not valid or expired.
 
 ---
 
@@ -149,7 +157,7 @@ curl -X 'GET' \
 ### `PATCH /v2/tokens`
 
 Updates information of an Access Token.
-The The `token` field is required; it specifies the Access Token to update.
+The `token` field is required, it specifies the Access Token to update.
 Fields that can be updated: 
 - `name`.
 - `expiresAt`: date time value or `null` to set no expiration.
@@ -160,10 +168,10 @@ Fields that can be updated:
 
 ```bash
 curl -X 'PATCH' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{
     "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
     "name": "updated-user-token",
@@ -187,10 +195,10 @@ The `token` in the request is optional when the Access Token is used for the aut
 
 ```bash
 curl -X 'DELETE' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{
     "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
   }'
@@ -198,22 +206,22 @@ curl -X 'DELETE' \
 
 ---
 
-## List Tokens by Entity
+## List Tokens by User
 
-### `GET /v2/tokens/entities/{entityId}`
+### `GET /v2/tokens/users/{userId}`
 
-Returns all non-expired tokens associated with the specified entity.
+Returns all non-expired tokens associated with the specified user.
 
 - **Authentication**: API Key  
-- **Path Parameter**: `entityId`
+- **Path Parameter**: `userId`
 
 #### Example
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud:443/v2/tokens/entities/0195fc5b-96a6-7000-8b17-fd2420499c2c' \
+  'https://<your-project-domain>.sqlite.cloud/v2/tokens/users/0195fc5b-96a6-7000-8b17-fd2420499c2c' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 #### Example Response
