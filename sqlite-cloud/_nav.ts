@@ -77,6 +77,12 @@ const sidebarNav: SidebarNavStruct = [
     type: "inner",
     level: 0,
   },
+  {
+    title: "Access Tokens",
+    filePath: "access-tokens",
+    type: "inner",
+    level: 0,
+  },
   { title: "Backups", filePath: "backups", type: "inner", level: 0 },
   { title: "Query Analyzer", filePath: "analyzer", type: "inner", level: 0 },
   { title: "Extensions", filePath: "extensions", type: "inner", level: 0 },
