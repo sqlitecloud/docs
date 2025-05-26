@@ -8,239 +8,76 @@ slug: access-tokens
 
 # Access Token API
 
-Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud database and services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation.
-All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
+Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud database and services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation. All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
+
+API Documentation can be found in the **Weblite** section in the [Dashboard](https://dashboard.sqlitecloud.io).
 
 ---
 
-## Create a New Access Token
+In the repository on GitHub [sqlitecloud/examples](https://github.com/sqlitecloud/examples), we created a simple app to demonstrate how to generate and use Access Tokens.
 
-### `POST /v2/tokens`
+We’ll log in with Google, grab a token, and use it to interact with SQLite Cloud Weblite APIs. Here’s how it works.
 
-Creates a new Access Token for a specific user.   
-The `userId` refers to your user's id or any kind of resource you want to associate the Access Token to. It must be a unique ID in your system.  
-The `expiresAt` is a date time value to set expiration, or `null` if it doesn't expire.
+## Generate a new Access Token
 
->[!note] Store the Access Token securely. It will not be shown again.
+In the snippet below, we handle the Google Login callback when the user has completed the login on Google. Here, you can exchange the `code` with the Google Access Token and then decide what to do with it as needed.
 
-- **Authentication**: API Key  
-
-#### Example
-
-```bash
-curl -X 'POST' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>' \
-  -d '{
-    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
-    "name": "user-token",
-    "attributes": "{\"role\":\"myrole\"}",
-    "expiresAt": "2023-10-01 10:11:12"
-  }'
-```
-
-#### Example Response
-
-```json
-{
-  "data": {
-    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
-    "access_token_id": 134,
-    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
-    "name": "user-token",
-    "attributes": "{\"role\":\"myrole\"}",
-    "expiresAt": "2023-10-01 10:11:12",
-    "createdAt": "2023-09-01 10:11:12"
+```typescript
+if (pathname === "/auth/callback") {
+  const q = query;
+  if (q.state !== STATE || !q.code) {
+    return send(res, 400, "Invalid state or missing code");
   }
-}
+
+  try {
+    // Exchange code for tokens
+    // Store the Google Token in the database
+    const googleToken = await getGoogleTokens(q.code as string);
+    ...
 ```
 
----
+Now we have authenticated the user, we are ready to request SQLite Cloud to create a new SQLite Cloud Access Token to assign to the this user.
 
-## Get Current Token Details (Access Token Only)
+```typescript
+async function getSQLiteCloudToken(userId: string) {
+  const payload = {
+    name: "test-user-token", // A name for the token, can be anything you want
+    userId,
+    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // expires in 24 hours
+  };
 
-### `GET /v2/tokens/details`
-
-Retrieves metadata about the token used to authenticate the request.
-
-- **Authentication**: Access Token
-
-#### Example
-
-```bash
-curl -X 'GET' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens/details' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
-```
-
-#### Example Response
-
-```json
-{
-  "data": {
-    "access_token_id": 134,
-    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
-    "name": "user-token",
-    "attributes": null,
-    "expiresAt": "2023-10-01 10:11:12",
-    "createdAt": "2023-09-01 10:11:12"
-  }
-}
-```
-
----
-
-## Get Token Details (Using API Key)
-
-### `POST /v2/tokens/details`
-
-Lets you inspect an Access Token using your API Key.
-
-- **Authentication**: API Key  
-
-#### Example
-
-```bash
-curl -X 'POST' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens/details' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>' \
-  -d '{
-    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
-  }'
-```
-
-#### Example Response
-
-```json
-{
-  "data": {
-    "access_token_id": 134,
-    "userId": "0195fc5b-96a6-7000-8b17-fd2420499c2c",
-    "name": "user-token",
-    "attributes": null,
-    "expiresAt": "2023-10-01 10:11:12",
-    "createdAt": "2023-09-01 10:11:12"
-  }
-}
-```
-
----
-
-## Check Token Validity
-
-### `GET /v2/tokens/authorized`
-
-Checks whether the provided Access Token is valid and not expired.
-
-- **Authentication**: API Key or Access Token
-
-#### Example
-
-```bash
-curl -X 'GET' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens/authorized' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer 134|sqla_abcdeabcdeabcdeabcdeabcdeabcde'
-```
-
-#### Example Response
-
-HTTP Status **204** or **401** if not valid or expired.
-
----
-
-## Update an Access Token
-
-### `PATCH /v2/tokens`
-
-Updates information of an Access Token.
-The `token` field is required, it specifies the Access Token to update.
-Fields that can be updated: 
-- `name`.
-- `expiresAt`: date time value or `null` to set no expiration.
-
-- **Authentication**: API Key  
-
-#### Example
-
-```bash
-curl -X 'PATCH' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>' \
-  -d '{
-    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde",
-    "name": "updated-user-token",
-    "expiresAt": "2024-12-31T23:59:59"
-  }'
-```
-
----
-
-## Revoke a Token
-
-### `DELETE /v2/tokens`
-
-Revokes the given token, making it immediately unusable.
-
-- **Authentication**: API Key, Access Token
-
-The `token` in the request is optional when the Access Token is used for the authentication.
-
-#### Example
-
-```bash
-curl -X 'DELETE' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>' \
-  -d '{
-    "token": "134|sqla_abcdeabcdeabcdeabcdeabcdeabcde"
-  }'
-```
-
----
-
-## List Tokens by User
-
-### `GET /v2/tokens/users/{userId}`
-
-Returns all non-expired tokens associated with the specified user.
-
-- **Authentication**: API Key  
-- **Path Parameter**: `userId`
-
-#### Example
-
-```bash
-curl -X 'GET' \
-  'https://<your-project-domain>.sqlite.cloud/v2/tokens/users/0195fc5b-96a6-7000-8b17-fd2420499c2c' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer <your-api-key>'
-```
-
-#### Example Response
-
-```json
-{
-  "data": [
-    {
-      "name": "sqlitesync-user",
-      "expiresAt": "2024-11-01 00:00:00",
-      "createdAt": "2024-10-01 10:11:12"
+  const res = await fetch(SQLITE_CLOUD_API_TOKENS, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SQLITE_CLOUD_API_KEY}`,
+      "Content-Type": "application/json",
     },
-    {
-      "name": "sqlitesync-user",
-      "expiresAt": null,
-      "createdAt": "2024-09-01 10:11:12"
-    }
-  ]
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to create SQLite Cloud token: ${res.statusText}`);
+  }
+
+  return res.json();
 }
 ```
 
----
+In the response JSON, the `data.token` field contains the Access Token.
+
+Finally, the user is authorized to securely access SQLite Cloud services like the Weblite API to perform a query on the database:
+
+```typescript
+const res = await fetch(sqliteCloudApiQuery, {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer " + sqliteCloudToken,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    sql: "USE DATABASE chinook.sqlite;SELECT * FROM artists LIMIT 10;",
+  }),
+});
+...
+```
+
+The results depend on the [Row Level Security](https://) you enabled for the tables.
