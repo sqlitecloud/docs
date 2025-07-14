@@ -11,7 +11,7 @@ import Callout from "@commons-components/Information/Callout.astro";
 Row-Level Security (RLS) allows you to define fine-grained access control policies that determine which rows in a table a user can access. This ensures that users can only view or modify data they are authorized to see, enhancing data security and privacy.
 
 <Callout type="note" title="RLS Scope">
-RLS rules only affect users who are authenticated using tokens. Admins, APIKEYs, or other non-token users are not restricted by RLS.
+RLS rules only affect users who are authenticated using [Access Tokens](/docs/access-tokens). Admins, APIKEYs, or other non-token users are not restricted by RLS.
 </Callout>
 
 RLS is a powerful feature for building secure, multi-tenant applications. When combined with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
@@ -213,7 +213,7 @@ This policy uses the `OLD` reference to check the value of the `status` column *
 
 When using RLS in conjunction with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
 
-To accommodate this, SQLite Cloud offers two modes for handling RLS during sync operations, configurable via the `rls_mode` server setting.
+To accommodate this, SQLite Cloud offers two modes for handling RLS during sync operations, configurable via the `rls_mode` server setting using the SQLite Cloud builtin command `SET KEY rls_mode TO <value>`.
 
 #### Default Mode (`rls_mode = 1`)
 
