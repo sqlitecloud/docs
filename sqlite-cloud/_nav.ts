@@ -78,6 +78,12 @@ const sidebarNav: SidebarNavStruct = [
     level: 0,
   },
   {
+    title: "Row-Level Security",
+    filePath: "rls",
+    type: "inner",
+    level: 0,
+  },
+  {
     title: "Access Tokens",
     filePath: "access-tokens",
     type: "inner",
