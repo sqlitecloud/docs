@@ -16,7 +16,7 @@ RLS rules only affect users who are authenticated using [Access Tokens](/docs/ac
 
 RLS is a powerful feature for building secure, multi-tenant applications. When combined with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
 
-This architecture simplifies development by allowing your application to interact with a local database while SQLite Cloud transparently handles the synchronization with a central database. RLS ensures that each user's data is securely isolated during this process. The centralized database can then be used for powerful business analytics and reporting across all tenants, without compromising individual data privacy.
+This architecture simplifies development by allowing your application to interact with a local database while SQLite Cloud [OffSync](/docs/offsync) transparently handles the synchronization with a central database. RLS ensures that each user's data is securely isolated during this process. The centralized database can then be used for powerful business analytics and reporting across all tenants, without compromising individual data privacy.
 
 ## Policy Enforcement
 

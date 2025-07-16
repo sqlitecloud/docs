@@ -83,6 +83,7 @@ const sidebarNav: SidebarNavStruct = [
     type: "inner",
     level: 0,
   },
+  { title: "Offsync", filePath: "offsync", type: "inner", level: 0 },
   {
     title: "Access Tokens",
     filePath: "access-tokens",
