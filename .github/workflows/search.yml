@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: sqlitecloud/docsearch-action@v5
+      - uses: sqlitecloud/docsearch-action@v6
         with:
           project-string: ${{ secrets.PROJECT_STRING }}
           base-url: ${{ vars.BASE_URL }}
