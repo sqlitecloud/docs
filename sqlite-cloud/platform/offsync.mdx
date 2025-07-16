@@ -1,5 +1,5 @@
 ---
-title: Offsync
+title: OffSync
 description: Enable local-first applications with automatic data synchronization between edge devices and SQLite Cloud.
 category: platform
 status: publish
@@ -8,23 +8,23 @@ slug: offsync
 
 import Callout from "@commons-components/Information/Callout.astro";
 
-Offsync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the [SQLite Sync](https://github.com/sqliteai/sqlite-sync) extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
+OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the [SQLite Sync](https://github.com/sqliteai/sqlite-sync) extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
 
-This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), Offsync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
+This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), OffSync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
 
 ## How It Works
 
-Offsync extends standard SQLite tables with built-in support for offline work and automatic synchronization. This allows multiple devices to operate independently and then seamlessly merge their changes.
+OffSync extends standard SQLite tables with built-in support for offline work and automatic synchronization. This allows multiple devices to operate independently and then seamlessly merge their changes.
 
 - **Offline-First by Design**: Applications work seamlessly even when devices are offline. Changes are queued locally and synced automatically when connectivity is restored.
 - **CRDT-Based Conflict Resolution**: Merges updates deterministically and efficiently, ensuring eventual consistency across all replicas without complex merge logic.
 - **Seamless Integration**: The sync layer is tightly integrated with SQLite Cloud, enabling secure data sharing across devices, users, and platforms.
 
-When combined with [Row-Level Security (RLS)](/docs/rls), Offsync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
+When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
 
-## Configuring Offsync
+## Configuring OffSync
 
-You can enable and manage Offsync for your databases directly from the SQLite Cloud dashboard.
+You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.
 
 1.  **Navigate to the Databases Page**: From the main dashboard, go to the "Databases" page.
 2.  **Select the Offsync Column**: In the list of your databases, click on the button in the "Offsync" column for the desired database.
@@ -36,7 +36,7 @@ You can enable and manage Offsync for your databases directly from the SQLite Cl
     ![Dashboard Offsync Settings Page](@docs-website-assets/introduction/offsync-2.png)
 
 <Callout type="note" title="Matching Schemas and Tables">
-For Offsync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
+For OffSync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
 </Callout>
 
 Once enabled, any changes made to the selected tables via the SQLite Sync extension will be automatically synchronized with your SQLite Cloud database.
