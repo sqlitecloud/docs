@@ -1,0 +1,81 @@
+---
+title: Access Tokens
+description: Grant to your users, devices, tenant, access to SQLite Cloud database and services.
+category: platform
+status: publish
+slug: access-tokens
+---
+
+Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud database and services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation. All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
+
+The API Documentation for the Access Tokens API can be found in the **Weblite** section in the [Dashboard](https://dashboard.sqlitecloud.io).
+
+---
+
+## Example Using SQLite Cloud Access Tokens with Google Login
+
+In the repository on GitHub [sqlitecloud/examples](https://github.com/sqlitecloud/examples/tree/main/access-tokens-and-social-login), we created a simple app to demonstrate how to generate and use Access Tokens.
+
+We’ll log in with Google, grab a token, and use it to interact with SQLite Cloud Weblite APIs. Here’s how it works.
+
+In the snippet below, we handle the Google Login callback when the user has completed the login on Google. Here, you can exchange the `code` with the Google Access Token and then decide what to do with it as needed.
+
+```typescript
+if (pathname === "/auth/callback") {
+  const q = query;
+  if (q.state !== STATE || !q.code) {
+    return send(res, 400, "Invalid state or missing code");
+  }
+
+  try {
+    // Exchange code for tokens
+    // Store the Google Token in the database
+    const googleToken = await getGoogleTokens(q.code as string);
+    ...
+```
+
+Now we have authenticated the user, we are ready to request SQLite Cloud to create a new SQLite Cloud Access Token assigned to this user.
+
+```typescript
+async function getSQLiteCloudToken(userId: string) {
+  const payload = {
+    name: "test-user-token", // A name for the token, can be anything you want
+    userId,
+    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // expires in 24 hours
+  };
+
+  const res = await fetch("https://<your-project-url>/v2/tokens", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SQLITE_CLOUD_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to create SQLite Cloud token: ${res.statusText}`);
+  }
+
+  return res.json();
+}
+```
+
+In the response JSON, the `data.token` field contains the Access Token.
+
+Finally, the user is authorized to securely access SQLite Cloud services like the Weblite API to perform a query on the database:
+
+```typescript
+const res = await fetch("https://<your-project-url>/v2/weblite/sql", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer " + sqliteCloudToken,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    sql: "USE DATABASE chinook.sqlite;SELECT * FROM artists LIMIT 10;",
+  }),
+});
+...
+```
+
+The result depends on the [Row Level Security](https://docs.sqlitecloud.io/docs/rls) policies you enabled for the tables.
