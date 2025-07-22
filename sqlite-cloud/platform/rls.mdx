@@ -1,0 +1,228 @@
+---
+title: Row-Level Security
+description: Configure fine-grained access control policies to determine which rows in a table a user can access.
+category: platform
+status: publish
+slug: rls
+---
+
+import Callout from "@commons-components/Information/Callout.astro";
+
+Row-Level Security (RLS) allows you to define fine-grained access control policies that determine which rows in a table a user can access. This ensures that users can only view or modify data they are authorized to see, enhancing data security and privacy.
+
+<Callout type="note" title="RLS Scope">
+RLS rules only affect users who are authenticated using [Access Tokens](/docs/access-tokens). Admins, APIKEYs, or other non-token users are not restricted by RLS.
+</Callout>
+
+RLS is a powerful feature for building secure, multi-tenant applications. When combined with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
+
+This architecture simplifies development by allowing your application to interact with a local database while SQLite Cloud [OffSync](/docs/offsync) transparently handles the synchronization with a central database. RLS ensures that each user's data is securely isolated during this process. The centralized database can then be used for powerful business analytics and reporting across all tenants, without compromising individual data privacy.
+
+## Policy Enforcement
+
+RLS in SQLite Cloud operates based on the following principles:
+
+Access is denied by default.
+
+Unless explicitly allowed by RLS rules, access is blocked. Specifically:
+
+- If RLS is enabled and rules are defined, only permitted operations will succeed.
+- If RLS is enabled but a rule is missing for an operation (e.g., `SELECT`), that operation will be denied.
+- If RLS is not enabled or not configured for a table, token-authenticated users won't see any rows at all.
+
+To make data accessible to token-authenticated users, you must both enable RLS for the table and define rules for the desired operations (like `SELECT`, `INSERT`, etc.).
+
+Otherwise, they will be blocked from accessing any rows.
+
+## Configuring RLS
+
+You can configure RLS policies for your databases through the SQLite Cloud dashboard.
+
+1.  **Navigate to the Databases Page**: From the main dashboard, go to the "Databases" page.
+2.  **Select the RLS Column**: In the list of your databases, click on the button in the "RLS" column for the desired database.
+
+    ![Dashboard Databases Page](@docs-website-assets/introduction/rls-1.png)
+
+3.  **Configure RLS Settings**: On the RLS settings page, you can define the policies for each table.
+
+    ![Dashboard RLS Settings Page](@docs-website-assets/introduction/rls-2.png)
+
+    For each table, you can specify the following RLS policies:
+
+    - **SELECT**: A SQL expression that determines which rows a user can `SELECT`.
+    - **INSERT**: A SQL expression that determines if a user can `INSERT` a new row.
+    - **UPDATE**: A SQL expression that determines which rows a user can `UPDATE`.
+    - **DELETE**: A SQL expression that determines which rows a user can `DELETE`.
+
+    <Callout type="note" title="RLS Expressions">
+    The SQL expressions can be any valid SQLite expression that returns a boolean value. You can use built-in SQLite functions, and even custom functions to define your policies.
+    </Callout>
+
+### User Information Functions
+
+To help you create dynamic RLS policies, SQLite Cloud provides two functions to retrieve information about the current authenticated user:
+
+- `auth_userid()`: Returns the `userid` of the current token-authenticated user.
+- `auth_json()`: Returns a JSON object with all the details of the current token-authenticated user, including `user_id`, `name`, `attributes`, `created_at`, and `expires_at`.
+
+These functions are particularly useful for creating policies that are based on user attributes.
+
+For more information on Access Tokens, see the [Access Tokens documentation](/docs/access-tokens). The API Documentation for the Access Tokens API can be found in the Weblite section in the [Dashboard](https://dashboard.sqlitecloud.io/).
+
+### OLD and NEW References
+
+Your RLS policies for `INSERT`, `UPDATE`, and `DELETE` operations can reference column values as they are being changed. This is done using the special `OLD.column` and `NEW.column` identifiers. Their availability and meaning depend on the operation being performed:
+
+| Operation | `OLD.column` Reference | `NEW.column` Reference |
+| :--- | :--- | :--- |
+| `INSERT` | Not available | The value for the new row. |
+| `UPDATE` | The value of the row *before* the update. | The value of the row *after* the update. |
+| `DELETE` | The value of the row being deleted. | Not available |
+
+## Example
+
+Suppose you have a `tasks` table with the following schema:
+
+```sql
+CREATE TABLE tasks (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  owner_id INTEGER,
+  status TEXT
+);
+```
+
+Here are a few examples of RLS policies you can create:
+
+**1. Users can only see their own tasks.**
+
+```sql
+-- SELECT policy
+owner_id = auth_userid()
+```
+
+**2. Users can only insert tasks for themselves.**
+
+```sql
+-- INSERT policy
+NEW.owner_id = auth_userid()
+```
+
+**3. Users can only update the status of their own tasks.**
+
+```sql
+-- UPDATE policy
+OLD.owner_id = auth_userid()
+```
+
+**4. Users with the 'admin' group can see all tasks.**
+
+```sql
+-- SELECT policy
+json_extract(auth_json(), '$.attributes.group') = 'admin'
+```
+
+**5. Role-Based Access within a Tenancy**
+
+```sql
+-- SELECT policy
+org_id = json_extract(auth_json(), '$.attributes.org_id') AND
+(json_extract(auth_json(), '$.attributes.role') = 'admin' OR owner_id = auth_userid())
+```
+
+**6. Access via a Membership Linking Table**
+
+```sql
+-- SELECT policy
+EXISTS (
+  SELECT 1 FROM project_members
+  WHERE project_members.project_id = tasks.project_id
+    AND project_members.user_id = auth_userid()
+)
+```
+
+**7. Public vs. Private Record Visibility**
+
+```sql
+-- SELECT policy
+visibility = 'public' OR owner_id = auth_userid()
+```
+
+With these policies, when a user executes a query, SQLite Cloud will automatically enforce the defined RLS rules, ensuring data security and compliance.
+
+### Additional Real-World Examples
+
+Here are a few more examples to illustrate how you can use RLS policies to solve common security challenges.
+
+#### 1. Team-Based Access (Multi-Tenancy)
+
+**Use Case:** A user should only be able to see documents that belong to their organization or team. This is a classic multi-tenancy scenario.
+
+**Assumptions:**
+*   Your `documents` table has an `org_id` column.
+*   The user's access token contains their organization ID in the JSON attributes (e.g., `{"org_id": "acme_corp"}`).
+
+**RLS Policy (`SELECT`):**
+```sql
+-- On the 'documents' table
+org_id = json_extract(auth_json(), '$.attributes.org_id')
+```
+
+**Explanation:**
+This policy ensures that the `org_id` in the document row must match the `org_id` stored in the authenticated user's token. This effectively isolates data between different organizations.
+
+---
+
+#### 2. Content Publishing Workflow
+
+**Use Case:** In a simple CMS or blog, any user (even anonymous ones, if applicable) can see articles with a `published` status. However, only the original author can see their own articles when they are in the `draft` status.
+
+**Assumptions:**
+*   Your `articles` table has a `status` column (`'draft'` or `'published'`) and an `author_id` column.
+
+**RLS Policy (`SELECT`):**
+```sql
+-- On the 'articles' table
+status = 'published' OR (status = 'draft' AND author_id = auth_userid())
+```
+
+**Explanation:**
+This policy uses a boolean `OR` to combine two conditions. A user can see a row if:
+1.  The article's status is `published`, OR
+2.  The article's status is `draft` AND the user is the author.
+
+---
+
+#### 3. Making Records Read-Only
+
+**Use Case:** Once an invoice has been marked as `paid`, it should become immutable. No user should be able to update it.
+
+**Assumptions:**
+*   Your `invoices` table has a `status` column (`'pending'`, `'paid'`, etc.).
+
+**RLS Policy (`UPDATE`):**
+```sql
+-- On the 'invoices' table
+OLD.status <> 'paid'
+```
+
+**Explanation:**
+This policy uses the `OLD` reference to check the value of the `status` column *before* the update is applied. If the status is already `'paid'`, the condition `OLD.status <> 'paid'` will be false, and the `UPDATE` operation will be denied. This effectively makes paid invoices read-only.
+
+### Advanced: RLS and SQLite Sync
+
+When using RLS in conjunction with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
+
+To accommodate this, SQLite Cloud offers two modes for handling RLS during sync operations, configurable via the `rls_mode` server setting using the SQLite Cloud builtin command `SET KEY rls_mode TO <value>`.
+
+#### Default Mode (`rls_mode = 1`)
+
+To simplify policy creation for the most common use cases, the default mode does **not** enforce `INSERT` and `UPDATE` policies while applying changes from SQLite Sync.
+
+Instead, after the sync operation is complete, the `SELECT` policy is used to validate the final state of the row. If the user does not have permission to view the resulting row, the entire transaction is rolled back. This ensures that users cannot introduce changes that they are not allowed to see.
+
+#### Manual Policy Mode (`rls_mode = 0`)
+
+For more complex scenarios, such as implementing separate read/write permissions or restricting write access to specific columns, you can set `rls_mode` to `0`.
+
+In this mode, your `INSERT` and `UPDATE` policies are enforced for every incremental change applied by SQLite Sync. Because of Sync's column-by-column operation, your policies must be written to permit intermediate states. This means the policies must allow `NEW` values for non-primary key columns to be temporarily set to their default values during the sync process.

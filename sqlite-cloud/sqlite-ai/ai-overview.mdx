@@ -1,0 +1,37 @@
+---
+title: Getting Started with SQLite AI
+description: SQLite Cloud is a distributed relational database system built on top of the SQLite database engine.
+category: getting-started
+status: publish
+slug: ai-overview
+---
+
+## Overview
+
+**SQLite AI** is an advanced extension of SQLite designed to bring AI capabilities directly to the edge. It transforms the world’s most deployed database into a powerful, intelligent local database engine capable of powering modern, AI-driven applications, from mobile apps to embedded systems, IoT devices, and robotics.
+
+At the core of the project is a belief that **AI should run where the data is** — locally, privately, and efficiently — without always relying on the cloud.
+
+### Key Extensions
+
+SQLite AI is built around several modular extensions:
+
+1. **SQLite-AI**
+   Integrates on-device AI capabilities (e.g., LLM inference, audio transcription with Whisper) directly into SQLite using extensions that wrap C-based AI libraries such as `llama.cpp`, `whisper.cpp`, and more.
+
+2. **SQLite-Vector**
+   Adds native vector search to SQLite using optimized in-database structures and distance functions (L2, cosine, dot, etc.), with support for multiple vector formats (Float32, Int8, etc.). Ideal for on-device semantic search and AI retrieval.
+
+3. **SQLite-Sync**
+   A local-first sync layer that keeps SQLite databases synchronized across devices and users, with support for CRDTs, delta-based replication, and efficient cloud coordination.
+
+4. **SQLite-JS**
+   Embed JavaScript directly into SQLite using a lightweight interpreter (e.g., QuickJS), allowing developers to define SQLite functions and logic in JavaScript for increased flexibility and expressiveness.
+
+
+### Features
+
+* **Works offline-first**: No need for a server to run advanced queries or AI models.
+* **Cross-platform**: Runs on iOS, Android, Windows, Linux, macOS, and WebAssembly.
+* **Minimal footprint**: Optimized for constrained devices.
+* **Modular and open**: Built in C with clean, embeddable APIs and no heavy dependencies.

@@ -1,0 +1,20 @@
+---
+title: Security and Access Control
+description: SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability.
+category: platform
+status: publish
+slug: apikey
+---
+
+## API KEYs 
+
+API KEYs can be used as an alternative authentication mechanism.
+Authentication through API keys ensures the same privileges as the user to which they are associated.
+API KEYs are recommended for all server-to-server authentication cases and are necessary for using the REST APIs and the SDKs that uses the WebSocket APIs.
+
+To create an API key for a user, click on the **Create API KEY** button.
+
+![Dashboard Create APIKEY](@docs-website-assets/introduction/dashboard_create_apikey.png)
+
+The resulting table will display all the API keys associated with each user, along with their name and restrictions.
+![Dashboard List APIKEY](@docs-website-assets/introduction/dashboard_list_apikey.png)
