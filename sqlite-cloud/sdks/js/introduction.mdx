@@ -34,14 +34,14 @@ let results = await database.sql`SELECT * FROM tracks WHERE name = ${name}`
 
 Use [Database.sql](/docs/sqlite-cloud/sdks/js/classes/database#sql) to execute prepared statements or plain SQL queries asynchronously. This method returns an array of rows for SELECT queries and supports the standard syntax for UPDATE, INSERT, and DELETE.
 
-We aim for full compatibility with the established [sqlite3 API](https://www.npmjs.com/package/sqlite3), with the primary distinction being that our driver connects to SQLiteCloud databases. This allows you to migrate your [SQLite to the cloud](https://sqlitecloud.io) while continuing to use your existing codebase.
+We aim for full compatibility with the established [sqlite3 API](https://www.npmjs.com/package/sqlite3), with the primary distinction being that our driver connects to SQLiteCloud databases. This allows you to migrate your [SQLite to the cloud](https://sqlite.ai) while continuing to use your existing codebase.
 
 The package is developed entirely in TypeScript and is fully compatible with JavaScript. It doesn't require any native libraries. This makes it a straightforward and effective tool for managing cloud-based databases in a familiar SQLite environment.
 
 ## More
 
 How do I deploy SQLite in the cloud?  
-[https://sqlitecloud.io](https://sqlitecloud.io)
+[https://sqlite.ai](https://sqlite.ai)
 
 How do I connect SQLite cloud with Javascript?  
 [https://sqlitecloud.github.io/sqlitecloud-js/](https://sqlitecloud.github.io/sqlitecloud-js/)
