@@ -6,140 +6,236 @@ status: publish
 slug: pub-sub
 ---
 
-Pub/Sub is a messaging pattern that allows multiple applications to communicate with each other asynchronously. In the context of **SQLiteCloud**, Pub/Sub can be used to provide real-time updates and notifications to subscribed applications whenever data changes in the database or it can be used to send payloads (messages) to anyone subscribed to a channel. Here's how it works:
+# SQLiteCloud Pub/Sub System
 
-**Publishers:** Publishers are responsible for sending messages or notifications to the system whenever a change occurs in the database. Publishers can be any application that has write access to the database, including web servers, mobile apps, or background processes. A Publisher can also be anyone who NOTIFY a payload to a specific channel (without any write database operation).
+**Publish/Subscribe (Pub/Sub)** is a messaging pattern that enables asynchronous communication between multiple applications. In the context of **SQLiteCloud**, Pub/Sub provides a robust way to deliver real-time updates or custom messages to subscribed clients when data changes or explicit notifications are issued.
 
-**Subscribers:** Subscribers are applications that want to receive updates whenever a change occurs in the database or whenever someone send a message to a specific channel.
+This feature is particularly useful for building reactive applications, synchronizing distributed systems, and enabling event-driven architectures around your SQLite databases.
 
-**Channels:** Channels are messaging patterns through which messages are sent and received. Publishers send messages to specific channel, and subscribers can subscribe to one or more channel to receive notifications. A channel can be a database table or a unique name not bound to any database entity.
+---
 
-Here are some of the capabilities that Pub/Sub provides for a database management system:
+## Core Concepts
 
-* Real-time updates: With Pub/Sub, subscribers can receive real-time updates whenever data changes in the database. This can be useful for applications that need to display real-time information to users, such as stock tickers or social media feeds.
+### **Publishers**
 
-* Scalability: Pub/Sub provides a scalable solution for database notifications, allowing multiple subscribers to receive updates without impacting database performance.
+Publishers are entities that send messages or notifications. In **SQLiteCloud**, a publisher can:
 
-* Customizable filtering: Pub/Sub allows subscribers to customize the types of messages they receive by filtering on specific topics or keywords. This can help reduce network traffic and improve application performance.
+* Modify a database (triggering automatic Pub/Sub events on commit).
+* Explicitly send a message using the `NOTIFY` command, even without making changes to the database.
 
-* Fault tolerance: Pub/Sub systems are designed to be fault-tolerant, ensuring that messages are not lost even if a subscriber or publisher goes offline.
+Any client with write access—such as a web server, mobile app, or background process—can act as a publisher.
 
-Overall, Pub/Sub provides a powerful messaging system for database management systems, enabling real-time updates and notifications for subscribed applications while maintaining scalability, reliability, and performance.
+### **Subscribers**
 
-## Pub/Sub Payload Format
+Subscribers are clients that listen for messages or data change events. They can subscribe to:
 
-JSON is used to deliver payload to all listening clients. JSON format depends on the operation type. In case of database tables, notifications occur on COMMIT so the same JSON can collect more changes related to that table. **SQLite Cloud** guarantees **one JSON per channel**.
+* A **channel** representing a database table (to receive change events).
+* A **named message channel** (for general-purpose messages).
 
-**1. NOTIFY payload**
+Subscribers will receive all messages published on the channels they subscribe to.
+
+### **Channels**
+
+Channels are the communication endpoints used for Pub/Sub messaging. A channel can be:
+
+* A **database table name**, used to deliver change notifications.
+* A **custom channel name**, used to send arbitrary messages.
+
+Channels are **not bound** to any database entity unless explicitly tied to a table.
+
+---
+
+## Benefits of Pub/Sub in SQLiteCloud
+
+* **Real-time Updates**
+  Instantly notify subscribers when data changes. Useful for dashboards, live feeds, or collaborative apps.
+
+* **Scalability**
+  One publisher can broadcast to many subscribers with minimal overhead on the database.
+
+* **Message Filtering**
+  Subscribers can choose specific channels, reducing unnecessary data traffic.
+
+* **Fault Tolerance**
+  Notifications are delivered reliably. If a subscriber or publisher disconnects, the system continues to function without losing messages.
+
+---
+
+## Payload Format
+
+All Pub/Sub messages in **SQLiteCloud** are delivered as **JSON** objects. The structure of the payload depends on the type of event:
+
+### 1. **NOTIFY Message Payload**
+
+Sent explicitly by clients using the `NOTIFY` command.
+
 ```json
 {
-    sender: "UUID",
-    channel: "name",
-    type: "MESSAGE",
-    payload: "Message content here"	// payload is optional
+  "sender": "UUID",
+  "channel": "name",
+  "channel_type": "MESSAGE",
+  "payload": "Message content here"
 }
 ```
 
+* **sender**: UUID of the client that sent the message.
+* **channel**: Target channel name.
+* **channel\_type**: Always `"MESSAGE"` for this type.
+* **payload**: Optional message content.
 
-**2. Multiple TABLE modification payload**
+---
+
+### 2. **Database Table Change Payload**
+
+Generated automatically when a transaction modifies a subscribed table. Triggered at **COMMIT** time and may include multiple row operations.
+
 ```json
 {
-    sender: "UUID",
-    channel: "tablename",
-    type: "TABLE",
-    pk: ["id", "col1"],    // array of primary key name(s)
-    payload: [             // array of operations that affect table name
-        {
-            type: "INSERT",
-            id: 12,
-            col1: "value1",
-            col2: 3.14
-        },
-        {
-            type: "DELETE",
-            pv: [13],    // primary key value (s) in the same order as the pk array
-        },
-        {
-            type: "UPDATE",
-            id: 15,        // new value
-            col1: "newvalue",
-            col2: 0.0,
-            // if primary key is updated during this update then add it to:
-            // UPDATE TABLE SET col1='newvalue', col2=0.0, id = 15 WHERE id=14
-            pv: [14]       // primary key value (s) set prior to this UPDATE operation
-        }
-    ]
+  "sender": "UUID",
+  "channel": "tablename",
+  "channel_type": "TABLE",
+  "sqlite_pk_name": ["id", "col1"],
+  "payload": [
+    {
+      "sqlite_type": "INSERT",
+      "id": 12,
+      "col1": "value1",
+      "col2": 3.14
+    },
+    {
+      "sqlite_type": "DELETE",
+      "sqlite_pk_value": [13]
+    },
+    {
+      "sqlite_type": "UPDATE",
+      "id": 15,
+      "col1": "newvalue",
+      "col2": 0.0,
+      "sqlite_pk_value": [14]
+    }
+  ]
 }
 ```
 
-**Details:**
+#### Field Descriptions:
 
-* **sender**: is the UUID of the client who sent the NOTIFY event or who initiated the WRITE operation that triggers the notification. It is common for a client that executes **NOTIFY** to be listening on the same notification channel itself. In that case it will get back a notification event, just like all the other listening sessions. Depending on the application logic, this could result in useless work, for example, reading a database table to find the same updates that that session just wrote out. It is possible to avoid such extra work by noticing whether the notifying **UUID** (supplied in the notification event message) is the same as one's **UUID** (available from SDK). When they are the same, the notification event is one's own work bouncing back, and can be ignored. If **UUID** is 0 it means that server sent that payload.
-* **channel**: this field represents the channel/table affected.
-* **type**: determine the type of operation, it can be: MESSAGE, TABLE, INSERT, UPDATE, or DELETE (more to come).
-* **pk/pv**: these fields represent the primary key name(s) and value(s) affected by this table operation.
-* **payload**: TODO
+* **sender**: UUID of the client initiating the change, or `0` if triggered by the server.
+* **channel**: Table name where the change occurred.
+* **channel\_type**: `"TABLE"`.
+* **sqlite\_pk\_name**: Array of primary key column names for the table.
+* **payload**: Array of individual row operations.
 
-**More SQL examples:**
-```
+  * **sqlite\_type**: `"INSERT"`, `"UPDATE"`, or `"DELETE"`.
+  * **sqlite\_pk\_value**: Previous primary key values (used in `DELETE` or `UPDATE`).
+  * Other keys represent column values (for `INSERT` and `UPDATE`).
+
+> **Tip:** If a client is subscribed to a channel and also publishes to it, it will receive its own notifications. Use the **sender UUID** to filter out self-generated events if needed.
+
+---
+
+## Example SQL Usage
+
+```sql
 > USE DATABASE test.sqlite
 OK
 
 > GET SQL foo
-CREATE TABLE "foo" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "col1" TEXT, "col2" TEXT)
+CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "col1" TEXT,
+  "col2" TEXT
+)
 
 > LISTEN TABLE foo
 OK
 ```
 
-**3. DELETE FROM foo WHERE id=14;**
+---
+
+## Example Event Payloads
+
+### DELETE
+
+```sql
+DELETE FROM foo WHERE id=14;
+```
+
 ```json
 {
-	"sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
-	"channel": "foo",
-	"type": "TABLE",
-	"pk": ["id"],
-	"payload": [{
-		"type": "DELETE",
-		"pv": [14]
-	}]
+  "sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
+  "channel": "foo",
+  "channel_type": "TABLE",
+  "sqlite_pk_name": ["id"],
+  "payload": [{
+    "sqlite_type": "DELETE",
+    "sqlite_pk_value": [14]
+  }]
 }
 ```
 
-**4. INSERT INTO foo(col1, col2) VALUES ('test100', 'test101');**
+---
+
+### INSERT
+
+```sql
+INSERT INTO foo(col1, col2) VALUES ('test100', 'test101');
+```
+
 ```json
 {
-	"sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
-	"channel": "foo",
-	"type": "TABLE",
-	"pk": ["id"],
-	"payload": [{
-		"type": "INSERT",
-		"id": 15,
-		"col1": "test100",
-		"col2": "test101"
-	}]
+  "sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
+  "channel": "foo",
+  "channel_type": "TABLE",
+  "sqlite_pk_name": ["id"],
+  "payload": [{
+    "sqlite_type": "INSERT",
+    "id": 15,
+    "col1": "test100",
+    "col2": "test101"
+  }]
 }
 ```
 
-**5. UPDATE foo SET id=14,col1='test200' WHERE id=15;**
+---
+
+### UPDATE (Primary Key Changed)
+
+```sql
+UPDATE foo SET id=14, col1='test200' WHERE id=15;
+```
+
 ```json
 {
-	"sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
-	"channel": "foo",
-	"type": "TABLE",
-	"pk": ["id"],
-	"payload": [{
-		"type": "DELETE",
-		"pv": [15]
-	}, {
-		"type": "INSERT",
-		"id": 14,
-		"col1": "test200",
-		"col2": "test101"
-	}]
+  "sender": "b7a92805-ef82-4ad1-8c2f-92da6df6b1d5",
+  "channel": "foo",
+  "channel_type": "TABLE",
+  "sqlite_pk_name": ["id"],
+  "payload": [
+    {
+      "sqlite_type": "DELETE",
+      "sqlite_pk_value": [15]
+    },
+    {
+      "sqlite_type": "INSERT",
+      "id": 14,
+      "col1": "test200",
+      "col2": "test101"
+    }
+  ]
 }
 ```
+
+---
+
+## Summary
+
+SQLiteCloud's Pub/Sub system enables:
+
+* Real-time data sync across applications.
+* Lightweight messaging between distributed components.
+* Fine-grained, reliable notifications with minimal overhead.
+
+By leveraging Pub/Sub, developers can build responsive, event-driven applications that scale seamlessly and remain in sync with the database state.
 
 ## Client Library Examples
 
