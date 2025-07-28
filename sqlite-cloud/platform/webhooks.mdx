@@ -6,10 +6,40 @@ status: publish
 slug: webhooks
 ---
 
-Webhooks in SQLite Cloud are a powerful way to receive and send event-based notifications.
+**Webhooks** are HTTP callbacks that allow your applications to receive real-time notifications when specific events occur. In the context of SQLite Cloud, webhooks make it easy to build reactive systems by automatically sending notifications when data changes happen within your databases.
+
+## Real-Time Notifications for Database Writes
+
+Use the **Webhooks panel** to effortlessly create real-time notifications for write operations—such as inserts, updates, or deletes—within your SQLite Cloud database.
+
+For example, you can configure SQLite Cloud to notify a [webhook.site](https://webhook.site) endpoint every time a write operation occurs on the `albums` table of the `chinook.sqlite` database.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create.png)
 
 ## Change Data Capture
-With change data webhooks, you can send notifications from SQLite Cloud to any HTTP endpoint when an insert, update or delete operation occurs on a specified database and/or table. The webhook payload includes the database name, table name, and the row data that was changed.
+
+Change Data Webhooks let you send structured HTTP requests to any external service whenever a row in a specific database and/or table is modified. These webhooks include:
+
+* **Database name**
+* **Table name**
+* **Operation type** (insert, update, delete)
+* **Changed row data**
+
+This enables seamless integration with logging systems, monitoring dashboards, or external APIs that react to database activity.
+
+Upon creation, each webhook is assigned a **secret key** used to verify the authenticity of incoming requests.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create2.png)
+
+You can also manage and review all active webhooks from your project dashboard.
+
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_list.png)
 
 ## Trigger Edge Functions
-Webhooks can also be used to trigger your edge functions, either via HTTP or Websockets request, or on a database event.
+
+Webhooks in SQLite Cloud aren't limited to data capture—they can also **trigger Edge Functions**:
+
+* Via HTTP or WebSocket
+* In response to database write events
+
+This allows developers to build distributed, event-driven applications that react immediately to changes at the edge.
