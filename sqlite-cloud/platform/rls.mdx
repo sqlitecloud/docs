@@ -85,9 +85,9 @@ Suppose you have a `tasks` table with the following schema:
 
 ```sql
 CREATE TABLE tasks (
-  id INTEGER PRIMARY KEY,
+  id TEXT PRIMARY KEY NOT NULL,
+  user_id TEXT,
   title TEXT,
-  owner_id INTEGER,
   status TEXT
 );
 ```
@@ -98,39 +98,46 @@ Here are a few examples of RLS policies you can create:
 
 ```sql
 -- SELECT policy
-owner_id = auth_userid()
+user_id = auth_userid()
 ```
 
 **2. Users can only insert tasks for themselves.**
 
 ```sql
 -- INSERT policy
-NEW.owner_id = auth_userid()
+NEW.user_id = auth_userid()
 ```
 
 **3. Users can only update the status of their own tasks.**
 
 ```sql
 -- UPDATE policy
-OLD.owner_id = auth_userid()
+OLD.user_id = auth_userid()
 ```
 
-**4. Users with the 'admin' group can see all tasks.**
+**4. Users can only delete their own tasks.**
+
+```sql
+-- DELETE policy
+OLD.user_id = auth_userid()
+```
+
+**5. Users with the 'admin' group can see all tasks.**
 
 ```sql
 -- SELECT policy
 json_extract(auth_json(), '$.attributes.group') = 'admin'
 ```
 
-**5. Role-Based Access within a Tenancy**
+**6. Role-Based Access within a Tenancy**
 
 ```sql
 -- SELECT policy
 org_id = json_extract(auth_json(), '$.attributes.org_id') AND
-(json_extract(auth_json(), '$.attributes.role') = 'admin' OR owner_id = auth_userid())
+(json_extract(auth_json(), '$.attributes.role') = 'admin' OR user_id = auth_userid())
 ```
 
-**6. Access via a Membership Linking Table**
+**7. Access via a Membership Linking Table**
 
 ```sql
 -- SELECT policy
@@ -141,11 +148,11 @@ EXISTS (
 )
 ```
 
-**7. Public vs. Private Record Visibility**
+**8. Public vs. Private Record Visibility**
 
 ```sql
 -- SELECT policy
-visibility = 'public' OR owner_id = auth_userid()
+visibility = 'public' OR user_id = auth_userid()
 ```
 
 With these policies, when a user executes a query, SQLite Cloud will automatically enforce the defined RLS rules, ensuring data security and compliance.
