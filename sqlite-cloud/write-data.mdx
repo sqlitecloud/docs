@@ -5,13 +5,16 @@ category: getting-started
 status: publish
 slug: write-data
 ---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import studioInsert from '@docs-website-assets/introduction/video/dashboard_studio.mp4';
+
 
 After you've created a database in SQLite Cloud, you can start writing data to it. You can write data to your cluster using the SQLite Cloud UI, API, or client libraries.
 
 ## Writing data with the SQLite Cloud UI
 Navigate to the console tab in the left-hand navigation. From here, you can run SQL commands against your cluster. Use the optional dropdown menus to select a database and table.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_console.png)
+<VideoPlayer src={studioInsert} />
 
 ### Example
 ```sql

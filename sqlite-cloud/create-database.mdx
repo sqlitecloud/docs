@@ -6,6 +6,10 @@ status: publish
 slug: create-database
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import uploadDb from '@docs-website-assets/introduction/video/dashboard_upload_db.mp4';
+import createDb from '@docs-website-assets/introduction/video/dashboard_create_db.mp4';
+
 You can import an existing SQLite databases, or create new databases using the SQLite Cloud UI, API, or client libraries.
 
 ## Uploading an existing SQLite Database
@@ -26,7 +30,8 @@ To upload a local SQLite database via the SQLite Cloud UI, navigate to the Datab
 
 ### Via Dashboard UI
 To import a database from the UI, navigate to the Databases tab and click the "Upload Database" button.
-![Dashbord Upload Database](@docs-website-assets/introduction/dashboard_upload_db.png)
+
+<VideoPlayer src={uploadDb} />
 
 Select the database file you want to upload, and click "Upload Database". The database will be available in your cluster within a few minutes.
 
@@ -34,7 +39,7 @@ Select the database file you want to upload, and click "Upload Database". The da
 ### From the Dashboard
 
 To create a new database from the SQLite Cloud UI, navigate to the Databases tab and click the "Create Database" button.
-![Dashboard Create Database](@docs-website-assets/introduction/dashboard_create_database.png)
+<VideoPlayer src={createDb} />
 
 The default encoding is set to UTF-8, and the default page size is 4096KB.
 
