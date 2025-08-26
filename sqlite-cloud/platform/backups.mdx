@@ -6,8 +6,12 @@ status: publish
 slug: backups
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import enableDisableBackup from '@docs-website-assets/introduction/video/dashboard_enable_disable_backup.mp4';
+import restoreBackup from '@docs-website-assets/introduction/video/dashboard_restore_backup.mp4';
+
 ## Overview
-Backups provide a robust solution for mitigating data loss and resolving data corruption issues. Backups are available for databases in all [Pro and Scale](https://www.sqlitecloud.io/pricing) projects.
+Backups provide a robust solution for mitigating data loss and resolving data corruption issues. Backups are available for databases in all [Dev, Pro and Startup](https://www.sqlitecloud.io/pricing) projects.
 
 SQLite Cloud creates a full snapshot backup of your data once a day, and stores incremental changes once per second, on commodity object storage.
 
@@ -23,18 +27,11 @@ SQLite Cloud creates a full snapshot backup of your data once a day, and stores 
 ## Getting Started
 Setting up and managing backups in SQLite Cloud is designed to be straightforward, allowing you to implement robust data protection strategies effortlessly.
 
-First, navigate to the backups section.
+<VideoPlayer src={enableDisableBackup} />
 
-![Backup Empty](@docs-website-assets/introduction/backup_empty.png)
-
-Then, click on settings to see a list of your databases. From here, you can enable backups for each database.
-![Backup Modal](@docs-website-assets/introduction/backup_modal.png)
-
-Click save, and your database backups will appear below.
-![Backup Items](@docs-website-assets/introduction/backup_items.png)
 
 ### Restoring from a Backup
 
 Click on a backup to begin the restore process. Select Yes to confirm the restoration, and your database will be restored to the selected point in time.
 
-![Restore Backup](@docs-website-assets/introduction/restore_backup.png)
+<VideoPlayer src={restoreBackup} />

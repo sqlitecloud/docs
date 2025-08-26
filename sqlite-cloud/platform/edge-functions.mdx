@@ -5,6 +5,8 @@ category: platform
 status: publish
 slug: edge-functions
 ---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import edgeFunctions from '@docs-website-assets/introduction/video/dashboard_edge_functions.mp4';
 
 Edge functions let you define custom logic to run on the same nodes as your database files for ultra-fast performance.
 
@@ -15,11 +17,59 @@ Edge functions can be called remotely over HTTP or Websockets via API, or trigge
 Turning on linearizable reads ensures strong consistency, but may introduce some latency. When eventual consistency is sufficient, we recommend leaving linearizable reads off.
 
 ## Getting Started
-1. Navigate to the Edge Functions page from your dashboard.
-2. Under "Development", select "Edge Function", then click the "Create" button.
-3. Write and test your function.
-    1. Select the database you want to access and an API key if necessary
-    2. When you're finished, click deploy.
+
+This guide explains how to create, deploy, and test Edge Functions in the SQLite Cloud UI.
+
+<VideoPlayer src={edgeFunctions} />
+
+
+
+1. Open the Edge Functions Section
+    - From the left-hand sidebar, click the **Edge Functions** icon.  
+    - You will see the list of your functions on the left and the code editor on the right.
+
+2. Create a New Function
+    - Click the **+** button next to *Filter functions...*.  
+    - Choose the function type: **SQL**, **JavaScript**, or **TypeScript**.  
+    - A new function (e.g., `function-1`) will appear in the list.
+
+3. Write Your Function Code
+    - Use the editor to implement your logic.  
+    - You can include request parameters, execute SQL queries, and return custom objects.  
+
+4. Select the Target Database
+    - At the bottom of the editor, choose the database (e.g., `chinook.sqlite`).  
+    - You can search and switch databases if needed.  
+
+5. Deploy the Function
+    - Before testing, you must **Deploy** the function.  
+    - Click the **Deploy** button in the bottom-right corner.  
+    - The function is now active and ready to be tested.  
+
+6. Test the Function
+    - After deployment, click **Test**.  
+    - A panel will open on the right where you can configure:
+      - **User** → choose a user with access to the selected database.  
+      - **API Key** → select the appropriate key.  
+      - **Request Body** → provide JSON input (e.g., `{ "filter": "a" }`).  
+      - **Query Parameters** → add parameters (e.g., `limit = 10`).  
+      - Click **Send Request** to execute the test.
+
+7. Review the Response
+    - The response will be shown at the bottom of the test panel.  
+    - It includes your custom message, the SQL results, and the request object.
+
+8. Enable Linearizable Reads (Optional)
+    - If your database is frequently modified and you want strong consistency,  
+      toggle **Linearizable** at the bottom before testing or deploying.
+
+9. View the Function Details
+    - Switch to the **Details** tab to check deployment information.  
+    - You can see:
+      - The **last deployed date and time**.  
+      - The **Function URL**, which you can copy and use to call the function from external applications
+
+
 
 #### Note:
 Functions should return a JSON-serializable object with a data field:
@@ -32,21 +82,15 @@ return {
 ```
 
 ### Authorization
-Edge functions that access your SQLite databases must be authorized via API key. You can automatically authorize an edge function on every call by assigning it an API key via the "API KEY" dropdown. 
+Edge functions that access your SQLite databases must be authorized via API key. 
 
-If no API key is assigned, an API key must be sent in the request url as a query parameter (`?apikey=YOUR_API_KEY`) or as an attribute in the request body (`{ apikey: YOUR_API_KEY }`).
+An API key must be sent in the request url as a query parameter (`?apikey=YOUR_API_KEY`) or as an attribute in the request body (`{ apikey: YOUR_API_KEY }`).
 
 ### Execution
 
 Edge functions can be called via HTTP GET and POST methods. You can pass additional values to your edge function in two ways:
 - Query parameters: Accessible via `request.params`
 - Request body: Accessible via `request.data`
-
-### Testing
-You may test the execution of edge functions by clicking the "Test" command. 
-
-You are not required to supply an API key when testing your edge function in the console. The function will run using the dashboard user privileges. 
-
 
 
 ## Guides

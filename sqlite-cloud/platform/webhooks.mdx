@@ -5,16 +5,21 @@ category: platform
 status: publish
 slug: webhooks
 ---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import webhooksUrl from '@docs-website-assets/introduction/video/dashboard_webhooks_trigger_url.mp4';
+import webhooksEdgeFunction from '@docs-website-assets/introduction/video/dashboard_webhooks_trigger_edge_function.mp4.mp4';
 
 **Webhooks** are HTTP callbacks that allow your applications to receive real-time notifications when specific events occur. In the context of SQLite Cloud, webhooks make it easy to build reactive systems by automatically sending notifications when data changes happen within your databases.
 
 ## Real-Time Notifications for Database Writes
 
+
 Use the **Webhooks panel** to effortlessly create real-time notifications for write operations—such as inserts, updates, or deletes—within your SQLite Cloud database.
 
 For example, you can configure SQLite Cloud to notify a [webhook.site](https://webhook.site) endpoint every time a write operation occurs on the `albums` table of the `chinook.sqlite` database.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create.png)
+<VideoPlayer src={webhooksUrl} />
+
 
 ## Change Data Capture
 
@@ -29,7 +34,7 @@ This enables seamless integration with logging systems, monitoring dashboards, o
 
 Upon creation, each webhook is assigned a **secret key** used to verify the authenticity of incoming requests.
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_create2.png)
+![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_secret.png)
 
 You can also manage and review all active webhooks from your project dashboard.
 
@@ -41,5 +46,6 @@ Webhooks in SQLite Cloud aren't limited to data capture—they can also **trigge
 
 * Via HTTP or WebSocket
 * In response to database write events
+<VideoPlayer src={webhooksEdgeFunction} />
 
 This allows developers to build distributed, event-driven applications that react immediately to changes at the edge.
