@@ -6,6 +6,10 @@ status: publish
 slug: rls
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import rlsEnable from '@docs-website-assets/introduction/video/dashboard_rls_enable.mp4';
+import rlsTest from '@docs-website-assets/introduction/video/dashboard_rls_test.mp4';
+
 import Callout from "@commons-components/Information/Callout.astro";
 
 Row-Level Security (RLS) allows you to define fine-grained access control policies that determine which rows in a table a user can access. This ensures that users can only view or modify data they are authorized to see, enhancing data security and privacy.
@@ -17,6 +21,8 @@ RLS rules only affect users who are authenticated using [Access Tokens](/docs/ac
 RLS is a powerful feature for building secure, multi-tenant applications. When combined with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
 
 This architecture simplifies development by allowing your application to interact with a local database while SQLite Cloud [OffSync](/docs/offsync) transparently handles the synchronization with a central database. RLS ensures that each user's data is securely isolated during this process. The centralized database can then be used for powerful business analytics and reporting across all tenants, without compromising individual data privacy.
+
+---
 
 ## Policy Enforcement
 
@@ -34,18 +40,18 @@ To make data accessible to token-authenticated users, you must both enable RLS f
 
 Otherwise, they will be blocked from accessing any rows.
 
+---
+
 ## Configuring RLS
 
 You can configure RLS policies for your databases through the SQLite Cloud dashboard.
 
+<VideoPlayer src={rlsEnable} />
+
 1.  **Navigate to the Databases Page**: From the main dashboard, go to the "Databases" page.
 2.  **Select the RLS Column**: In the list of your databases, click on the button in the "RLS" column for the desired database.
-
-    ![Dashboard Databases Page](@docs-website-assets/introduction/rls-1.png)
-
 3.  **Configure RLS Settings**: On the RLS settings page, you can define the policies for each table.
 
-    ![Dashboard RLS Settings Page](@docs-website-assets/introduction/rls-2.png)
 
     For each table, you can specify the following RLS policies:
 
@@ -78,6 +84,39 @@ Your RLS policies for `INSERT`, `UPDATE`, and `DELETE` operations can reference 
 | `INSERT` | Not available | The value for the new row. |
 | `UPDATE` | The value of the row *before* the update. | The value of the row *after* the update. |
 | `DELETE` | The value of the row being deleted. | Not available |
+
+---
+
+## Testing RLS
+
+<VideoPlayer src={rlsTest} />
+
+To verify that your Row-Level Security (RLS) policies work as expected, you can use the **Test RLS** feature in the dashboard:
+
+1. **Open the Test Panel**  
+   On the RLS policies page, click **Test** to open the dedicated testing panel.
+
+2. **Generate an Access Token**  
+   - Go to the **Weblite page** and use the `POST /v2/tokens` endpoint.  
+   - Provide a request body with a `userId`, a `name`, and any attributes required by your RLS policies (for example: `role`, `enabled`, etc.).  
+   - Execute the request and copy the `token` value from the response.
+
+3. **Authenticate in the Test Panel**  
+   - Paste the generated token into the **Enter Access Token** field and click **Authorize**.  
+   - The dashboard will now simulate queries to the database as if they were executed by the user identified in the token.
+
+4. **View Filtered Data**  
+   - Once authenticated, you can navigate through the database tables directly from the test panel.  
+   - Only the rows allowed by your RLS rules will be displayed (for example, activities tied to the `user_id` in the token or accessible with the `coach` role).
+
+5. **Compare with Full Data**  
+   - By switching back to **Database Studio**, you can see all rows in the table without RLS filters.  
+   - This allows you to compare the filtered view (via token) with the complete dataset and confirm that your policies are correctly enforced.
+
+
+
+
+---
 
 ## Example
 
@@ -216,7 +255,10 @@ OLD.status <> 'paid'
 **Explanation:**
 This policy uses the `OLD` reference to check the value of the `status` column *before* the update is applied. If the status is already `'paid'`, the condition `OLD.status <> 'paid'` will be false, and the `UPDATE` operation will be denied. This effectively makes paid invoices read-only.
 
-### Advanced: RLS and SQLite Sync
+
+--- 
+
+## Advanced: RLS and SQLite Sync
 
 When using RLS in conjunction with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
 

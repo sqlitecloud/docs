@@ -6,11 +6,19 @@ status: publish
 slug: offsync
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import enableSync from '@docs-website-assets/introduction/video/dashboard_sqlite_sync_enabling.mp4';
+import connectionUrlSync from '@docs-website-assets/introduction/video/dashboard_sync_connection_url.mp4';
+import devicesSync from '@docs-website-assets/introduction/video/dashboard_sync_devices.mp4';
+
 import Callout from "@commons-components/Information/Callout.astro";
 
 OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the [SQLite Sync](https://github.com/sqliteai/sqlite-sync) extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
 
 This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), OffSync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
+
+
+---
 
 ## How It Works
 
@@ -22,18 +30,33 @@ OffSync extends standard SQLite tables with built-in support for offline work an
 
 When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
 
+
+--- 
+
 ## Configuring OffSync
 
-You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.
+You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.  
+Below are the main steps:
 
-1.  **Navigate to the Databases Page**: From the main dashboard, go to the "Databases" page.
-2.  **Select the Offsync Column**: In the list of your databases, click on the button in the "Offsync" column for the desired database.
+### Enable Tables for Synchronization
+From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.  
+Once enabled, all changes to those tables will automatically sync with connected devices.
 
-    ![Dashboard Databases Page](@docs-website-assets/introduction/offsync-1.png)
+<VideoPlayer src={enableSync} />
 
-3.  **Enable Tables for Synchronization**: On the Offsync settings page, you will see a list of all tables in your database. Toggle the switch next to each table you want to enable for synchronization.
 
-    ![Dashboard Offsync Settings Page](@docs-website-assets/introduction/offsync-2.png)
+### Get the Connection String
+In the **Configuration** tab, copy the connection string.  
+Use this in your application to initialize OffSync and connect your local SQLite database with SQLite Cloud.
+
+<VideoPlayer src={connectionUrlSync} />
+
+
+### Manage Connected Devices
+In the **Devices** tab, you can view all devices currently connected to your database.  
+Here you can check their sync status and remove devices if needed.
+
+<VideoPlayer src={devicesSync} />
 
 <Callout type="note" title="Matching Schemas and Tables">
 For OffSync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
