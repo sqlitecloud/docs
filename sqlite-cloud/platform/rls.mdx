@@ -6,6 +6,12 @@ status: publish
 slug: rls
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import rlsEnable from '@docs-website-assets/introduction/video/dashboard_rls_enable.mp4';
+import rlsTest from '@docs-website-assets/introduction/video/dashboard_rls_test.mp4';
+
+
+
 import Callout from "@commons-components/Information/Callout.astro";
 
 Row-Level Security (RLS) allows you to define fine-grained access control policies that determine which rows in a table a user can access. This ensures that users can only view or modify data they are authorized to see, enhancing data security and privacy.
@@ -38,14 +44,12 @@ Otherwise, they will be blocked from accessing any rows.
 
 You can configure RLS policies for your databases through the SQLite Cloud dashboard.
 
+<VideoPlayer src={rlsEnable} />
+
 1.  **Navigate to the Databases Page**: From the main dashboard, go to the "Databases" page.
 2.  **Select the RLS Column**: In the list of your databases, click on the button in the "RLS" column for the desired database.
-
-    ![Dashboard Databases Page](@docs-website-assets/introduction/rls-1.png)
-
 3.  **Configure RLS Settings**: On the RLS settings page, you can define the policies for each table.
 
-    ![Dashboard RLS Settings Page](@docs-website-assets/introduction/rls-2.png)
 
     For each table, you can specify the following RLS policies:
 
@@ -57,6 +61,31 @@ You can configure RLS policies for your databases through the SQLite Cloud dashb
     <Callout type="note" title="RLS Expressions">
     The SQL expressions can be any valid SQLite expression that returns a boolean value. You can use built-in SQLite functions, and even custom functions to define your policies.
     </Callout>
+
+## Testing RLS
+<VideoPlayer src={rlsTest} />
+
+To verify that your Row-Level Security (RLS) policies work as expected, you can use the **Test RLS** feature in the dashboard:
+
+1. **Open the Test Panel**  
+   On the RLS policies page, click **Test** to open the dedicated testing panel.
+
+2. **Generate an Access Token**  
+   - Go to the **Weblite page** and use the `POST /v2/tokens` endpoint.  
+   - Provide a request body with a `userId`, a `name`, and any attributes required by your RLS policies (for example: `role`, `enabled`, etc.).  
+   - Execute the request and copy the `token` value from the response.
+
+3. **Authenticate in the Test Panel**  
+   - Paste the generated token into the **Enter Access Token** field and click **Authorize**.  
+   - The dashboard will now simulate queries to the database as if they were executed by the user identified in the token.
+
+4. **View Filtered Data**  
+   - Once authenticated, you can navigate through the database tables directly from the test panel.  
+   - Only the rows allowed by your RLS rules will be displayed (for example, activities tied to the `user_id` in the token or accessible with the `coach` role).
+
+5. **Compare with Full Data**  
+   - By switching back to **Database Studio**, you can see all rows in the table without RLS filters.  
+   - This allows you to compare the filtered view (via token) with the complete dataset and confirm that your policies are correctly enforced.
 
 ### User Information Functions
 

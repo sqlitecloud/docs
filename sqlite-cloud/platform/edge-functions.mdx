@@ -8,6 +8,8 @@ slug: edge-functions
 import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
 import edgeFunctions from '@docs-website-assets/introduction/video/dashboard_edge_functions.mp4';
 
+import Callout from "@commons-components/Information/Callout.astro";
+
 Edge functions let you define custom logic to run on the same nodes as your database files for ultra-fast performance.
 
 You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
@@ -18,58 +20,12 @@ Turning on linearizable reads ensures strong consistency, but may introduce some
 
 ## Getting Started
 
-This guide explains how to create, deploy, and test Edge Functions in the SQLite Cloud UI.
+Use the **Edge Functions panel**  to effortlessly create, deploy, and test Edge Functions directly in the SQLite Cloud dashboard.  
+The editor allows you to choose the language of your function — **JavaScript**, **TypeScript**, or **SQL** — and connect it to the database of your choice.
+
+Once deployed, the function can be tested immediately in the dashboard or invoked externally through its Function URL.
 
 <VideoPlayer src={edgeFunctions} />
-
-
-
-1. Open the Edge Functions Section
-    - From the left-hand sidebar, click the **Edge Functions** icon.  
-    - You will see the list of your functions on the left and the code editor on the right.
-
-2. Create a New Function
-    - Click the **+** button next to *Filter functions...*.  
-    - Choose the function type: **SQL**, **JavaScript**, or **TypeScript**.  
-    - A new function (e.g., `function-1`) will appear in the list.
-
-3. Write Your Function Code
-    - Use the editor to implement your logic.  
-    - You can include request parameters, execute SQL queries, and return custom objects.  
-
-4. Select the Target Database
-    - At the bottom of the editor, choose the database (e.g., `chinook.sqlite`).  
-    - You can search and switch databases if needed.  
-
-5. Deploy the Function
-    - Before testing, you must **Deploy** the function.  
-    - Click the **Deploy** button in the bottom-right corner.  
-    - The function is now active and ready to be tested.  
-
-6. Test the Function
-    - After deployment, click **Test**.  
-    - A panel will open on the right where you can configure:
-      - **User** → choose a user with access to the selected database.  
-      - **API Key** → select the appropriate key.  
-      - **Request Body** → provide JSON input (e.g., `{ "filter": "a" }`).  
-      - **Query Parameters** → add parameters (e.g., `limit = 10`).  
-      - Click **Send Request** to execute the test.
-
-7. Review the Response
-    - The response will be shown at the bottom of the test panel.  
-    - It includes your custom message, the SQL results, and the request object.
-
-8. Enable Linearizable Reads (Optional)
-    - If your database is frequently modified and you want strong consistency,  
-      toggle **Linearizable** at the bottom before testing or deploying.
-
-9. View the Function Details
-    - Switch to the **Details** tab to check deployment information.  
-    - You can see:
-      - The **last deployed date and time**.  
-      - The **Function URL**, which you can copy and use to call the function from external applications
-
-
 
 #### Note:
 Functions should return a JSON-serializable object with a data field:
@@ -80,6 +36,25 @@ return {
   }
 }
 ```
+
+
+
+<Callout type="note">
+Enabling **linearizable reads** guarantees strong consistency but may introduce additional latency.  
+For most cases, we recommend keeping it disabled to benefit from lower response times.
+</Callout>
+
+
+### Function Details
+
+In the **Details** tab you will find key information about your function, including:
+
+- The **last deployment date and time**  
+- The **Function URL**, which you can use to call the function from external applications  
+
+![Edge Function Details](@docs-website-assets/introduction/dahsboard-edge-function-details.png)
+
+
 
 ### Authorization
 Edge functions that access your SQLite databases must be authorized via API key. 

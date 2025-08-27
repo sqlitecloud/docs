@@ -21,6 +21,7 @@ For example, you can configure SQLite Cloud to notify a [webhook.site](https://w
 <VideoPlayer src={webhooksUrl} />
 
 
+
 ## Change Data Capture
 
 Change Data Webhooks let you send structured HTTP requests to any external service whenever a row in a specific database and/or table is modified. These webhooks include:
@@ -32,13 +33,43 @@ Change Data Webhooks let you send structured HTTP requests to any external servi
 
 This enables seamless integration with logging systems, monitoring dashboards, or external APIs that react to database activity.
 
+
+### Payload Fields
+
+```json
+{
+  "type": "insert",
+  "database": "chinook.sqlite",
+  "table": "albums",
+  "column": [
+    "AlbumId"
+  ],
+  "data": [
+    349
+  ],
+  "webhook": {
+    "id": 1,
+    "action": "https://webhook.site/70792a3c-2a18-4a48-9ded-df1c90e758ce",
+    "options": {
+      "type": "url"
+    }
+  }
+}
+```
+
+* **type** – The operation type (`insert`, `update`, or `delete`).
+* **database** – The name of the database where the change occurred.
+* **table** – The table affected by the operation.
+* **column** – An array listing the column(s) involved in the operation.
+* **data** – The values corresponding to the affected row(s).
+* **webhook** – Metadata about the webhook itself, including its unique `id`, target `action` (URL or Edge Function), and configuration `options`.
+
+## Security
+
 Upon creation, each webhook is assigned a **secret key** used to verify the authenticity of incoming requests.
 
 ![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_secret.png)
 
-You can also manage and review all active webhooks from your project dashboard.
-
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_list.png)
 
 ## Trigger Edge Functions
 
@@ -46,6 +77,29 @@ Webhooks in SQLite Cloud aren't limited to data capture—they can also **trigge
 
 * Via HTTP or WebSocket
 * In response to database write events
+
 <VideoPlayer src={webhooksEdgeFunction} />
+
+Within an Edge Function, the webhook payload containing the **Change Data Capture** information is directly accessible through the `request.data` variable, which is available by default in all Edge Functions.  
+
+```js
+// Get secret from database
+const slackWebhookEndpoint = await connection.sql`GET ENV slack_webhook_endpoint`;
+
+// Get record sent in body via webhook
+const content = request.data;
+
+// Define helpers to assign and notify
+const notifyRep = async ( ) => {
+    await fetch(slackWebhookEndpoint, { body: JSON.stringify({ text: "Discover the Latest Album Releases" +  JSON.stringify(request.data)}), method: 'POST', 'Content-type': 'application/json'  });
+} 
+
+// Call async functions
+await notifyRep();
+
+return {
+    data: 'OK'
+}
+```
 
 This allows developers to build distributed, event-driven applications that react immediately to changes at the edge.
