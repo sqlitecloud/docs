@@ -5,13 +5,21 @@ category: getting-started
 status: publish
 slug: write-data
 ---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import studioInsert from '@docs-website-assets/introduction/video/dashboard_studio.mp4';
 
 After you've created a database in SQLite Cloud, you can start writing data to it. You can write data to your cluster using the SQLite Cloud UI, API, or client libraries.
 
-## Writing data with the SQLite Cloud UI
-Navigate to the console tab in the left-hand navigation. From here, you can run SQL commands against your cluster. Use the optional dropdown menus to select a database and table.
+---
 
-![Dashboard Projects](@docs-website-assets/introduction/dashboard_console.png)
+## Writing data with the SQLite Cloud UI
+Navigate to the Studio tab from the left-hand navigation. From here, you can run SQL commands directly on your cluster.
+If needed, use the dropdown menus to select the database and table where you want to insert or update data.
+
+Alternatively, you can also interact directly with the table view to add new records or update existing ones without writing SQL manually.
+
+
+<VideoPlayer src={studioInsert} />
 
 ### Example
 ```sql
@@ -23,6 +31,8 @@ CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_make TEXT NOT NULL, sc_y
 INSERT INTO sports_cars (sc_make, sc_year) VALUES ('Ferrari', 2021);
 ```
 
+---
+
 ## Writing data with the Weblite API
 You can use the [Weblite API](/docs/weblite) to run SQL commands against your cluster. Here is an example cURL request:
 
@@ -33,6 +43,8 @@ curl -X 'POST' \
   -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
   -d '<your-sql-here>'
 ```
+
+---
 
 ## Writing data with client libraries
 To write data to your cluster using a client library, use the INSERT INTO SQL command. 
