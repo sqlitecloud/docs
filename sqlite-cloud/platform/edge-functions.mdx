@@ -18,6 +18,8 @@ Edge functions can be called remotely over HTTP or Websockets via API, or trigge
 
 Turning on linearizable reads ensures strong consistency, but may introduce some latency. When eventual consistency is sufficient, we recommend leaving linearizable reads off.
 
+---
+
 ## Getting Started
 
 Use the **Edge Functions panel**  to effortlessly create, deploy, and test Edge Functions directly in the SQLite Cloud dashboard.  
@@ -67,6 +69,7 @@ Edge functions can be called via HTTP GET and POST methods. You can pass additio
 - Query parameters: Accessible via `request.params`
 - Request body: Accessible via `request.data`
 
+---
 
 ## Guides
 ### Interacting with your Database
@@ -101,6 +104,9 @@ You can also add environment variables in the UI by navigating to the "Environme
 
 ### Handling Errors
 In case of error we return an HTTP error code and a JSON with the error message. Manually throwing an error in your code results in a 500 response. You may also return an error. 
+
+
+--- 
 
 ## Examples
 

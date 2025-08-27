@@ -11,6 +11,10 @@ import webhooksEdgeFunction from '@docs-website-assets/introduction/video/dashbo
 
 **Webhooks** are HTTP callbacks that allow your applications to receive real-time notifications when specific events occur. In the context of SQLite Cloud, webhooks make it easy to build reactive systems by automatically sending notifications when data changes happen within your databases.
 
+
+---
+
+
 ## Real-Time Notifications for Database Writes
 
 
@@ -20,7 +24,7 @@ For example, you can configure SQLite Cloud to notify a [webhook.site](https://w
 
 <VideoPlayer src={webhooksUrl} />
 
-
+---
 
 ## Change Data Capture
 
@@ -64,12 +68,15 @@ This enables seamless integration with logging systems, monitoring dashboards, o
 * **data** – The values corresponding to the affected row(s).
 * **webhook** – Metadata about the webhook itself, including its unique `id`, target `action` (URL or Edge Function), and configuration `options`.
 
+---
+
 ## Security
 
 Upon creation, each webhook is assigned a **secret key** used to verify the authenticity of incoming requests.
 
 ![Dashboard Projects](@docs-website-assets/introduction/dashboard_webhook_secret.png)
 
+---
 
 ## Trigger Edge Functions
 

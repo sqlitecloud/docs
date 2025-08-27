@@ -11,13 +11,14 @@ import enableSync from '@docs-website-assets/introduction/video/dashboard_sqlite
 import connectionUrlSync from '@docs-website-assets/introduction/video/dashboard_sync_connection_url.mp4';
 import devicesSync from '@docs-website-assets/introduction/video/dashboard_sync_devices.mp4';
 
-
-
 import Callout from "@commons-components/Information/Callout.astro";
 
 OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the [SQLite Sync](https://github.com/sqliteai/sqlite-sync) extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
 
 This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), OffSync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
+
+
+---
 
 ## How It Works
 
@@ -29,26 +30,29 @@ OffSync extends standard SQLite tables with built-in support for offline work an
 
 When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
 
+
+--- 
+
 ## Configuring OffSync
 
 You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.  
 Below are the main steps:
 
-### 1. Enable Tables for Synchronization
+### Enable Tables for Synchronization
 From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.  
 Once enabled, all changes to those tables will automatically sync with connected devices.
 
 <VideoPlayer src={enableSync} />
 
 
-### 2. Get the Connection String
+### Get the Connection String
 In the **Configuration** tab, copy the connection string.  
 Use this in your application to initialize OffSync and connect your local SQLite database with SQLite Cloud.
 
 <VideoPlayer src={connectionUrlSync} />
 
 
-### 3. Manage Connected Devices
+### Manage Connected Devices
 In the **Devices** tab, you can view all devices currently connected to your database.  
 Here you can check their sync status and remove devices if needed.
 

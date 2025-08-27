@@ -12,16 +12,19 @@ import applyAnalyzer from '@docs-website-assets/introduction/video/dashboard_ana
 
 The Analyzer panel is a powerful tool that collects and categorizes all the queries executed on your cluster based on their execution time. It allows for intelligent and proactive analysis, and provides recommendations on which indexes to use to optimize frequently used queries.
 
-<VideoPlayer src={enableAnalyzer} />
+---
+
+## Getting Started
 
 By default, the Analyzer is turned off to avoid a small performance penalty. However, you can enable it by accessing the Settings button and setting the `query_analyzer_enabled` flag to 1, then pressing Save. You can also adjust the `query_analyzer_threshold` flag to set the minimum threshold query time (in milliseconds) that triggers a query to be included in the Analyzer. If the default value is too low, it's recommended to increase it to avoid having too many queries included in the panel.
+<VideoPlayer src={enableAnalyzer} />
 
 
-
+----
 ## Testing the Analyzer
+To test the Analyzer, we can go to the `Studio -> chinook.sqlite -> SQL Console` section and perform a query that filters the non-indexed Composer column of the Track table with the following statement: `SELECT * FROM Tracks WHERE Composer = 'AC/DC'`;
 <VideoPlayer src={applyAnalyzer} />
 
-To test the Analyzer, we can go to the `Studio -> chinook.sqlite -> SQL Console` section and perform a query that filters the non-indexed Composer column of the Track table with the following statement: `SELECT * FROM Tracks WHERE Composer = 'AC/DC'`;
 
 
 Once we have executed this query, we can go back to the Analyzer panel and see that it has been successfully analyzed by the **nxidiwbuhz** node. 
