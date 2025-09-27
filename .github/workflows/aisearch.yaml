@@ -1,0 +1,24 @@
+name: Process docs for SQLite AI Search
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - stage
+
+jobs:
+  aisearch:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: sqliteai/sqlite-aisearch-action@v1
+        with:
+          connection_string: ${{ secrets.PROJECT_STRING }}
+          base_url: ${{ vars.BASE_URL }}
+          database_name: documentation_ai.sqlite
