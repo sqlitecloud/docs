@@ -1,9 +1,9 @@
 ---
-title: SQLite-Sync
-description: SQLite Cloud is a distributed relational database system built on top of the SQLite database engine.
+title: SQLite-Sync Introduction
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
-slug: sqlite-sync
+slug: sqlite-sync-introduction
 ---
 
 # Introduction to SQLite Sync
@@ -93,6 +93,7 @@ SQLite Sync is ideal for building collaborative and distributed apps across web,
 ## Integrations
 
 Use SQLite-Sync alongside:
+
 - **[SQLite-AI](https://github.com/sqliteai/sqlite-ai)** – on-device inference, embedding generation, and model interaction directly into your database
 - **[SQLite-Vector](https://github.com/sqliteai/sqlite-vector)** – vector search from SQL
 - **[SQLite-JS](https://github.com/sqliteai/sqlite-js)** – define SQLite functions in JavaScript

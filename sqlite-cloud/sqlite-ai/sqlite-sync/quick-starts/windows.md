@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync WASM Quick Start
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-windows
+---
+
 ## Windows Quick Start
 
 This guide explains how to install SQLite on Windows with support for loading extensions.
@@ -69,6 +77,7 @@ This guide shows how to load a native SQLite extension (e.g., **`cloudsync.dll`*
 ### 1. Install the SQLite package
 
 Install the [`Microsoft.Data.Sqlite`](https://www.nuget.org/packages/Microsoft.Data.Sqlite) NuGet package:
+
 ```bash
 dotnet add package Microsoft.Data.Sqlite
 ```
@@ -78,6 +87,7 @@ dotnet add package Microsoft.Data.Sqlite
 Place `cloudsync.dll` in your project and configure it to copy to the output folder.
 
 Example directory structure:
+
 ```
 MyApp/
   Program.cs
@@ -87,6 +97,7 @@ MyApp/
 ```
 
 Configure your `MyApp.csproj` file:
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -112,6 +123,7 @@ Configure your `MyApp.csproj` file:
 ### 3. Load the extension in your code
 
 Create your `Program.cs` file to initialize SQLite and load the extension:
+
 ```csharp
 using System;
 using Microsoft.Data.Sqlite;
@@ -152,12 +164,14 @@ class Program
 ### 4. Run your application
 
 Build and run your application:
+
 ```bash
 dotnet build
 dotnet run
 ```
 
 You should see output similar to:
+
 ```
 SQLite version: 3.45.0
 cloudsync_version(): 1.0.0
@@ -208,6 +222,7 @@ SQLite searches for extensions in this order:
 ### Deployment
 
 When publishing your app, ensure the extension is included:
+
 ```bash
 dotnet publish -c Release -r win-x64 --self-contained false
 ```

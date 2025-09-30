@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync Linux Quick Start
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-linux
+---
+
 ## Linux Quick Start
 
 SQLite on Linux supports dynamic extension loading via `.so` shared libraries.

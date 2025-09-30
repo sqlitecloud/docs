@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync MacOS Quick Start
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-macos
+---
+
 # MacOS Quick Start Guide
 
 This guide explains how to install SQLite on macOS with support for loading extensions.

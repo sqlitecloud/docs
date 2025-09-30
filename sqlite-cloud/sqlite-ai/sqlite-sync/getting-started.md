@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync Getting Started
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-getting-started
+---
+
 # Getting Started
 
 Here's a quick example to get started with SQLite Sync:
@@ -12,7 +20,7 @@ Here's a quick example to get started with SQLite Sync:
 1. Create a new project and database in your [SQLite Cloud Dashboard](https://dashboard.sqlitecloud.io/)
 2. Copy your connection string and API key from the dashboard
 3. Create tables with identical schema in both local and cloud databases
-4. [Enable synchronization](https://docs.sqlitecloud.io/docs/offsync#:~:text=in%20the%20cloud.-,Configuring%20OffSync,-You%20can%20enable): go to Databases > Offsync page and select each table you want to synchronize in your database
+4. [Enable synchronization](/docs/offsync#:~:text=in%20the%20cloud.-,Configuring%20OffSync,-You%20can%20enable): go to Databases > Offsync page and select each table you want to synchronize in your database
 
 ### Local Database Setup
 

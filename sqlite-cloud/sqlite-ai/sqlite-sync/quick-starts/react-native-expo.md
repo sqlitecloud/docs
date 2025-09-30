@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync Expo Quick Start
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-expo
+---
+
 # React Native - Expo Quick Start Guide
 
 This guide shows how to integrate CloudSync extensions in Expo and React Native applications using OP-SQLite.

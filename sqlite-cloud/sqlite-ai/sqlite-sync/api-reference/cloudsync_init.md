@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync API Reference - cloudsync_init
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-api-cloudsync-init
+---
+
 ### `cloudsync_init(table_name, [crdt_algo], [force])`
 
 **Description:** Initializes a table for `sqlite-sync` synchronization. This function is idempotent and needs to be called only once per table on each site; configurations are stored in the database and automatically loaded with the extension.
@@ -18,7 +26,7 @@ When designing your database schema for SQLite Sync, follow these essential requ
 - **Foreign Key Compatibility**: Be aware of potential conflicts during CRDT merge operations and RLS policy interactions.
 - **Trigger Compatibility**: Triggers may cause duplicate operations or be called multiple times due to column-by-column processing.
 
-For comprehensive guidelines, see the [Database Schema Recommendations](https://github.com/sqliteai/sqlite-sync/blob/main/README.md#database-schema-recommendations) section.
+For comprehensive guidelines, see the [Database Schema Recommendations](/docs/sqlite-sync-best-practices) section.
 
 The function supports three overloads:
 

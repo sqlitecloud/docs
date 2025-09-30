@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync Best Practices
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-best-practices
+---
+
 ## Database Schema Recommendations
 
 When designing your database schema for SQLite Sync, follow these best practices to ensure optimal CRDT performance and conflict resolution:
@@ -64,7 +72,7 @@ CREATE TABLE users (
 
 ### Foreign Key Compatibility
 
-When using foreign key constraints with SQLite Sync, be aware that interactions with the CRDT merge algorithm and Row-Level Security policies may cause constraint violations. 
+When using foreign key constraints with SQLite Sync, be aware that interactions with the CRDT merge algorithm and Row-Level Security policies may cause constraint violations.
 
 #### Potential Conflicts
 
@@ -75,18 +83,21 @@ When using foreign key constraints with SQLite Sync, be aware that interactions 
 - If a foreign key column has a DEFAULT value, that value must exist in the referenced table
 
 **Row-Level Security and CASCADE Actions**
+
 - RLS policies may block operations required for maintaining referential integrity
 - CASCADE DELETE/UPDATE operations may fail if RLS prevents access to related rows
 
 #### Recommendations
 
 **Database Design Patterns**
+
 - Prefer application-level cascade logic over database-level CASCADE actions
 - Design RLS policies to accommodate referential integrity operations
 - Use nullable foreign keys where appropriate to avoid DEFAULT value issues
 - Alternatively, ensure DEFAULT values for foreign key columns exist in their referenced tables
 
 **Testing and Validation**
+
 - Test synchronization scenarios with foreign key constraints enabled
 - Monitor for constraint violations during sync operations in development
 
@@ -95,10 +106,12 @@ When using foreign key constraints with SQLite Sync, be aware that interactions 
 Be aware that certain types of triggers can cause errors during synchronization due to SQLite Sync's merge logic.
 
 **Duplicate Operations**
+
 - If a trigger modifies a table that is also synchronized with SQLite Sync, changes performed by the trigger may be applied twice during the merge operation
 - This can lead to constraint violations or unexpected data states depending on the table's constraints
 
 **Column-by-Column Processing**
+
 - SQLite Sync applies changes column-by-column during synchronization
 - UPDATE triggers may be called multiple times for a single row as each column is processed
 - This can result in unexpected trigger behavior

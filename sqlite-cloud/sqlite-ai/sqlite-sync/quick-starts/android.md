@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync Android Quick Start
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-android
+---
+
 # Android Quick Start Guide
 
 This guide shows how to integrate sqlite sync extension into your Android application. Since extension loading is disabled by default in Android's SQLite implementation, you need an alternative SQLite library that supports extensions.
@@ -18,8 +26,8 @@ dependencies {
 
 1. Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases)
 2. Download your preferred .zip architecture releases:
-    - arm64-v8a - Modern 64-bit ARM devices (recommended for most users)
-    - x86_64 - 64-bit x86 emulators and Intel-based devices
+   - arm64-v8a - Modern 64-bit ARM devices (recommended for most users)
+   - x86_64 - 64-bit x86 emulators and Intel-based devices
 3. Extract and place the `cloudsync.so` file in: `app/src/main/assets/lib/cloudsync.so`
 
 ### 3. Basic Integration

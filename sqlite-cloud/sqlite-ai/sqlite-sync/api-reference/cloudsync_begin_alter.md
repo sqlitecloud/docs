@@ -1,3 +1,11 @@
+---
+title: SQLite-Sync API Reference - cloudsync_begin_alter
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-api-cloudsync-begin-alter
+---
+
 ### `cloudsync_begin_alter(table_name)`
 
 **Description:** Prepares a synchronized table for schema changes. This function must be called before altering the table. Failure to use `cloudsync_begin_alter` and `cloudsync_commit_alter` can lead to synchronization errors and data divergence.
