@@ -1,9 +1,10 @@
----
+r---
 title: "Android Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-android
+
 ---
 
 This guide shows how to integrate sqlite sync extension into your Android application. Since extension loading is disabled by default in Android's SQLite implementation, you need an alternative SQLite library that supports extensions.
@@ -14,71 +15,92 @@ This example uses the [requery:sqlite-android](https://github.com/requery/sqlite
 
 In your `app/build.gradle.kts`:
 
-```kotlin
+<details>
+<summary>Groovy DSL</summary>
+
+```groovy
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
 dependencies {
-    implementation("com.github.requery:sqlite-android:3.49.0")
+    // ...
+    // Use requery's SQLite instead of Android's built-in SQLite to support loading custom extensions
+    implementation 'com.github.requery:sqlite-android:3.49.0'
+    // Both packages below are identical - use either one
+    implementation 'ai.sqlite:sync:0.8.39' // Maven Central
+    // implementation 'com.github.sqliteai:sqlite-sync:0.8.39' // JitPack (alternative)
 }
 ```
+</details>
 
-### 2. Bundle the Extension
+<details>
+<summary>Kotlin DSL</summary>
 
-1. Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases)
-2. Download your preferred .zip architecture releases:
-   - arm64-v8a - Modern 64-bit ARM devices (recommended for most users)
-   - x86_64 - 64-bit x86 emulators and Intel-based devices
-3. Extract and place the `cloudsync.so` file in: `app/src/main/assets/lib/cloudsync.so`
+```kotlin
+repositories {
+    google()
+    mavenCentral()
+    maven(url = "https://jitpack.io")
+}
+dependencies {
+    // ...
+    // Use requery's SQLite instead of Android's built-in SQLite to support loading custom extensions
+    implementation("com.github.requery:sqlite-android:3.49.0")
+    // Both packages below are identical - use either one
+    implementation("ai.sqlite:sync:0.8.39") // Maven Central
+    // implementation("com.github.sqliteai:sqlite-sync:0.8.39") // JitPack (alternative)
+}
+```
+</details>
+
+### 2. Update AndroidManifest.xml
+
+Add `android:extractNativeLibs="true"` to your `<application>` tag:
+
+```xml
+<application
+    android:extractNativeLibs="true"
+    ...>
+```
 
 ### 3. Basic Integration
 
 Here’s a complete example showing how to load the extension, create a table, initialize CloudSync, and perform network sync.
 
+> **Important:** Replace the following placeholders with your actual values:
+>
+> - `database_name` - Your database name
+> - `table_name` - Your table name
+> - `<connection-string>` - Your SQLiteCloud connection string
+> - `<api-key>` - Your SQLiteCloud API key
+
 ```kotlin
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import io.requery.android.database.sqlite.SQLiteCustomExtension
-import io.requery.android.database.sqlite.SQLiteCustomFunction
 import io.requery.android.database.sqlite.SQLiteDatabase
 import io.requery.android.database.sqlite.SQLiteDatabaseConfiguration
-import io.requery.android.database.sqlite.SQLiteFunction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.FileOutputStream
 
 class MainActivity : ComponentActivity() {
-    private fun copyExtensionToFilesDir(context: Context): File {
-        val assetManager = context.assets
-        val inputStream = assetManager.open("lib/cloudsync.so")
-
-        val outFile = File(context.filesDir, "cloudsync.so")
-        inputStream.use { input ->
-            FileOutputStream(outFile).use { output ->
-                input.copyTo(output)
-            }
-        }
-        return outFile
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // --- Copy extension from assets to filesystem ---
-        val extensionFile = copyExtensionToFilesDir(this)
-        val extensionPath = extensionFile.absolutePath
-
         // --- Create extension configuration ---
-        val cloudSyncExtension = SQLiteCustomExtension(extensionPath, null)
+        val cloudsyncExtension = SQLiteCustomExtension(applicationInfo.nativeLibraryDir + "/cloudsync", null)
 
         // --- Configure database with extension ---
         val config = SQLiteDatabaseConfiguration(
-            "${filesDir.path}/database_name.db",
+            cacheDir.path + "/database_name.db",
             SQLiteDatabase.CREATE_IF_NECESSARY or SQLiteDatabase.OPEN_READWRITE,
-            emptyList<SQLiteCustomFunction>(),
-            emptyList<SQLiteFunction>(),
-            listOf(cloudSyncExtension)
+            emptyList(),
+            emptyList(),
+            listOf(cloudsyncExtension)
         )
 
         // --- Open database ---
@@ -103,9 +125,9 @@ class MainActivity : ComponentActivity() {
                     // --- Create test table ---
                     val createTableSQL = """
                         CREATE TABLE IF NOT EXISTS $tableName (
-                          id TEXT PRIMARY KEY NOT NULL,
-                          value TEXT NOT NULL DEFAULT '',
-                          created_at TEXT DEFAULT CURRENT_TIMESTAMP
+                            id TEXT PRIMARY KEY NOT NULL,
+                            value TEXT NOT NULL DEFAULT '',
+                            created_at TEXT DEFAULT CURRENT_TIMESTAMP
                         );
                     """.trimIndent()
                     db.execSQL(createTableSQL)
@@ -121,10 +143,16 @@ class MainActivity : ComponentActivity() {
                     """.trimIndent())
 
                     // --- Initialize network connection ---
-                    db.rawQuery("SELECT cloudsync_network_init('<connection-string>');", null).use { it.moveToFirst() }
+                    db.rawQuery(
+                        "SELECT cloudsync_network_init('<connection-string>');",
+                        null
+                    ).use { it.moveToFirst() }
 
                     // --- Set API key ---
-                    db.rawQuery( "SELECT cloudsync_network_set_apikey('<api-key>');", null).use { it.moveToFirst() }
+                    db.rawQuery(
+                        "SELECT cloudsync_network_set_apikey('<api-key>');",
+                        null
+                    ).use { it.moveToFirst() }
 
                     // --- Run network sync multiple times ---
                     // Note: cloudsync_network_sync() returns > 0 if data was sent/received.
