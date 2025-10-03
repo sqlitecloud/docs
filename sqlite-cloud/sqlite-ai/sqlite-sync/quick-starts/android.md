@@ -6,11 +6,11 @@ status: publish
 slug: sqlite-sync-quick-start-android
 ---
 
-This guide shows how to integrate sqlite sync extension into your Android application. Since extension loading is disabled by default in Android's SQLite implementation, you need an alternative SQLite library that supports extensions.
-
-This example uses the [requery:sqlite-android](https://github.com/requery/sqlite-android) library, but other options include building a custom SQLite with extension support or using other third-party SQLite libraries that enable extension loading.
+This guide shows how to integrate sqlite-sync extension into your Android application. 
 
 ### 1. Add Dependencies
+
+You can [add sqlite-sync as a dependency to your Android project](https://central.sonatype.com/artifact/ai.sqlite/sync).
 
 <details>
 <summary>Groovy DSL</summary>
