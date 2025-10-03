@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync Getting Started
+title: "Getting Started"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-getting-started
 ---
-
-# Getting Started
 
 Here's a quick example to get started with SQLite Sync:
 

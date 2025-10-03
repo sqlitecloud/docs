@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync Android Quick Start
+title: "Android Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-android
 ---
-
-# Android Quick Start Guide
 
 This guide shows how to integrate sqlite sync extension into your Android application. Since extension loading is disabled by default in Android's SQLite implementation, you need an alternative SQLite library that supports extensions.
 

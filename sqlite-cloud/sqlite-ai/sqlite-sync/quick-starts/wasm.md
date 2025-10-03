@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync WASM Quick Start
+title: "WASM Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-wasm
 ---
-
-# WASM Quick Start Guide
 
 1. Install the WebAssembly (WASM) version of SQLite with the SQLite Sync extension enabled from npm:
 

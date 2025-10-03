@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_is_enabled
+title: "cloudsync_is_enabled(table_name)"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-is-enabled
 ---
-
-### `cloudsync_is_enabled(table_name)`
 
 **Description:** Checks if synchronization is enabled for the specified table.
 

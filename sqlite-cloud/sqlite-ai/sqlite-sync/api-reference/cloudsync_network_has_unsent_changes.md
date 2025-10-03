@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_network_has_unsent_changes
+title: "cloudsync_network_has_unsent_changes()"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-has-unsent-changes
 ---
-
-### `cloudsync_network_has_unsent_changes()`
 
 **Description:** Checks if there are any local changes that have not yet been sent to the remote server.
 

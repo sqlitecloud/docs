@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync Introduction
+title: "Introduction to SQLite Sync"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-introduction
 ---
-
-# Introduction to SQLite Sync
 
 [SQLite Sync](https://github.com/sqliteai/sqlite-sync) is a multi-platform extension that brings a true **local-first experience** to your applications with minimal effort. It extends standard SQLite tables with built-in support for offline work and automatic synchronization, allowing multiple devices to operate independently—even without a network connection—and seamlessly stay in sync. With SQLite Sync, developers can easily build **distributed, collaborative applications** while continuing to rely on the **simplicity, reliability, and performance of SQLite**.
 

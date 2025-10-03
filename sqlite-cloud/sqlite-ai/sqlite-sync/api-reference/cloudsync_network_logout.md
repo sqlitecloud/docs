@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_network_logout
+title: "cloudsync_network_logout()"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-logout
 ---
-
-### `cloudsync_network_logout()`
 
 **Description:** Logs out the current user and cleans up all local data from synchronized tables. This function deletes and then re-initializes synchronized tables, useful for switching users or resetting the local database. **Warning:** This function deletes all data from synchronized tables. Use with caution.
 

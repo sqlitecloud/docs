@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_network_sync
+title: "cloudsync_network_sync([wait_ms], [max_retries])"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-sync
 ---
-
-### `cloudsync_network_sync([wait_ms], [max_retries])`
 
 **Description:** Performs a full synchronization cycle. This function has two overloads:
 

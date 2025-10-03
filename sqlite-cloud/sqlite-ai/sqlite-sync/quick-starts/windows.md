@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync WASM Quick Start
+title: Windows Quick Start
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-windows
 ---
-
-## Windows Quick Start
 
 This guide explains how to install SQLite on Windows with support for loading extensions.
 

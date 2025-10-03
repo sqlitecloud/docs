@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync iOS Quick Start
+title: "iOS Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-ios
 ---
-
-# iOS Quick Start Guide
 
 This guide will walk you through setting up SQLite in Swift to load CloudsSync extensions.
 

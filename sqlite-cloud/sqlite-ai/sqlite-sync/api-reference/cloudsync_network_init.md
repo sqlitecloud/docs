@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_network_init
+title: "cloudsync_network_init(connection_string)"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-init
 ---
-
-### `cloudsync_network_init(connection_string)`
 
 **Description:** Initializes the `sqlite-sync` network component. This function parses the connection string to configure change checking and upload endpoints, and initializes the cURL library.
 

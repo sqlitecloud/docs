@@ -1,12 +1,10 @@
 ---
-title: SQLite-Sync API Reference - cloudsync_network_check_changes
+title: "cloudsync_network_check_changes()"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-check-changes
 ---
-
-### `cloudsync_network_check_changes()`
 
 **Description:** Checks the remote server for new changes and applies them to the local database.
 
