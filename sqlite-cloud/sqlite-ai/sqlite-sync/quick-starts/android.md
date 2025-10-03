@@ -1,10 +1,9 @@
-r---
+---
 title: "Android Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
 status: publish
 slug: sqlite-sync-quick-start-android
-
 ---
 
 This guide shows how to integrate sqlite sync extension into your Android application. Since extension loading is disabled by default in Android's SQLite implementation, you need an alternative SQLite library that supports extensions.
@@ -12,8 +11,6 @@ This guide shows how to integrate sqlite sync extension into your Android applic
 This example uses the [requery:sqlite-android](https://github.com/requery/sqlite-android) library, but other options include building a custom SQLite with extension support or using other third-party SQLite libraries that enable extension loading.
 
 ### 1. Add Dependencies
-
-In your `app/build.gradle.kts`:
 
 <details>
 <summary>Groovy DSL</summary>
