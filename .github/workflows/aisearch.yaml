@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: sqliteai/sqlite-aisearch-action@v1
         with:
           connection_string: ${{ secrets.PROJECT_STRING }}
