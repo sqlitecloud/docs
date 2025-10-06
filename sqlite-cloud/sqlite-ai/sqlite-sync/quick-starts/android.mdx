@@ -6,7 +6,9 @@ status: publish
 slug: sqlite-sync-quick-start-android
 ---
 
-This guide shows how to integrate sqlite-sync extension into your Android application. 
+import Callout from "@commons-components/Information/Callout.astro";
+
+This guide shows how to integrate sqlite-sync extension into your Android application.
 
 ### 1. Add Dependencies
 
@@ -30,6 +32,7 @@ dependencies {
     // implementation 'com.github.sqliteai:sqlite-sync:0.8.39' // JitPack (alternative)
 }
 ```
+
 </details>
 
 <details>
@@ -50,6 +53,7 @@ dependencies {
     // implementation("com.github.sqliteai:sqlite-sync:0.8.39") // JitPack (alternative)
 }
 ```
+
 </details>
 
 ### 2. Update AndroidManifest.xml
@@ -66,12 +70,19 @@ Add `android:extractNativeLibs="true"` to your `<application>` tag:
 
 Here’s a complete example showing how to load the extension, create a table, initialize CloudSync, and perform network sync.
 
-> **Important:** Replace the following placeholders with your actual values:
->
-> - `database_name` - Your database name
-> - `table_name` - Your table name
-> - `<connection-string>` - Your SQLiteCloud connection string
-> - `<api-key>` - Your SQLiteCloud API key
+<Callout type="note">
+    Replace the following placeholders with your actual values:
+    - `database_name` - Your database name
+    - `table_name` - Your table name
+    - `<connection-string>` - Your SQLiteCloud connection string
+    - `<api-key>` - Your SQLiteCloud API key
+</Callout>
+
+<Callout type="warning">
+  CloudSync functions must be executed with `SELECT`. In Android, use
+  `rawQuery()` to call them, and always call `moveToFirst()` (or `moveToNext()`)
+  on the cursor to ensure the query actually executes.
+</Callout>
 
 ```kotlin
 import android.os.Bundle
@@ -179,9 +190,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 ```
-
-### 4. Notes on SQLite Usage in Android
-
-CloudSync functions must be executed with `SELECT`. In Android, use `rawQuery()` to call them, and always call `moveToFirst()` (or `moveToNext()`) on the cursor to ensure the query actually executes.
-
-For detailed SQLite Sync API documentation, see the main [documentation](https://github.com/sqliteai/sqlite-sync/blob/main/README.md).
