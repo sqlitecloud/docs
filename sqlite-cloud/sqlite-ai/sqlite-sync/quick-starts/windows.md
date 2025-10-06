@@ -32,7 +32,7 @@ This guide explains how to install SQLite on Windows with support for loading ex
 
 5. **Load Extension**
 
-   ```
+   ```python
    import sqlite3
    import os
 

@@ -8,13 +8,13 @@ slug: sqlite-sync-quick-start-wasm
 
 1. Install the WebAssembly (WASM) version of SQLite with the SQLite Sync extension enabled from npm:
 
-    ```
+    ```bash
     npm install @sqliteai/sqlite-wasm
     ```
 
 2. Create an HTML file that imports the SQLite WASM module using an import map and references the JavaScript loader:
 
-    ```
+    ```html
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -41,7 +41,7 @@ slug: sqlite-sync-quick-start-wasm
 
 3. Create the JavaScript file (load_extension.js) that initializes the SQLite WASM worker and verifies the extension is loaded:
 
-    ```
+    ```javascript
     /**
     * This example uses the package `@sqliteai/sqlite-wasm`.
     * This version of SQLite WASM is bundled with SQLite Sync and SQLite Vector extensions.
