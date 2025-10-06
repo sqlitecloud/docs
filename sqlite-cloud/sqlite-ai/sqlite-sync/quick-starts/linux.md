@@ -40,7 +40,7 @@ apk add sqlite
 
 ## 2. Download the Extension
 
-Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases) and download the extension.
+Go to <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a> and download the extension.
 
 > For Alpine Linux: ensure to download the extension specifically for `musl-x86_64` or `musl-arm64` targets.
 

@@ -11,7 +11,7 @@ This guide explains how to install SQLite on Windows with support for loading ex
 ## Using SQLite with Python
 
 1. **Download Python**  
-   Get the latest Python for Windows from [python.org](https://www.python.org/downloads/windows/).
+   Get the latest Python for Windows from <a href="https://www.python.org/downloads/windows/" target="_blank">python.org</a>.
 
 2. **Install Python**
 
@@ -28,7 +28,7 @@ This guide explains how to install SQLite on Windows with support for loading ex
    ```
 
 4. **Download the Extension**
-   Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases) and download the extension.
+   Go to <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a> and download the extension.
 
 5. **Load Extension**
 
@@ -65,8 +65,8 @@ This guide shows how to load a native SQLite extension (e.g., **`cloudsync.dll`*
 
 - Windows x64
 - .NET 6+ SDK
-- [NuGet package manager](https://learn.microsoft.com/en-us/nuget/install-nuget-client-tools?tabs=windows)
-- The native extension file: `cloudsync.dll` (x64 build) - download from [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases)
+- <a href="https://learn.microsoft.com/en-us/nuget/install-nuget-client-tools?tabs=windows" target="_blank">NuGet package manager</a>
+- The native extension file: `cloudsync.dll` (x64 build) - download from <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a>
 
 > **Important:** Your app, `e_sqlite3.dll` (bundled by `Microsoft.Data.Sqlite`), and `cloudsync.dll` must all be the **same architecture** (typically x64).
 
@@ -74,7 +74,7 @@ This guide shows how to load a native SQLite extension (e.g., **`cloudsync.dll`*
 
 ### 1. Install the SQLite package
 
-Install the [`Microsoft.Data.Sqlite`](https://www.nuget.org/packages/Microsoft.Data.Sqlite) NuGet package:
+Install the <a href="https://www.nuget.org/packages/Microsoft.Data.Sqlite" target="_blank">`Microsoft.Data.Sqlite`</a> NuGet package:
 
 ```bash
 dotnet add package Microsoft.Data.Sqlite

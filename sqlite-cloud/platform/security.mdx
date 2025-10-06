@@ -34,7 +34,7 @@ There are two types of roles in SQLite Cloud:
 ### Built-in roles
 import Callout from "@commons-components/Information/Callout.astro"; 
 
-SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the [GRANT ROLE](https://docs.sqlitecloud.io/docs/role-commands) command, and custom roles can be created with the [CREATE ROLE](https://docs.sqlitecloud.io/docs/role-commands) command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
+SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the <a href="https://docs.sqlitecloud.io/docs/role-commands" target="_blank">GRANT ROLE</a> command, and custom roles can be created with the <a href="https://docs.sqlitecloud.io/docs/role-commands" target="_blank">CREATE ROLE</a> command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
 
 Here is an overview of the built-in roles:
 
@@ -60,7 +60,7 @@ Here is an overview of the built-in roles:
 
 
 <Callout type="note" title="Restrictions">
-To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/role-commands), [GRANT ROLE](/docs/role-commands), [GRANT PRIVILEGE](https://docs.sqlitecloud.io/docs/privilege-commands) and [SET PRIVILEGE](https://docs.sqlitecloud.io/docs/privilege-commands) commands, as well as during the [CREATE USER](https://docs.sqlitecloud.io/docs/user-commands) command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
+To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/role-commands), [GRANT ROLE](/docs/role-commands), <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">GRANT PRIVILEGE</a> and <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">SET PRIVILEGE</a> commands, as well as during the <a href="https://docs.sqlitecloud.io/docs/user-commands" target="_blank">CREATE USER</a> command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
 </Callout>
 
 ```bash
@@ -100,7 +100,7 @@ In a role-based access control system, a privilege represents a specific action 
 It defines what a user can or cannot do, such as reading, writing, or managing certain resources like tables, databases, or settings.
 Essentially, a privilege is a **right** or **ability** granted to a user or role, specifying their level of access and control over the system's resources.
 
-A privilege can be [granted](https://docs.sqlitecloud.io/docs/privilege-commands), [revoked](https://docs.sqlitecloud.io/docs/privilege-commands) and [assigned](https://docs.sqlitecloud.io/docs/privilege-commands) to a given role.
+A privilege can be <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">granted</a>, <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">revoked</a> and <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">assigned</a> to a given role.
 A role can contains any combination of privileges.
 
 ```bash
@@ -152,7 +152,7 @@ A role can contains any combination of privileges.
 
 {/*
 ## IP Restrictions
-The IP Restrictions panel enables the restriction of access for a role or user by allowing only specific IP addresses or ranges in [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) (for example 10.10.10.0/24). Both IPv4 and IPv6 addresses are supported.
+The IP Restrictions panel enables the restriction of access for a role or user by allowing only specific IP addresses or ranges in <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" target="_blank">CIDR notation</a> (for example 10.10.10.0/24). Both IPv4 and IPv6 addresses are supported.
 
 To add a new IP restriction to a user or role, click on the **Add IP** button.
 

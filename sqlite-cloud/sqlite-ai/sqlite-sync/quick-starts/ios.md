@@ -16,8 +16,7 @@ This guide will walk you through setting up SQLite in Swift to load CloudsSync e
 
 ## 2. Download and Add CloudSync Framework
 
-1. Download the latest version of `cloudsync-apple-xcframework` from:  
-   https://github.com/sqliteai/sqlite-sync/releases
+1. Download the latest version of `cloudsync-apple-xcframework` from <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">here</a>
 
 2. In Xcode, click on your project name in the source tree (top left with the Xcode logo)
 
@@ -49,7 +48,7 @@ You need a version of SQLite that supports loading extensions. You have two opti
 
 ### Option A: Download SQLite Amalgamation (Recommended)
 
-1. Download the amalgamation from: https://sqlite.org/download.html
+1. Download the amalgamation from <a href="https://sqlite.org/download.html" target="_blank">here</a>
 2. Create a new folder called **SQLite** in your Swift project in Xcode
 3. Copy `sqlite3.c` and `sqlite3.h` into this folder by dragging them in
 4. Enable all targets and confirm
@@ -205,4 +204,4 @@ This confirms that CloudSync is properly integrated and functional in your Swift
 
 ## Usage Example
 
-Check out the [Swift Multiplatform app](https://github.com/sqliteai/sqlite-sync/tree/main/examples/swift-multiplatform-app) for a complete implementation of using the SQLite CloudSync extension to sync data across devices.
+Check out the <a href="https://github.com/sqliteai/sqlite-sync/tree/main/examples/swift-multiplatform-app" target="_blank">Swift Multiplatform app</a> for a complete implementation of using the SQLite CloudSync extension to sync data across devices.

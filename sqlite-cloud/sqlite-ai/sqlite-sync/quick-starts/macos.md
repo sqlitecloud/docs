@@ -10,7 +10,7 @@ This guide explains how to install SQLite on macOS with support for loading exte
 
 ## macOS and xcframework
 
-On recent versions of macOS, the recommended way to load a SQLite extension is through the [.xcframework](https://github.com/sqliteai/sqlite-extensions-guide/blob/main/platforms/ios.md) approach, the same method used on iOS.
+On recent versions of macOS, the recommended way to load a SQLite extension is through the <a href="https://github.com/sqliteai/sqlite-extensions-guide/blob/main/platforms/ios.md" target="_blank">.xcframework</a> approach, the same method used on iOS.
 
 ## macOS and dylib
 
@@ -60,7 +60,7 @@ print("Extension loaded successfully.")
 ## Python on macOS
 
 The default Python on macOS doesn't support loading SQLite extensions.
-Install Python from the [official package](https://www.python.org/downloads/macos/) or use Homebrew Python instead:
+Install Python from the <a href="https://www.python.org/downloads/macos/" target="_blank">official package</a> or use Homebrew Python instead:
 
 ```bash
 brew install python
@@ -104,4 +104,4 @@ print(cursor.fetchone())
 
 ## Usage Example
 
-Check out the [Swift Multiplatform app](https://github.com/sqliteai/sqlite-sync/tree/main/examples/swift-multiplatform-app) for a complete implementation of using the SQLite CloudSync extension to sync data across devices.
+Check out the <a href="https://github.com/sqliteai/sqlite-sync/tree/main/examples/swift-multiplatform-app" target="_blank">Swift Multiplatform app</a> for a complete implementation of using the SQLite CloudSync extension to sync data across devices.

@@ -12,7 +12,7 @@ int SQCloudVMBindParameterCount (SQCloudVM *vm);
 ### Description
 This routine can be used to find the number of SQL parameters in a prepared statement. SQL parameters are tokens of the form "?", "?NNN", ":AAA", "$AAA", or "@AAA" that serve as placeholders for values that are bound to the parameters at a later time. This routine actually returns the index of the largest (rightmost) parameter. For all forms except ?NNN, this will correspond to the number of unique parameters. If parameters of the ?NNN form are used, there may be gaps in the list.
 
-This function resembles the [bind_parameter_count](https://www.sqlite.org/c3ref/bind_parameter_count.html) SQLite API. 
+This function resembles the <a href="https://www.sqlite.org/c3ref/bind_parameter_count.html" target="_blank">bind_parameter_count</a> SQLite API. 
 
 ### Parameters
 * **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sqlite-cloud/sdks/c/sqcloudvmcompile).

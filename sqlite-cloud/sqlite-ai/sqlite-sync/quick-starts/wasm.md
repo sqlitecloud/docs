@@ -97,4 +97,4 @@ slug: sqlite-sync-quick-start-wasm
 
 ## Usage Example
 
-Check out the [React/Vite app](https://github.com/sqliteai/sqlite-sync/tree/main/examples/sport-tracker-app) for a complete implementation of using the SQLite CloudSync extension to sync data across devices.
+Check out the <a href="https://github.com/sqliteai/sqlite-sync/tree/main/examples/sport-tracker-app" target="_blank">React/Vite app</a> for a complete implementation of using the SQLite CloudSync extension to sync data across devices.

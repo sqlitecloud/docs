@@ -37,7 +37,7 @@ npx expo prebuild
 
 ### Step 1: Download Android Extension
 
-1. Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases)
+1. Go to <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a>
 2. Download your preferred .zip architecture releases:
    - arm64-v8a - Modern 64-bit ARM devices (recommended for most users)
    - x86_64 - 64-bit x86 emulators and Intel-based devices
@@ -64,7 +64,7 @@ Extract the `.so` files in the following directory structure:
 
 ### Step 1: Download iOS Extension
 
-1. Go to [sqlite-sync releases](https://github.com/sqliteai/sqlite-sync/releases)
+1. Go to <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a>
 2. Download the `cloudsync-apple-xcframework-*.zip`
 3. Extract `CloudSync.xcframework`
 
@@ -166,4 +166,4 @@ const loadCloudSyncExtension = async () => {
 
 ## Usage Example
 
-Check out the [Expo to-do-app](https://github.com/sqliteai/sqlite-sync/tree/main/examples/to-do-app) for comprehensive usage examples and best practices.
+Check out the <a href="https://github.com/sqliteai/sqlite-sync/tree/main/examples/to-do-app" target="_blank">Expo to-do-app</a> for comprehensive usage examples and best practices.

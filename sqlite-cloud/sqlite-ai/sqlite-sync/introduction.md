@@ -6,7 +6,7 @@ status: publish
 slug: sqlite-sync-introduction
 ---
 
-[SQLite Sync](https://github.com/sqliteai/sqlite-sync) is a multi-platform extension that brings a true **local-first experience** to your applications with minimal effort. It extends standard SQLite tables with built-in support for offline work and automatic synchronization, allowing multiple devices to operate independently—even without a network connection—and seamlessly stay in sync. With SQLite Sync, developers can easily build **distributed, collaborative applications** while continuing to rely on the **simplicity, reliability, and performance of SQLite**.
+<a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> is a multi-platform extension that brings a true **local-first experience** to your applications with minimal effort. It extends standard SQLite tables with built-in support for offline work and automatic synchronization, allowing multiple devices to operate independently—even without a network connection—and seamlessly stay in sync. With SQLite Sync, developers can easily build **distributed, collaborative applications** while continuing to rely on the **simplicity, reliability, and performance of SQLite**.
 
 Under the hood, SQLite Sync uses advanced **CRDT (Conflict-free Replicated Data Type)** algorithms and data structures designed specifically for **collaborative, distributed systems**. This means:
 
@@ -34,7 +34,7 @@ Unlike traditional sync systems that require you to build and maintain a complex
 - Compatible with **any language or framework** that supports SQLite.
 - **No backend setup required** — SQLite Sync handles networking, change tracking, and conflict resolution for you.
 
-The sync layer is tightly integrated with [**SQLite Cloud**](https://sqlitecloud.io/), enabling seamless and secure data sharing across devices, users, and platforms. You get the power of cloud sync without the complexity.
+The sync layer is tightly integrated with <a href="https://sqlitecloud.io/" target="_blank">**SQLite Cloud**</a>, enabling seamless and secure data sharing across devices, users, and platforms. You get the power of cloud sync without the complexity.
 
 ## Row-Level Security
 
@@ -92,6 +92,6 @@ SQLite Sync is ideal for building collaborative and distributed apps across web,
 
 Use SQLite-Sync alongside:
 
-- **[SQLite-AI](https://github.com/sqliteai/sqlite-ai)** – on-device inference, embedding generation, and model interaction directly into your database
-- **[SQLite-Vector](https://github.com/sqliteai/sqlite-vector)** – vector search from SQL
-- **[SQLite-JS](https://github.com/sqliteai/sqlite-js)** – define SQLite functions in JavaScript
+- **<a href="https://github.com/sqliteai/sqlite-ai" target="_blank">SQLite-AI</a>** – on-device inference, embedding generation, and model interaction directly into your database
+- **<a href="https://github.com/sqliteai/sqlite-vector" target="_blank">SQLite-Vector</a>** – vector search from SQL
+- **<a href="https://github.com/sqliteai/sqlite-js" target="_blank">SQLite-JS</a>** – define SQLite functions in JavaScript

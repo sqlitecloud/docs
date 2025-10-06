@@ -12,7 +12,7 @@ bool SQCloudBlobReOpen (SQCloudBlob *blob, int64_t rowid);
 ### Description
 This function is used to move an existing BLOB handle so that it points to a different row of the same database table. The new row is identified by the **rowid** value passed as the second argument. Only the row can be changed. The database, table and column on which the blob handle is open remain the same.
 
-This function resembles the [sqlite3_blob_reopen](https://www.sqlite.org/c3ref/blob_reopen.html) SQLite API. 
+This function resembles the <a href="https://www.sqlite.org/c3ref/blob_reopen.html" target="_blank">sqlite3_blob_reopen</a> SQLite API. 
 
 ### Parameters
 * **blob**: a valid SQCloudBlob opaque datatype obtained by [SQCloudBlobOpen](/docs/sqlite-cloud/sdks/c/sqcloudblobopen)

@@ -10,12 +10,12 @@ Here's a quick example to get started with SQLite Sync:
 
 ### Prerequisites
 
-1. **SQLite Cloud Account**: Sign up at [SQLite Cloud](https://sqlitecloud.io/)
-2. **SQLite Sync Extension**: Download from [Releases](https://github.com/sqliteai/sqlite-sync/releases)
+1. **SQLite Cloud Account**: Sign up at <a href="https://sqlitecloud.io/" target="_blank">SQLite Cloud</a>
+2. **SQLite Sync Extension**: Download from <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">Releases</a>
 
 ### SQLite Cloud Setup
 
-1. Create a new project and database in your [SQLite Cloud Dashboard](https://dashboard.sqlitecloud.io/)
+1. Create a new project and database in your <a href="https://dashboard.sqlitecloud.io/" target="_blank">SQLite Cloud Dashboard</a>
 2. Copy your connection string and API key from the dashboard
 3. Create tables with identical schema in both local and cloud databases
 4. [Enable synchronization](/docs/offsync#:~:text=in%20the%20cloud.-,Configuring%20OffSync,-You%20can%20enable): go to Databases > Offsync page and select each table you want to synchronize in your database
@@ -118,7 +118,7 @@ SELECT cloudsync_terminate();
 
 ### For a Complete Example
 
-See the [examples](https://github.com/sqliteai/sqlite-sync/blob/main/examples/simple-todo-db/README.md) directory for a comprehensive walkthrough including:
+See the <a href="https://github.com/sqliteai/sqlite-sync/blob/main/examples/simple-todo-db/README.md" target="_blank">examples</a> directory for a comprehensive walkthrough including:
 
 - Multi-device collaboration
 - Offline scenarios

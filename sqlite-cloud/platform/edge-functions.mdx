@@ -14,7 +14,7 @@ Edge functions let you define custom logic to run on the same nodes as your data
 
 You can write edge functions directly in the SQLite Cloud dashboard using JavaScript, TypeScript, or SQL. Importing modules is not currently supported.
 
-Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud [Webhooks](https://docs.sqlitecloud.io/docs/webhooks). Each function runs in an isolated environment using the Bun runtime. 
+Edge functions can be called remotely over HTTP or Websockets via API, or triggered by database events via SQLite Cloud <a href="https://docs.sqlitecloud.io/docs/webhooks" target="_blank">Webhooks</a>. Each function runs in an isolated environment using the Bun runtime. 
 
 Turning on linearizable reads ensures strong consistency, but may introduce some latency. When eventual consistency is sufficient, we recommend leaving linearizable reads off.
 
@@ -81,7 +81,7 @@ return {
 }
 ```
 
-Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the [USE command](https://docs.sqlitecloud.io/docs/database-commands).
+Select the database you would like to access from the "Database" dropdown, or select the database you want to use in your SQL query with the <a href="https://docs.sqlitecloud.io/docs/database-commands" target="_blank">USE command</a>.
 
 ```js
 const customers = await connection.sql`USE DATABASE chinook.sqlite; SELECT * FROM customers;`;
@@ -94,10 +94,10 @@ return {
 Environment variables can be accessed and stored with the ENV command. ENV variables are stored in the server settings file and are project-specific.
 Use the following commands to set and read values in your server settings file:
 
-* [LIST ENV](https://docs.sqlitecloud.io/docs/settings-commands#list-env)
-* [SET ENV](https://docs.sqlitecloud.io/docs/settings-commands#set-env) key VALUE value
-* [GET ENV](https://docs.sqlitecloud.io/docs/settings-commands#get-env) key
-* [REMOVE ENV](https://docs.sqlitecloud.io/docs/settings-commands#remove-env) key
+* <a href="https://docs.sqlitecloud.io/docs/settings-commands#list-env" target="_blank">LIST ENV</a>
+* <a href="https://docs.sqlitecloud.io/docs/settings-commands#set-env" target="_blank">SET ENV</a> key VALUE value
+* <a href="https://docs.sqlitecloud.io/docs/settings-commands#get-env" target="_blank">GET ENV</a> key
+* <a href="https://docs.sqlitecloud.io/docs/settings-commands#remove-env" target="_blank">REMOVE ENV</a> key
 
 You can also add environment variables in the UI by navigating to the "Environment Variables" section and clicking the "Create" button.
 

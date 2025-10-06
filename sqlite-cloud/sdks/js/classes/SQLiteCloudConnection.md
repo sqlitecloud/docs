@@ -55,7 +55,7 @@ Parse and validate provided connectionString or configuration
 
 #### Defined in
 
-[src/drivers/connection.ts:16](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L16)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L16" target="_blank">src/drivers/connection.ts:16</a>
 
 ## Properties
 
@@ -67,7 +67,7 @@ Configuration passed by client or extracted from connection string
 
 #### Defined in
 
-[src/drivers/connection.ts:28](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L28)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L28" target="_blank">src/drivers/connection.ts:28</a>
 
 ___
 
@@ -79,7 +79,7 @@ Operations are serialized by waiting an any pending promises
 
 #### Defined in
 
-[src/drivers/connection.ts:31](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L31)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L31" target="_blank">src/drivers/connection.ts:31</a>
 
 ## Accessors
 
@@ -95,7 +95,7 @@ Returns true if connection is open
 
 #### Defined in
 
-[src/drivers/connection.ts:74](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L74)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L74" target="_blank">src/drivers/connection.ts:74</a>
 
 ## Methods
 
@@ -111,7 +111,7 @@ Disconnect from server, release transport.
 
 #### Defined in
 
-[src/drivers/connection.ts:100](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L100)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L100" target="_blank">src/drivers/connection.ts:100</a>
 
 ___
 
@@ -133,7 +133,7 @@ Connect will establish a tls or websocket transport to the server based on confi
 
 #### Defined in
 
-[src/drivers/connection.ts:38](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L38)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L38" target="_blank">src/drivers/connection.ts:38</a>
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[src/drivers/connection.ts:56](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L56)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L56" target="_blank">src/drivers/connection.ts:56</a>
 
 ___
 
@@ -177,7 +177,7 @@ Will log to console if verbose mode is enabled
 
 #### Defined in
 
-[src/drivers/connection.ts:62](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L62)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L62" target="_blank">src/drivers/connection.ts:62</a>
 
 ___
 
@@ -200,7 +200,7 @@ Will enquee a command to be executed and callback with the resulting rowset/resu
 
 #### Defined in
 
-[src/drivers/connection.ts:82](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L82)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L82" target="_blank">src/drivers/connection.ts:82</a>
 
 ___
 
@@ -223,7 +223,7 @@ Send a command, return the rowset/result or throw an error
 
 #### Defined in
 
-[src/drivers/connection.ts:59](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L59)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L59" target="_blank">src/drivers/connection.ts:59</a>
 
 ___
 
@@ -239,4 +239,4 @@ Enable verbose logging for debug purposes
 
 #### Defined in
 
-[src/drivers/connection.ts:77](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L77)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/connection.ts#L77" target="_blank">src/drivers/connection.ts:77</a>

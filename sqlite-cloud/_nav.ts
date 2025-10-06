@@ -615,7 +615,7 @@ const sidebarNav: SidebarNavStruct = [
   { title: "CLI", type: "inner", level: 0 },
   { title: "Introduction", filePath: "cli-commands", type: "inner", level: 1 },
 
-  { title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite/" },
+  { title: "SQLite", type: "inner", level: 0, href: "/docs/sqlite" },
 ];
 
 export default sidebarNav;
