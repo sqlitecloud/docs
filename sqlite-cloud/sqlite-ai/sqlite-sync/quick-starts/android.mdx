@@ -78,12 +78,6 @@ Here’s a complete example showing how to load the extension, create a table, i
     - `<api-key>` - Your SQLiteCloud API key
 </Callout>
 
-<Callout type="warning">
-  CloudSync functions must be executed with `SELECT`. In Android, use
-  `rawQuery()` to call them, and always call `moveToFirst()` (or `moveToNext()`)
-  on the cursor to ensure the query actually executes.
-</Callout>
-
 ```kotlin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -190,3 +184,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 ```
+
+<Callout type="warning">
+  CloudSync functions must be executed with `SELECT`. In Android, use
+  `rawQuery()` to call them, and always call `moveToFirst()` (or `moveToNext()`)
+  on the cursor to ensure the query actually executes.
+</Callout>
