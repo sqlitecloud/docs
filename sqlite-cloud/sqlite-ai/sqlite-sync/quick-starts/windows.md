@@ -11,6 +11,7 @@ This guide explains how to install SQLite on Windows with support for loading ex
 ## Using SQLite with Python
 
 1. **Download Python**  
+
    Get the latest Python for Windows from <a href="https://www.python.org/downloads/windows/" target="_blank">python.org</a>.
 
 2. **Install Python**
@@ -22,40 +23,40 @@ This guide explains how to install SQLite on Windows with support for loading ex
 3. **Check your installation**  
    Open Command Prompt and run:
 
-   ```bash
-   python --version
-   python -c "import sqlite3; print('SQLite version:', sqlite3.sqlite_version)"
-   ```
+  ```bash
+  python --version
+  python -c "import sqlite3; print('SQLite version:', sqlite3.sqlite_version)"
+  ```
 
 4. **Download the Extension**
+
    Go to <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">sqlite-sync releases</a> and download the extension.
 
 5. **Load Extension**
+  ```python
+  import sqlite3
+  import os
 
-   ```python
-   import sqlite3
-   import os
+  # Path to your compiled extension (.dll for Windows)
+  EXTENSION_PATH = os.path.abspath("cloudsync")
 
-   # Path to your compiled extension (.dll for Windows)
-   EXTENSION_PATH = os.path.abspath("cloudsync")
+  # Connect to SQLite and enable extension loading
+  conn = sqlite3.connect(":memory:")
+  conn.enable_load_extension(True)
 
-   # Connect to SQLite and enable extension loading
-   conn = sqlite3.connect(":memory:")
-   conn.enable_load_extension(True)
+  # Load the extension
+  try:
+      conn.load_extension(EXTENSION_PATH)
+      print("Extension loaded successfully.")
+  except sqlite3.OperationalError as e:
+      print(f"Failed to load extension: {e}")
 
-   # Load the extension
-   try:
-       conn.load_extension(EXTENSION_PATH)
-       print("Extension loaded successfully.")
-   except sqlite3.OperationalError as e:
-       print(f"Failed to load extension: {e}")
+  conn.enable_load_extension(False)
 
-   conn.enable_load_extension(False)
-
-   # Optionally test it (e.g., call a custom SQL function)
-   cursor = conn.execute("SELECT cloudsync_version();")
-   print(cursor.fetchone())
-   ```
+  # Optionally test it (e.g., call a custom SQL function)
+  cursor = conn.execute("SELECT cloudsync_version();")
+  print(cursor.fetchone())
+  ```
 
 ## Using SQLite with C#
 
