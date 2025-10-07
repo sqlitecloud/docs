@@ -6,7 +6,7 @@ status: publish
 slug: sdk-c-introduction
 ---
 
-SQCloud is the C application programmer's interface to SQLite Cloud. SQCloud is a set of library functions that allow client programs to pass queries and SQL commands to the SQLite Cloud backend server and to receive the results of these queries. In addition to the standard SQLite statements, several other [commands](/docs/commands) are supported.
+SQCloud is the C application programmer's interface to SQLite Cloud. SQCloud is a set of library functions that allow client programs to pass queries and SQL commands to the SQLite Cloud backend server and to receive the results of these queries. In addition to the standard SQLite statements, several other [commands](server-side-commands) are supported.
 
 The following files are required when compiling a C application:
 * sqcloud.c/.h
@@ -15,6 +15,6 @@ The following files are required when compiling a C application:
 
 The header file `sqcloud.h` must be included in your C application.
 
-All the communications between the client and the server are encrypted and so, you are required to link the LibreSSL (libtls) library with your client. More information about LibreSSL and how to compile it can be found in the official [LibreSSL](http://www.libressl.org) website.
+All the communications between the client and the server are encrypted and so, you are required to link the LibreSSL (libtls) library with your client. More information about LibreSSL and how to compile it can be found in the official <a href="http://www.libressl.org" target="_blank">LibreSSL</a> website.
 
-The SQCloud APIs implement the [SQLiteCloud Serialization Protocol](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md).
+The SQCloud APIs implement the <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SQLiteCloud Serialization Protocol</a>.

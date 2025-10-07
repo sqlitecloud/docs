@@ -1,0 +1,192 @@
+---
+title: "Android Quick Start Guide"
+description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+category: platform
+status: publish
+slug: sqlite-sync-quick-start-android
+---
+
+import Callout from "@commons-components/Information/Callout.astro";
+
+This guide shows how to integrate sqlite-sync extension into your Android application.
+
+### 1. Add Dependencies
+
+You can <a href="https://central.sonatype.com/artifact/ai.sqlite/sync" target="_blank">add sqlite-sync as a dependency to your Android project</a>.
+
+<details>
+<summary>Groovy DSL</summary>
+
+```groovy
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    // ...
+    // Use requery's SQLite instead of Android's built-in SQLite to support loading custom extensions
+    implementation 'com.github.requery:sqlite-android:3.49.0'
+    // Both packages below are identical - use either one
+    implementation 'ai.sqlite:sync:0.8.39' // Maven Central
+    // implementation 'com.github.sqliteai:sqlite-sync:0.8.39' // JitPack (alternative)
+}
+```
+
+</details>
+
+<details>
+<summary>Kotlin DSL</summary>
+
+```kotlin
+repositories {
+    google()
+    mavenCentral()
+    maven(url = "https://jitpack.io")
+}
+dependencies {
+    // ...
+    // Use requery's SQLite instead of Android's built-in SQLite to support loading custom extensions
+    implementation("com.github.requery:sqlite-android:3.49.0")
+    // Both packages below are identical - use either one
+    implementation("ai.sqlite:sync:0.8.39") // Maven Central
+    // implementation("com.github.sqliteai:sqlite-sync:0.8.39") // JitPack (alternative)
+}
+```
+
+</details>
+
+### 2. Update AndroidManifest.xml
+
+Add `android:extractNativeLibs="true"` to your `<application>` tag:
+
+```xml
+<application
+    android:extractNativeLibs="true"
+    ...>
+```
+
+### 3. Basic Integration
+
+Here’s a complete example showing how to load the extension, create a table, initialize CloudSync, and perform network sync.
+
+<Callout type="note">
+    Replace the following placeholders with your actual values:
+    - `database_name` - Your database name
+    - `table_name` - Your table name
+    - `<connection-string>` - Your SQLiteCloud connection string
+    - `<api-key>` - Your SQLiteCloud API key
+</Callout>
+
+```kotlin
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
+import io.requery.android.database.sqlite.SQLiteCustomExtension
+import io.requery.android.database.sqlite.SQLiteDatabase
+import io.requery.android.database.sqlite.SQLiteDatabaseConfiguration
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // --- Create extension configuration ---
+        val cloudsyncExtension = SQLiteCustomExtension(applicationInfo.nativeLibraryDir + "/cloudsync", null)
+
+        // --- Configure database with extension ---
+        val config = SQLiteDatabaseConfiguration(
+            cacheDir.path + "/database_name.db",
+            SQLiteDatabase.CREATE_IF_NECESSARY or SQLiteDatabase.OPEN_READWRITE,
+            emptyList(),
+            emptyList(),
+            listOf(cloudsyncExtension)
+        )
+
+        // --- Open database ---
+        val db = SQLiteDatabase.openDatabase(config, null, null)
+        val tableName = "table_name"
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                // --- Check CloudSync version ---
+                val version = db.rawQuery("SELECT cloudsync_version();", null).use { cursor ->
+                    if (cursor.moveToFirst()) cursor.getString(0) else null
+                }
+
+                if (version == null) {
+                    println("CLOUDSYNC-TEST: Failed to load SQLite Sync extension")
+                    return@withContext
+                }
+
+                println("CLOUDSYNC-TEST: SQLite Sync loaded successfully. Version: $version")
+
+                try {
+                    // --- Create test table ---
+                    val createTableSQL = """
+                        CREATE TABLE IF NOT EXISTS $tableName (
+                            id TEXT PRIMARY KEY NOT NULL,
+                            value TEXT NOT NULL DEFAULT '',
+                            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+                        );
+                    """.trimIndent()
+                    db.execSQL(createTableSQL)
+
+                    // --- Initialize CloudSync for table ---
+                    val initResult = db.rawQuery("SELECT cloudsync_init('$tableName');", null).use { it.moveToFirst() }
+
+                    // --- Insert sample data ---
+                    db.execSQL("""
+                        INSERT INTO $tableName (id, value) VALUES
+                            (cloudsync_uuid(), 'test1'),
+                            (cloudsync_uuid(), 'test2');
+                    """.trimIndent())
+
+                    // --- Initialize network connection ---
+                    db.rawQuery(
+                        "SELECT cloudsync_network_init('<connection-string>');",
+                        null
+                    ).use { it.moveToFirst() }
+
+                    // --- Set API key ---
+                    db.rawQuery(
+                        "SELECT cloudsync_network_set_apikey('<api-key>');",
+                        null
+                    ).use { it.moveToFirst() }
+
+                    // --- Run network sync multiple times ---
+                    // Note: cloudsync_network_sync() returns > 0 if data was sent/received.
+                    // It should ideally be called periodically to ensure both sending local
+                    // changes and receiving remote changes work reliably.
+                    repeat(2) { attempt ->
+                        try {
+                            val syncResult = db.rawQuery("SELECT cloudsync_network_sync();", null).use { cursor ->
+                                if (cursor.moveToFirst()) cursor.getInt(0) else 0
+                            }
+                            println("CLOUDSYNC-TEST: Network sync attempt ${attempt + 1}: result = $syncResult")
+                        } catch (e: Exception) {
+                            println("CLOUDSYNC-TEST: Sync attempt ${attempt + 1} failed: ${e.message}")
+                        }
+                    }
+                } catch (e: Exception) {
+                    println("CLOUDSYNC-TEST: Error - ${e.message}")
+                } finally {
+                    // --- Terminate CloudSync ---
+                    db.rawQuery("SELECT cloudsync_terminate();", null).use { it.moveToFirst() }
+
+                    // Close the database
+                    db.close()
+                }
+            }
+        }
+    }
+}
+```
+
+<Callout type="warning">
+  CloudSync functions must be executed with `SELECT`. In Android, use
+  `rawQuery()` to call them, and always call `moveToFirst()` (or `moveToNext()`)
+  on the cursor to ensure the query actually executes.
+</Callout>

@@ -7,7 +7,7 @@ slug: backup-commands
 ---
 
 ## APPLY BACKUP SETTINGS
-Several backup-related settings can be applied using the [SET DATABASE KEY](https://docs.sqlitecloud.io/docs/settings-commands#set-database-key) command.
+Several backup-related settings can be applied using the <a href="https://docs.sqlitecloud.io/docs/settings-commands#set-database-key" target="_blank">SET DATABASE KEY</a> command.
 
 The following keys affect the backup settings:
 * **backup**: set to 1 to activate a backup, 0 to disable.
@@ -28,7 +28,7 @@ BACKUP
 
 ### Return
 
-OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 
 ## LIST BACKUP SETTINGS
@@ -49,7 +49,7 @@ BACKUP
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **name**: database name
 * **enabled**: 1 enabled, 0 disabled
 * **backup_retention**: retention period
@@ -91,7 +91,7 @@ BACKUP
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **type**: can be snapshot or wal
 * **replica**: always S3 in this version
 * **generation**: backup generation ID
@@ -145,7 +145,7 @@ BACKUP
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with a single **name** column that returns all the databases with backup enabled.
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with a single **name** column that returns all the databases with backup enabled.
 
 ### Example
 
@@ -172,7 +172,7 @@ RESTORE BACKUP DATABASE **database_name** [GENERATION **generation**] [INDEX **i
 
 ### Return
 
-OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 ### Privileges
 

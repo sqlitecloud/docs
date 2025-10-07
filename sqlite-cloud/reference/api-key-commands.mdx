@@ -8,7 +8,7 @@ slug: api-key-commands
 ## CREATE APIKEY USER
 The CREATE APIKEY USER command creates a new APIKEY associated to a specific username and with a mnemonic name. The RESTRICTION option is currently unused and an expiration date can be set using the EXPIRATION parameter.
 
-It returns a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the new APIKEY.
+It returns a <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">String</a> with the new APIKEY.
 
 ### Syntax
 ```bash
@@ -22,7 +22,7 @@ USERADMIN
 ## LIST APIKEYS
 The LIST APIKEYS command retrieves all the APIKEYS created on the server. The USER parameter can be used to filter the result further.
 
-It returns a [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+It returns a <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **username**: user name
 * **key**: API KEY
 * **name**: mnemonic name
@@ -41,7 +41,7 @@ USERADMIN
 ## LIST MY APIKEYS
 The LIST MY APIKEYS command returns a list of all the APIKEYs associated with the username used in the current connection.
 
-It returns a [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+It returns a <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **username**: user name
 * **key**: API KEY
 * **name**: mnemonic name
@@ -60,7 +60,7 @@ USERADMIN
 ## SET APIKEY
 The SET KEY command sets or updates a **keyname** to a specific **keyvalue**. Once set, the server immediately uses the updated value (and automatically distributes it on the cluster).
 
-It returns OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+It returns OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 
 ### Syntax
@@ -75,7 +75,7 @@ SETTINGS
 ## REMOVE APIKEY
 The REMOVE APIKEY command permanently removes an APIKEY from the server.
 
-It returns OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+It returns OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 
 ### Syntax

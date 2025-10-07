@@ -12,7 +12,7 @@ int SQCloudBlobRead (SQCloudBlob *blob, void *buffer, int blen, int offset);
 ### Description
 The **SQCloudBlobRead** function is used to read data from an open BLOB handle into a caller-supplied buffer. **blen** bytes of data are copied into buffer **buffer** from the open BLOB, starting at offset **offset**.
 
-This function resembles the [sqlite3_blob_read](https://www.sqlite.org/c3ref/blob_read.html) SQLite API. 
+This function resembles the <a href="https://www.sqlite.org/c3ref/blob_read.html" target="_blank">sqlite3_blob_read</a> SQLite API. 
 
 ### Parameters
 * **blob**: a valid SQCloudBlob opaque datatype obtained by [SQCloudBlobOpen](/docs/sqlite-cloud/sdks/c/sqcloudblobopen)

@@ -18,7 +18,7 @@ Row-Level Security (RLS) allows you to define fine-grained access control polici
 RLS rules only affect users who are authenticated using [Access Tokens](/docs/access-tokens). Admins, APIKEYs, or other non-token users are not restricted by RLS.
 </Callout>
 
-RLS is a powerful feature for building secure, multi-tenant applications. When combined with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
+RLS is a powerful feature for building secure, multi-tenant applications. When combined with <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a>, it enables you to create robust **local-first apps** where user data is stored on the device for offline availability and superior performance.
 
 This architecture simplifies development by allowing your application to interact with a local database while SQLite Cloud [OffSync](/docs/offsync) transparently handles the synchronization with a central database. RLS ensures that each user's data is securely isolated during this process. The centralized database can then be used for powerful business analytics and reporting across all tenants, without compromising individual data privacy.
 
@@ -73,7 +73,7 @@ To help you create dynamic RLS policies, SQLite Cloud provides two functions to 
 
 These functions are particularly useful for creating policies that are based on user attributes.
 
-For more information on Access Tokens, see the [Access Tokens documentation](/docs/access-tokens). The API Documentation for the Access Tokens API can be found in the Weblite section in the [Dashboard](https://dashboard.sqlitecloud.io/).
+For more information on Access Tokens, see the [Access Tokens documentation](/docs/access-tokens). The API Documentation for the Access Tokens API can be found in the Weblite section in the <a href="https://dashboard.sqlitecloud.io/" target="_blank">Dashboard</a>.
 
 ### OLD and NEW References
 
@@ -260,7 +260,7 @@ This policy uses the `OLD` reference to check the value of the `status` column *
 
 ## Advanced: RLS and SQLite Sync
 
-When using RLS in conjunction with [SQLite Sync](https://github.com/sqliteai/sqlite-sync), it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
+When using RLS in conjunction with <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a>, it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
 
 To accommodate this, SQLite Cloud offers two modes for handling RLS during sync operations, configurable via the `rls_mode` server setting using the SQLite Cloud builtin command `SET KEY rls_mode TO <value>`.
 

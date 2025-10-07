@@ -98,7 +98,7 @@ Array\&lt;SQLiteCloudRow\&gt;.constructor
 
 #### Defined in
 
-[src/drivers/rowset.ts:41](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L41)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L41" target="_blank">src/drivers/rowset.ts:41</a>
 
 ## Properties
 
@@ -110,7 +110,7 @@ Actual data organized in rows
 
 #### Defined in
 
-[src/drivers/rowset.ts:72](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L72)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L72" target="_blank">src/drivers/rowset.ts:72</a>
 
 ___
 
@@ -122,7 +122,7 @@ Metadata contains number of rows and columns, column names, types, etc.
 
 #### Defined in
 
-[src/drivers/rowset.ts:69](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L69)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L69" target="_blank">src/drivers/rowset.ts:69</a>
 
 ___
 
@@ -168,7 +168,7 @@ Array of columns names
 
 #### Defined in
 
-[src/drivers/rowset.ts:93](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L93)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L93" target="_blank">src/drivers/rowset.ts:93</a>
 
 ___
 
@@ -184,7 +184,7 @@ Get rowset metadata
 
 #### Defined in
 
-[src/drivers/rowset.ts:98](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L98)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L98" target="_blank">src/drivers/rowset.ts:98</a>
 
 ___
 
@@ -200,7 +200,7 @@ Number of columns in row set
 
 #### Defined in
 
-[src/drivers/rowset.ts:88](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L88)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L88" target="_blank">src/drivers/rowset.ts:88</a>
 
 ___
 
@@ -216,7 +216,7 @@ Number of rows in row set
 
 #### Defined in
 
-[src/drivers/rowset.ts:83](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L83)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L83" target="_blank">src/drivers/rowset.ts:83</a>
 
 ___
 
@@ -236,7 +236,7 @@ https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md
 
 #### Defined in
 
-[src/drivers/rowset.ts:78](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L78)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L78" target="_blank">src/drivers/rowset.ts:78</a>
 
 ## Methods
 
@@ -522,7 +522,7 @@ Array.filter
 
 #### Defined in
 
-[src/drivers/rowset.ts:141](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L141)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L141" target="_blank">src/drivers/rowset.ts:141</a>
 
 ___
 
@@ -726,7 +726,7 @@ Return value of item at given row and column
 
 #### Defined in
 
-[src/drivers/rowset.ts:103](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L103)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L103" target="_blank">src/drivers/rowset.ts:103</a>
 
 ___
 
@@ -877,7 +877,7 @@ Array.map
 
 #### Defined in
 
-[src/drivers/rowset.ts:131](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L131)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L131" target="_blank">src/drivers/rowset.ts:131</a>
 
 ___
 
@@ -1145,7 +1145,7 @@ Array.slice
 
 #### Defined in
 
-[src/drivers/rowset.ts:113](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L113)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L113" target="_blank">src/drivers/rowset.ts:113</a>
 
 ___
 

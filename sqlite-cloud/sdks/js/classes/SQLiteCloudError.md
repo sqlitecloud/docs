@@ -59,7 +59,7 @@ Error.constructor
 
 #### Defined in
 
-[src/drivers/types.ts:102](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L102)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L102" target="_blank">src/drivers/types.ts:102</a>
 
 ## Properties
 
@@ -75,7 +75,7 @@ Error.cause
 
 #### Defined in
 
-[src/drivers/types.ts:111](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L111)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L111" target="_blank">src/drivers/types.ts:111</a>
 
 ___
 
@@ -87,7 +87,7 @@ Error code returned by drivers or server
 
 #### Defined in
 
-[src/drivers/types.ts:113](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L113)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L113" target="_blank">src/drivers/types.ts:113</a>
 
 ___
 
@@ -99,7 +99,7 @@ Additional error code
 
 #### Defined in
 
-[src/drivers/types.ts:115](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L115)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L115" target="_blank">src/drivers/types.ts:115</a>
 
 ___
 
@@ -139,7 +139,7 @@ Additional offset code in commands
 
 #### Defined in
 
-[src/drivers/types.ts:117](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L117)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L117" target="_blank">src/drivers/types.ts:117</a>
 
 ___
 

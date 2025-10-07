@@ -22,7 +22,7 @@ This function fails if any of the following conditions are true:
 * Column **colname** is part of an index, PRIMARY KEY or UNIQUE constraint and the blob is being opened for read/write access
 * Foreign key constraints are enabled, column **colname** is part of a child key definition and the blob is being opened for read/write access
 
-This function resembles the [sqlite3_blob_open](https://www.sqlite.org/c3ref/blob_open.html) SQLite API. 
+This function resembles the <a href="https://www.sqlite.org/c3ref/blob_open.html" target="_blank">sqlite3_blob_open</a> SQLite API. 
 
 ### Parameters
 * **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sqlite-cloud/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sqlite-cloud/sdks/c/sqcloudconnectwithstring)

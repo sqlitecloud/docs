@@ -16,7 +16,7 @@ const char *SQCloudErrorMsg (SQCloudConnection *connection);
 
 ### Description
 If the most recent API call associated with with database connection failed, then this APIs return information about the error.
-These functions resemble the [sqlite3_error_*](https://www.sqlite.org/c3ref/errcode.html) SQLite APIs. 
+These functions resemble the <a href="https://www.sqlite.org/c3ref/errcode.html" target="_blank">sqlite3_error_*</a> SQLite APIs. 
 
 
 ### Parameters
@@ -26,7 +26,7 @@ These functions resemble the [sqlite3_error_*](https://www.sqlite.org/c3ref/errc
 * **SQLiteIsError** returns `true` if the most recent API call failed.
 * **SQCloudIsSQLiteError** returns `true` if the most recent error is related to an SQLite operation.
 * **SQCloudErrorCode** returns the numeric error code (or 0 if no error).
-* **SQCloudExtendedErrorCode** returns the numeric [extended error code](https://www.sqlite.org/rescode.html#extrc) related to the failed SQLite operation.
+* **SQCloudExtendedErrorCode** returns the numeric <a href="https://www.sqlite.org/rescode.html#extrc" target="_blank">extended error code</a> related to the failed SQLite operation.
 * **SQCloudErrorOffset** returns the byte offset of the start of the most recent error references a specific token in the input SQL (if any). If the most recent error does not reference a specific token in the input SQL, then the **SQCloudErrorOffset** function returns -1.
 * **SQCloudErrorMsg** return English-language text that describes the error.
 
