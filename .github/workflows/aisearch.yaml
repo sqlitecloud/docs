@@ -23,3 +23,4 @@ jobs:
           base_url: ${{ vars.BASE_URL }}
           database_name: documentation_ai.sqlite
           source_files: ./
+          only_extensions: "md,mdx"
