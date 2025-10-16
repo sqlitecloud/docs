@@ -11,8 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # - uses: sqlitecloud/sqlite-ai-action@v1
-      #   with:
-      #     project-string: ${{ secrets.PROJECT_STRING }}
-      #     base-url: ${{ vars.BASE_URL }}
-      #     database: documentation_ai.sqlite
+      - uses: sqliteai/sqlite-aisearch-action@v1
+        with:
+          connection_string: ${{ secrets.PROJECT_STRING }}
+          base_url: ${{ vars.BASE_URL }}
+          database_name: documentation_ai.sqlite
+          source_files: ./
+          only_extensions: "md,mdx"
