@@ -1,6 +1,10 @@
 name: Process docs for SQLite AI Search
 
 on:
+  push:
+    branches:
+      - main
+      - stage
   workflow_dispatch:
   
 jobs:
