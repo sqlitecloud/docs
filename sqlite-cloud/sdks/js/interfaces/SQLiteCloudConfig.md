@@ -45,7 +45,7 @@ Optional identifier used for verbose logging
 
 #### Defined in
 
-[src/drivers/types.ts:62](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L62)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L62" target="_blank">src/drivers/types.ts:62</a>
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[src/drivers/types.ts:41](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L41)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L41" target="_blank">src/drivers/types.ts:41</a>
 
 ___
 
@@ -67,7 +67,7 @@ Connection string in the form of sqlitecloud://user:password@host:port/database?
 
 #### Defined in
 
-[src/drivers/types.ts:15](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L15)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L15" target="_blank">src/drivers/types.ts:15</a>
 
 ___
 
@@ -79,7 +79,7 @@ Create the database if it doesn't exist?
 
 #### Defined in
 
-[src/drivers/types.ts:37](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L37)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L37" target="_blank">src/drivers/types.ts:37</a>
 
 ___
 
@@ -91,7 +91,7 @@ Name of database to open
 
 #### Defined in
 
-[src/drivers/types.ts:34](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L34)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L34" target="_blank">src/drivers/types.ts:34</a>
 
 ___
 
@@ -103,7 +103,7 @@ Database will be created in memory
 
 #### Defined in
 
-[src/drivers/types.ts:39](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L39)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L39" target="_blank">src/drivers/types.ts:39</a>
 
 ___
 
@@ -115,7 +115,7 @@ Url where we can connect to a SQLite Cloud Gateway that has a socket.io deamon w
 
 #### Defined in
 
-[src/drivers/types.ts:59](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L59)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L59" target="_blank">src/drivers/types.ts:59</a>
 
 ___
 
@@ -127,7 +127,7 @@ Host name is required unless connectionString is provided, eg: xxx.sqlitecloud.i
 
 #### Defined in
 
-[src/drivers/types.ts:25](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L25)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L25" target="_blank">src/drivers/types.ts:25</a>
 
 ___
 
@@ -139,7 +139,7 @@ Connect using plain TCP port, without TLS encryption, NOT RECOMMENDED, TEST ONLY
 
 #### Defined in
 
-[src/drivers/types.ts:29](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L29)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L29" target="_blank">src/drivers/types.ts:29</a>
 
 ___
 
@@ -151,7 +151,7 @@ Do not send columns with more than max_data bytes
 
 #### Defined in
 
-[src/drivers/types.ts:47](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L47)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L47" target="_blank">src/drivers/types.ts:47</a>
 
 ___
 
@@ -163,7 +163,7 @@ Server should chunk responses with more than maxRows
 
 #### Defined in
 
-[src/drivers/types.ts:49](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L49)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L49" target="_blank">src/drivers/types.ts:49</a>
 
 ___
 
@@ -175,7 +175,7 @@ Server should limit total number of rows in a set to maxRowset
 
 #### Defined in
 
-[src/drivers/types.ts:51](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L51)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L51" target="_blank">src/drivers/types.ts:51</a>
 
 ___
 
@@ -187,7 +187,7 @@ Server should send BLOB columns
 
 #### Defined in
 
-[src/drivers/types.ts:45](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L45)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L45" target="_blank">src/drivers/types.ts:45</a>
 
 ___
 
@@ -199,7 +199,7 @@ Request for immediate responses from the server node without waiting for lineriz
 
 #### Defined in
 
-[src/drivers/types.ts:43](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L43)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L43" target="_blank">src/drivers/types.ts:43</a>
 
 ___
 
@@ -211,7 +211,7 @@ Password is required unless connection string is provided
 
 #### Defined in
 
-[src/drivers/types.ts:20](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L20)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L20" target="_blank">src/drivers/types.ts:20</a>
 
 ___
 
@@ -223,7 +223,7 @@ True if password is hashed, default is false
 
 #### Defined in
 
-[src/drivers/types.ts:22](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L22)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L22" target="_blank">src/drivers/types.ts:22</a>
 
 ___
 
@@ -235,7 +235,7 @@ Port number for tls socket
 
 #### Defined in
 
-[src/drivers/types.ts:27](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L27)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L27" target="_blank">src/drivers/types.ts:27</a>
 
 ___
 
@@ -247,7 +247,7 @@ Optional query timeout passed directly to TLS socket
 
 #### Defined in
 
-[src/drivers/types.ts:32](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L32)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L32" target="_blank">src/drivers/types.ts:32</a>
 
 ___
 
@@ -259,7 +259,7 @@ Custom options and configurations for tls socket, eg: additional certificates
 
 #### Defined in
 
-[src/drivers/types.ts:54](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L54)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L54" target="_blank">src/drivers/types.ts:54</a>
 
 ___
 
@@ -271,7 +271,7 @@ True if we should force use of SQLite Cloud Gateway and websocket connections, d
 
 #### Defined in
 
-[src/drivers/types.ts:57](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L57)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L57" target="_blank">src/drivers/types.ts:57</a>
 
 ___
 
@@ -283,7 +283,7 @@ User name is required unless connectionString is provided
 
 #### Defined in
 
-[src/drivers/types.ts:18](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L18)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L18" target="_blank">src/drivers/types.ts:18</a>
 
 ___
 
@@ -295,4 +295,4 @@ True if connection should enable debug logs
 
 #### Defined in
 
-[src/drivers/types.ts:64](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L64)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L64" target="_blank">src/drivers/types.ts:64</a>

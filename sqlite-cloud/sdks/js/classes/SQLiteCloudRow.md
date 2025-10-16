@@ -50,7 +50,7 @@ Column values are accessed by column name
 
 #### Defined in
 
-[src/drivers/rowset.ts:9](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L9)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L9" target="_blank">src/drivers/rowset.ts:9</a>
 
 ## Properties
 
@@ -60,7 +60,7 @@ Column values are accessed by column name
 
 #### Defined in
 
-[src/drivers/rowset.ts:21](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L21)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L21" target="_blank">src/drivers/rowset.ts:21</a>
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[src/drivers/rowset.ts:18](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L18)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L18" target="_blank">src/drivers/rowset.ts:18</a>
 
 ## Methods
 
@@ -86,7 +86,7 @@ Returns rowset data as a plain array of values
 
 #### Defined in
 
-[src/drivers/rowset.ts:31](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L31)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L31" target="_blank">src/drivers/rowset.ts:31</a>
 
 ___
 
@@ -102,4 +102,4 @@ Returns the rowset that this row belongs to
 
 #### Defined in
 
-[src/drivers/rowset.ts:25](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L25)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/rowset.ts#L25" target="_blank">src/drivers/rowset.ts:25</a>

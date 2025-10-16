@@ -27,7 +27,7 @@ Columns' metadata
 
 #### Defined in
 
-[src/drivers/types.ts:77](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L77)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L77" target="_blank">src/drivers/types.ts:77</a>
 
 ___
 
@@ -39,7 +39,7 @@ Number of columns
 
 #### Defined in
 
-[src/drivers/types.ts:74](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L74)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L74" target="_blank">src/drivers/types.ts:74</a>
 
 ___
 
@@ -51,7 +51,7 @@ Number of rows
 
 #### Defined in
 
-[src/drivers/types.ts:72](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L72)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L72" target="_blank">src/drivers/types.ts:72</a>
 
 ___
 
@@ -63,4 +63,4 @@ Rowset version 1 has column's name, version 2 has extended metadata
 
 #### Defined in
 
-[src/drivers/types.ts:70](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L70)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L70" target="_blank">src/drivers/types.ts:70</a>

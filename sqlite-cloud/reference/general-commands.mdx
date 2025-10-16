@@ -22,7 +22,7 @@ USERADMIN
 
 ### Return
 
-OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 ### Example
 
@@ -54,7 +54,7 @@ CLUSTERADMIN, CLUSTERMONITOR
 
 ### Return
 
-A single value (usually a [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md)) that depends on the input **key**.
+A single value (usually a <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">String</a>) that depends on the input **key**.
 
 ### Example
 
@@ -79,7 +79,7 @@ READWRITE
 
 ### Return
 
-A [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) set to the CREATE TABLE sql statement.
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">String</a> set to the CREATE TABLE sql statement.
 
 ### Example
 
@@ -104,7 +104,7 @@ NONE
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **command**: command syntax
 * **count**: how many times the command was executed
 * **avgtime**: average command execution time
@@ -160,7 +160,7 @@ USERADMIN, HOSTADMIN
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **id**: unique connection (client) ID
 * **address**: source connection IP address
 * **username**: username used to authenticate the connection
@@ -196,7 +196,7 @@ READWRITE
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **name**: index name
 * **tbl_name**: table name
 
@@ -236,7 +236,7 @@ CLUSTERADMIN, CLUSTERMONITOR
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **key**: server key
 * **value**: server value
 
@@ -307,7 +307,7 @@ READWRITE, DBADMIN
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with one **key** column that returns all the reserved SQLite keywords.
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with one **key** column that returns all the reserved SQLite keywords.
 
 ### Example
 
@@ -482,7 +482,7 @@ READWRITE
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with several columns that depends on the filters used in the command. The output is similar to the one obtains by calling the [sqlite3_table_column_metadata](https://www.sqlite.org/c3ref/table_column_metadata.html) API.
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with several columns that depends on the filters used in the command. The output is similar to the one obtains by calling the <a href="https://www.sqlite.org/c3ref/table_column_metadata.html" target="_blank">sqlite3_table_column_metadata</a> API.
 
 ### Example
 
@@ -589,7 +589,7 @@ READWRITE
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **schema**: database schema name
 * **name**: table name
 * **type**: always 'table' in this version
@@ -636,7 +636,7 @@ CLUSTERADMIN
 
 ### Return
 
-A [Rowset](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) with the following columns:
+A <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">Rowset</a> with the following columns:
 * **datetime**: the data time of the stat
 * **key**: stat name
 * **value**: stat value
@@ -710,7 +710,7 @@ NONE
 
 ### Return
 
-It returns the "PONG" [String](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md). 
+It returns the "PONG" <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">String</a>. 
 
 ### Example
 
@@ -735,7 +735,7 @@ NONE
 
 ### Return
 
-OK string or error value (see [SCSP](https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md) protocol).
+OK string or error value (see <a href="https://github.com/sqlitecloud/sdk/blob/master/PROTOCOL.md" target="_blank">SCSP</a> protocol).
 
 ### Example
 

@@ -8,13 +8,13 @@ slug: access-tokens
 
 Access Tokens let backend systems securely grant users, devices, tenants, etc. access to SQLite Cloud database and services (SQLite Sync, Weblite, etc.). These endpoints enable full token lifecycle management: creation, inspection, validation, update, and revocation. All endpoints require authentication. Use an **API Key** or an **Access Token** via the `Authorization` header.
 
-The API Documentation for the Access Tokens API can be found in the **Weblite** section in the [Dashboard](https://dashboard.sqlitecloud.io).
+The API Documentation for the Access Tokens API can be found in the **Weblite** section in the <a href="https://dashboard.sqlitecloud.io" target="_blank">Dashboard</a>.
 
 ---
 
 ## Example Using SQLite Cloud Access Tokens with Google Login
 
-In the repository on GitHub [sqlitecloud/examples](https://github.com/sqlitecloud/examples/tree/main/access-tokens-and-social-login), we created a simple app to demonstrate how to generate and use Access Tokens.
+In the repository on GitHub <a href="https://github.com/sqlitecloud/examples/tree/main/access-tokens-and-social-login" target="_blank">sqlitecloud/examples</a>, we created a simple app to demonstrate how to generate and use Access Tokens.
 
 We’ll log in with Google, grab a token, and use it to interact with SQLite Cloud Weblite APIs. Here’s how it works.
 
@@ -78,4 +78,4 @@ const res = await fetch("https://<your-project-url>/v2/weblite/sql", {
 ...
 ```
 
-The result depends on the [Row Level Security](https://docs.sqlitecloud.io/docs/rls) policies you enabled for the tables.
+The result depends on the [Row Level Security](rls) policies you enabled for the tables.

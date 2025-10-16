@@ -10,7 +10,7 @@ bool SQCloudVMIsReadOnly (SQCloudVM *vm);
 ```
 
 ### Description
-The **SQCloudVMIsReadOnly** interface returns true if and only if the prepared statement bound to vm makes no direct changes to the content of the database file. This routine returns false if there is any possibility that the statement might change the database file. A false return does not guarantee that the statement will change the database file. This function resembles the [sqlite3_stmt_readonly](https://www.sqlite.org/c3ref/stmt_readonly.html) SQLite API.
+The **SQCloudVMIsReadOnly** interface returns true if and only if the prepared statement bound to vm makes no direct changes to the content of the database file. This routine returns false if there is any possibility that the statement might change the database file. A false return does not guarantee that the statement will change the database file. This function resembles the <a href="https://www.sqlite.org/c3ref/stmt_readonly.html" target="_blank">sqlite3_stmt_readonly</a> SQLite API.
 
 ### Parameters
 * **vm**: A valid VM obtained by [SQCloudVMCompile](/docs/sqlite-cloud/sdks/c/sqcloudvmcompile).

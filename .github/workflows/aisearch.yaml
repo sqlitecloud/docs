@@ -2,17 +2,11 @@ name: Process docs for SQLite AI Search
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - stage
-
+  
 jobs:
-  aisearch:
+  docsearch:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
-    permissions:
-      contents: read
 
     steps:
       - uses: actions/checkout@v4

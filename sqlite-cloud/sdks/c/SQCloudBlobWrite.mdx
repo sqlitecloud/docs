@@ -13,7 +13,7 @@ int SQCloudBlobWrite (SQCloudBlob *blob, const void *buffer, int blen, int offse
 The **SQCloudBlobWrite** function is used to write data into an open BLOB handle from a caller-supplied buffer.
 **blen** bytes of data are copied from the buffer **buffer**into the open BLOB, starting at offset **offset**.
 
-This function resembles the [sqlite3_blob_write](https://www.sqlite.org/c3ref/blob_write.html) SQLite API. 
+This function resembles the <a href="https://www.sqlite.org/c3ref/blob_write.html" target="_blank">sqlite3_blob_write</a> SQLite API. 
 
 ### Parameters
 * **blob**: a valid SQCloudBlob opaque datatype obtained by [SQCloudBlobOpen](/docs/sqlite-cloud/sdks/c/sqcloudblobopen)

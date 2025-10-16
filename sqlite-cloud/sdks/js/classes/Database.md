@@ -84,7 +84,7 @@ EventEmitter.constructor
 
 #### Defined in
 
-[src/drivers/database.ts:33](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L33)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L33" target="_blank">src/drivers/database.ts:33</a>
 
 • **new Database**(`config`, `mode?`, `callback?`): [`Database`](database)
 
@@ -106,7 +106,7 @@ EventEmitter.constructor
 
 #### Defined in
 
-[src/drivers/database.ts:34](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L34)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L34" target="_blank">src/drivers/database.ts:34</a>
 
 ## Properties
 
@@ -118,7 +118,7 @@ Configuration used to open database connections
 
 #### Defined in
 
-[src/drivers/database.ts:57](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L57)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L57" target="_blank">src/drivers/database.ts:57</a>
 
 ___
 
@@ -130,7 +130,7 @@ Database connections
 
 #### Defined in
 
-[src/drivers/database.ts:60](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L60)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L60" target="_blank">src/drivers/database.ts:60</a>
 
 ___
 
@@ -215,7 +215,7 @@ calls to retrieve a previously unknown amount of rows.
 
 #### Defined in
 
-[src/drivers/database.ts:273](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L273)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L273" target="_blank">src/drivers/database.ts:273</a>
 
 ▸ **all**\<`T`\>(`sql`, `params`, `callback?`): [`Database`](database)
 
@@ -239,7 +239,7 @@ calls to retrieve a previously unknown amount of rows.
 
 #### Defined in
 
-[src/drivers/database.ts:274](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L274)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L274" target="_blank">src/drivers/database.ts:274</a>
 
 ___
 
@@ -266,7 +266,7 @@ parameters is emitted, regardless of whether a callback was provided or not.
 
 #### Defined in
 
-[src/drivers/database.ts:394](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L394)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L394" target="_blank">src/drivers/database.ts:394</a>
 
 ___
 
@@ -289,7 +289,7 @@ Set a configuration option for the database
 
 #### Defined in
 
-[src/drivers/database.ts:190](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L190)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L190" target="_blank">src/drivers/database.ts:190</a>
 
 ___
 
@@ -330,7 +330,7 @@ way to abort execution.
 
 #### Defined in
 
-[src/drivers/database.ts:312](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L312)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L312" target="_blank">src/drivers/database.ts:312</a>
 
 ▸ **each**\<`T`\>(`sql`, `params`, `callback?`, `complete?`): [`Database`](database)
 
@@ -355,7 +355,7 @@ way to abort execution.
 
 #### Defined in
 
-[src/drivers/database.ts:313](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L313)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L313" target="_blank">src/drivers/database.ts:313</a>
 
 ___
 
@@ -411,7 +411,7 @@ Emits given event with optional arguments on the next tick so callbacks can comp
 
 #### Defined in
 
-[src/drivers/database.ts:160](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L160)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L160" target="_blank">src/drivers/database.ts:160</a>
 
 ___
 
@@ -462,7 +462,7 @@ will be emitted on the database object.
 
 #### Defined in
 
-[src/drivers/database.ts:368](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L368)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L368" target="_blank">src/drivers/database.ts:368</a>
 
 ___
 
@@ -498,7 +498,7 @@ the only supported way is by column name.
 
 #### Defined in
 
-[src/drivers/database.ts:235](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L235)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L235" target="_blank">src/drivers/database.ts:235</a>
 
 ▸ **get**\<`T`\>(`sql`, `params`, `callback?`): [`Database`](database)
 
@@ -522,7 +522,7 @@ the only supported way is by column name.
 
 #### Defined in
 
-[src/drivers/database.ts:236](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L236)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L236" target="_blank">src/drivers/database.ts:236</a>
 
 ___
 
@@ -542,7 +542,7 @@ A configuration object
 
 #### Defined in
 
-[src/drivers/database.ts:176](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L176)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L176" target="_blank">src/drivers/database.ts:176</a>
 
 ___
 
@@ -564,7 +564,7 @@ Returns first available connection from connection pool
 
 #### Defined in
 
-[src/drivers/database.ts:67](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L67)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L67" target="_blank">src/drivers/database.ts:67</a>
 
 ___
 
@@ -588,7 +588,7 @@ Handles an error by closing the connection, calling the callback and/or emitting
 
 #### Defined in
 
-[src/drivers/database.ts:117](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L117)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L117" target="_blank">src/drivers/database.ts:117</a>
 
 ___
 
@@ -607,7 +607,7 @@ open to use this function.
 
 #### Defined in
 
-[src/drivers/database.ts:429](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L429)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L429" target="_blank">src/drivers/database.ts:429</a>
 
 ___
 
@@ -688,7 +688,7 @@ Loads a compiled SQLite extension into the database connection object.
 
 #### Defined in
 
-[src/drivers/database.ts:413](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L413)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L413" target="_blank">src/drivers/database.ts:413</a>
 
 ___
 
@@ -822,7 +822,7 @@ they are bound to the prepared statement before calling the callback.
 
 #### Defined in
 
-[src/drivers/database.ts:353](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L353)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L353" target="_blank">src/drivers/database.ts:353</a>
 
 ___
 
@@ -854,7 +854,7 @@ https://github.com/TryGhost/node-sqlite3/wiki/API#runsql--param---callback
 
 #### Defined in
 
-[src/drivers/database.ts:141](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L141)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L141" target="_blank">src/drivers/database.ts:141</a>
 
 ___
 
@@ -948,7 +948,7 @@ which it was called to allow for function chaining.
 
 #### Defined in
 
-[src/drivers/database.ts:202](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L202)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L202" target="_blank">src/drivers/database.ts:202</a>
 
 ▸ **run**\<`T`\>(`sql`, `params`, `callback?`): [`Database`](database)
 
@@ -972,7 +972,7 @@ which it was called to allow for function chaining.
 
 #### Defined in
 
-[src/drivers/database.ts:203](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L203)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L203" target="_blank">src/drivers/database.ts:203</a>
 
 ___
 
@@ -1001,7 +1001,7 @@ metadata in case of insert, update, delete.
 
 #### Defined in
 
-[src/drivers/database.ts:447](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L447)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L447" target="_blank">src/drivers/database.ts:447</a>
 
 ___
 
@@ -1017,4 +1017,4 @@ Enable verbose mode
 
 #### Defined in
 
-[src/drivers/database.ts:181](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L181)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/database.ts#L181" target="_blank">src/drivers/database.ts:181</a>

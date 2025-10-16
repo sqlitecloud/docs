@@ -56,7 +56,7 @@ slug: sdk-js-modules
 
 #### Defined in
 
-[src/drivers/types.ts:120](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L120)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/types.ts#L120" target="_blank">src/drivers/types.ts:120</a>
 
 ## Functions
 
@@ -78,7 +78,7 @@ Takes a generic value and escapes it so it can replace ? as a binding in a prepa
 
 #### Defined in
 
-[src/drivers/utilities.ts:70](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L70)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L70" target="_blank">src/drivers/utilities.ts:70</a>
 
 ___
 
@@ -100,7 +100,7 @@ Parse connectionString like sqlitecloud://username:password@host:port/database?o
 
 #### Defined in
 
-[src/drivers/utilities.ts:210](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L210)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L210" target="_blank">src/drivers/utilities.ts:210</a>
 
 ___
 
@@ -123,7 +123,7 @@ Take a sql statement and replaces ? or $named parameters that are properly seria
 
 #### Defined in
 
-[src/drivers/utilities.ts:105](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L105)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L105" target="_blank">src/drivers/utilities.ts:105</a>
 
 ___
 
@@ -145,4 +145,4 @@ Validate configuration, apply defaults, throw if something is missing or misconf
 
 #### Defined in
 
-[src/drivers/utilities.ts:173](https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L173)
+<a href="https://github.com/sqlitecloud/sqlitecloud-js/blob/f7cd658/src/drivers/utilities.ts#L173" target="_blank">src/drivers/utilities.ts:173</a>
