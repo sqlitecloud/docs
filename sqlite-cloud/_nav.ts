@@ -44,6 +44,7 @@ const sidebarNav: SidebarNavStruct = [
 	      { title: "cloudsync_network_logout", filePath: "sqlite-sync-api-cloudsync-network-logout", type: "inner", level: 2 },
   { title: "SQLite-Vector", filePath: "sqlite-vector", type: "inner", level: 0 },
   { title: "MCP (Model Context Protocol)", filePath: "mcp-server", type: "inner", level: 0 },
+  { title: "AI Search for your documents", filePath: "aisearch-documents", type: "inner", level: 0 },
 
   // ### CLOUD ###
   { title: "Cloud", type: "secondary", icon: "docs-star",},
