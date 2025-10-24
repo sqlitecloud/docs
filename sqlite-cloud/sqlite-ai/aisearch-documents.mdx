@@ -7,11 +7,11 @@ slug: aisearch-documents
 ---
 
 This guide shows you how to set up a ready-to-use AI semantic search for your documents and files.
-Using the [sqlite-aisearch-action](https://github.com/sqliteai/sqlite-aisearch-action), you can integrate document processing into your GitHub workflow and set up a chat bot on your site in just a few steps.
+Using the [sqlite-aisearch-action](https://github.com/sqliteai/sqlite-aisearch-action), you can integrate document processing into your GitHub workflow and set up a chatbot on your site in just a few steps.
 
 The semantic search is powered by [SQLite RAG](https://github.com/sqliteai/sqlite-rag).
 
-## Set Up Your GitHub Workflow
+## Step 1: Set Up Your GitHub Workflow
 
 1. **Get Your Connection String**: Ensure you have a project on the [SQLite Cloud dashboard](https://dashboard.sqlitecloud.io). If not, sign up for [SQLite AI](https://sqlite.ai) to create one for free.
 
@@ -42,7 +42,7 @@ jobs:
           source_files: ./path/to/documents
 ```
 
-## Create the Search Edge Function
+## Step 2: Create the Search Edge Function
 
 To enable search functionality on your indexed database, create an Edge Function using the provided template:
 
@@ -63,3 +63,59 @@ To enable search functionality on your indexed database, create an Edge Function
     ```
     GET https://myproject.cloud/v2/functions/aisearch-docs?query=what%27s+Offsync%3F
     ```
+
+## Integrate the Docs Chatbot in Your Website
+
+Once you have your search edge function deployed, you can easily add an interactive AI chatbot to your website. The chatbot provides a user-friendly interface for your documentation search, powered by the indexed content.
+
+### React Integration
+
+Install the chatbot package:
+
+```bash
+npm install @sqliteai/docs-chatbot
+```
+
+Then add it to your React application:
+
+```tsx
+import { DocsChatbot } from "@sqliteai/docs-chatbot";
+import "@sqliteai/docs-chatbot/style.css";
+
+function App() {
+  return (
+    <DocsChatbot
+      searchUrl="https://yourproject.sqlite.cloud/v2/functions/aisearch-docs"
+      apiKey="your-api-key"
+      title="Help Center"
+    />
+  );
+}
+```
+
+### Vanilla JavaScript
+
+For non-React applications, use the web component:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/@sqliteai/docs-chatbot/dist/umd/docs-chatbot.min.js"></script>
+
+    <docs-chatbot
+      search-url="https://yourproject.sqlite.cloud/v2/functions/aisearch-docs"
+      api-key="your-api-key"
+      title="Help Center"
+    >
+    </docs-chatbot>
+  </body>
+</html>
+```
+
+By default, the chatbot displays as a floating button in the bottom-right corner.
+For advanced configuration options including custom triggers, theming, and API reference, see the [full docs chatbot documentation](https://github.com/sqliteai/docs-chatbot).
