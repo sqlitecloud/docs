@@ -1,0 +1,133 @@
+---
+title: Build AI Search for Your Documentation
+description: SQLite AI Search for your documents and files
+category: platform
+status: publish
+slug: aisearch-documents
+---
+
+import Callout from "@commons-components/Information/Callout.astro";
+
+This guide shows you how to set up a ready-to-use AI semantic search for your documents and files.
+Using the [sqlite-aisearch-action](https://github.com/sqliteai/sqlite-aisearch-action), you can integrate document processing into your GitHub workflow and set up a chatbot on your site in just a few steps.
+
+The semantic search is powered by [SQLite RAG](https://github.com/sqliteai/sqlite-rag).
+
+## Step 1: Set Up Your GitHub Workflow
+
+1. **Get Your Connection String**: Ensure you have a project on the [SQLite Cloud dashboard](https://dashboard.sqlitecloud.io). If not, sign up for [SQLite AI](https://sqlite.ai) to create one for free.
+
+2. **Set GitHub Secret**: Add your connection string as `SQLITECLOUD_CONNECTION_STRING` in your repository secrets.
+
+3. **Add to Workflow**: Create or update your GitHub workflow:
+
+```yaml
+name: AI Search Index
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build AI Search Database
+        uses: sqliteai/sqlite-aisearch-action@v1
+        with:
+          connection_string: ${{ secrets.SQLITECLOUD_CONNECTION_STRING }}
+          base_url: https://docs.yoursite.com
+          database_name: aidocs_search.db
+          source_files: ./path/to/documents
+```
+
+## Step 2: Create the Search Edge Function
+
+To enable search functionality on your indexed database, create an Edge Function using the provided template:
+
+1. Access your dashboard at https://dashboard.sqlitecloud.io
+2. Navigate to the same project where your database was uploaded
+3. Go to the **Edge Functions** section
+   ![AISearch Edge Function](@docs-website-assets/aisearch-docs/edgefn_aisearch.png)
+4. Create a new `Javascript Function` and copy the code from [aisearch-docs.js](https://github.com/sqliteai/sqlite-aisearch-action/blob/main/search_edge_function_template/aisearch-docs.js) into the editor
+5. Deploy and test
+
+### How to Perform a Search
+
+1. Go to **Details** in the Edge Function panel and copy the **Function URL**
+   ![AISearch Edge Function Details](@docs-website-assets/aisearch-docs/edgefn_aisearch_details.png)
+2. Execute a GET request with a URL-encoded query as the `query` parameter
+
+   Example:
+
+   ```
+   GET https://myproject.cloud/v2/functions/aisearch-docs?query=what%27s+Offsync%3F
+   ```
+
+## Step 3: Integrate the Docs Chatbot in Your Website
+
+Once you have your search edge function deployed, you can easily add an interactive AI chatbot to your website. The chatbot provides a user-friendly interface for your documentation search, powered by the indexed content.
+
+![Docs Chatbot](@docs-website-assets/aisearch-docs/docs_chatbot.png)
+
+### React Integration
+
+Install the chatbot package:
+
+```bash
+npm install @sqliteai/docs-chatbot
+```
+
+Then add it to your React application:
+
+```tsx
+import { DocsChatbot } from "@sqliteai/docs-chatbot";
+import "@sqliteai/docs-chatbot/style.css";
+
+function App() {
+  return (
+    <DocsChatbot
+      searchUrl="https://yourproject.sqlite.cloud/v2/functions/aisearch-docs"
+      apiKey="your-api-key"
+      title="Help Center"
+    />
+  );
+}
+```
+
+<Callout type="note">
+  - Replace the `searchUrl` with your **Function URL** from Step 2 
+  - For the `apiKey`, you need to use an API key with read
+  permissions on your AI docs database. Learn how to create and manage API keys
+  in the [API Key documentation](/docs/apikey).
+</Callout>
+
+### Vanilla JavaScript
+
+For non-React applications, use the web component:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/@sqliteai/docs-chatbot/dist/umd/docs-chatbot.min.js"></script>
+
+    <docs-chatbot
+      search-url="https://yourproject.sqlite.cloud/v2/functions/aisearch-docs"
+      api-key="your-api-key"
+      title="Help Center"
+    >
+    </docs-chatbot>
+  </body>
+</html>
+```
+
+By default, the chatbot displays as a floating button in the bottom-right corner.
+For advanced configuration options including custom triggers, theming, and API reference, see the [full docs chatbot documentation](https://github.com/sqliteai/docs-chatbot).
