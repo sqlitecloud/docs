@@ -9,6 +9,8 @@ import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
 import enableAnalyzer from '@docs-website-assets/introduction/video/dashboard_enable_query_analyzer.mp4';
 import applyAnalyzer from '@docs-website-assets/introduction/video/dashboard_analyzer_apply_suggestion.mp4';
 
+import Callout from "@commons-components/Information/Callout.astro";
+
 
 The Analyzer panel is a powerful tool that collects and categorizes all the queries executed on your cluster based on their execution time. It allows for intelligent and proactive analysis, and provides recommendations on which indexes to use to optimize frequently used queries.
 
@@ -16,21 +18,40 @@ The Analyzer panel is a powerful tool that collects and categorizes all the quer
 
 ## Getting Started
 
-By default, the Analyzer is turned off to avoid a small performance penalty. However, you can enable it by accessing the Settings button and setting the `query_analyzer_enabled` flag to 1, then pressing Save. You can also adjust the `query_analyzer_threshold` flag to set the minimum threshold query time (in milliseconds) that triggers a query to be included in the Analyzer. If the default value is too low, it's recommended to increase it to avoid having too many queries included in the panel.
+By default, the Analyzer is disabled to avoid unnecessary overhead. You can enable it directly from the top-left dropdown menu in the Analyzer panel.
+
+Simply click on the dropdown (initially labeled **Disabled**) and select a monitoring threshold. You can choose a preset value (e.g., **Threshold 10ms**, **Threshold 100ms**) or define a **Custom Threshold**. Only queries taking longer than the selected time (in milliseconds) will be recorded and analyzed.
+
+
+<Callout type="warning">
+Query Analyzer is a **debugging tool**. <br/>It's recommended to keep it active only for the time strictly necessary to identify and optimize queries.
+</Callout>
+
+
 <VideoPlayer src={enableAnalyzer} />
+
 
 
 ----
 ## Testing the Analyzer
-To test the Analyzer, we can go to the `Studio -> chinook.sqlite -> SQL Console` section and perform a query that filters the non-indexed Composer column of the Track table with the following statement: `SELECT * FROM Tracks WHERE Composer = 'AC/DC'`;
+To test the Analyzer, we can navigate to the `Studio -> chinook.sqlite -> SQL Console` section and perform a query that filters the non-indexed `Composer` column of the `Track` table using the following statement: 
+
+`SELECT * FROM Tracks WHERE Composer = 'AC/DC';`
+
 <VideoPlayer src={applyAnalyzer} />
 
+Once the query is executed, return to the **Analyzer** panel. You will see the query listed in the table along with execution statistics, such as **Count**, **Avg. Time (ms)**, and **Max Time (ms)**.
 
+### Analyzing Performance and Applying Suggestions
 
-Once we have executed this query, we can go back to the Analyzer panel and see that it has been successfully analyzed by the **nxidiwbuhz** node. 
+Click on the query row to open the **Query Details** side panel. This panel provides in-depth information organized into three tabs:
 
+1.  **Query**: Displays the full SQL statement (with an option to copy it).
+2.  **Current Execution Plan**: Shows how the database engine currently processes the query (e.g., `SCAN TABLE` indicates a full table scan, which is often inefficient).
+3.  **Index Suggestions**: This is the most critical section for optimization. It displays **Candidate Indexes** and a **Suggested Index**.
 
-By selecting **Details** and **Plan**, we can get more in-depth information about the execution of this query over time. However, what we're most interested in is the intelligent recommendation, which can be found by selecting **Suggest**. In the Indexes field, we can find the optimal index to apply to our database, which will speed up all queries on the Track table filtered by the Composer column.
+To optimize your database performance, navigate to the **Index Suggestions** tab. 
 
+If an optimization is available, you will see a proposed `CREATE INDEX` statement. 
 
-To apply the recommended index(es), simply select **Apply** and they will be automatically written and distributed in the `Chinook.sqlite` database.
+Simply click the **Apply All Suggestions** button. The Analyzer will automatically create and distribute the optimal index in the `chinook.sqlite` database, speeding up future queries filtered by the `Composer` column.
