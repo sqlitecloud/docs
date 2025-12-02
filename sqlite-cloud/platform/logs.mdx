@@ -1,0 +1,84 @@
+---
+title: Logs
+description: View detailed insights into your SQLite Cloud project's operations to monitor activity, debug issues, and track system behavior in real time.
+category: platform
+status: publish
+slug: logs
+---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import logsVideo from '@docs-website-assets/introduction/video/dashboard_logs.mp4';
+
+
+Logs provide detailed insights into your SQLite Cloud project's operations, helping you monitor activity, debug issues, and track system behavior in real time. The Logs panel displays a comprehensive view of all events occurring across your cluster nodes.
+
+
+---
+
+## Key Features
+
+- **Log Monitoring**: View recent log entries with manual refresh capability to get the latest activity
+- **Filtering Options**: Filter logs by time range, specific nodes, and search through messages
+- **Detailed Context**: Each log entry includes timestamp, severity level, source, and detailed message information
+
+<VideoPlayer src={logsVideo} />
+
+---
+
+## Accessing Logs
+
+Navigate to the **Logs** section from your SQLite Cloud dashboard to view your project's log entries. The interface displays logs in a table format with the following columns:
+
+- **Time**: Timestamp when the event occurred (in UTC)
+- **Level**: Severity level of the log entry 
+- **Source**: Component or service that generated the log
+- **Log Type**: Category of the log entry
+- **Message**: Detailed description of the logged event
+
+---
+
+## Filtering Logs
+
+### Timestamp Range
+
+Use the timestamp range selector to filter logs by time period. Available options include:
+
+- Last 30 minutes
+- Last hour
+- Last 12 hours
+- Last day
+- Last 3 days
+- Last week
+- Last 2 weeks
+- Last 30 days
+- Custom date range (using the calendar picker)
+
+### Node Filtering
+
+Filter logs by specific cluster nodes using the **Nodes** section on the left sidebar. You can:
+
+- Search for specific nodes using the search box
+- Select individual nodes to view their logs
+- View the node location (e.g., US East)
+
+### Search Logs
+
+Use the search box at the top of the logs table to filter entries by message content. This helps you quickly locate specific errors or events.
+
+---
+
+## Viewing Log Details
+
+Click on any log entry to view detailed information in the **Log Details** panel. This panel displays:
+
+- **Timestamp**: Exact time of the event
+- **Level**: Severity level
+- **Source**: Originating component
+- **Node ID**: Specific node that generated the log
+- **Log Type**: Category of the event
+- **Message**: Full message with complete error details or event information
+
+---
+
+## Refreshing Logs
+
+Click the **Refresh** button in the top-right corner to manually update the log list and view the most recent entries. This ensures you're viewing the latest activity from your cluster.

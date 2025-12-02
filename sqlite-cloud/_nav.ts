@@ -299,6 +299,7 @@ const sidebarNav: SidebarNavStruct = [
   },
   { title: "Backups", filePath: "backups", type: "inner", level: 0 },
   { title: "Query Analyzer", filePath: "analyzer", type: "inner", level: 0 },
+  { title: "Logs", filePath: "logs", type: "inner", level: 0 },
   { title: "Extensions", filePath: "extensions", type: "inner", level: 0 },
   { title: "Weblite (REST API)", filePath: "weblite", type: "inner", level: 0 },
 
