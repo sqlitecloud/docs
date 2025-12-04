@@ -1,0 +1,113 @@
+---
+title: Users
+description: Manage users, credentials, and access scopes in SQLite Cloud.
+category: platform
+status: publish
+slug: users
+---
+
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import userCreationFlow from '@docs-website-assets/introduction/video/users/dashboard_user_creation_flow.mp4';
+import userManagementActions from '@docs-website-assets/introduction/video/users/dashboard_user_management_actions.mp4';
+import userPswUpdate from '@docs-website-assets/introduction/video/users/dashboard_user_password_update.mp4';
+import userGrantingRole from '@docs-website-assets/introduction/video/users/dashboard_granting_roles_scope.mp4';
+import userRemoveRole from '@docs-website-assets/introduction/video/users/dashboard_remove_roles_scope.mp4';
+import userCreateApikey from '@docs-website-assets/introduction/video/users/dashboard_users_create_api_key.mp4';
+import userManageApikey from '@docs-website-assets/introduction/video/users/dashboard_users_manage_api_key.mp4';
+
+
+SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability. In SQLite Cloud, roles serve as the foundation blocks for user access, and the level of user access to the database system is determined by the assigned roles. Users have no access to the system outside the designated roles.
+
+You can manage your cluster's users via the SQLite Cloud Dashboard under the **Users** section.
+
+---
+
+### Creating a User
+
+To add a new user to your cluster:
+
+1. Navigate to the **Users** section in the left sidebar.
+2. Click the **+** button next to the search bar.
+3. In the **Create User** modal, enter the **User Name**.
+4. Enter a **Password** or use the **Generate** button to create a secure one automatically.
+5. Confirm the password and click **Create**.
+
+<VideoPlayer src={userCreationFlow} />
+
+### Managing User Status
+
+Once a user is selected from the list, you can manage their lifecycle using the controls in the top right corner or the context menu (three dots) next to their name in the list.
+
+*   **Disable User:** Click **Disable User** to temporarily revoke access without deleting the account or its configurations.
+*   **Rename:** Change the username while preserving assigned roles and keys.
+*   **Delete:** Permanently remove the user from the cluster.
+
+<VideoPlayer src={userManagementActions} />
+
+---
+
+## User Configuration & Password Rotation
+
+You can update a user's password at any time through the **Configuration** tab.
+
+1. Select the user from the list.
+2. Click on the **Configuration** tab.
+3. Enter the **New Password** and confirm it in the **Confirm Password** field.
+4. Click **Update Password**.
+
+<VideoPlayer src={userPswUpdate} />
+
+---
+
+## Assigning Roles
+
+The **Roles** tab allows you to control what a user can do. A user can have multiple roles, and the combination of these roles determines their effective permissions.
+
+### Granting a Role
+
+The Grant Roles interface allows you to assign roles with precise scoping (limiting a role to specific databases or tables) directly from the assignment screen.
+
+1. Select the user and ensure you are on the **Roles** tab.
+2. Click the **Grant Roles** button.
+3. **Select Scope (Optional):** By default, roles apply to all databases (`*`) and all tables (`*`). You can restrict the role by selecting a specific **Database** and **Table** from the dropdowns at the top.
+4. **Select Roles:** Browse the list of roles. You can filter by **Built-in** or **Custom** roles using the radio buttons, or use the search bar to find a specific role.
+5. Check the box next to the role(s) you wish to assign.
+6. Click **Grant**.
+
+<VideoPlayer src={userGrantingRole} />
+
+### Revoking a Role
+
+To remove a role from a user:
+1. In the **Roles** tab, find the role in the list.
+2. Click the context menu (three dots) on the right side of the role row.
+3. Select **Delete**.
+
+<VideoPlayer src={userRemoveRole} />
+
+
+---
+
+## User API Keys
+
+Authentication is primarily handled via **API Keys**. You can generate multiple keys specific to a user, which inherit that user's permissions. These keys inherit the user's permissions and are ideal for programmatic access, SDKs, and REST API usage
+
+### Creating an API Key
+
+1. Select the user and switch to the **API Keys** tab.
+2. Click **Create API Key**.
+3. **Name:** Give the key a descriptive name (e.g., "Production App", "Testing Script").
+4. **Expiration:** Choose whether the key **Never expires** or **Set expiration date** to have it automatically invalidate after a specific time.
+5. Click **Create**.
+
+<VideoPlayer src={userCreateApikey} />
+
+### Managing API Keys
+
+Existing keys are listed in the API Keys tab. From here you can:
+
+*   **View Details:** See the key name, masked value, creation date, and expiration status.
+*   **Regenerate:** If a key is compromised, use the context menu to **Regenerate** it. This invalidates the old key string and provides a new one immediately.
+*   **Delete:** Permanently remove an API Key to revoke access for any application using it.
+
+<VideoPlayer src={userManageApikey} />
