@@ -6,6 +6,9 @@ status: publish
 slug: offsync
 ---
 
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import enableDisableSync from '@docs-website-assets/introduction/video/offsync/dashboard_offsync_enable_disable.mp4';
+
 import Callout from "@commons-components/Information/Callout.astro";
 
 OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
@@ -39,10 +42,15 @@ When OffSync is not yet active for a database, the panel shows a brief explanati
 
 To disable OffSync, click the **Disable OffSync** button in the top-right corner of the panel and confirm the action in the dialog that appears.
 
+<VideoPlayer src={enableDisableSync} />
+
 ### Enable Tables for Synchronization
 
 From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.
 Once enabled, all changes to those tables will automatically sync with connected devices.
+
+{/* VIDEO: dashboard_offsync_sync_tables.mp4
+    Show: Sync Tables tab open → toggle one or more tables on → confirmation that sync is active for those tables. */}
 
 ### Configuration Tab
 
@@ -56,10 +64,16 @@ SELECT cloudsync_network_init('<database-id>');
 
 **Push Notifications** — Configure an Expo access token to enable push notifications when using `sqlite-sync-react-native` in push mode. The tab shows the current notification status: **Working**, **Paused**, or **Not working**.
 
+{/* VIDEO: dashboard_offsync_configuration.mp4
+    Show: Configuration tab open → Database ID field with copy button clicked → scroll down to Push Notifications section → paste an Expo token → save → status changes to "Working". */}
+
 ### Manage Connected Devices
 
 In the **Devices** tab, you can view all devices currently connected to your database.
 Here you can check their sync status and remove devices if needed.
+
+{/* VIDEO: dashboard_offsync_devices.mp4
+    Show: Devices tab open with a list of connected devices → inspect sync status of one device → remove a device from the list. */}
 
 <Callout type="note" title="Matching Schemas and Tables">
 For OffSync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
@@ -72,5 +86,8 @@ The **Metrics** tab provides visibility into daily and cumulative usage for your
 - **Active devices** — number of devices that have synced within the period
 - **Upload bytes** — data sent from devices to SQLite Cloud
 - **Download bytes** — data sent from SQLite Cloud to devices
+
+{/* VIDEO: dashboard_offsync_metrics.mp4
+    Show: Metrics tab open → scroll through active devices chart → upload bytes chart → download bytes chart, ideally with some non-zero data visible. */}
 
 Once enabled, any changes made to the selected tables via the SQLite Sync extension will be automatically synchronized with your SQLite Cloud database.
