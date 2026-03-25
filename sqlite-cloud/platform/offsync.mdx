@@ -6,11 +6,6 @@ status: publish
 slug: offsync
 ---
 
-import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
-import enableSync from '@docs-website-assets/introduction/video/dashboard_sqlite_sync_enabling.mp4';
-import connectionUrlSync from '@docs-website-assets/introduction/video/dashboard_sync_connection_url.mp4';
-import devicesSync from '@docs-website-assets/introduction/video/dashboard_sync_devices.mp4';
-
 import Callout from "@commons-components/Information/Callout.astro";
 
 OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
@@ -31,35 +26,51 @@ OffSync extends standard SQLite tables with built-in support for offline work an
 When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
 
 
---- 
+---
 
 ## Configuring OffSync
 
-You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.  
-Below are the main steps:
+You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.
+The OffSync panel has four tabs: **Sync Tables**, **Configuration**, **Devices**, and **Metrics**.
+
+### Enabling and Disabling OffSync
+
+When OffSync is not yet active for a database, the panel shows a brief explanation and an **Enable OffSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.
+
+To disable OffSync, click the **Disable OffSync** button in the top-right corner of the panel and confirm the action in the dialog that appears.
 
 ### Enable Tables for Synchronization
-From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.  
+
+From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.
 Once enabled, all changes to those tables will automatically sync with connected devices.
 
-<VideoPlayer src={enableSync} />
+### Configuration Tab
 
+The **Configuration** tab contains two sub-sections:
 
-### Get the Connection String
-In the **Configuration** tab, copy the connection string.  
-Use this in your application to initialize OffSync and connect your local SQLite database with SQLite Cloud.
+**Database ID** — A read-only field showing the unique identifier for your OffSync-enabled database, with a copy button for convenience. Use this ID in your application to initialize the sync connection:
 
-<VideoPlayer src={connectionUrlSync} />
+```sql
+SELECT cloudsync_network_init('<database-id>');
+```
 
+**Push Notifications** — Configure an Expo access token to enable push notifications when using `sqlite-sync-react-native` in push mode. The tab shows the current notification status: **Working**, **Paused**, or **Not working**.
 
 ### Manage Connected Devices
-In the **Devices** tab, you can view all devices currently connected to your database.  
-Here you can check their sync status and remove devices if needed.
 
-<VideoPlayer src={devicesSync} />
+In the **Devices** tab, you can view all devices currently connected to your database.
+Here you can check their sync status and remove devices if needed.
 
 <Callout type="note" title="Matching Schemas and Tables">
 For OffSync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
 </Callout>
+
+### Metrics Tab
+
+The **Metrics** tab provides visibility into daily and cumulative usage for your OffSync-enabled database:
+
+- **Active devices** — number of devices that have synced within the period
+- **Upload bytes** — data sent from devices to SQLite Cloud
+- **Download bytes** — data sent from SQLite Cloud to devices
 
 Once enabled, any changes made to the selected tables via the SQLite Sync extension will be automatically synchronized with your SQLite Cloud database.
