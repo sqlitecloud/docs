@@ -254,24 +254,3 @@ OLD.status <> 'paid'
 
 **Explanation:**
 This policy uses the `OLD` reference to check the value of the `status` column *before* the update is applied. If the status is already `'paid'`, the condition `OLD.status <> 'paid'` will be false, and the `UPDATE` operation will be denied. This effectively makes paid invoices read-only.
-
-
---- 
-
-## Advanced: RLS and SQLite Sync
-
-When using RLS in conjunction with <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a>, it's important to understand how they interact. The Sync protocol applies changes on a column-by-column basis, which can affect how `INSERT` and `UPDATE` policies are evaluated.
-
-To accommodate this, SQLite Cloud offers two modes for handling RLS during sync operations, configurable via the `rls_mode` server setting using the SQLite Cloud builtin command `SET KEY rls_mode TO <value>`.
-
-#### Default Mode (`rls_mode = 1`)
-
-To simplify policy creation for the most common use cases, the default mode does **not** enforce `INSERT` and `UPDATE` policies while applying changes from SQLite Sync.
-
-Instead, after the sync operation is complete, the `SELECT` policy is used to validate the final state of the row. If the user does not have permission to view the resulting row, the entire transaction is rolled back. This ensures that users cannot introduce changes that they are not allowed to see.
-
-#### Manual Policy Mode (`rls_mode = 0`)
-
-For more complex scenarios, such as implementing separate read/write permissions or restricting write access to specific columns, you can set `rls_mode` to `0`.
-
-In this mode, your `INSERT` and `UPDATE` policies are enforced for every incremental change applied by SQLite Sync. Because of Sync's column-by-column operation, your policies must be written to permit intermediate states. This means the policies must allow `NEW` values for non-primary key columns to be temporarily set to their default values during the sync process.
