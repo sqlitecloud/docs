@@ -56,13 +56,13 @@ Once enabled, all changes to those tables will automatically sync with connected
 
 The **Configuration** tab contains two sub-sections:
 
-**Database ID** — A read-only field showing the unique identifier for your OffSync-enabled database, with a copy button for convenience. Use this ID in your application to initialize the sync connection:
+**Database ID** — A read-only field showing the unique identifier for your OffSync-enabled database, with a copy button for convenience. Use this ID in your application to initialize the sync connection (see the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">sqlite-sync README</a> for more details):
 
 ```sql
 SELECT cloudsync_network_init('<database-id>');
 ```
 
-**Push Notifications** — Configure an Expo access token to enable push notifications when using `sqlite-sync-react-native` in push mode. The tab shows the current notification status: **Working**, **Paused**, or **Not working**.
+**Push Notifications** — Push notifications work out of the box. If you have enabled Expo enhanced security, provide your access token here. This is only required when using the `sqlite-sync-react-native` library with push mode enabled — the token adds an extra layer of security to prevent unauthorized push notifications.
 
 {/* VIDEO: dashboard_offsync_configuration.mp4
     Show: Configuration tab open → Database ID field with copy button clicked → scroll down to Push Notifications section → paste an Expo token → save → status changes to "Working". */}
