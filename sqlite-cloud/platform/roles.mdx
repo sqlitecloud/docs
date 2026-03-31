@@ -1,52 +1,66 @@
 ---
-title: Security and Access Control
-description: SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability.
+title: Roles & Privileges
+description: Understand the role-based access control system, built-in roles, and how to define custom access policies.
 category: platform
 status: publish
-slug: security
+slug: roles
+---
+import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
+import createRole from '@docs-website-assets/introduction/video/roles-privileges/roles_create_custom_role.mp4';
+import manageRole from '@docs-website-assets/introduction/video/roles-privileges/roles_manage_roles.mp4';
+
+import Callout from "@commons-components/Information/Callout.astro";
+
+
+
+In SQLite Cloud, a **Role** is a named collection of permissions (privileges) that allows specific actions on resources like databases, tables. Users can have multiple roles, which determine their access to the system.
+
+Roles are the bridge between Users and Resources:
+*   **Users** authenticate into the system.
+*   **Roles** define what those users are allowed to do.
+*   **Resources** (Databases, Tables) are the objects being accessed.
+
+You can manage role definitions via the SQLite Cloud Dashboard under the **Roles** section.
+
 ---
 
-## Users
-SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability. In SQLite Cloud, roles serve as the foundation blocks for user access, and the level of user access to the database system is determined by the assigned roles. Users have no access to the system outside the designated roles.
+## Built-in Roles
 
-To add new users to your cluster, simply click on the **Create User** button.
+SQLite Cloud comes with a set of pre-defined roles designed to cover the most common use cases. These roles are available immediately and cannot be modified, but they can be scoped to specific databases or tables when assigned to a user.
 
-![Dashboard Create User](@docs-website-assets/introduction/dashboard_create_user.png)
+### General Access Roles
+*   **ADMIN:** This role possesses the highest level of privileges, with unrestricted access to all assigned permissions.
+*   **READ:** Grants read-only access to a specified database or table.
+*   **READWRITE:** Offers both read and write functionality for a specified database or table.
+*   **DBADMIN:** Allows for administrative tasks like indexing and statistics gathering but doesn't manage users or roles.
 
-Once a user is successfully created, you can assign one or more roles to them to determine their level of access to the system.
+### Any Database Roles
+These roles implicitly apply to the entire cluster (`*`) and do not require specific scoping during assignment.
+*   **READANYDATABASE:** Provides read-only access to any database and table.
+*   **READWRITEANYDATABASE:** Grants read and write capabilities across any database and table.
+*   **DBADMINANYDATABASE:** Provides administrative functions for any database.
 
----
+### Pub/Sub Roles
+*   **SUB:** Grants the subscribe privilege to a specified database, table, or channel.
+*   **PUB:** Offers the publish privilege to a specified database, table, or channel.
+*   **PUBSUB:** Combines subscribe and publish privileges for a specified database, table, or channel.
+*   **PUBSUBADMIN:** Allows the creation and removal of channel privileges for a specified database or channel.
+*   **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
+*   **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
+*   **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
+*   **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
 
-## Roles
-In SQLite Cloud, a role is a set of permissions that allows a user to perform specific actions on a particular resource, such as a database or table. Users can have multiple roles, which determine their access to the system.
-
-You can assign roles to users in two ways: when creating a new user account, or when updating the roles of an existing user.
-
-There are two types of roles in SQLite Cloud:
-
-- **Built-In Roles.** These roles are pre-defined by SQLite Cloud to provide commonly needed privileges in a database system. Built-in roles grant permissions on any database.
-
-- **User-Defined Roles.** If the built-in roles do not provide the necessary privileges or if you need to grant permissions for a specific set of resources, you can define custom roles using the **CREATE ROLE** button. These roles are called user-defined roles.
-
-
-![Dashboard Roles](@docs-website-assets/introduction/dashboard_roles.png)
-
-### Built-in roles
-import Callout from "@commons-components/Information/Callout.astro"; 
-
-SQLite Cloud offers a comprehensive system of built-in roles designed to provide essential privileges within a database framework. These roles can be assigned using the <a href="https://docs.sqlitecloud.io/docs/role-commands" target="_blank">GRANT ROLE</a> command, and custom roles can be created with the <a href="https://docs.sqlitecloud.io/docs/role-commands" target="_blank">CREATE ROLE</a> command. Privileges represent fundamental operations that can be executed on specific databases or tables and can be granted, revoked, or assigned to specific roles.
-
-Here is an overview of the built-in roles:
-
-- **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
-- **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
-- **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
-- **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
-
+### Cluster Management Roles
+*   **USERADMIN:** Enables the creation and modification of roles and users.
+*   **CLUSTERADMIN:** Empowers users to manage and monitor the cluster.
+*   **CLUSTERMONITOR:** Offers read-only access to cluster monitoring commands.
+*   **HOSTADMIN:** Allows monitoring and management of individual nodes.
 
 <Callout type="note" title="Restrictions">
 To further refine the scope of a role or privilege, you can specify a database and table name during the [CREATE ROLE](/docs/role-commands), [GRANT ROLE](/docs/role-commands), <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">GRANT PRIVILEGE</a> and <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">SET PRIVILEGE</a> commands, as well as during the <a href="https://docs.sqlitecloud.io/docs/user-commands" target="_blank">CREATE USER</a> command. If `NULL` is used, it means that the role or privilege is not assigned and cannot function without specifying a database and table name combination. To extend the validity to any database and table, you can utilize the special `*` character.
 </Callout>
+
+Below is the technical definition of all built-in roles and their mapped privileges:
 
 ```bash
 >> LIST ROLES
@@ -80,70 +94,56 @@ To further refine the scope of a role or privilege, you can specify a database a
 -----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
 ```
 
-## Privileges
-In a role-based access control system, a privilege represents a specific action or permission that a user or role is allowed to perform within the system.
+---
+
+## Custom Roles
+
+If the built-in roles do not fit your specific security model, you can create **User-Defined Roles**. This allows you to mix and match specific privileges.
+
+### Creating a Custom Role
+
+1. Navigate to the **Roles** section in the left sidebar.
+2. Click the **Create Role** button.
+3. **Name:** Enter a unique name for the role (e.g., `AuditLogger`, `HRManager`).
+4. **Privileges:** Select the specific atomic privileges this role should possess (see list below).
+5. Click **Create**.
+
+<VideoPlayer src={createRole} />
+
+### Managing Roles
+
+From the Roles list, you can:
+*   **Inspect:** Click on a role to see exactly which privileges it contains.
+*   **Edit:** Add or remove privileges from a custom role (Built-in roles cannot be edited).
+*   **Delete:** Remove a custom role.
+
+<VideoPlayer src={manageRole} />
+
+---
+
+## Privileges Reference
+
+In a role-based access control system, a **Privilege** represents a specific action or permission that a user or role is allowed to perform within the system.
 It defines what a user can or cannot do, such as reading, writing, or managing certain resources like tables, databases, or settings.
 Essentially, a privilege is a **right** or **ability** granted to a user or role, specifying their level of access and control over the system's resources.
 
 A privilege can be <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">granted</a>, <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">revoked</a> and <a href="https://docs.sqlitecloud.io/docs/privilege-commands" target="_blank">assigned</a> to a given role.
 A role can contains any combination of privileges.
 
-```bash
->> LIST PRIVILEGES
------------------|
- name            |
------------------|
- NONE            |
- READ            |
- INSERT          |
- UPDATE          |
- DELETE          |
- READWRITE       |
- PRAGMA          |
- CREATE_TABLE    |
- CREATE_INDEX    |
- CREATE_VIEW     |
- CREATE_TRIGGER  |
- DROP_TABLE      |
- DROP_INDEX      |
- DROP_VIEW       |
- DROP_TRIGGER    |
- ALTER_TABLE     |
- ANALYZE         |
- ATTACH          |
- DETACH          |
- DBADMIN         |
- SUB             |
- PUB             |
- PUBSUB          |
- BACKUP          |
- RESTORE         |
- DOWNLOAD        |
- PLUGIN          |
- SETTINGS        |
- USERADMIN       |
- CLUSTERADMIN    |
- CLUSTERMONITOR  |
- CREATE_DATABASE |
- DROP_DATABASE   |
- HOSTADMIN       |
- SWITCH_USER     |
- PUBSUBCREATE    |
- PUBSUBADMIN     |
- WEBLITE         |
- ADMIN           |
------------------|
-```
+Below is the complete list of available privileges:
 
-{/*
-## IP Restrictions
-The IP Restrictions panel enables the restriction of access for a role or user by allowing only specific IP addresses or ranges in <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" target="_blank">CIDR notation</a> (for example 10.10.10.0/24). Both IPv4 and IPv6 addresses are supported.
-
-To add a new IP restriction to a user or role, click on the **Add IP** button.
-
-![Dashboard Create IP Restriction](@docs-website-assets/introduction/dashboard_create_ip.png)
-
-The IP Restrictions table will display all current IP restrictions for the selected user or role.
-
-![Dashboard List IP Restrictions](@docs-website-assets/introduction/dashboard_list_ip.png)
-*/}
+| | | |
+| :--- | :--- | :--- |
+| NONE | READ | INSERT |
+| UPDATE | DELETE | READWRITE |
+| PRAGMA | CREATE_TABLE | CREATE_INDEX |
+| CREATE_VIEW | CREATE_TRIGGER | DROP_TABLE |
+| DROP_INDEX | DROP_VIEW | DROP_TRIGGER |
+| ALTER_TABLE | ANALYZE | ATTACH |
+| DETACH | DBADMIN | SUB |
+| PUB | PUBSUB | BACKUP |
+| RESTORE | DOWNLOAD | PLUGIN |
+| SETTINGS | USERADMIN | CLUSTERADMIN |
+| CLUSTERMONITOR | CREATE_DATABASE | DROP_DATABASE |
+| HOSTADMIN | SWITCH_USER | PUBSUBCREATE |
+| PUBSUBADMIN | WEBLITE | ADMIN |

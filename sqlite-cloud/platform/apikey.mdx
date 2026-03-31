@@ -1,20 +1,75 @@
 ---
 title: Security and Access Control
-description: SQLite Cloud provides secure access to resources through role-based authorization, which ensures user isolation and enhances security and manageability.
+description: Manage API Keys for secure application access, server-to-server communication, and SDK integration.
 category: platform
 status: publish
 slug: apikey
 ---
 
-## API KEYs 
 
 API KEYs can be used as an alternative authentication mechanism.
 Authentication through API keys ensures the same privileges as the user to which they are associated.
 API KEYs are recommended for all server-to-server authentication cases and are necessary for using the REST APIs and the SDKs that uses the WebSocket APIs.
 
-To create an API key for a user, click on the **Create API KEY** button.
+You can manage all keys in your cluster via the SQLite Cloud Dashboard under the **API Keys** section.
 
-![Dashboard Create APIKEY](@docs-website-assets/introduction/dashboard_create_apikey.png)
+---
 
-The resulting table will display all the API keys associated with each user, along with their name.
-![Dashboard List APIKEY](@docs-website-assets/introduction/dashboard_list_apikey.png)
+## Creating an API Key
+
+You can create an API Key and immediately assign it to any existing user in your cluster.
+
+1. Navigate to the **API Keys** section in the left sidebar.
+2. Click the **Create API Key** button.
+3. **API Key Name:** Enter a descriptive name to identify the key (e.g., `MobileApp_Prod`, `Backend_Worker`).
+4. **User:** Select the user this key will impersonate from the dropdown list.
+5. **Expiration:**
+    *   Select **Never expires** for long-running services.
+    *   Select **Set expiration date** to enforce a rotation policy or for temporary access tokens.
+6. Click **Create**.
+
+[VIDEO: create_apikey_global.mp4]
+{/* <!-- Video showing the global creation flow: entering a name, selecting a user from the dropdown, picking a date, and creating --> */}
+
+---
+
+## Managing API Keys
+
+The API Keys list provides a centralized view of all active keys, their associated users, and expiration status.
+
+### Regenerating a Key
+If a key is lost, forgotten, or you suspect it has been compromised (leaked), you should regenerate it immediately.
+
+1. Find the key in the list.
+2. Click the context menu (three dots) on the right.
+3. Select **Regenerate**.
+4. Confirm the action in the modal window.
+
+**Warning:** Regenerating a key invalidates the old key string immediately. You must update any applications or scripts using the old key with the new value to restore connectivity.
+
+[VIDEO: regenerate_apikey.mp4]
+{/* <!-- Video showing the regenerate flow and the confirmation modal --> */}
+
+### Editing and Deleting
+*   **Edit:** Allows you to rename the key or change its expiration settings without changing the key string itself.
+*   **Delete:** Permanently revokes the key. Applications using this key will no longer be able to connect.
+
+[VIDEO: delete_apikey.mp4]
+{/* <!-- Video showing the delete action --> */}
+
+---
+
+## Using API Keys
+
+Once generated, the API Key is typically used in the connection string of your SQLite Cloud client or SDK.
+
+The standard format for a connection string using an API Key is:
+```
+sqlitecloud://<host>:<port>?apikey=<your-api-key>
+```
+
+When using the REST API directly, the key should be passed in the Authorization header:
+
+```http
+Authorization: Bearer <your-api-key>
+```
