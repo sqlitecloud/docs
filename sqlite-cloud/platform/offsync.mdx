@@ -32,61 +32,159 @@ When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to 
 
 ## Configuring OffSync
 
-You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard.
-The OffSync panel has four tabs: **Sync Tables**, **Configuration**, **Devices**, and **Metrics**.
+You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard. Select a database from the left panel — the list shows all databases in your project along with their OffSync status. The right panel has four tabs: **Database Setup**, **Client Integration**, **Devices**, and **Metrics**.
 
 ### Enabling and Disabling OffSync
 
-When OffSync is not yet active for a database, the panel shows a brief explanation and an **Enable OffSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.
+When OffSync is not yet active for a database, the right panel shows a brief explanation and an **Enable OffSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.
 
-To disable OffSync, click the **Disable OffSync** button in the top-right corner of the panel and confirm the action in the dialog that appears.
+To disable OffSync, click the **Disable OffSync** button in the top-right corner of the panel and confirm in the dialog that appears.
 
 {/* <VideoPlayer src={enableDisableSync} /> */}
 
-### Enable Tables for Synchronization
+---
 
-From the **Sync Tables** tab, select which tables in your database you want to keep synchronized.
-Once enabled, all changes to those tables will automatically sync with connected devices.
+## Database Setup Tab
 
-{/* VIDEO: dashboard_offsync_sync_tables.mp4
-    Show: Sync Tables tab open → toggle one or more tables on → confirmation that sync is active for those tables. */}
+The **Database Setup** tab handles the **server-side configuration** of OffSync. This is where you verify the database connection and choose which tables to synchronize.
 
-### Configuration Tab
+### Connection Status
 
-The **Configuration** tab contains two sub-sections:
+A connection card at the top of the tab shows whether the sync service can reach your database. When healthy, it displays the **Host**, **Port**, and **Database** name alongside a green **Connected** indicator.
 
-**Database ID** — A read-only field showing the unique identifier for your OffSync-enabled database, with a copy button for convenience. Use this ID in your application to initialize the sync connection (see the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">sqlite-sync README</a> for more details):
+If the connection cannot be established, a warning appears with an action button to resolve it:
+
+- On **Supabase self-hosted / PostgreSQL** workspaces, click **Configure Connection** to provide the correct connection credentials via the connection settings sheet. The card also shows an **Edit** button when the connection is healthy, so you can update the credentials at any time.
+- On **SQLite Cloud** workspaces, click **Restore Connection** to automatically regenerate the internal API key used by the sync service.
+
+If the OffSync extension is not detected on the database, a warning is shown with a link to the installation documentation.
+
+### Select Tables to Enable OffSync
+
+Below the connection card, you can choose which tables to synchronize. This section is only shown when the connection is healthy. A counter shows how many tables are currently selected (e.g., *1 of 1 selected*).
+
+- Use the **Filter tables** input to search through large table lists.
+- Check or uncheck individual tables to include or exclude them from synchronization. Tables already registered with the sync service are marked as **Enabled**.
+- Use **Select All** / **Deselect All** to manage the full list at once.
+
+Once you have made your selection, click **Deploy Changes** (bottom-right of the panel) to apply. From that point on, any writes to those tables via the SQLite Sync extension will be automatically synchronized.
+
+<Callout type="note" title="Matching Schemas and Tables">
+For OffSync to work correctly, the tables you enable for synchronization—and their schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
+</Callout>
+
+{/* VIDEO: dashboard_offsync_database_setup.mp4
+    Show: Database Setup tab → Connected indicator → select/deselect tables → Deploy Changes. */}
+
+---
+
+## Client Integration Tab
+
+The **Client Integration** tab contains everything you need to **connect your local application** to the cloud database. This includes your Database ID, how authentication works, and how to handle push notifications.
+
+<Callout type="note" title="Workspace-specific instructions">
+The options available in this tab depend on your workspace type. **SQLite Cloud** workspaces use API keys or access tokens. **Supabase self-hosted and PostgreSQL** workspaces use database credentials or JWT-based authentication. The relevant options are displayed automatically based on your project.
+</Callout>
+
+### Database ID
+
+A unique identifier for your OffSync-enabled database. Pass this ID to the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension in your client application to initialize the sync connection:
 
 ```sql
 SELECT cloudsync_network_init('<database-id>');
 ```
 
-**Push Notifications** — Push notifications work out of the box. If you have enabled Expo enhanced security, provide your access token here. This is only required when using the `sqlite-sync-react-native` library with push mode enabled — the token adds an extra layer of security to prevent unauthorized push notifications.
+Use the **Copy** button to copy the ID to your clipboard.
 
-{/* VIDEO: dashboard_offsync_configuration.mp4
-    Show: Configuration tab open → Database ID field with copy button clicked → scroll down to Push Notifications section → paste an Expo token → save → status changes to "Working". */}
+### Row Level Security (RLS)
 
-### Manage Connected Devices
+RLS controls which data each user can access. Instead of giving clients full access to the database, it ensures each user can only read or modify their own data. Choose one of two modes:
 
-In the **Devices** tab, you can view all devices currently connected to your database.
-Here you can check their sync status and remove devices if needed.
+- **No, bypass RLS** — Best for trusted environments such as internal tools or server-side clients. The client has full access to all synced tables.
+- **Yes, enforce RLS** — Best for user-facing apps. Each sync request is tied to a user identity, and access rules are applied automatically.
+
+Your selection here determines how the **Authentication** section below is configured.
+
+### Authentication
+
+The authentication method shown depends on your **workspace type** and **RLS mode** selection.
+
+**SQLite Cloud workspaces — RLS bypassed (API Key)**
+
+Select a **User** and the corresponding **API Key** from the dropdowns. The code snippet below updates automatically:
+
+```sql
+-- 1. Connect to your database
+SELECT cloudsync_network_init('<database-id>');
+
+-- 2. Authenticate using API key (full access, no RLS)
+SELECT cloudsync_network_set_apikey('<your-api-key>');
+```
+
+**SQLite Cloud workspaces — RLS enforced (Access Token)**
+
+Authentication is done via a user-scoped access token. Two action cards guide you through the setup:
+
+- **Configure RLS** — Links to the RLS page to define which rows each user can access.
+- **Generate user access tokens** — Links to the Weblite API to generate an access token per user.
+
+Once you have a token, pass it to your client:
+
+```sql
+-- 1. Connect to your database
+SELECT cloudsync_network_init('<database-id>');
+
+-- 2. Authenticate as a specific user (RLS enforced)
+SELECT cloudsync_network_set_token('<user-access-token>');
+```
+
+**Supabase self-hosted / PostgreSQL workspaces — RLS bypassed (Username & Password)**
+
+Connects using your database credentials, giving full access to all synced tables and bypassing Row Level Security. Refer to the quickstart guide shown at the top of the tab for provider-specific instructions.
+
+**Supabase self-hosted / PostgreSQL workspaces — RLS enforced (JWT)**
+
+To verify users and apply access rules, you must configure a JWT authentication provider. A status card shows the current configuration:
+
+- **Not configured** — Users cannot be verified. Click **Configure authentication** to set up your provider.
+- **Configured** — Shows the active method (HMAC Secret HS256 or JWKS Issuer Validation). Click **Edit** to update it.
+
+Refer to the quickstart guide shown at the top of the tab for provider-specific integration instructions.
+
+### Push Notifications
+
+Real-time push notifications are active out of the box when using the <a href="https://github.com/sqliteai/sqlite-sync-react-native" target="_blank">sqlite-sync-react-native</a> library with push mode enabled.
+
+A status card shows the current **Expo Security** configuration:
+
+- **Not configured** — Standard push notifications are active with no extra security.
+- **Configured** — An Expo access token has been provided, adding an extra security layer to prevent unauthorized push notifications. The date the token was last updated is also shown.
+
+Use **Configure** to add a token, **Edit** to update an existing one, or **Delete** to remove it.
+
+{/* VIDEO: dashboard_offsync_client_integration.mp4
+    Show: Client Integration tab → Database ID copy → RLS toggle → auth section changes → code snippet → Push Notifications configure. */}
+
+---
+
+## Devices Tab
+
+The **Devices** tab lists all devices currently synchronized with the selected database. For each device you can see its **Site ID** and the timestamp of its **Last Sync**. Use the **Remove** button to deregister a device.
 
 {/* VIDEO: dashboard_offsync_devices.mp4
-    Show: Devices tab open with a list of connected devices → inspect sync status of one device → remove a device from the list. */}
+    Show: Devices tab → list of connected devices → remove a device. */}
 
-<Callout type="note" title="Matching Schemas and Tables">
-For OffSync to work correctly, the list of tables configured for synchronization—and their corresponding schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
-</Callout>
+---
 
-### Metrics Tab
+## Metrics Tab
 
-The **Metrics** tab provides visibility into daily and cumulative usage for your OffSync-enabled database:
+The **Metrics** tab provides visibility into usage for your OffSync-enabled database over time:
 
 - **Active devices** — number of devices that have synced within the period
 - **Upload bytes** — data sent from devices to SQLite Cloud
 - **Download bytes** — data sent from SQLite Cloud to devices
 
-{/* VIDEO: dashboard_offsync_metrics.mp4
-    Show: Metrics tab open → scroll through active devices chart → upload bytes chart → download bytes chart, ideally with some non-zero data visible. */}
+The usage summary at the top of the left panel shows the total data transferred for the current billing period.
 
-Once enabled, any changes made to the selected tables via the SQLite Sync extension will be automatically synchronized with your SQLite Cloud database.
+{/* VIDEO: dashboard_offsync_metrics.mp4
+    Show: Metrics tab → active devices chart → upload bytes chart → download bytes chart. */}
