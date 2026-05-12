@@ -25,7 +25,7 @@ export const WebliteSourceCode = `<script>
   async function searchData(event) {
     const query = document.getElementById('query').value;
     const response = await fetch(
-      "https://abcdef123k.sqlite.cloud:8090/v2/functions/search-js?query=" + query
+      "https://abcdef123k.sqlite.cloud/v2/functions/search-js?query=" + query
     )
     const data = await response.json();
   }
