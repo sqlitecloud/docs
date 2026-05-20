@@ -10,6 +10,8 @@ A SQLite extension that gives AI agents persistent, searchable memory, optimized
 
 Agent memory databases can be synchronized between agents using **offline-first technology** via [sqlite-sync](https://github.com/sqliteai/sqlite-sync). Each agent works independently and syncs when connected, making it ideal for distributed AI systems, edge deployments, and collaborative agent architectures.
 
+> **GitHub repository:** [sqliteai/sqlite-memory](https://github.com/sqliteai/sqlite-memory)
+
 ## The Future of AI Agent Memory
 
 Modern AI agents need persistent, searchable memory to maintain context across conversations and tasks. Inspired by [OpenClaw's memory architecture](https://docs.openclaw.ai/concepts/memory), sqlite-memory implements what we believe will become the de facto standard for AI agent memory systems: **markdown files as the source of truth**.

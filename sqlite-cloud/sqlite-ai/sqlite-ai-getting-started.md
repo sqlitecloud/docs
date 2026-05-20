@@ -1,6 +1,6 @@
 ---
 title: "SQLite-AI Getting Started"
-description: "Install and load SQLite-AI, then run local model inference from SQL."
+description: "Run local model inference, embeddings, audio transcription, and multimodal AI from SQL."
 category: platform
 status: publish
 slug: sqlite-ai-getting-started
@@ -13,10 +13,6 @@ slug: sqlite-ai-getting-started
 sqlite3 myapp.db
 ```
 
-```sql
--- Load the extension
-.load ./ai
-```
 
 ### Text Generation
 
@@ -92,103 +88,3 @@ SELECT llm_chat_respond('What do you see in this photo?', './photos/landscape.jp
 SELECT llm_text_generate('Compare these two images', './img1.jpg', './img2.jpg');
 ```
 
-## Installation
-
-### Pre-built Binaries
-
-Download the appropriate pre-built binary for your platform from the official [Releases](https://github.com/sqliteai/sqlite-ai/releases) page:
-
-- Linux: x86 and ARM
-- macOS: x86 and ARM
-- Windows: x86
-- Android
-- iOS
-
-### Loading the Extension
-
-```sql
--- In SQLite CLI
-.load ./ai
-
--- In SQL
-SELECT load_extension('./ai');
-```
-
-### Swift Package
-
-You can [add this repository as a package dependency to your Swift project](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app#Add-a-package-dependency). After adding the package, you'll need to set up SQLite with extension loading by following steps 4 and 5 of [this guide](https://github.com/sqliteai/sqlite-extensions-guide/blob/main/platforms/ios.md#4-set-up-sqlite-with-extension-loading).
-
-Here's an example of how to use the package:
-```swift
-import ai
-
-...
-
-var db: OpaquePointer?
-sqlite3_open(":memory:", &db)
-sqlite3_enable_load_extension(db, 1)
-var errMsg: UnsafeMutablePointer<Int8>? = nil
-sqlite3_load_extension(db, ai.path, nil, &errMsg)
-var stmt: OpaquePointer?
-sqlite3_prepare_v2(db, "SELECT ai_version()", -1, &stmt, nil)
-defer { sqlite3_finalize(stmt) }
-sqlite3_step(stmt)
-log("ai_version(): \(String(cString: sqlite3_column_text(stmt, 0)))")
-sqlite3_close(db)
-```
-
-### Android Package
-
-Add the [following](https://central.sonatype.com/artifact/ai.sqlite/ai) to your Gradle dependencies:
-
-```gradle
-implementation 'ai.sqlite:ai:0.7.55'
-```
-
-Here's an example of how to use the package:
-```java
-SQLiteCustomExtension aiExtension = new SQLiteCustomExtension(getApplicationInfo().nativeLibraryDir + "/ai", null);
-SQLiteDatabaseConfiguration config = new SQLiteDatabaseConfiguration(
-    getCacheDir().getPath() + "/ai_test.db",
-    SQLiteDatabase.CREATE_IF_NECESSARY | SQLiteDatabase.OPEN_READWRITE,
-    Collections.emptyList(),
-    Collections.emptyList(),
-    Collections.singletonList(aiExtension)
-);
-SQLiteDatabase db = SQLiteDatabase.openDatabase(config, null, null);
-```
-
-**Note:** Additional settings and configuration are required for a complete setup. For full implementation details, see the [complete Android example](https://github.com/sqliteai/sqlite-extensions-guide/blob/main/examples/android/README.md).
-
-### Python Package
-
-Python developers can quickly get started using the ready-to-use `sqlite-ai` package available on PyPI:
-
-```bash
-pip install sqlite-ai
-```
-
-For usage details and examples, see the [Python package documentation](https://github.com/sqliteai/sqlite-ai/tree/main/packages/python).
-
-### Flutter Package
-
-Add the [sqlite_ai](https://pub.dev/packages/sqlite_ai) package to your project:
-
-```bash
-flutter pub add sqlite_ai  # Flutter projects
-dart pub add sqlite_ai     # Dart projects
-```
-
-Usage with `sqlite3` package:
-```dart
-import 'package:sqlite3/sqlite3.dart';
-import 'package:sqlite_ai/sqlite_ai.dart';
-
-sqlite3.loadSqliteAiExtension();
-final db = sqlite3.openInMemory();
-print(db.select('SELECT ai_version()'));
-```
-
-For a complete example, see the [Flutter example](https://github.com/sqliteai/sqlite-extensions-guide/blob/main/examples/flutter/README.md).
-
----

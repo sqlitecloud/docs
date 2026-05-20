@@ -12,7 +12,6 @@ A SQLite extension that provides semantic memory capabilities with hybrid search
 
 - [Overview](#overview)
 - [Sync Behavior](#sync-behavior)
-- [Loading the Extension](#loading-the-extension)
 - [SQL Functions](#sql-functions)
   - [General Functions](#general-functions)
   - [Configuration Functions](#configuration-functions)
@@ -60,25 +59,6 @@ Every sync operation is wrapped in a SQLite **SAVEPOINT** transaction. If any st
 - **Safe to retry** — a failed sync leaves the database in its previous valid state
 
 This makes all sync functions idempotent and safe to call repeatedly (e.g., on a schedule or at application startup).
-
----
-
-## Loading the Extension
-
-### Dynamic Loading (Recommended)
-
-```sql
-.load ./memory
-```
-
-### With sqlite-vector (Required for Search)
-
-The extension requires [sqlite-vector](https://github.com/sqliteai/sqlite-vector) for vector similarity search:
-
-```sql
-.load ./vector
-.load ./memory
-```
 
 ---
 
@@ -515,7 +495,7 @@ AND max_entries = 5;
 -- Get the chunk sequence number (useful for reconstructing document order)
 SELECT path, seq, snippet, ranking
 FROM memory_search
-WHERE query = 'installation steps';
+WHERE query = 'setup steps';
 ```
 
 ---
@@ -687,10 +667,6 @@ FROM dbmem_content;
 ### Complete Setup and Usage
 
 ```sql
--- Load extensions
-.load ./vector
-.load ./memory
-
 -- Check version
 SELECT memory_version();
 

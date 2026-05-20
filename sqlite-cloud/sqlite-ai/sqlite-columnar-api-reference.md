@@ -11,7 +11,6 @@ This document lists the SQL API exposed by the `columnar` loadable extension.
 Examples assume the extension is loaded and this table exists:
 
 ```sql
-.load ./columnar
 
 CREATE VIRTUAL TABLE sales USING columnar(
   id INTEGER,

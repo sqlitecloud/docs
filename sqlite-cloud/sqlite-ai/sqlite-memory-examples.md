@@ -27,9 +27,6 @@ Multiple agents can share and merge knowledge without any coordination. Each age
 Enable sync on a database connection before ingesting content:
 
 ```sql
--- Load the sqlite-sync extension
-SELECT load_extension('./cloudsync');
-
 -- Enable CRDT sync (optionally scoped to a specific context)
 SELECT memory_enable_sync();               -- sync all memory
 SELECT memory_enable_sync('project-x');   -- sync only the 'project-x' context
@@ -68,7 +65,7 @@ The combination of local-first memory and CRDT sync enables agent architectures 
 - Agent B indexes knowledge about the Great Barrier Reef
 - After sync, **both agents can answer questions about both topics** — knowledge each agent never directly indexed
 
-See [`test/sync/README.md`](https://github.com/sqliteai/sqlite-memory/tree/main/test/sync) for setup instructions, SQLiteCloud account configuration, and how to run the test.
+See [`test/sync/README.md`](https://github.com/sqliteai/sqlite-memory/tree/main/test/sync) for the complete integration test flow and SQLite Cloud account configuration.
 
 ## Use Cases
 
@@ -85,7 +82,7 @@ Practical examples for common `sqlmem` workflows.
 
 ## Initialize A Project
 
-Create `.sqlmem.json`, create the SQLite database, install required extensions, and configure the embedding model.
+Create `.sqlmem.json`, create the SQLite database, and configure the embedding model.
 
 ```sh
 sqlmem init --model /models/nomic-embed-text-v1.5.Q8_0.gguf
@@ -270,45 +267,6 @@ Opt into reStructuredText explicitly:
 
 ```sh
 sqlmem config set options.extensions "md,mdx,txt,rst"
-```
-
-## Manage Extensions
-
-Print the global extension cache path:
-
-```sh
-sqlmem extensions path
-```
-
-Install required extensions:
-
-```sh
-sqlmem extensions install
-```
-
-Install only sqlite-sync:
-
-```sh
-sqlmem extensions install sync
-```
-
-List installed extension files:
-
-```sh
-sqlmem extensions list
-```
-
-Update cached extensions:
-
-```sh
-sqlmem extensions update
-```
-
-Use a GitHub token for higher release API limits:
-
-```sh
-export GITHUB_TOKEN="..."
-sqlmem extensions update
 ```
 
 ## MCP Server

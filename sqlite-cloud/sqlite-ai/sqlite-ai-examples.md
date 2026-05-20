@@ -13,10 +13,6 @@ slug: sqlite-ai-examples
 sqlite3 myapp.db
 ```
 
-```sql
--- Load the extension
-.load ./ai
-```
 
 ### Text Generation
 

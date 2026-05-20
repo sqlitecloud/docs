@@ -2,7 +2,7 @@
 title: "SQLite-Sync Installation"
 description: "Installation options for SQLite-Sync across native, mobile, Expo, React Native, Flutter, and WASM targets."
 category: platform
-status: publish
+status: draft
 slug: sqlite-sync-installation
 ---
 

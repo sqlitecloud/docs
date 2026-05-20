@@ -48,9 +48,6 @@ SELECT vector_quantize('documents', 'embedding');
 ### Agent Memory
 
 ```sql
-.load ./vector
-.load ./memory
-
 SELECT memory_set_model('local', './models/nomic-embed-text-v1.5.Q8_0.gguf');
 SELECT memory_add_text('The user prefers concise Python examples.', 'conversation');
 
@@ -63,8 +60,6 @@ ORDER BY ranking DESC;
 ### Offline-First AI Apps
 
 ```sql
-.load ./cloudsync
-
 CREATE TABLE notes (
   id TEXT PRIMARY KEY NOT NULL,
   body TEXT NOT NULL DEFAULT ''

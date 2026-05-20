@@ -96,12 +96,6 @@ const sidebarNav: SidebarNavStruct = [
 		level: 1,
 	},
 	{
-		title: "Installation",
-		filePath: "sqlite-sync-installation",
-		type: "inner",
-		level: 1,
-	},
-	{
 		title: "Best Practices",
 		filePath: "sqlite-sync-best-practices",
 		type: "inner",
@@ -118,49 +112,6 @@ const sidebarNav: SidebarNavStruct = [
 		filePath: "sqlite-sync-block-lww",
 		type: "inner",
 		level: 1,
-	},
-	{ title: "Quick Starts", type: "inner", level: 1 },
-	{
-		title: "Android",
-		filePath: "sqlite-sync-quick-start-android",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "iOS",
-		filePath: "sqlite-sync-quick-start-ios",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "Linux",
-		filePath: "sqlite-sync-quick-start-linux",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "macOS",
-		filePath: "sqlite-sync-quick-start-macos",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "React Native Expo",
-		filePath: "sqlite-sync-quick-start-expo",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "WASM",
-		filePath: "sqlite-sync-quick-start-wasm",
-		type: "inner",
-		level: 2,
-	},
-	{
-		title: "Windows",
-		filePath: "sqlite-sync-quick-start-windows",
-		type: "inner",
-		level: 2,
 	},
 	{ title: "API Reference", type: "inner", level: 1 },
 	{

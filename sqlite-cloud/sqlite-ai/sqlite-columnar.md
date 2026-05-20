@@ -7,13 +7,15 @@ slug: sqlite-columnar
 ---
 
 `sqlite-columnar` brings column-oriented analytics to SQLite as a self-contained
-loadable extension. It lets applications keep the operational simplicity of
+extension. It lets applications keep the operational simplicity of
 SQLite while adding a storage and execution path built for analytical scans,
 aggregations, and grouped summaries over wide datasets.
 
-It does not patch SQLite's pager, btree, parser, VDBE, or shell. Build it as a
-normal extension, load it into SQLite, and create columnar virtual tables for
-the parts of your application that behave more like analytics than OLTP.
+It does not patch SQLite's pager, btree, parser, VDBE, or shell. Use it to
+create columnar virtual tables for the parts of your application that behave
+more like analytics than OLTP.
+
+> **GitHub repository:** [sqliteai/sqlite-columnar](https://github.com/sqliteai/sqlite-columnar)
 
 ## Why Columnar SQLite?
 

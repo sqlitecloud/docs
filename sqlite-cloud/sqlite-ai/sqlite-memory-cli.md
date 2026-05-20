@@ -9,13 +9,8 @@ slug: sqlite-memory-cli
 ## sqlmem
 
 `sqlmem` manages SQLite Memory databases backed by Markdown sources.
-The CLI handles config, extension download/loading, optional PDF conversion cache, watch mode, and MCP. Markdown parsing, chunking, embedding, schema, FTS, and vector search stay inside the `sqlite-memory` extension.
+The CLI handles project config, optional PDF conversion cache, watch mode, and MCP. Markdown parsing, chunking, embedding, schema, FTS, and vector search stay inside the `sqlite-memory` extension.
 
-## Build
-
-```sh
-make build
-```
 
 ## Quick Start
 
@@ -47,26 +42,6 @@ If no config is found, commands fail with:
 ```text
 No .sqlmem.json found. Run `sqlmem init` first.
 ```
-
-## Extensions
-
-Extensions are cached globally:
-
-- macOS: `~/Library/Application Support/sqlmem/extensions/`
-- Linux: `~/.local/share/sqlmem/extensions/`
-- Windows: `%APPDATA%/sqlmem/extensions/`
-
-Override with `--extensions-dir` or `sqlmem_EXTENSIONS_DIR`.
-
-```sh
-sqlmem extensions path
-sqlmem extensions install
-sqlmem extensions install sync
-sqlmem extensions list
-sqlmem extensions update
-```
-
-The load order is `sqlite-vector`, `sqlite-memory`, then optional `sqlite-sync`.
 
 ## PDF
 
@@ -105,12 +80,6 @@ sqlmem reset
 
 Running `sqlmem` without arguments opens an interactive prompt with command history and arrow-key navigation.
 
-## Test
-
-```sh
-make test
-```
-
 
 ## sqlmem Examples
 
@@ -118,7 +87,7 @@ Practical examples for common `sqlmem` workflows.
 
 ## Initialize A Project
 
-Create `.sqlmem.json`, create the SQLite database, install required extensions, and configure the embedding model.
+Create `.sqlmem.json`, create the SQLite database, and configure the embedding model.
 
 ```sh
 sqlmem init --model /models/nomic-embed-text-v1.5.Q8_0.gguf
@@ -303,45 +272,6 @@ Opt into reStructuredText explicitly:
 
 ```sh
 sqlmem config set options.extensions "md,mdx,txt,rst"
-```
-
-## Manage Extensions
-
-Print the global extension cache path:
-
-```sh
-sqlmem extensions path
-```
-
-Install required extensions:
-
-```sh
-sqlmem extensions install
-```
-
-Install only sqlite-sync:
-
-```sh
-sqlmem extensions install sync
-```
-
-List installed extension files:
-
-```sh
-sqlmem extensions list
-```
-
-Update cached extensions:
-
-```sh
-sqlmem extensions update
-```
-
-Use a GitHub token for higher release API limits:
-
-```sh
-export GITHUB_TOKEN="..."
-sqlmem extensions update
 ```
 
 ## MCP Server

@@ -10,6 +10,8 @@ slug: sqlite-sync-introduction
 
 **SQLite Sync** is a multi-platform extension that turns any SQLite database into a **conflict-free, offline-first replica** that syncs automatically with **[SQLite Cloud](https://sqlitecloud.io/)** nodes, **PostgreSQL** servers, and **Supabase** instances. One function call is all it takes: no backend to build, no sync protocol to implement.
 
+> **GitHub repository:** [sqliteai/sqlite-sync](https://github.com/sqliteai/sqlite-sync)
+
 Built on **CRDT** (Conflict-free Replicated Data Types), it guarantees:
 
 - **No data loss.** Devices update independently, even offline, and all changes merge automatically.
