@@ -1,97 +1,56 @@
 ---
-title: "Introduction to SQLite Sync"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+title: "Introduction to SQLite-Sync"
+description: "Introduction to SQLite-Sync"
 category: platform
 status: publish
 slug: sqlite-sync-introduction
 ---
 
-<a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> is a multi-platform extension that brings a true **local-first experience** to your applications with minimal effort. It extends standard SQLite tables with built-in support for offline work and automatic synchronization, allowing multiple devices to operate independently—even without a network connection—and seamlessly stay in sync. With SQLite Sync, developers can easily build **distributed, collaborative applications** while continuing to rely on the **simplicity, reliability, and performance of SQLite**.
+[![sqlite-sync coverage](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fsqliteai.github.io%2Fsqlite-sync%2F&search=Functions%3A%3C%5C%2Ftd%3E%5Cs*%3Ctd%20class%3D%22headerCovTableEntry(?:Hi|Med|Lo)%22%3E(%5B%5Cd.%5D%2B)%26nbsp%3B%25&replace=%241%25&label=coverage&labelColor=rgb(85%2C%2085%2C%2085)%3B&color=rgb(167%2C%20252%2C%20157)%3B&link=https%3A%2F%2Fsqliteai.github.io%2Fsqlite-sync%2F)](https://sqliteai.github.io/sqlite-sync/)
 
-Under the hood, SQLite Sync uses advanced **CRDT (Conflict-free Replicated Data Type)** algorithms and data structures designed specifically for **collaborative, distributed systems**. This means:
+**SQLite Sync** is a multi-platform extension that turns any SQLite database into a **conflict-free, offline-first replica** that syncs automatically with **[SQLite Cloud](https://sqlitecloud.io/)** nodes, **PostgreSQL** servers, and **Supabase** instances. One function call is all it takes: no backend to build, no sync protocol to implement.
 
-- Devices can update data independently, even without a network connection.
-- When they reconnect, all changes are **merged automatically and without conflicts**.
-- **No data loss. No overwrites. No manual conflict resolution.**
+Built on **CRDT** (Conflict-free Replicated Data Types), it guarantees:
 
-In simple terms, CRDTs make it possible for multiple users to **edit shared data at the same time**, from anywhere, and everything just works.
+- **No data loss.** Devices update independently, even offline, and all changes merge automatically.
+- **No conflicts.** Deterministic merge, no manual conflict resolution, ever.
+- **No extra infrastructure.** A globally distributed network of **CloudSync microservices** handles routing, packaging, and delivery of changes between SQLite and other DBMS nodes.
 
-## Key Features
+## Why SQLite Sync?
 
-- **Offline-First by Design**: Works seamlessly even when devices are offline. Changes are queued locally and synced automatically when connectivity is restored.
-- **CRDT-Based Conflict Resolution**: Merges updates deterministically and efficiently, ensuring eventual consistency across all replicas without the need for complex merge logic.
-- **Embedded Network Layer**: No external libraries or sync servers required. SQLiteSync handles connection setup, message encoding, retries, and state reconciliation internally.
-- **Drop-in Simplicity**: Just load the extension into SQLite and start syncing. No need to implement custom protocols or state machines.
-- **Efficient and Resilient**: Optimized binary encoding, automatic batching, and robust retry logic make synchronization fast and reliable even on flaky networks.
+**For offline-first apps** (mobile, desktop, IoT, edge): devices work with a local SQLite database and sync when connectivity is available. Changes queue locally and merge seamlessly on reconnect.
 
-Whether you're building a mobile app, IoT device, or desktop tool, SQLite Sync simplifies distributed data management and unlocks the full potential of SQLite in decentralized environments.
-
-## Built-in Network Layer
-
-Unlike traditional sync systems that require you to build and maintain a complex backend, **SQLite Sync includes a built-in network layer** that works out of the box:
-
-- Sync your database with the cloud using **a single function call**.
-- Compatible with **any language or framework** that supports SQLite.
-- **No backend setup required** — SQLite Sync handles networking, change tracking, and conflict resolution for you.
-
-The sync layer is tightly integrated with <a href="https://sqlitecloud.io/" target="_blank">**SQLite Cloud**</a>, enabling seamless and secure data sharing across devices, users, and platforms. You get the power of cloud sync without the complexity.
-
-## Row-Level Security
-
-Thanks to the underlying SQLite Cloud infrastructure, **SQLite Sync supports Row-Level Security (RLS)**—allowing you to define **precise access control at the row level**:
-
-- Control not just who can read or write a table, but **which specific rows** they can access.
-- Enforce security policies on the server—no need for client-side filtering.
-
-For example:
-
-- User A can only see and edit their own data.
-- User B can access a different set of rows—even within the same shared table.
-
-**Benefits of RLS**:
-
-- **Data isolation**: Ensure users only access what they’re authorized to see.
-- **Built-in privacy**: Security policies are enforced at the database level.
-- **Simplified development**: Reduce or eliminate complex permission logic in your application code.
+**For AI agents**: agents that maintain memory, notes, or shared state in SQLite can sync across instances without coordination. **[Block-Level LWW](#block-level-lww)** was specifically designed to keep **markdown files** in sync: multiple agents editing different sections of the same document preserve all changes after sync.
 
 ## What Can You Build with SQLite Sync?
 
-SQLite Sync is ideal for building collaborative and distributed apps across web, mobile, desktop, and edge platforms. Some example use cases include:
+### Offline-First Apps
+- **Shared To-Do Lists**: users independently update tasks and sync effortlessly.
+- **Note-Taking Apps**: real-time collaboration with offline editing.
+- **Field Data Collection**: for remote inspections, agriculture, or surveys.
+- **Point-of-Sale Systems**: offline-first retail solutions with synced inventory.
 
-#### 📋 Productivity & Collaboration
+### AI Agent Sync
+- **Agent Memory**: multiple agents share and update a common SQLite database, syncing state across instances without coordination.
+- **Markdown Knowledge Bases**: agents independently edit different sections of shared markdown documents, with Block-Level LWW preserving all changes.
+- **Distributed Pipelines**: agents running on different nodes accumulate results locally and merge them into a single consistent dataset.
 
-- **Shared To-Do Lists**: Users independently update tasks and sync effortlessly.
-- **Note-Taking Apps**: Real-time collaboration with offline editing.
-- **Markdown Editors**: Work offline, sync when back online—no conflicts.
+### Enterprise and Multi-Tenant
+- **CRM Systems**: sync leads and clients per user with row-level access control.
+- **SaaS Platforms**: row-level access for each user or team using a single shared database.
+- **Project Management Tools**: offline-friendly planning and task management.
 
-#### 📱 Mobile & Edge
+### Personal Apps
+- **Journaling and Diaries**: private entries that sync across devices.
+- **Habit Trackers**: sync progress with data security and consistency.
+- **Bookmarks and Reading Lists**: personal or collaborative content management.
 
-- **Field Data Collection**: For remote inspections, agriculture, or surveys.
-- **Point-of-Sale Systems**: Offline-first retail solutions with synced inventory.
-- **Health & Fitness Apps**: Sync data across devices with strong privacy controls.
+## Key Features
 
-#### 🏢 Enterprise Workflows
-
-- **CRM Systems**: Sync leads and clients per user with row-level access control.
-- **Project Management Tools**: Offline-friendly planning and task management.
-- **Expense Trackers**: Sync team expenses securely and automatically.
-
-#### 🧠 Personal Apps
-
-- **Journaling & Diaries**: Private, encrypted entries that sync across devices.
-- **Bookmarks & Reading Lists**: Personal or collaborative content management.
-- **Habit Trackers**: Sync progress with data security and consistency.
-
-#### 🌍 Multi-User, Multi-Tenant Systems
-
-- **SaaS Platforms**: Row-level access for each user or team.
-- **Collaborative Design Tools**: Merge visual edits and annotations offline.
-- **Educational Apps**: Shared learning content with per-student access controls.
-
-## Integrations
-
-Use SQLite-Sync alongside:
-
-- **<a href="https://github.com/sqliteai/sqlite-ai" target="_blank">SQLite-AI</a>** – on-device inference, embedding generation, and model interaction directly into your database
-- **<a href="https://github.com/sqliteai/sqlite-vector" target="_blank">SQLite-Vector</a>** – vector search from SQL
-- **<a href="https://github.com/sqliteai/sqlite-js" target="_blank">SQLite-JS</a>** – define SQLite functions in JavaScript
+| Feature | Description |
+|---------|-------------|
+| **CRDT-based sync** | Causal-Length Set, Delete-Wins, Add-Wins, and Grow-Only Set algorithms |
+| **Block-Level LWW** | Line-level merge for text/markdown columns, concurrent edits to different lines are preserved |
+| **Built-in networking** | Embedded network layer (libcurl or native), single function call to sync |
+| **Row-Level Security** | Server-enforced RLS: each client syncs only the rows it is authorized to see |
+| **Multi-platform** | Linux, macOS, Windows, iOS, Android, WASM |

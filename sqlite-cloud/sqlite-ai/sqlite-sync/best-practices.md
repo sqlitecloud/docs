@@ -1,117 +1,99 @@
 ---
-title: SQLite-Sync Best Practices
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+title: "SQLite-Sync Best Practices"
+description: "SQLite-Sync Best Practices"
 category: platform
 status: publish
 slug: sqlite-sync-best-practices
 ---
 
-## Database Schema Recommendations
+When designing your database schema for SQLite Sync, follow these guidelines to ensure correct CRDT behavior and conflict resolution.
 
-When designing your database schema for SQLite Sync, follow these best practices to ensure optimal CRDT performance and conflict resolution:
+## Schema Consistency Across Devices
 
-### Primary Key Requirements
+All databases participating in the same sync (every client and the cloud database) **must have the same set of synced tables with identical structure**:
 
-- **Use globally unique identifiers**: Always use TEXT primary keys with UUIDs, ULIDs, or similar globally unique identifiers
-- **Avoid auto-incrementing integers**: Integer primary keys can cause conflicts across multiple devices
-- **Use `cloudsync_uuid()`**: The built-in function generates UUIDv7 identifiers optimized for distributed systems
-- **All primary keys must be explicitly declared as `NOT NULL`**.
+- The same tables must be created on every participant.
+- Each table must be initialized with `cloudsync_init()` on every participant.
+- Column names, types, and constraints must match across participants.
+
+sqlite-sync computes a **schema hash** from the synced tables and includes it in every sync payload. The server rejects payloads whose schema hash it does not recognize, failing with an error like:
+
+```
+cloudsync operation failed: Cannot apply the received payload because the schema hash is unknown <hash>
+```
+
+If you need different clients to see different subsets of data (for example, per-tenant or per-workspace isolation), do **not** give each client a different table. Instead, use a single shared schema and scope the data with a column such as `tenant_id` or `workspace_id`, then enforce isolation server-side with [Row-Level Security](/docs/sqlite-sync-row-level-security).
+
+## Primary Key Requirements
+
+- **Use globally unique identifiers**: Always use TEXT primary keys with UUIDs or ULIDs.
+- **Avoid auto-incrementing integers**: Integer primary keys cause conflicts across multiple devices.
+- **Use `cloudsync_uuid()`**: Generates UUIDv7 identifiers optimized for distributed systems.
+- **Note:** Any write operation with a NULL primary key value will be rejected with an error.
 
 ```sql
--- ✅ Recommended: Globally unique TEXT primary key
+-- Recommended: Globally unique TEXT primary key
 CREATE TABLE users (
-    id TEXT PRIMARY KEY NOT NULL,          -- Use cloudsync_uuid()
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL
+    id TEXT PRIMARY KEY,                    -- Use cloudsync_uuid()
+    name TEXT NOT NULL DEFAULT '',
+    email TEXT UNIQUE NOT NULL DEFAULT ''
 );
 
--- ❌ Avoid: Auto-incrementing integer primary key
+-- Avoid: Auto-incrementing integer primary key
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Causes conflicts
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL
+    id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Causes conflicts across devices
+    name TEXT NOT NULL DEFAULT '',
+    email TEXT UNIQUE NOT NULL DEFAULT ''
 );
 ```
 
-### Column Constraint Guidelines
+## Column Constraint Guidelines
 
-- **Provide DEFAULT values**: All `NOT NULL` columns (except primary keys) must have `DEFAULT` values
-- **Consider nullable columns**: For optional data, use nullable columns instead of empty strings
+- All `NOT NULL` columns (except primary keys) **must** have `DEFAULT` values.
+- For optional data, use nullable columns instead of empty strings.
 
 ```sql
--- ✅ Recommended: Proper constraints and defaults
 CREATE TABLE tasks (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL DEFAULT '',
     status TEXT NOT NULL DEFAULT 'pending',
     priority INTEGER NOT NULL DEFAULT 1,
     created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-    assigned_to TEXT                       -- Nullable for optional assignment
+    assigned_to TEXT                       -- Nullable for optional data
 );
 ```
 
-### UNIQUE Constraint Considerations
+## UNIQUE Constraint Considerations
 
-When converting from single-tenant to multi-tenant database schemas with Row-Level Security, **UNIQUE constraints must be globally unique** across all tenants in the cloud database. For columns that should only be unique within a tenant, use composite UNIQUE constraints.
+In multi-tenant scenarios with Row-Level Security, UNIQUE constraints must be globally unique across all tenants in the cloud database. Use composite UNIQUE constraints for per-tenant uniqueness:
 
 ```sql
--- ❌ Single-tenant: Unique email per database
+-- Multi-tenant: Composite unique constraint
 CREATE TABLE users (
     id TEXT PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL  -- Problem: Not unique across tenants
-);
-
--- ✅ Multi-tenant: Composite unique constraint
-CREATE TABLE users (
-    id TEXT PRIMARY KEY,
-    tenant_id TEXT NOT NULL,
-    email TEXT NOT NULL,
+    tenant_id TEXT NOT NULL DEFAULT '',
+    email TEXT NOT NULL DEFAULT '',
     UNIQUE(tenant_id, email)    -- Unique email per tenant
 );
 ```
 
-### Foreign Key Compatibility
+## Foreign Key Compatibility
 
-When using foreign key constraints with SQLite Sync, be aware that interactions with the CRDT merge algorithm and Row-Level Security policies may cause constraint violations.
+Foreign key constraints may conflict with the CRDT merge algorithm:
 
-#### Potential Conflicts
+- CRDT changes are applied column-by-column during synchronization. Columns may be temporarily assigned DEFAULT values, so foreign key defaults must reference existing rows.
+- RLS policies may block CASCADE DELETE/UPDATE operations on related rows.
 
-**CRDT Merge Algorithm and DEFAULT Values**
+**Recommendations:**
+- Prefer application-level cascade logic over database-level CASCADE actions.
+- Use nullable foreign keys to avoid DEFAULT value issues.
+- Test synchronization scenarios with foreign key constraints enabled.
 
-- CRDT changes are applied column-by-column during synchronization
-- Columns may be temporarily assigned DEFAULT values during the merge process
-- If a foreign key column has a DEFAULT value, that value must exist in the referenced table
+## Trigger Compatibility
 
-**Row-Level Security and CASCADE Actions**
+Triggers can cause issues during synchronization:
 
-- RLS policies may block operations required for maintaining referential integrity
-- CASCADE DELETE/UPDATE operations may fail if RLS prevents access to related rows
+- **Duplicate operations**: Triggers that modify synchronized tables may apply changes twice during merge.
+- **Column-by-column processing**: UPDATE triggers may fire multiple times per row as each column is processed.
 
-#### Recommendations
-
-**Database Design Patterns**
-
-- Prefer application-level cascade logic over database-level CASCADE actions
-- Design RLS policies to accommodate referential integrity operations
-- Use nullable foreign keys where appropriate to avoid DEFAULT value issues
-- Alternatively, ensure DEFAULT values for foreign key columns exist in their referenced tables
-
-**Testing and Validation**
-
-- Test synchronization scenarios with foreign key constraints enabled
-- Monitor for constraint violations during sync operations in development
-
-### Trigger Compatibility
-
-Be aware that certain types of triggers can cause errors during synchronization due to SQLite Sync's merge logic.
-
-**Duplicate Operations**
-
-- If a trigger modifies a table that is also synchronized with SQLite Sync, changes performed by the trigger may be applied twice during the merge operation
-- This can lead to constraint violations or unexpected data states depending on the table's constraints
-
-**Column-by-Column Processing**
-
-- SQLite Sync applies changes column-by-column during synchronization
-- UPDATE triggers may be called multiple times for a single row as each column is processed
-- This can result in unexpected trigger behavior
+Avoid triggers that write to synchronized tables. Use application-level logic instead.

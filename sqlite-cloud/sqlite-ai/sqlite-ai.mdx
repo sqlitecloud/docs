@@ -1,13 +1,23 @@
 ---
-title: SQLite-AI
-description: SQLite Cloud is a distributed relational database system built on top of the SQLite database engine.
+title: "SQLite-AI"
+description: "Run LLM inference, embeddings, chat, audio transcription, and multimodal AI directly inside SQLite."
 category: platform
 status: publish
 slug: sqlite-ai
 ---
 
-<a href="https://sqlite.ai/sqlite-ai" target="_blank">SQLite-AI</a> is a groundbreaking extension that brings powerful AI capabilities directly into SQLite. By embedding llama and whisper, it enables local LLM inference, text generation, embedding creation, speech recognition, translation, and even multimodal support, all from within the database itself.
+**SQLite-AI** is an extension for SQLite that brings artificial intelligence capabilities directly into the database. It enables developers to run, fine-tune, and serve AI models from within SQLite using simple SQL queries — ideal for on-device and edge applications where low-latency and offline inference are critical. The extension is actively developed by [SQLite AI](https://sqlite.ai), some API and features are still evolving.
 
-With a simple SQL interface, you can chat with a model, stream tokens in real time, generate high-quality embeddings, or transcribe and translate audio using Whisper. Multimodal features allow image processing and embedding, making SQLite-AI a versatile foundation for modern AI applications.
+## Features
 
-**SQLite-AI** is an open-source project available on <a href="https://github.com/sqliteai/sqlite-ai" target="_blank">GitHub</a>.
+* **Embedded AI Inference**: Run transformer models directly from SQL queries.
+* **Streaming I/O**: Token-by-token streaming via SQL aggregate functions.
+* **Fine-tuning & Embedding**: On-device model customization and vector embedding.
+* **Full On-Device Support**: Works on iOS, Android, Linux, macOS, and Windows.
+* **Offline-First**: No server dependencies or internet connection required.
+* **Composable SQL Interface**: AI + relational logic in a single unified layer.
+* **Audio Transcription**: Speech-to-text via Whisper models (WAV, MP3, FLAC).
+* **Vision / Multimodal**: Analyze images via multimodal models (JPG, PNG, BMP, GIF).
+* **Supports any GGUF model**: available on Huggingface; Qwen, Gemma, Llama, DeepSeek and more
+
+SQLite-AI supports **text embedding generation** for search and classification, a **chat-like interface with history and token streaming**, **automatic context save and restore** across sessions, **audio transcription** via Whisper models, and **vision/multimodal** image understanding — making it ideal for building conversational agents, memory-aware assistants, and voice-enabled applications.

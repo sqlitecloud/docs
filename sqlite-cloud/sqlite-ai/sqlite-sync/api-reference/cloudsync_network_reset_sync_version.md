@@ -1,10 +1,12 @@
 ---
 title: "cloudsync_network_reset_sync_version()"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+description: "SQLite-Sync SQL function reference."
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-reset-sync-version
 ---
+
+## `cloudsync_network_reset_sync_version()`
 
 **Description:** Resets local synchronization version numbers, forcing the next sync to fetch all changes from the server.
 
@@ -17,3 +19,5 @@ slug: sqlite-sync-api-cloudsync-network-reset-sync-version
 ```sql
 SELECT cloudsync_network_reset_sync_version();
 ```
+
+---

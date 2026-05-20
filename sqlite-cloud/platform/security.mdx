@@ -38,10 +38,14 @@ SQLite Cloud offers a comprehensive system of built-in roles designed to provide
 
 Here is an overview of the built-in roles:
 
-- **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
-- **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
-- **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
-- **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
+- **ADMIN:** Provides full administrative access.
+- **READ:** Grants read-only access to a specified database or table.
+- **READWRITE:** Grants read and write access to a specified database or table.
+- **DBADMIN:** Allows database administration tasks without user or role management.
+- **USERADMIN:** Enables user and role management.
+- **CLUSTERADMIN:** Enables cluster management.
+- **CLUSTERMONITOR:** Grants read-only access to cluster monitoring commands.
+- **HOSTADMIN:** Allows monitoring and management of individual nodes.
 
 
 <Callout type="note" title="Restrictions">
@@ -55,8 +59,8 @@ To further refine the scope of a role or privilege, you can specify a database a
 -----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
  ADMIN                 | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
                        |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,														  |              |           |
-                       |         | ATTACH,DETACH,DBADMIN,SUB,PUB,PUBSUB,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												  |              |           |
-                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,PUBSUBCREATE,PUBSUBADMIN,WEBLITE,ADMIN 				  | NULL         | NULL      |
+                       |         | ATTACH,DETACH,DBADMIN,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												                  |              |           |
+                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,WEBLITE,ADMIN 				                              | NULL         | NULL      |
  READ                  | 1       | READ                                                                                                                                   | NULL         | NULL      |
  READANYDATABASE       | 1       | READ                                                                                                                                   | *            | *         |
  READWRITE             | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | NULL         | NULL      |
@@ -69,14 +73,6 @@ To further refine the scope of a role or privilege, you can specify a database a
  CLUSTERADMIN          | 1       | CLUSTERADMIN                                                                                                                           | *            | *         |
  CLUSTERMONITOR        | 1       | CLUSTERMONITOR                                                                                                                         | *            | *         |
  HOSTADMIN             | 1       | BACKUP,RESTORE,DOWNLOAD,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN                                                                        | *            | *         |
- SUB                   | 1       | SUB                                                                                                                                    | NULL         | NULL      |
- SUBANYCHANNEL         | 1       | SUB                                                                                                                                    | *            | *         |
- PUB                   | 1       | PUB                                                                                                                                    | NULL         | NULL      |
- PUBANYCHANNEL         | 1       | PUB                                                                                                                                    | *            | *         |
- PUBSUB                | 1       | SUB,PUB,PUBSUB                                                                                                                         | NULL         | NULL      |
- PUBSUBANYCHANNEL      | 1       | SUB,PUB,PUBSUB                                                                                                                         | *            | *         |
- PUBSUBADMIN           | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | NULL         | NULL      |
- PUBSUBADMINANYCHANNEL | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | *            | *         |
 -----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
 ```
 
@@ -113,9 +109,6 @@ A role can contains any combination of privileges.
  ATTACH          |
  DETACH          |
  DBADMIN         |
- SUB             |
- PUB             |
- PUBSUB          |
  BACKUP          |
  RESTORE         |
  DOWNLOAD        |
@@ -128,8 +121,6 @@ A role can contains any combination of privileges.
  DROP_DATABASE   |
  HOSTADMIN       |
  SWITCH_USER     |
- PUBSUBCREATE    |
- PUBSUBADMIN     |
  WEBLITE         |
  ADMIN           |
 -----------------|

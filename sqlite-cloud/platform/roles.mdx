@@ -40,16 +40,6 @@ These roles implicitly apply to the entire cluster (`*`) and do not require spec
 *   **READWRITEANYDATABASE:** Grants read and write capabilities across any database and table.
 *   **DBADMINANYDATABASE:** Provides administrative functions for any database.
 
-### Pub/Sub Roles
-*   **SUB:** Grants the subscribe privilege to a specified database, table, or channel.
-*   **PUB:** Offers the publish privilege to a specified database, table, or channel.
-*   **PUBSUB:** Combines subscribe and publish privileges for a specified database, table, or channel.
-*   **PUBSUBADMIN:** Allows the creation and removal of channel privileges for a specified database or channel.
-*   **SUBANYCHANNEL**: Provides the subscribe privilege for any channel or table.
-*   **PUBANYCHANNEL**: Grants the publish privilege for any channel or table.
-*   **PUBSUBANYCHANNEL**: Combines subscribe and publish privileges for any channel or table.
-*   **PUBSUBADMINANYCHANNEL**: Permits the creation and removal of channel privileges for any channel.
-
 ### Cluster Management Roles
 *   **USERADMIN:** Enables the creation and modification of roles and users.
 *   **CLUSTERADMIN:** Empowers users to manage and monitor the cluster.
@@ -69,8 +59,8 @@ Below is the technical definition of all built-in roles and their mapped privile
 -----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
  ADMIN                 | 1       | READ,INSERT,UPDATE,DELETE,READWRITE,PRAGMA,CREATE_TABLE,CREATE_INDEX,CREATE_VIEW,                                                      |              |           |
                        |         | CREATE_TRIGGER,DROP_TABLE,DROP_INDEX,DROP_VIEW,DROP_TRIGGER,ALTER_TABLE,ANALYZE,														  |              |           |
-                       |         | ATTACH,DETACH,DBADMIN,SUB,PUB,PUBSUB,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												  |              |           |
-                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,PUBSUBCREATE,PUBSUBADMIN,WEBLITE,ADMIN 				  | NULL         | NULL      |
+                       |         | ATTACH,DETACH,DBADMIN,BACKUP,RESTORE,DOWNLOAD,PLUGIN,SETTINGS,USERADMIN,												                  |              |           |
+                       |         | CLUSTERADMIN,CLUSTERMONITOR,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN,SWITCH_USER,WEBLITE,ADMIN 				                              | NULL         | NULL      |
  READ                  | 1       | READ                                                                                                                                   | NULL         | NULL      |
  READANYDATABASE       | 1       | READ                                                                                                                                   | *            | *         |
  READWRITE             | 1       | READ,INSERT,UPDATE,DELETE,READWRITE                                                                                                    | NULL         | NULL      |
@@ -83,14 +73,6 @@ Below is the technical definition of all built-in roles and their mapped privile
  CLUSTERADMIN          | 1       | CLUSTERADMIN                                                                                                                           | *            | *         |
  CLUSTERMONITOR        | 1       | CLUSTERMONITOR                                                                                                                         | *            | *         |
  HOSTADMIN             | 1       | BACKUP,RESTORE,DOWNLOAD,CREATE_DATABASE,DROP_DATABASE,HOSTADMIN                                                                        | *            | *         |
- SUB                   | 1       | SUB                                                                                                                                    | NULL         | NULL      |
- SUBANYCHANNEL         | 1       | SUB                                                                                                                                    | *            | *         |
- PUB                   | 1       | PUB                                                                                                                                    | NULL         | NULL      |
- PUBANYCHANNEL         | 1       | PUB                                                                                                                                    | *            | *         |
- PUBSUB                | 1       | SUB,PUB,PUBSUB                                                                                                                         | NULL         | NULL      |
- PUBSUBANYCHANNEL      | 1       | SUB,PUB,PUBSUB                                                                                                                         | *            | *         |
- PUBSUBADMIN           | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | NULL         | NULL      |
- PUBSUBADMINANYCHANNEL | 1       | SUB,PUB,PUBSUB,PUBSUBCREATE,PUBSUBADMIN                                                                                                | *            | *         |
 -----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------|-----------|
 ```
 
@@ -140,10 +122,9 @@ Below is the complete list of available privileges:
 | CREATE_VIEW | CREATE_TRIGGER | DROP_TABLE |
 | DROP_INDEX | DROP_VIEW | DROP_TRIGGER |
 | ALTER_TABLE | ANALYZE | ATTACH |
-| DETACH | DBADMIN | SUB |
-| PUB | PUBSUB | BACKUP |
+| DETACH | DBADMIN | BACKUP |
 | RESTORE | DOWNLOAD | PLUGIN |
 | SETTINGS | USERADMIN | CLUSTERADMIN |
 | CLUSTERMONITOR | CREATE_DATABASE | DROP_DATABASE |
-| HOSTADMIN | SWITCH_USER | PUBSUBCREATE |
-| PUBSUBADMIN | WEBLITE | ADMIN |
+| HOSTADMIN | SWITCH_USER | WEBLITE |
+| ADMIN | | |
