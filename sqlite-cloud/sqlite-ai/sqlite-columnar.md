@@ -15,7 +15,14 @@ It does not patch SQLite's pager, btree, parser, VDBE, or shell. Use it to
 create columnar virtual tables for the parts of your application that behave
 more like analytics than OLTP.
 
-> **GitHub repository:** [sqliteai/sqlite-columnar](https://github.com/sqliteai/sqlite-columnar)
+<div class="not-prose my-6 flex flex-wrap items-center gap-2">
+  <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+    Installed by default in SQLite Cloud
+  </span>
+  <a class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-900 hover:border-slate-300" href="https://github.com/sqliteai/sqlite-columnar" target="_blank" rel="noopener noreferrer">
+    GitHub: https://github.com/sqliteai/sqlite-columnar
+  </a>
+</div>
 
 ## Why Columnar SQLite?
 
