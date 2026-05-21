@@ -22,7 +22,7 @@ To upload a local SQLite database via weblite, make a POST request to the `/v2/w
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
+  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
   -d ''
@@ -52,7 +52,7 @@ The default encoding is set to UTF-8, and the default page size is 4096KB.
 To create a new database or upload an existing database via [Weblite](/docs/weblite), our REST API, you can make a request with the following parameters:
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud:8090/v2/weblite/<database-name>.sqlite' \
+  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
   -d ''
