@@ -1,126 +1,103 @@
 ---
-title: "Getting Started"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+title: "SQLite-Sync Getting Started"
+description: "SQLite-Sync Getting Started"
 category: platform
 status: publish
 slug: sqlite-sync-getting-started
 ---
 
-Here's a quick example to get started with SQLite Sync:
+## Quick Start
 
-### Prerequisites
-
-1. **SQLite Cloud Account**: Sign up at <a href="https://sqlitecloud.io/" target="_blank">SQLite Cloud</a>
-2. **SQLite Sync Extension**: Download from <a href="https://github.com/sqliteai/sqlite-sync/releases" target="_blank">Releases</a>
-
-### SQLite Cloud Setup
-
-1. Create a new project and database in your <a href="https://dashboard.sqlitecloud.io/" target="_blank">SQLite Cloud Dashboard</a>
-2. Copy your connection string and API key from the dashboard
-3. Create tables with identical schema in both local and cloud databases
-4. [Enable synchronization](/docs/offsync#:~:text=in%20the%20cloud.-,Configuring%20OffSync,-You%20can%20enable): go to Databases > Offsync page and select each table you want to synchronize in your database
-
-### Local Database Setup
-
-```bash
-# Start SQLite CLI
-sqlite3 myapp.db
-```
+### 1. Create a table and enable sync
 
 ```sql
--- Load the extension
-.load ./cloudsync
-
--- Create a table (primary key MUST be TEXT for global uniqueness)
-CREATE TABLE IF NOT EXISTS my_data (
-    id TEXT PRIMARY KEY NOT NULL,
-    value TEXT NOT NULL DEFAULT '',
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE tasks (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL DEFAULT '',
+    done INTEGER NOT NULL DEFAULT 0
 );
 
--- Initialize table for synchronization
-SELECT cloudsync_init('my_data');
+-- Enable CRDT sync on the table
+SELECT cloudsync_init('tasks');
+```
 
--- Use your local database normally: read and write data using standard SQL queries
--- The CRDT system automatically tracks all changes for synchronization
+### 2. Use your database normally
 
--- Example: Insert data (always use cloudsync_uuid() for globally unique IDs)
-INSERT INTO my_data (id, value) VALUES
-    (cloudsync_uuid(), 'Hello from device A!'),
-    (cloudsync_uuid(), 'Working offline is seamless!');
+```sql
+INSERT INTO tasks (id, title) VALUES (cloudsync_uuid(), 'Buy groceries');
+INSERT INTO tasks (id, title) VALUES (cloudsync_uuid(), 'Review PR #42');
 
--- Example: Update and delete operations work normally
-UPDATE my_data SET value = 'Updated: Hello from device A!' WHERE value LIKE 'Hello from device A!';
+UPDATE tasks SET done = 1 WHERE title = 'Buy groceries';
 
--- View your data
-SELECT * FROM my_data ORDER BY created_at;
+SELECT * FROM tasks;
+```
 
--- Configure network connection before using the network sync functions
-SELECT cloudsync_network_init('sqlitecloud://your-project-id.sqlite.cloud/database.sqlite');
-SELECT cloudsync_network_set_apikey('your-api-key-here');
--- Or use token authentication (required for Row-Level Security)
--- SELECT cloudsync_network_set_token('your_auth_token');
+### 3. Sync with the cloud
 
--- Sync with cloud: send local changes, then check the remote server for new changes
--- and, if a package with changes is ready to be downloaded, applies them to the local database
+```sql
+-- Connect to your SQLite Cloud managed database
+-- (get the managed database ID from the CloudSync page on the SQLite Cloud dashboard)
+SELECT cloudsync_network_init('your-managed-database-id');
+SELECT cloudsync_network_set_apikey('your-api-key');
+
+-- Send local changes and receive remote changes
 SELECT cloudsync_network_sync();
--- Keep calling periodically. The function returns > 0 if data was received
--- In production applications, you would typically call this periodically
--- rather than manually (e.g., every few seconds)
+-- Returns JSON: {"send":{"status":"synced","localVersion":3,"serverVersion":3},"receive":{"rows":0,"tables":[]}}
+
+-- Call periodically to stay in sync
 SELECT cloudsync_network_sync();
 
--- Before closing the database connection
+-- Before closing the connection
 SELECT cloudsync_terminate();
--- Close the database connection
-.quit
 ```
 
-```sql
--- On another device (or create another database for testing: sqlite3 myapp_2.db)
--- Follow the same setup steps: load extension, create table, init sync, configure network
+### 4. Sync from another device
 
--- Load extension and create identical table structure
-.load ./cloudsync
-CREATE TABLE IF NOT EXISTS my_data (
-    id TEXT PRIMARY KEY NOT NULL,
-    value TEXT NOT NULL DEFAULT '',
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+On a second device (or a second database for testing), repeat the same setup:
+
+```sql
+-- Device B: create the same table and init sync
+CREATE TABLE tasks (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL DEFAULT '',
+    done INTEGER NOT NULL DEFAULT 0
 );
-SELECT cloudsync_init('my_data');
+
+SELECT cloudsync_init('tasks');
 
 -- Connect to the same cloud database
-SELECT cloudsync_network_init('sqlitecloud://your-project-id.sqlite.cloud/database.sqlite');
-SELECT cloudsync_network_set_apikey('your-api-key-here');
+SELECT cloudsync_network_init('your-managed-database-id');
+SELECT cloudsync_network_set_apikey('your-api-key');
 
--- Sync to get data from the first device
+-- Pull changes from Device A
 SELECT cloudsync_network_sync();
--- repeat until data is received (returns > 0)
-SELECT cloudsync_network_sync();
-
--- View synchronized data
-SELECT * FROM my_data ORDER BY created_at;
-
--- Add data from this device to test bidirectional sync
-INSERT INTO my_data (id, value) VALUES
-    (cloudsync_uuid(), 'Hello from device B!');
-
--- Sync again to send this device's changes
+-- Call again: the first call triggers package preparation, the second downloads it
 SELECT cloudsync_network_sync();
 
--- The CRDT system ensures all devices eventually have the same data,
--- with automatic conflict resolution and no data loss
+-- Device A's tasks are now here
+SELECT * FROM tasks;
 
--- Before closing the database connection
+-- Add data from this device
+INSERT INTO tasks (id, title) VALUES (cloudsync_uuid(), 'Call the dentist');
+
+-- Send this device's changes to the cloud
+SELECT cloudsync_network_sync();
+
+-- Before closing the connection
 SELECT cloudsync_terminate();
--- Close the database connection
-.quit
 ```
 
-### For a Complete Example
+Back on Device A, calling `cloudsync_network_sync()` will pull Device B's changes. The CRDT engine ensures all devices converge to the same data, automatically, with no conflicts.
 
-See the <a href="https://github.com/sqliteai/sqlite-sync/blob/main/examples/simple-todo-db/README.md" target="_blank">examples</a> directory for a comprehensive walkthrough including:
+> **Note:** every device participating in the same sync must create **the same set of tables with the same structure** and initialize each one with `cloudsync_init()`. sqlite-sync derives a schema hash from the synced tables, and the server rejects payloads whose hash it does not recognize. For multi-tenant setups where each client should see only a subset of rows, use a shared schema with a tenant/scope column and enforce isolation with [Row-Level Security](/docs/sqlite-sync-row-level-security) — do not give each client a different table.
 
-- Multi-device collaboration
-- Offline scenarios
-- Row-level security setup
-- Conflict resolution demonstrations
+## SQLite Cloud Setup
+
+1. Sign up at [SQLite Cloud](https://sqlitecloud.io/) and create a project.
+2. Create a database and your tables in the [dashboard](https://dashboard.sqlitecloud.io/).
+3. Enable synchronization: click **"CloudSync"** for your database and select the tables to sync.
+4. Copy the managed database ID and API key from the dashboard.
+5. Use `cloudsync_network_init()` and `cloudsync_network_set_apikey()` locally, then call `cloudsync_network_sync()`.
+
+For token-based authentication (required for RLS), use `cloudsync_network_set_token()` instead of `cloudsync_network_set_apikey()`.
+

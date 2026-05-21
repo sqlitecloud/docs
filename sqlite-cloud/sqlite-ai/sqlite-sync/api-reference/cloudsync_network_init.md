@@ -1,21 +1,25 @@
 ---
-title: "cloudsync_network_init(connection_string)"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+title: "cloudsync_network_init(managedDatabaseId)"
+description: "SQLite-Sync SQL function reference."
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-init
 ---
 
-**Description:** Initializes the `sqlite-sync` network component. This function parses the connection string to configure change checking and upload endpoints, and initializes the cURL library.
+## `cloudsync_network_init(managedDatabaseId)`
+
+**Description:** Initializes the `sqlite-sync` network component. This function configures the endpoints for the CloudSync service and initializes the cURL library.
 
 **Parameters:**
 
-- `connection_string` (TEXT): The connection string for the remote synchronization server. The format is `sqlitecloud://<host>:<port>/<database>?<options>`.
+- `managedDatabaseId` (TEXT): The managed database identifier returned by the CloudSync service when a new database is registered for sync. For SQLiteCloud projects, this value can be obtained from the project's CloudSync page on the dashboard.
 
 **Returns:** None.
 
 **Example:**
 
 ```sql
-SELECT cloudsync_network_init('<projectid>.sqlite.cloud/<db>.sqlite');
+SELECT cloudsync_network_init('your-managed-database-id');
 ```
+
+---

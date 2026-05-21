@@ -1,6 +1,6 @@
 ---
 title: Getting Started with SQLite AI
-description: SQLite Cloud is a distributed relational database system built on top of the SQLite database engine.
+description: SQLite AI brings local AI, vector search, sync, analytics, memory, and JavaScript extensions directly into SQLite.
 category: getting-started
 status: publish
 slug: ai-overview
@@ -8,30 +8,69 @@ slug: ai-overview
 
 ## Overview
 
-**SQLite AI** is an advanced extension of SQLite designed to bring AI capabilities directly to the edge. It transforms the world’s most deployed database into a powerful, intelligent local database engine capable of powering modern, AI-driven applications, from mobile apps to embedded systems, IoT devices, and robotics.
+**SQLite AI** is a local-first stack of SQLite extensions for building AI-enabled applications close to the data. It keeps inference, retrieval, memory, analytics, sync, and custom logic inside the same SQLite workflow, so applications can run offline, preserve privacy, and still connect to SQLite Cloud when they need managed sync, auth, or shared infrastructure.
 
-At the core of the project is a belief that **AI should run where the data is** — locally, privately, and efficiently — without always relying on the cloud.
+## Extension Stack
 
-### Key Extensions
+- **[SQLite-AI](/docs/sqlite-ai)** runs local LLM inference, embeddings, chat, audio transcription, and multimodal image analysis from SQL.
+- **[SQLite-Memory](/docs/sqlite-memory)** adds persistent, searchable memory for AI agents with markdown-aware chunking, hybrid vector and FTS search, and optional sync.
+- **[SQLite-Vector](/docs/sqlite-vector)** stores embeddings in ordinary SQLite tables and performs fast nearest-neighbor search with quantization support.
+- **[SQLite-Sync](/docs/sqlite-sync-introduction)** keeps local SQLite databases synchronized across devices and users with CRDT-based conflict resolution.
+- **[SQLite-Columnar](/docs/sqlite-columnar)** adds column-oriented virtual tables and analytical helpers for fast local OLAP-style queries.
+- **[SQLite-JS](/docs/sqlite-js)** lets you define scalar, aggregate, window, and collation functions in JavaScript.
 
-SQLite AI is built around several modular extensions:
+## Common Workflows
 
-1. **SQLite-AI**
-   Integrates on-device AI capabilities (e.g., LLM inference, audio transcription with Whisper) directly into SQLite using extensions that wrap C-based AI libraries such as `llama.cpp`, `whisper.cpp`, and more.
+### Local RAG
 
-2. **SQLite-Vector**
-   Adds native vector search to SQLite using optimized in-database structures and distance functions (L2, cosine, dot, etc.), with support for multiple vector formats (Float32, Int8, etc.). Ideal for on-device semantic search and AI retrieval.
+```sql
+-- Generate embeddings with SQLite-AI.
+SELECT llm_model_load('./models/nomic-embed-text-v1.5-Q8_0.gguf', 'gpu_layers=99');
+SELECT llm_context_create_embedding('embedding_type=FLOAT32');
 
-3. **SQLite-Sync**
-   A local-first sync layer that keeps SQLite databases synchronized across devices and users, with support for CRDTs, delta-based replication, and efficient cloud coordination.
+CREATE TABLE documents (
+  id INTEGER PRIMARY KEY,
+  body TEXT,
+  embedding BLOB
+);
 
-4. **SQLite-JS**
-   Embed JavaScript directly into SQLite using a lightweight interpreter (e.g., QuickJS), allowing developers to define SQLite functions and logic in JavaScript for increased flexibility and expressiveness.
+INSERT INTO documents (body, embedding)
+VALUES (
+  'SQLite stores data in a single portable database file.',
+  llm_embed_generate('SQLite stores data in a single portable database file.')
+);
 
+-- Search them with SQLite-Vector.
+SELECT vector_init('documents', 'embedding', 'type=FLOAT32,dimension=768,distance=COSINE');
+SELECT vector_quantize('documents', 'embedding');
+```
 
-### Features
+### Agent Memory
 
-* **Works offline-first**: No need for a server to run advanced queries or AI models.
-* **Cross-platform**: Runs on iOS, Android, Windows, Linux, macOS, and WebAssembly.
-* **Minimal footprint**: Optimized for constrained devices.
-* **Modular and open**: Built in C with clean, embeddable APIs and no heavy dependencies.
+```sql
+SELECT memory_set_model('local', './models/nomic-embed-text-v1.5.Q8_0.gguf');
+SELECT memory_add_text('The user prefers concise Python examples.', 'conversation');
+
+SELECT path, snippet, ranking
+FROM memory_search
+WHERE query = 'what style should I use for code examples?'
+ORDER BY ranking DESC;
+```
+
+### Offline-First AI Apps
+
+```sql
+CREATE TABLE notes (
+  id TEXT PRIMARY KEY NOT NULL,
+  body TEXT NOT NULL DEFAULT ''
+);
+
+SELECT cloudsync_init('notes');
+INSERT INTO notes VALUES (cloudsync_uuid(), 'Draft generated locally');
+SELECT cloudsync_network_sync();
+```
+
+## Tools
+
+- **[MCP Server](/docs/mcp-server)** connects AI agents and MCP-compatible clients to SQLite Cloud databases.
+- **[AI-Powered Docs Search](/docs/aisearch-documents)** shows how to build semantic documentation search with GitHub Actions, SQLite Cloud, and an Edge Function.

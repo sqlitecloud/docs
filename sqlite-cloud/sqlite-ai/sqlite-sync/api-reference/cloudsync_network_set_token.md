@@ -1,12 +1,14 @@
 ---
 title: "cloudsync_network_set_token(token)"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+description: "SQLite-Sync SQL function reference."
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-network-set-token
 ---
 
-**Description:** Sets the authentication token to be used for network requests. This token will be included in the `Authorization` header of all subsequent requests. For more information, refer to the [Access Tokens documentation](/docs/access-tokens).
+## `cloudsync_network_set_token(token)`
+
+**Description:** Sets the authentication token to be used for network requests. This token will be included in the `Authorization` header of all subsequent requests. For more information, refer to the [Access Tokens documentation](https://docs.sqlitecloud.io/docs/access-tokens). 
 
 **Parameters:**
 
@@ -19,3 +21,5 @@ slug: sqlite-sync-api-cloudsync-network-set-token
 ```sql
 SELECT cloudsync_network_set_token('your_auth_token');
 ```
+
+---
