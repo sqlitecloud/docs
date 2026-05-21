@@ -423,7 +423,7 @@ SELECT cloudsync_commit_alter('my_table');
 
 **Parameters:**
 
-- `managedDatabaseId` (TEXT): The managed database identifier returned by the CloudSync service when a new database is registered for sync. For SQLiteCloud projects, this value can be obtained from the project's OffSync page on the dashboard.
+- `managedDatabaseId` (TEXT): The managed database identifier returned by the CloudSync service when a new database is registered for sync. For SQLiteCloud projects, this value can be obtained from the project's CloudSync page on the dashboard.
 
 **Returns:** None.
 

@@ -395,7 +395,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Roles & Privileges", filePath: "roles", type: "inner", level: 0 },
 	{ title: "API Keys", filePath: "apikey", type: "inner", level: 0 },
 	{ title: "Row-Level Security", filePath: "rls", type: "inner", level: 0 },
-	{ title: "OffSync", filePath: "offsync", type: "inner", level: 0 },
+	{ title: "CloudSync", filePath: "cloudsync", type: "inner", level: 0 },
 	{
 		title: "Access Tokens",
 		filePath: "access-tokens",

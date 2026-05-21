@@ -36,7 +36,7 @@ SELECT * FROM tasks;
 
 ```sql
 -- Connect to your SQLite Cloud managed database
--- (get the managed database ID from the OffSync page on the SQLite Cloud dashboard)
+-- (get the managed database ID from the CloudSync page on the SQLite Cloud dashboard)
 SELECT cloudsync_network_init('your-managed-database-id');
 SELECT cloudsync_network_set_apikey('your-api-key');
 
@@ -95,7 +95,7 @@ Back on Device A, calling `cloudsync_network_sync()` will pull Device B's change
 
 1. Sign up at [SQLite Cloud](https://sqlitecloud.io/) and create a project.
 2. Create a database and your tables in the [dashboard](https://dashboard.sqlitecloud.io/).
-3. Enable synchronization: click **"OffSync"** for your database and select the tables to sync.
+3. Enable synchronization: click **"CloudSync"** for your database and select the tables to sync.
 4. Copy the managed database ID and API key from the dashboard.
 5. Use `cloudsync_network_init()` and `cloudsync_network_set_apikey()` locally, then call `cloudsync_network_sync()`.
 
