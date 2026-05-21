@@ -381,8 +381,8 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Gin", filePath: "quick-start-gin", type: "inner", level: 1 },
 	{ title: "Knex.js", filePath: "quick-start-knex", type: "inner", level: 1 },
 
-	// ### PLATFORM ###
-	{ title: "Platform", type: "secondary", icon: "docs-plat" },
+	// ### DASHBOARD ###
+	{ title: "Dashboard", type: "secondary", icon: "docs-plat" },
 	{
 		title: "Edge Functions",
 		filePath: "edge-functions",
@@ -409,7 +409,7 @@ const sidebarNav: SidebarNavStruct = [
 	{ title: "Weblite (REST API)", filePath: "weblite", type: "inner", level: 0 },
 
 	// ### CLOUD SDK ###
-	{ title: "SDKs", type: "secondary", icon: "docs-sdk" },
+	{ title: "Cloud SDKs", type: "secondary", icon: "docs-sdk" },
 	{ title: "C/C++", type: "inner", level: 0 },
 	{
 		title: "Introduction",
