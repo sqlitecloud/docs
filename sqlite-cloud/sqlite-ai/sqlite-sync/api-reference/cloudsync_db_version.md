@@ -1,10 +1,12 @@
 ---
 title: "cloudsync_db_version()"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+description: "SQLite-Sync SQL function reference."
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-db-version
 ---
+
+## `cloudsync_db_version()`
 
 **Description:** Returns the current database version.
 
@@ -17,3 +19,5 @@ slug: sqlite-sync-api-cloudsync-db-version
 ```sql
 SELECT cloudsync_db_version();
 ```
+
+---

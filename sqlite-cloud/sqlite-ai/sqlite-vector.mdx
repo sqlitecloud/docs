@@ -1,13 +1,43 @@
 ---
-title: SQLite-Vector
-description: SQLite Cloud is a distributed relational database system built on top of the SQLite database engine.
+title: "SQLite-Vector"
+description: "Production-grade vector search inside SQLite for local, edge, and embedded AI applications."
 category: platform
 status: publish
 slug: sqlite-vector
 ---
 
-<a href="https://www.sqlite.ai/sqlite-vector" target="_blank">SQLite-Vector</a> is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities directly into your embedded database
+**SQLite Vector** is a cross-platform, ultra-efficient SQLite extension that brings vector search capabilities to your embedded database. It works seamlessly on **iOS, Android, Windows, Linux, and macOS**, using just **30MB of memory** by default. With support for **Float32, Float16, BFloat16, Int8, UInt8 and 1Bit**, and **highly optimized distance functions**, it's the ideal solution for **Edge AI** applications.
 
-Whether you're dealing with **millions of high-dimensional vectors** or operating on resource-constrained edge devices, SQLite-Vector delivers **lightning-fast performance** with a **tiny memory footprint**.
+<div className="not-prose my-6 flex flex-wrap items-center gap-2">
+  <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+    {"Installed by default in SQLite Cloud"}
+  </span>
+  <a className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-900 hover:border-slate-300" href="https://github.com/sqliteai/sqlite-vector" target="_blank" rel="noopener noreferrer">
+    {"GitHub: https://github.com/sqliteai/sqlite-vector"}
+  </a>
+</div>
 
-**SQLite-Vector** is an open-source project available on <a href="https://github.com/sqliteai/sqlite-vector" target="_blank">GitHub</a>.
+## Highlights
+
+* **No virtual tables required** – store vectors directly as `BLOB`s in ordinary tables
+* **Blazing fast** – optimized C implementation with SIMD acceleration
+* **Low memory footprint** – defaults to just 30MB of RAM usage
+* **Zero preindexing needed** – no long preprocessing or index-building phases
+* **Works offline** – perfect for on-device, privacy-preserving AI workloads
+* **Plug-and-play** – drop into existing SQLite workflows with minimal effort
+* **Cross-platform** – works out of the box on all major OSes
+
+
+## Why Use SQLite-Vector?
+
+| Feature                      | SQLite-Vector | Traditional Solutions                      |
+| ---------------------------- | ------------- | ------------------------------------------ |
+| Works with ordinary tables   | ✅             | ❌ (usually require special virtual tables) |
+| Doesn't need preindexing     | ✅             | ❌ (can take hours for large datasets)      |
+| Doesn't need external server | ✅             | ❌ (often needs Redis/FAISS/Weaviate/etc.)  |
+| Memory-efficient             | ✅             | ❌                                          |
+| Easy to use SQL              | ✅             | ❌ (often complex JOINs, subqueries)        |
+| Offline/Edge ready           | ✅             | ❌                                          |
+| Cross-platform               | ✅             | ❌                                          |
+
+Unlike other vector databases or extensions that require complex setup, SQLite-Vector **just works** with your existing database schema and tools.

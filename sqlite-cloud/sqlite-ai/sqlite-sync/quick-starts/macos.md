@@ -2,7 +2,7 @@
 title: "MacOS Quick Start Guide"
 description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
 category: platform
-status: publish
+status: draft
 slug: sqlite-sync-quick-start-macos
 ---
 

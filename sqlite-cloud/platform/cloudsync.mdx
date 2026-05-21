@@ -1,44 +1,44 @@
 ---
-title: OffSync
+title: CloudSync
 description: Enable local-first applications with automatic data synchronization between edge devices and SQLite Cloud.
 category: platform
 status: publish
-slug: offsync
+slug: cloudsync
 ---
 
 import VideoPlayer from '@commons-components/Video/VideoPlayer.astro';
 
 import Callout from "@commons-components/Information/Callout.astro";
 
-OffSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
+CloudSync is a powerful SQLite Cloud feature that enables true **local-first** data synchronization for your applications. Powered by the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension, it allows you to build robust, offline-capable applications where data is stored and processed on edge devices and seamlessly synchronized with a central SQLite Cloud database.
 
-This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), OffSync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
+This architecture is ideal for mobile apps, IoT devices, and any application requiring high availability and low latency, even with intermittent network connectivity. By leveraging Conflict-free Replicated Data Types (CRDTs), CloudSync ensures that changes made offline are merged automatically and without conflicts when the device reconnects.
 
 
 ---
 
 ## How It Works
 
-OffSync extends standard SQLite tables with built-in support for offline work and automatic synchronization. This allows multiple devices to operate independently and then seamlessly merge their changes.
+CloudSync extends standard SQLite tables with built-in support for offline work and automatic synchronization. This allows multiple devices to operate independently and then seamlessly merge their changes.
 
 - **Offline-First by Design**: Applications work seamlessly even when devices are offline. Changes are queued locally and synced automatically when connectivity is restored.
 - **CRDT-Based Conflict Resolution**: Merges updates deterministically and efficiently, ensuring eventual consistency across all replicas without complex merge logic.
 - **Seamless Integration**: The sync layer is tightly integrated with SQLite Cloud, enabling secure data sharing across devices, users, and platforms.
 
-When combined with [Row-Level Security (RLS)](/docs/rls), OffSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
+When combined with [Row-Level Security (RLS)](/docs/rls), CloudSync allows you to build secure, multi-tenant applications where each user's data is safely isolated, both on the edge and in the cloud.
 
 
 ---
 
-## Configuring OffSync
+## Configuring CloudSync
 
-You can enable and manage OffSync for your databases directly from the SQLite Cloud dashboard. Select a database from the left panel — the list shows all databases in your project along with their OffSync status. The right panel has four tabs: **Database Setup**, **Client Integration**, **Devices**, and **Metrics**.
+You can enable and manage CloudSync for your databases directly from the SQLite Cloud dashboard. Select a database from the left panel — the list shows all databases in your project along with their CloudSync status. The right panel has four tabs: **Database Setup**, **Client Integration**, **Devices**, and **Metrics**.
 
-### Enabling and Disabling OffSync
+### Enabling and Disabling CloudSync
 
-When OffSync is not yet active for a database, the right panel shows a brief explanation and an **Enable OffSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.
+When CloudSync is not yet active for a database, the right panel shows a brief explanation and an **Enable CloudSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.
 
-To disable OffSync, click the **Disable OffSync** button in the top-right corner of the panel and confirm in the dialog that appears.
+To disable CloudSync, click the **Disable CloudSync** button in the top-right corner of the panel and confirm in the dialog that appears.
 
 {/* <VideoPlayer src={enableDisableSync} /> */}
 
@@ -46,7 +46,7 @@ To disable OffSync, click the **Disable OffSync** button in the top-right corner
 
 ## Database Setup Tab
 
-The **Database Setup** tab handles the **server-side configuration** of OffSync. This is where you verify the database connection and choose which tables to synchronize.
+The **Database Setup** tab handles the **server-side configuration** of CloudSync. This is where you verify the database connection and choose which tables to synchronize.
 
 ### Connection Status
 
@@ -57,9 +57,9 @@ If the connection cannot be established, a warning appears with an action button
 - On **Supabase self-hosted / PostgreSQL** workspaces, click **Configure Connection** to provide the correct connection credentials via the connection settings sheet. The card also shows an **Edit** button when the connection is healthy, so you can update the credentials at any time.
 - On **SQLite Cloud** workspaces, click **Restore Connection** to automatically regenerate the internal API key used by the sync service.
 
-If the OffSync extension is not detected on the database, a warning is shown with a link to the installation documentation.
+If the CloudSync extension is not detected on the database, a warning is shown with a link to the installation documentation.
 
-### Select Tables to Enable OffSync
+### Select Tables to Enable CloudSync
 
 Below the connection card, you can choose which tables to synchronize. This section is only shown when the connection is healthy. A counter shows how many tables are currently selected (e.g., *1 of 1 selected*).
 
@@ -70,7 +70,7 @@ Below the connection card, you can choose which tables to synchronize. This sect
 Once you have made your selection, click **Deploy Changes** (bottom-right of the panel) to apply. From that point on, any writes to those tables via the SQLite Sync extension will be automatically synchronized.
 
 <Callout type="note" title="Matching Schemas and Tables">
-For OffSync to work correctly, the tables you enable for synchronization—and their schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
+For CloudSync to work correctly, the tables you enable for synchronization—and their schemas—must be identical in both your local SQLite database and your SQLite Cloud database.
 </Callout>
 
 {/* VIDEO: dashboard_offsync_database_setup.mp4
@@ -88,7 +88,7 @@ The options available in this tab depend on your workspace type. **SQLite Cloud*
 
 ### Database ID
 
-A unique identifier for your OffSync-enabled database. Pass this ID to the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension in your client application to initialize the sync connection:
+A unique identifier for your CloudSync-enabled database. Pass this ID to the <a href="https://github.com/sqliteai/sqlite-sync" target="_blank">SQLite Sync</a> extension in your client application to initialize the sync connection:
 
 ```sql
 SELECT cloudsync_network_init('<database-id>');
@@ -178,7 +178,7 @@ The **Devices** tab lists all devices currently synchronized with the selected d
 
 ## Metrics Tab
 
-The **Metrics** tab provides visibility into usage for your OffSync-enabled database over time:
+The **Metrics** tab provides visibility into usage for your CloudSync-enabled database over time:
 
 - **Active devices** — number of devices that have synced within the period
 - **Upload bytes** — data sent from devices to SQLite Cloud

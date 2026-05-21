@@ -10,7 +10,7 @@ SQCloudResult *SQCloudExecArray (SQCloudConnection *connection, const char *comm
 ```
 
 ### Description
-Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/commands). This function is equivalent to the [SQCloudExec](/docs/sqlite-cloud/sdks/c/sqcloudexec) function but special placeholders can be used to bind values to the statement (most of the time avoiding the need to perform copies and to encode data).
+Submits a command to the server and waits for the result. The command can be any SQLite statement or any built-in [SQLite Cloud command](/docs/server-side-commands). This function is equivalent to the [SQCloudExec](/docs/sqlite-cloud/sdks/c/sqcloudexec) function but special placeholders can be used to bind values to the statement (most of the time avoiding the need to perform copies and to encode data).
 
 ### Parameters
 * **connection**: a valid connection object obtained by [SQCloudConnect](/docs/sqlite-cloud/sdks/c/sqcloudconnect) or [SQCloudConnectWithString](/docs/sqlite-cloud/sdks/c/sqcloudconnectwithstring)

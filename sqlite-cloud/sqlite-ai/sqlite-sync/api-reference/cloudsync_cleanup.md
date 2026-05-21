@@ -1,10 +1,12 @@
 ---
 title: "cloudsync_cleanup(table_name)"
-description: SQLite Sync is a multi-platform extension that brings a true local-first experience to your applications with minimal effort.
+description: "SQLite-Sync SQL function reference."
 category: platform
 status: publish
 slug: sqlite-sync-api-cloudsync-cleanup
 ---
+
+## `cloudsync_cleanup(table_name)`
 
 **Description:** Removes the `sqlite-sync` synchronization mechanism from a specified table or all tables. This operation drops the associated `_cloudsync` metadata table and removes triggers from the target table(s). Use this function when synchronization is no longer desired for a table.
 
@@ -21,3 +23,5 @@ slug: sqlite-sync-api-cloudsync-cleanup
 SELECT cloudsync_cleanup('my_table');
 
 ```
+
+---
