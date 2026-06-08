@@ -34,6 +34,8 @@ When combined with [Row-Level Security (RLS)](/docs/rls), CloudSync allows you t
 
 You can enable and manage CloudSync for your databases directly from the SQLite Cloud dashboard. Select a database from the left panel — the list shows all databases in your project along with their CloudSync status. The right panel has four tabs: **Database Setup**, **Client Integration**, **Devices**, and **Metrics**.
 
+If you prefer automation, you can also register databases, inspect tables, and enable CloudSync programmatically with the [CloudSync Management API](/docs/sqlite-sync-cloudsync-management-api). That page documents the workspace-scoped management endpoints used with a `workspace-admin` key.
+
 ### Enabling and Disabling CloudSync
 
 When CloudSync is not yet active for a database, the right panel shows a brief explanation and an **Enable CloudSync** button. Clicking it opens a confirmation dialog; after confirming, the database is registered with the sync service and the tabbed view appears.

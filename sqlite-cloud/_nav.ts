@@ -96,6 +96,12 @@ const sidebarNav: SidebarNavStruct = [
 		level: 1,
 	},
 	{
+		title: "CloudSync Management API",
+		filePath: "sqlite-sync-cloudsync-management-api",
+		type: "inner",
+		level: 1,
+	},
+	{
 		title: "Best Practices",
 		filePath: "sqlite-sync-best-practices",
 		type: "inner",
