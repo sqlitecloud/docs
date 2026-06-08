@@ -127,4 +127,4 @@ SELECT cloudsync_set_column('docs', 'body', 'algo', 'block');
 - **Mixed columns**: A table can have both regular and block-level LWW columns.
 - **Transparent reads**: The base column always contains the current full text.
 
-For API details, see the [API Reference](/docs/sqlite-sync-api-reference).
+For API details, see the [Client API Reference](/docs/sqlite-sync-api-reference).
