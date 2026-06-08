@@ -44,7 +44,7 @@ Example error response:
 
 ## Quickstart
 
-Start with a workspace-level management API key from your project's **CloudSync** > **API Keys** page in the dashboard:
+Start with an API key from your project's **CloudSync** > **API Keys** page in the dashboard:
 
 ```bash
 export BASE_URL="https://cloudsync.sqlite.ai"

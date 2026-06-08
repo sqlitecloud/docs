@@ -101,4 +101,4 @@ Back on Device A, calling `cloudsync_network_sync()` will pull Device B's change
 
 For token-based authentication (required for RLS), use `cloudsync_network_set_token()` instead of `cloudsync_network_set_apikey()`.
 
-If you want to register the managed database and enable tables programmatically instead of using the dashboard, see [Management API](/docs/sqlite-sync-cloudsync-management-api). That flow uses a workspace-level management API key and is separate from the client authentication used by `cloudsync_network_set_apikey()` and `cloudsync_network_set_token()`.
+If you want to register the managed database and enable tables programmatically instead of using the dashboard, see [Management API](/docs/sqlite-sync-cloudsync-management-api). 
