@@ -8,8 +8,6 @@ slug: sqlite-sync-cloudsync-management-api
 
 You can register and manage CloudSync databases programmatically without using the dashboard UI.
 
-This page covers only the `/v1` management endpoints that are available when you authenticate with a workspace-scoped management API key that has the `workspace-admin` role. It intentionally excludes workspace management, org-wide key management, and `/v1/admin` platform-admin endpoints.
-
 ## Authentication
 
 ```http
