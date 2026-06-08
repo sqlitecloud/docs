@@ -112,22 +112,6 @@ curl --request POST "$BASE_URL/v1/databases/$MGMT_DB_ID/cloudsync/enable" \
   }'
 ```
 
-## What a `workspace-admin` Key Can Manage
-
-With a workspace-scoped management key, you can:
-
-- inspect the authenticated organization with `GET /v1/orgs`
-- register, list, read, update, delete, and verify managed databases in the key's workspace
-- list, enable, and disable CloudSync tables for those databases
-- manage Expo notification credentials and inspect notification status
-- list and remove registered devices
-
-It cannot:
-
-- list or mutate workspaces
-- create, list, or revoke management API keys
-- use `/v1/admin/*` endpoints
-
 ## Endpoint Summary
 
 | Area | Endpoints |
