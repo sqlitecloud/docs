@@ -17,11 +17,11 @@ Authorization: Bearer <APIKEY>
 ```
 
 - Base URL: `https://cloudsync.sqlite.ai`
-- Use a management API key with the `workspace-admin` role. In the dashboard, go to your project, then **CloudSync** > **API Keys**.
+- Use a management API key with the `workspace-admin` role. In the [SQLite Cloud Dashboard](https://dashboard.sqlitecloud.io/), go to your project, then **CloudSync** > **API Keys**.
 - The workspace is derived from the key itself.
 - You cannot override the workspace with headers, query parameters, or path segments.
 
-Use this API from backend services, CI, or trusted automation. Client apps should use the runtime sync APIs instead.
+Use this API from backend services, CI, or trusted automation. Client apps should use the [Client API Reference](/docs/sqlite-sync-api-reference) instead.
 
 ## Request and Response Conventions
 
