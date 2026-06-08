@@ -1,6 +1,6 @@
 ---
-title: "SQLite-Sync API Reference"
-description: "Comprehensive SQLite-Sync API reference for configuration, filters, block-level LWW, helpers, schema changes, and networking."
+title: "Client API Reference"
+description: "Reference for the SQLite Sync client runtime functions for configuration, filters, block-level LWW, helpers, schema changes, and networking."
 category: platform
 status: publish
 slug: sqlite-sync-api-reference

@@ -1,6 +1,6 @@
 ---
-title: "CloudSync Management API"
-description: "Register and manage CloudSync databases programmatically with a workspace-admin management API key."
+title: "Management API"
+description: "Register and manage SQLite Sync databases programmatically with a workspace-admin management API key."
 category: platform
 status: publish
 slug: sqlite-sync-cloudsync-management-api
