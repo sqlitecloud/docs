@@ -17,9 +17,8 @@ Authorization: Bearer <APIKEY>
 ```
 
 - Base URL: `https://cloudsync.sqlite.ai`
-- Use a management API key with the `workspace-admin` role.
+- Use a management API key with the `workspace-admin` role. In the dashboard, go to your project, then **CloudSync** > **API Keys**.
 - The workspace is derived from the key itself.
-- When a workspace-scoped key creates a managed database, you must omit `workspaceId`.
 - You cannot override the workspace with headers, query parameters, or path segments.
 
 Use this API from backend services, CI, or trusted automation. Client apps should use the runtime sync APIs instead.
@@ -48,13 +47,11 @@ Example error response:
 
 ## Quickstart
 
-Start with a workspace-level management API key from the dashboard:
+Start with a workspace-level management API key from your project's **CloudSync** > **API Keys** page in the dashboard:
 
 ```bash
 export BASE_URL="https://cloudsync.sqlite.ai"
 export APIKEY="<workspace-admin-management-api-key>"
-export PROJECT_ID="project-a"
-export DATABASE="appdb"
 ```
 
 ### 1. Register a Database
@@ -70,7 +67,6 @@ curl --request POST "$BASE_URL/v1/databases" \
     "connectionString": "sqlitecloud://project.sqlite.cloud:8860?apikey=xxxx",
     "provider": "sqlitecloud",
     "flavor": "sqlitecloud",
-    "projectId": "project-a",
     "databaseName": "appdb"
   }'
 ```
@@ -96,7 +92,7 @@ export MGMT_DB_ID="db_xxxxxxxxxxxxxxxxxxxxxxxx"
 Useful when you want to recover the managed database ID later.
 
 ```bash
-curl --request GET "$BASE_URL/v1/databases?projectId=$PROJECT_ID&database=$DATABASE" \
+curl --request GET "$BASE_URL/v1/databases" \
   --header "Authorization: Bearer $APIKEY"
 ```
 
@@ -178,7 +174,6 @@ Required fields:
 - `connectionString`
 - `provider` — `postgres` or `sqlitecloud`
 - `flavor` — for example `vanilla`, `supabase`, or `sqlitecloud`
-- `projectId`
 - `databaseName`
 
 Optional fields:
@@ -202,15 +197,10 @@ Common database failure codes include `database_paused`, `database_auth_failed`,
 
 Lists managed databases visible to the key.
 
-Supported query parameters:
-
-- `projectId`
-- `database` — requires `projectId`
-
 Example:
 
 ```bash
-curl "$BASE_URL/v1/databases?projectId=$PROJECT_ID&database=$DATABASE" \
+curl "$BASE_URL/v1/databases" \
   --header "Authorization: Bearer $APIKEY"
 ```
 
@@ -238,7 +228,6 @@ Supported fields:
 
 Notes:
 
-- `projectId` cannot be changed
 - when `connectionString` is provided, CloudSync verifies the new connection before storing it
 - omitting `jwtSecret` leaves the current secret unchanged
 - sending `"jwtSecret": ""` clears the current secret
