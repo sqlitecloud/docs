@@ -165,17 +165,11 @@ Required fields:
 
 Optional fields:
 
-- `workspaceId` — not supported with workspace-scoped keys; the workspace is derived from the key
 - `schemaName` — Postgres only
 - `jwtAllowedIssuers`
 - `jwtExpectedAudiences`
 - `jwksUri`
 - `jwtSecret`
-
-Important behavior for workspace-scoped keys:
-
-- omit `workspaceId`
-- the created database is automatically attached to the workspace derived from the key
 
 CloudSync verifies the tenant database connection before registration is persisted. If verification fails, the database is not registered.
 
