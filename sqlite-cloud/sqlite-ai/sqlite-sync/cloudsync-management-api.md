@@ -49,6 +49,10 @@ Start with an API key from your project's **CloudSync** > **API Keys** page in t
 ```bash
 export BASE_URL="https://cloudsync.sqlite.ai"
 export APIKEY="<workspace-admin-management-api-key>"
+export PROJECT_ID="<project-id>"
+export DATABASE_NAME="appdb"
+export SQLITECLOUD_HOST="<sqlitecloud-host>"
+export SQLITECLOUD_API_KEY="<sqlitecloud-api-key>"
 ```
 
 ### 1. Register a Database
@@ -61,10 +65,11 @@ curl --request POST "$BASE_URL/v1/databases" \
   --header "Content-Type: application/json" \
   --data '{
     "label": "Primary DB",
-    "connectionString": "sqlitecloud://project.sqlite.cloud:8860?apikey=xxxx",
+    "connectionString": "sqlitecloud://'"$SQLITECLOUD_HOST"':8860?apikey='"$SQLITECLOUD_API_KEY"'",
     "provider": "sqlitecloud",
     "flavor": "sqlitecloud",
-    "databaseName": "appdb"
+    "projectId": "'"$PROJECT_ID"'",
+    "databaseName": "'"$DATABASE_NAME"'"
   }'
 ```
 
@@ -78,7 +83,7 @@ Response:
 }
 ```
 
-Use that value as `MGMT_DB_ID` in the next calls.
+Use `managedDatabaseId` as `MGMT_DB_ID` in the next calls. The response also includes additional database metadata, such as `projectId`, `databaseName`, auth settings, and timestamps.
 
 ```bash
 export MGMT_DB_ID="db_xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -155,6 +160,7 @@ Required fields:
 - `connectionString`
 - `provider` — `postgres` or `sqlitecloud`
 - `flavor` — for example `vanilla`, `supabase`, or `sqlitecloud`
+- `projectId` — SQLite Cloud project identifier for the managed database. For SQLite Cloud connection strings, this must match the project ID parsed from the connection string.
 - `databaseName`
 
 Optional fields:
@@ -165,12 +171,9 @@ Optional fields:
 - `jwksUri`
 - `jwtSecret`
 
-Important behavior for workspace-scoped keys:
-
-- omit `workspaceId`
-- the created database is automatically attached to the workspace derived from the key
-
 CloudSync verifies the tenant database connection before registration is persisted. If verification fails, the database is not registered.
+
+For SQLite Cloud databases, `databaseName` identifies the target database and CloudSync switches to it when running CloudSync operations. For Postgres databases, the `connectionString` must point to the target database.
 
 Common database failure codes include `database_paused`, `database_auth_failed`, `database_unreachable`, `database_permission_denied`, `database_cloudsync_not_ready`, and `database_error`.
 
@@ -178,10 +181,22 @@ Common database failure codes include `database_paused`, `database_auth_failed`,
 
 Lists managed databases visible to the key.
 
+Query parameters:
+
+- `projectId` — filter by project ID
+- `database` — filter by database name; requires `projectId`
+
 Example:
 
 ```bash
 curl "$BASE_URL/v1/databases" \
+  --header "Authorization: Bearer $APIKEY"
+```
+
+Filtered example:
+
+```bash
+curl "$BASE_URL/v1/databases?projectId=$PROJECT_ID&database=$DATABASE_NAME" \
   --header "Authorization: Bearer $APIKEY"
 ```
 
