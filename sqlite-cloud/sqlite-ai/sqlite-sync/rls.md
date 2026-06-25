@@ -6,8 +6,6 @@ status: publish
 slug: sqlite-sync-rls-reference
 ---
 
-# Row Level Security (RLS) with CloudSync
-
 CloudSync is fully compatible with PostgreSQL Row Level Security. Standard RLS policies work out of the box.
 
 ## How It Works

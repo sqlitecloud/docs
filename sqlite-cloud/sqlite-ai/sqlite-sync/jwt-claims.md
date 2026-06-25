@@ -6,8 +6,6 @@ status: publish
 slug: sqlite-sync-jwt-claims
 ---
 
-# JWT Claims Reference
-
 ## HS256 Claims
 
 Use this mode when CloudSync validates JWTs with `jwtSecret`.

@@ -6,8 +6,6 @@ status: publish
 slug: sqlite-sync-postgresql-quick-start
 ---
 
-# CloudSync Quick Start: Self-Hosted PostgreSQL
-
 This guide helps you enable CloudSync on a **self-hosted PostgreSQL database**. CloudSync adds offline-first synchronization capabilities to your PostgreSQL database.
 
 ## Step 1: Deploy PostgreSQL with CloudSync

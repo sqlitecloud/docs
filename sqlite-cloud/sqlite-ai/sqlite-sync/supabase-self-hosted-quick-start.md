@@ -6,8 +6,6 @@ status: publish
 slug: sqlite-sync-supabase-self-hosted-quick-start
 ---
 
-# CloudSync Quick Start: Self-Hosted Supabase
-
 This guide helps you enable CloudSync on a **fresh or existing** self-hosted Supabase instance. CloudSync adds offline-first synchronization capabilities to your PostgreSQL database.
 
 ## Step 1: Use the CloudSync Supabase Image
