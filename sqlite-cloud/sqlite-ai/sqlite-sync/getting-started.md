@@ -8,7 +8,11 @@ slug: sqlite-sync-getting-started
 
 ## Quick Start
 
-### 1. Create a table and enable sync
+### 1. Install
+
+Install SQLite Sync for your platform first. See the [Installation guide](/docs/sqlite-sync-installation) for native, mobile, Expo, React Native, Flutter, and WASM setup.
+
+### 2. Create a table and enable sync
 
 ```sql
 CREATE TABLE tasks (
@@ -21,7 +25,7 @@ CREATE TABLE tasks (
 SELECT cloudsync_init('tasks');
 ```
 
-### 2. Use your database normally
+### 3. Use your database normally
 
 ```sql
 INSERT INTO tasks (id, title) VALUES (cloudsync_uuid(), 'Buy groceries');
@@ -32,7 +36,9 @@ UPDATE tasks SET done = 1 WHERE title = 'Buy groceries';
 SELECT * FROM tasks;
 ```
 
-### 3. Sync with the cloud
+### 4. Sync with the cloud
+
+The example below uses SQLite Cloud CloudSync. If you are wiring up a self-hosted backend instead, use the [PostgreSQL quick start](/docs/sqlite-sync-postgresql-quick-start) or the [self-hosted Supabase quick start](/docs/sqlite-sync-supabase-self-hosted-quick-start).
 
 ```sql
 -- Connect to your SQLite Cloud managed database
@@ -51,7 +57,7 @@ SELECT cloudsync_network_sync();
 SELECT cloudsync_terminate();
 ```
 
-### 4. Sync from another device
+### 5. Sync from another device
 
 On a second device (or a second database for testing), repeat the same setup:
 
@@ -92,6 +98,8 @@ Back on Device A, calling `cloudsync_network_sync()` will pull Device B's change
 > **Note:** every device participating in the same sync must create **the same set of tables with the same structure** and initialize each one with `cloudsync_init()`. sqlite-sync derives a schema hash from the synced tables, and the server rejects payloads whose hash it does not recognize. For multi-tenant setups where each client should see only a subset of rows, use a shared schema with a tenant/scope column and enforce isolation with [Row-Level Security](/docs/sqlite-sync-row-level-security) — do not give each client a different table.
 
 ## SQLite Cloud Setup
+
+If you are not using SQLite Cloud as the sync backend, see the [self-hosted PostgreSQL quick start](/docs/sqlite-sync-postgresql-quick-start) or the [self-hosted Supabase quick start](/docs/sqlite-sync-supabase-self-hosted-quick-start).
 
 1. Sign up at [SQLite Cloud](https://sqlitecloud.io/) and create a project.
 2. Create a database and your tables in the [dashboard](https://dashboard.sqlitecloud.io/).

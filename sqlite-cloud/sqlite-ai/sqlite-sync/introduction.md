@@ -25,6 +25,8 @@ Built on **CRDT** (Conflict-free Replicated Data Types), it guarantees:
 - **No conflicts.** Deterministic merge, no manual conflict resolution, ever.
 - **No extra infrastructure.** A globally distributed network of **CloudSync microservices** handles routing, packaging, and delivery of changes between SQLite and other DBMS nodes.
 
+> **Need a sync backend?** Plug into [PostgreSQL](/docs/sqlite-sync-postgresql-quick-start) or [self-hosted Supabase](/docs/sqlite-sync-supabase-self-hosted-quick-start), or use managed SQLite Cloud CloudSync.
+
 ## Why SQLite Sync?
 
 **For offline-first apps** (mobile, desktop, IoT, edge): devices work with a local SQLite database and sync when connectivity is available. Changes queue locally and merge seamlessly on reconnect.
