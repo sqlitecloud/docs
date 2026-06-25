@@ -144,15 +144,15 @@ const sidebarNav: SidebarNavStruct = [
 		type: "inner",
 		level: 2,
 	},
-	{ title: "Self-Hosted Backends", type: "inner", level: 1 },
+	{ title: "PostgreSQL Backends", type: "inner", level: 1 },
 	{
-		title: "PostgreSQL Quick Start",
+		title: "Self-Hosted PostgreSQL",
 		filePath: "sqlite-sync-postgresql-quick-start",
 		type: "inner",
 		level: 2,
 	},
 	{
-		title: "Supabase (Self-Hosted)",
+		title: "Self-Hosted Supabase",
 		filePath: "sqlite-sync-supabase-self-hosted-quick-start",
 		type: "inner",
 		level: 2,
