@@ -157,3 +157,7 @@ SELECT cloudsync_network_sync();
    SELECT cloudsync_network_set_token('<jwt-token>');
    SELECT cloudsync_network_sync();
    ```
+
+## Example App
+
+For a complete Expo walkthrough using a self-hosted PostgreSQL backend, see the [Todo App PostgreSQL example](https://github.com/sqliteai/sqlite-sync/blob/main/docs/postgresql/examples/todo-app-postgres.md).

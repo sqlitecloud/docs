@@ -127,3 +127,7 @@ SELECT cloudsync_network_sync();
    SELECT cloudsync_network_set_token('<jwt-token>');
    SELECT cloudsync_network_sync();
    ```
+
+## Example App
+
+For a complete web example using a self-hosted Supabase backend with JWT auth and RLS, see the [Sport Tracker Supabase example](https://github.com/sqliteai/sqlite-sync/blob/main/docs/postgresql/examples/sport-tracker-app-supabase.md).
