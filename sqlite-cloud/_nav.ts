@@ -327,6 +327,12 @@ const sidebarNav: SidebarNavStruct = [
 		level: 2,
 	},
 	{
+		title: "cloudsync_network_receive_changes",
+		filePath: "sqlite-sync-api-cloudsync-network-receive-changes",
+		type: "inner",
+		level: 2,
+	},
+	{
 		title: "cloudsync_network_check_changes",
 		filePath: "sqlite-sync-api-cloudsync-network-check-changes",
 		type: "inner",
