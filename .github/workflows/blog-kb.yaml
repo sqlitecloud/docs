@@ -1,0 +1,53 @@
+name: Ingest docs into the blog knowledge base
+
+# The blog pipeline plans and writes from this repository. It reads through sqlite-memory, which neither
+# search.yml (full-text) nor aisearch.yaml (sqlite-vector) produces — different extension, different schema
+# — so it needs its own ingest.
+#
+# It also captures when each document last changed, taken from git. The pipeline can write an announcement,
+# and that is only honest if we know a page genuinely changed; ingest timestamps cannot tell us, because a
+# full re-ingest restamps every page.
+#
+# Cheap to run on every push: memory_add_content is content-hashed, so an unchanged document is a no-op.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # Only when documentation actually changes. A README or workflow edit should not re-embed the corpus.
+      - "**/*.md"
+      - "**/*.mdx"
+      - ".github/workflows/blog-kb.yaml"
+      - ".github/scripts/ingest-blog-kb.mjs"
+  workflow_dispatch:
+
+# One ingest at a time. Two runs writing the same knowledge base would race on memory_embed_pending, and
+# the later push is the one whose content should win.
+concurrency:
+  group: blog-kb
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    environment: main
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history: the last-changed date for every document comes from `git log`, and a shallow
+          # clone has none. Without this every page would look like it changed today, and every topic
+          # would qualify as an announcement.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install --no-save @sqlitecloud/drivers
+
+      - run: node .github/scripts/ingest-blog-kb.mjs
+        env:
+          BLOG_KB_CONNECTION_STRING: ${{ secrets.BLOG_KB_CONNECTION_STRING }}
+          VECTORS_SPACE_API_KEY: ${{ secrets.VECTORS_SPACE_API_KEY }}
