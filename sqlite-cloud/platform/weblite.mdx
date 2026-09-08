@@ -242,7 +242,7 @@ sql="SELECT * FROM albums LIMIT 5"
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d "{\"sql\":\"$sql\", \"database\": \"chinook.sqlite\"}"
 ```
 
@@ -458,7 +458,7 @@ Example request:
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<new-database-name>' \
   -H 'Content-Type: application/octet-stream'  \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   --data-binary @<path-to-file>
 ```
 
@@ -497,7 +497,7 @@ Example request:
 curl -X 'PATCH' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>' \
   -H 'Content-Type: application/octet-stream'  \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   --data-binary @<path-to-file>
 ```
 
@@ -595,7 +595,7 @@ Example request:
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '[{"Name": "Il Divo"}, {"Name": "Natalia LaFourcade"}]'
 ```
 
@@ -671,7 +671,7 @@ Example request:
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{"Name": "Alessandro Safina"}'
 ```
 
@@ -704,7 +704,7 @@ Example request:
 curl -X 'PATCH' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{"title": "TEST"}'
 ```
 
