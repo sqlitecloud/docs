@@ -461,9 +461,9 @@ Example request:
 ```bash
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<new-database-name>' \
-  -H 'Content-Type: application/octet-stream'  \
+  -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <your-api-key>' \
-  --data-binary @<path-to-file>
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 Example response:
@@ -500,9 +500,9 @@ Example request:
 ```bash
 curl -X 'PATCH' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>' \
-  -H 'Content-Type: application/octet-stream'  \
+  -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <your-api-key>' \
-  --data-binary @<path-to-file>
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 Example response:
