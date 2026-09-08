@@ -49,14 +49,7 @@ The default encoding is set to UTF-8, and the default page size is 4096KB.
 
 
 ### From the API
-To create a new database or upload an existing database via [Weblite](/docs/weblite), our REST API, you can make a request with the following parameters:
-```bash
-curl -X 'POST' \
-  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer <your-api-key>' \
-  -d ''
-```
+The [Weblite](/docs/weblite) REST API creates a database only by transferring an existing file from a URL, as shown in the upload section above. To create a new, empty database, use the Dashboard or the `CREATE DATABASE` command from a client library, as described below.
 
 ### From client libraries
 To create a new database from a client library, connect to your cluster using a connection string without a specified database.
