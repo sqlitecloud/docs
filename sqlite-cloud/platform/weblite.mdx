@@ -183,7 +183,7 @@ sql_query="SELECT * FROM artists LIMIT 3"
 encoded_query=$(printf '%s' "$sql_query" | jq -sRr @uri)
 
 curl -X 'GET' \
-  "https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql?sql=$<encoded_query>&database=<database-name>" \
+  "https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql?sql=$encoded_query&database=<database-name>" \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer <your-api-key>'
 ```
