@@ -240,7 +240,7 @@ Example request:
 sql="SELECT * FROM albums LIMIT 5"
 
 curl -X 'POST' \
-  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <your-api-key>'
   -d "{\"sql\":\"$sql\", \"database\": \"chinook.sqlite\"}"
