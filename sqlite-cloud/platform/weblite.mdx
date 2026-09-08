@@ -16,11 +16,27 @@ First, navigate to the Weblite panel from the left-hand navigation menu.
 
 From here, you'll find a list of APIs you can use to interact with your SQLite Cloud instance, including:
 
-- **Services**: Endpoints for health checks, metrics, and more.
-- **Weblite**: Endpoints for executing SQLiteCloudArrayType, and interacting with databases and tables.
-- **Functions**: Endpoints for executing SQLite functions.
-- **Webhooks**: Endpoints for creating and managing webhooks.
-- **Files**: Endpoints for uploading and downloading files.
+- **Services**: Endpoints for health checks, project info, and stats.
+- **Weblite**: Endpoints for running SQL and managing databases, tables, and rows.
+- **Functions**: Endpoints for running and managing [edge functions](/docs/edge-functions).
+- **Webhooks**: Endpoints for creating and managing [webhooks](/docs/webhooks).
+- **Tokens**: Endpoints for generating and managing [Access Tokens](/docs/access-tokens).
+- **Memory**: Endpoints for searching [sqlite-memory](/docs/sqlite-memory) content.
+- **MCP**: Endpoints for connecting to the [MCP server](/docs/mcp-server).
+
+## Base URL
+
+All Weblite endpoints are served by the SQLite Cloud gateway:
+
+```
+https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud
+```
+
+You can copy the exact base URL for your project from the Weblite panel in the dashboard.
+
+## Authentication
+
+All Weblite endpoints require an `Authorization: Bearer` header. The value can be either an [API Key](/docs/apikey) or an [Access Token](/docs/access-tokens). The examples below use an API key; for per-user or browser access, use an access token.
 
 ## Services
 
@@ -32,9 +48,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/health' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/health' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -64,9 +80,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/info' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/info' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -129,9 +145,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/stats' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/stats' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -161,7 +177,7 @@ Example response:
 
 ## Weblite
 
-Weblite are endpoints for executing SQLiteCloudArrayType, and interacting with databases and tables.
+Weblite endpoints run SQL and manage databases, tables, and rows.
 
 ### Run SQL queries on the node - GET
 
@@ -173,9 +189,9 @@ sql_query="SELECT * FROM artists LIMIT 3"
 encoded_query=$(printf '%s' "$sql_query" | jq -sRr @uri)
 
 curl -X 'GET' \
-  "https://<your-project-id>.sqlite.cloud/v2/weblite/sql?sql=$<encoded_query>&database=<database-name>" \
+  "https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql?sql=$encoded_query&database=<database-name>" \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -230,9 +246,9 @@ Example request:
 sql="SELECT * FROM albums LIMIT 5"
 
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/sql \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d "{\"sql\":\"$sql\", \"database\": \"chinook.sqlite\"}"
 ```
 
@@ -302,9 +318,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/databases' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/databases' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -343,9 +359,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/tables' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/tables' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -376,9 +392,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>/columns' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/columns' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -425,9 +441,9 @@ Example request:
 
 ```bash
 curl -X 'GET' -o chinook.sqlite \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -446,10 +462,10 @@ Example request:
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<new-database-name>' \
-  -H 'Content-Type: application/octet-stream'  \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
-  --data-binary @<path-to-file>
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<new-database-name>' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <your-api-key>' \
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 Example response:
@@ -485,10 +501,10 @@ Example request:
 
 ```bash
 curl -X 'PATCH' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>' \
-  -H 'Content-Type: application/octet-stream'  \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
-  --data-binary @<path-to-file>
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <your-api-key>' \
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 Example response:
@@ -524,9 +540,9 @@ Example request:
 
 ```bash
 curl -X 'DELETE' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -548,9 +564,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -583,9 +599,9 @@ Example request:
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '[{"Name": "Il Divo"}, {"Name": "Natalia LaFourcade"}]'
 ```
 
@@ -608,9 +624,9 @@ Example request:
 
 ```bash
 curl -X 'DELETE' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -632,9 +648,9 @@ Example request:
 
 ```bash
 curl -X 'GET' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:
@@ -659,9 +675,9 @@ Example request:
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{"Name": "Alessandro Safina"}'
 ```
 
@@ -692,9 +708,9 @@ Example request:
 
 ```bash
 curl -X 'PATCH' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '{"title": "TEST"}'
 ```
 
@@ -725,9 +741,9 @@ Example request:
 
 ```bash
 curl -X 'DELETE' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>/<table-name>/<row-id>' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>'
+  -H 'Authorization: Bearer <your-api-key>'
 ```
 
 Example response:

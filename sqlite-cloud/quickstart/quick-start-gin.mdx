@@ -55,11 +55,11 @@ go: downloading github.com/sqlitecloud/sqlitecloud-go v1.0.0
 
 4. **Connect with a valid SQLite Cloud connection string**
 ```go 
-sqlitecloud://{username}:{password}@{host}.sqlite.cloud:8860/{database}
+sqlitecloud://{username}:{password}@{host}:8860/{database}
 ```
 - To get your admin username, go to your SQLite Cloud account dashboard. In the left nav, open Security and select Users. Your admin username has already been created. Replace `{username}` in the connection string.
 - To set your admin user’s password, click the row’s down chevron and select Edit. Enter a new Password and click Save. Replace `{password}` in the connection string.
-- To get the host, see under your Project name `{host}.sqlite.cloud`.
+- To get the host, click your Project in the dashboard and copy the hostname from the Connect panel. It looks like `myproject.myzone.sqlite.cloud`.
 - To get the database name, in the left nav, open Databases and select Tables. All of your databases are listed in the Select Database dropdown.
 
 

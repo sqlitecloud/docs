@@ -157,17 +157,17 @@ Copy the following to your ```index.html``` file:
 
 5. **Query data**
     - There are 2 ways to query data.
-        1. In your SQLite Cloud account dashboard, click on a Node, copy the Connection String, and paste it into the form's `Database Connection String` input. The expected string format is: `sqlitecloud://{host}.sqlite.cloud:8860?apikey={apikey}`.
+        1. In your SQLite Cloud account dashboard, click on a Node, copy the Connection String, and paste it into the form's `Database Connection String` input. The expected string format is: `sqlitecloud://{host}:8860?apikey={apikey}`.
         
         - Since this Connection String format does NOT contain the database to query, you MUST include the database name in your query. The expected query format is: `USE DATABASE {database}; select * from {table}`.
             - IMPORTANT: The example SQL we provide (`USE DATABASE chinook.sqlite; select * from customers limit 3`) queries the `customers` table in the `chinook` database. The results are specifically parsed to be more readable. To display raw data from any table, uncomment the `index.html` code starting after `// list raw data` and comment out the later `for` loop.
 
-        2. An alternative Connection String format is: `sqlitecloud://{username}:{password}@{host}.sqlite.cloud:8860/{database}`.
+        2. An alternative Connection String format is: `sqlitecloud://{username}:{password}@{host}:8860/{database}`.
 
         - Since this Connection String format DOES contain the database to query, you can exclude the database name from your query: `select * from {table}`.
         - To get your admin username, go to your SQLite Cloud account dashboard. In the left nav, open Security and select Users. Your admin username has already been created. Replace `{username}` the connection string.
         - To set your admin user's password, click the row's down chevron and select Edit. Enter a new Password and click Save. Replace `{password}` in the connection string.
-        - To get the host, see under your Project name `{host}.sqlite.cloud`.
+        - To get the host, click your Project in the dashboard and copy the hostname from the Connect panel. It looks like `myproject.myzone.sqlite.cloud`.
         - To get the database name, in the left nav, open Databases and select Tables. All of your databases are listed in the Select Database dropdown.
     
     - Send your query! Returned results will be listed, from most to least recent, below the form inputs.

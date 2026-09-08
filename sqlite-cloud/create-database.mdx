@@ -18,14 +18,14 @@ You can import an existing SQLite databases, or create new databases using the S
 ### Via HTTP API
 You can upload an existing SQLite database to your cluster using the SQLite Cloud UI or the Weblite API.
 
-To upload a local SQLite database via weblite, make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint.
+The Weblite API does not accept a database file in the request body. Instead, it transfers the database from a URL you provide: make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint with a JSON body containing the `location` of the file. The URL must be reachable from the SQLite Cloud gateway, so a path on your own machine will not work; to upload a local file, use the Dashboard.
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
-  -d ''
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <your-api-key>' \
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 To upload a local SQLite database via the SQLite Cloud UI, navigate to the Database tab in the left-hand navigation. Click the "Upload Database" button and select your local SQLite database.
@@ -49,14 +49,7 @@ The default encoding is set to UTF-8, and the default page size is 4096KB.
 
 
 ### From the API
-To create a new database or upload an existing database via [Weblite](/docs/weblite), our REST API, you can make a request with the following parameters:
-```bash
-curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
-  -d ''
-```
+The [Weblite](/docs/weblite) REST API creates a database only by transferring an existing file from a URL, as shown in the upload section above. To create a new, empty database, use the Dashboard or the `CREATE DATABASE` command from a client library, as described below.
 
 ### From client libraries
 To create a new database from a client library, connect to your cluster using a connection string without a specified database.
@@ -68,7 +61,7 @@ To start using the database within the connection, you can use the `USE DATABASE
 ```javascript
 import { Database } from '@sqlitecloud/drivers';
 // note that no database name is specified in the connection string path
-const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+const db = new Database('sqlitecloud://<your-project-id>.<your-hosted-zone>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
 
 const createDatabase = async () => await db.sql`CREATE DATABASE <database-name>;`;
 

@@ -44,7 +44,7 @@ async function getSQLiteCloudToken(userId: string) {
     expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // expires in 24 hours
   };
 
-  const res = await fetch("https://<your-project-url>/v2/tokens", {
+  const res = await fetch("https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/tokens", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${SQLITE_CLOUD_API_KEY}`,
@@ -65,7 +65,7 @@ In the response JSON, the `data.token` field contains the Access Token.
 Finally, the user is authorized to securely access SQLite Cloud services like the Weblite API to perform a query on the database:
 
 ```typescript
-const res = await fetch("https://<your-project-url>/v2/weblite/sql", {
+const res = await fetch("https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql", {
   method: "POST",
   headers: {
     Authorization: "Bearer " + sqliteCloudToken,
