@@ -18,14 +18,14 @@ You can import an existing SQLite databases, or create new databases using the S
 ### Via HTTP API
 You can upload an existing SQLite database to your cluster using the SQLite Cloud UI or the Weblite API.
 
-To upload a local SQLite database via weblite, make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint.
+The Weblite API does not accept a database file in the request body. Instead, it transfers the database from a URL you provide: make a POST request to the `/v2/weblite/<database-name>.sqlite` endpoint with a JSON body containing the `location` of the file. The URL must be reachable from the SQLite Cloud gateway, so a path on your own machine will not work; to upload a local file, use the Dashboard.
 
 ```bash
 curl -X 'POST' \
   'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
-  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <your-api-key>' \
-  -d ''
+  -d '{"location": "https://<url-of-your-database-file>"}'
 ```
 
 To upload a local SQLite database via the SQLite Cloud UI, navigate to the Database tab in the left-hand navigation. Click the "Upload Database" button and select your local SQLite database.
