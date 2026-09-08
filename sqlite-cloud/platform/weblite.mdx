@@ -16,11 +16,13 @@ First, navigate to the Weblite panel from the left-hand navigation menu.
 
 From here, you'll find a list of APIs you can use to interact with your SQLite Cloud instance, including:
 
-- **Services**: Endpoints for health checks, metrics, and more.
-- **Weblite**: Endpoints for executing SQLiteCloudArrayType, and interacting with databases and tables.
-- **Functions**: Endpoints for executing SQLite functions.
-- **Webhooks**: Endpoints for creating and managing webhooks.
-- **Files**: Endpoints for uploading and downloading files.
+- **Services**: Endpoints for health checks, project info, and stats.
+- **Weblite**: Endpoints for running SQL and managing databases, tables, and rows.
+- **Functions**: Endpoints for running and managing [edge functions](/docs/edge-functions).
+- **Webhooks**: Endpoints for creating and managing [webhooks](/docs/webhooks).
+- **Tokens**: Endpoints for generating and managing [Access Tokens](/docs/access-tokens).
+- **Memory**: Endpoints for searching [sqlite-memory](/docs/sqlite-memory) content.
+- **MCP**: Endpoints for connecting to the [MCP server](/docs/mcp-server).
 
 ## Base URL
 
@@ -175,7 +177,7 @@ Example response:
 
 ## Weblite
 
-Weblite are endpoints for executing SQLiteCloudArrayType, and interacting with databases and tables.
+Weblite endpoints run SQL and manage databases, tables, and rows.
 
 ### Run SQL queries on the node - GET
 
