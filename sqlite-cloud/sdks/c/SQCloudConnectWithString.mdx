@@ -46,7 +46,7 @@ A pointer to an opaque **SQCloudConnection** struct.
 ### Example
 ```c
 int main (int argc, const char * argv[]) {
-    const char *conninfo = "sqlitecloud://admin:admin@myproject.sqlite.cloud/invoice.sqlite";
+    const char *conninfo = "sqlitecloud://admin:admin@myproject.myzone.sqlite.cloud/invoice.sqlite";
 
     SQCloudConnection *conn = SQCloudConnectWithString(conninfo, NULL);
     if (SQCloudIsError(conn)) {

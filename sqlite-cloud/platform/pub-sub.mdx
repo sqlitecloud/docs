@@ -242,8 +242,8 @@ By leveraging Pub/Sub, developers can build responsive, event-driven application
 import { Database } from '@sqlitecloud/drivers'
 import { PubSub, PUBSUB_ENTITY_TYPE } from '@sqlitecloud/drivers/lib/drivers/pubsub'
 
-let database = new Database('sqlitecloud://user:password@xxx.sqlite.cloud:8860/chinook.sqlite')
-// or use sqlitecloud://xxx.sqlite.cloud:8860?apikey=xxxxxxx
+let database = new Database('sqlitecloud://user:password@myproject.myzone.sqlite.cloud:8860/chinook.sqlite')
+// or use sqlitecloud://myproject.myzone.sqlite.cloud:8860?apikey=xxxxxxx
 
 const pubSub: PubSub = await database.getPubSub()
 

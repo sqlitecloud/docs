@@ -38,9 +38,9 @@ You can use the [Weblite API](/docs/weblite) to run SQL commands against your cl
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/sql' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/sql' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d '<your-sql-here>'
 ```
 
@@ -52,7 +52,7 @@ To write data to your cluster using a client library, use the INSERT INTO SQL co
 ```javascript
 import { Database } from '@sqlitecloud/drivers';
 
-const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+const db = new Database('sqlitecloud://<your-project-id>.<your-hosted-zone>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
 db.exec('USE DATABASE <your-database-name>.sqlite;')
 db.exec('CREATE TABLE sports_cars (sc_id INTEGER PRIMARY KEY, sc_make TEXT NOT NULL, sc_year INTEGER NOT NULL);')
 db.commit()

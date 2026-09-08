@@ -45,7 +45,7 @@ int main (int argc, const char * argv[]) {
     config.username = "myusername";
     config.password = "mypassword"
 
-    SQCloudConnection *conn = SQCloudConnect("myproject.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
+    SQCloudConnection *conn = SQCloudConnect("myproject.myzone.sqlite.cloud", SQCLOUD_DEFAULT_PORT, &config);
     if (SQCloudIsError(conn)) {
         printf("ERROR connecting: %s (%d)\n", SQCloudErrorMsg(conn), SQCloudErrorCode(conn));
         return -1;

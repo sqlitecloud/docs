@@ -21,12 +21,12 @@ We aim for full compatibility with the established <a href="https://docs.python.
 import sqlitecloud
 
 # Open the connection to SQLite Cloud
-conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey")
+conn = sqlitecloud.connect("sqlitecloud://myproject.myzone.sqlite.cloud:8860?apikey=myapikey")
 
 # You can autoselect the database during the connect call
 # by adding the database name as path of the SQLite Cloud
 # connection string, eg:
-# conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey")
+# conn = sqlitecloud.connect("sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey")
 db_name = "chinook.sqlite"
 conn.execute(f"USE DATABASE {db_name}")
 
@@ -58,7 +58,7 @@ dfprices = pd.read_csv(
 )
 
 # Your SQLite Cloud connection string
-conn = sqlitecloud.connect("sqlitecloud://myhost.sqlite.cloud:8860/mydatabase.sqlite?apikey=myapikey")
+conn = sqlitecloud.connect("sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase.sqlite?apikey=myapikey")
 
 conn.executemany("DROP TABLE IF EXISTS ?", [("PRICES",)])
 
@@ -108,7 +108,7 @@ class Album(Base):
     Title = Column("Title", String)
 
 # Your SQLite Cloud connection string
-connection_string = "sqlitecloud://myhost.sqlite.cloud:8860/mydatabase.sqlite?apikey=myapikey"
+connection_string = "sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase.sqlite?apikey=myapikey"
 
 engine = sqlalchemy.create_engine(connection_string)
 Session = sessionmaker(bind=engine)

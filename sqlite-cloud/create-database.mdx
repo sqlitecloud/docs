@@ -22,9 +22,9 @@ To upload a local SQLite database via weblite, make a POST request to the `/v2/w
 
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d ''
 ```
 
@@ -52,9 +52,9 @@ The default encoding is set to UTF-8, and the default page size is 4096KB.
 To create a new database or upload an existing database via [Weblite](/docs/weblite), our REST API, you can make a request with the following parameters:
 ```bash
 curl -X 'POST' \
-  'https://<your-project-id>.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
+  'https://<your-project-id>.<your-hosted-zone>.gateway.sqlite.cloud/v2/weblite/<database-name>.sqlite' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer sqlitecloud://<your-project-id>.sqlite.cloud:8860?apikey=<your-api-key>' \
+  -H 'Authorization: Bearer <your-api-key>' \
   -d ''
 ```
 
@@ -68,7 +68,7 @@ To start using the database within the connection, you can use the `USE DATABASE
 ```javascript
 import { Database } from '@sqlitecloud/drivers';
 // note that no database name is specified in the connection string path
-const db = new Database('sqlitecloud://<your-project-id>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
+const db = new Database('sqlitecloud://<your-project-id>.<your-hosted-zone>.sqlite.cloud:<your-host-port>?apikey=<your-api-key>')
 
 const createDatabase = async () => await db.sql`CREATE DATABASE <database-name>;`;
 

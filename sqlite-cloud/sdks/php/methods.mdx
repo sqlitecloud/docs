@@ -10,7 +10,7 @@ slug: sdk-php-methods
 ## Connect
 ```php
 SQLiteCloudClient.connect($hostname, $port = 8860)
-SQLiteCloudClient.connectWithString('sqlitecloud://myhost.sqlite.cloud:8860?apikey=myapikey')
+SQLiteCloudClient.connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860?apikey=myapikey')
 ```
 
 To connect to SQLite Cloud, you need to first allocate an SQLiteCloud Client instance and then inizialize some mandatory public properties: connection string or username and password. The SQLiteCloud PHP class has the following properties:
@@ -34,7 +34,7 @@ use SQLiteCloud\SQLiteCloudClient;
 $sqlitecloud = new SQLiteCloudClient();
 
 try {
-	if ($sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey') == false) {
+	if ($sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey') == false) {
 		$msg = $sqlitecloud->errmsg;
 		return $msg;
 	}
@@ -55,7 +55,7 @@ $sqlitecloud->username = 'admin';
 $sqlitecloud->password = 'pass';
 
 try {
-	if ($sqlitecloud->connect('mynode.sqlite.cloud', 8860) == false) {
+	if ($sqlitecloud->connect('myproject.myzone.sqlite.cloud', 8860) == false) {
 		$msg = $sqlitecloud->errmsg;
 		return $msg;
 	}
@@ -87,7 +87,7 @@ Submits a command to the server and waits for the result. The command can be any
 use SQLiteCloud\SQLiteCloudClient;
 
 $sqlitecloud = new SQLiteCloudClient();
-$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+$sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $result = $sqlitecloud->execute('LIST INFO');
 
@@ -105,7 +105,7 @@ Print the Rowset on standard output.
 use SQLiteCloud\SQLiteCloudClient;
 
 $sqlitecloud = new SQLiteCloudCient();
-$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+$sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $result = $sqlitecloud->execute('LIST INFO');
 $result->dump();
@@ -128,7 +128,7 @@ use SQLiteCloud\SQLiteCloudClient;
 use SQLiteCloud\SQLiteCloudRowset;
 
 $sqlitecloud = new SQLiteCloudClient();
-$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+$sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 /** @var SQLiteCloudRowset */
 $result = $sqlitecloud->execute('LIST INFO');
@@ -152,7 +152,7 @@ use SQLiteCloud\SQLiteCloudClient;
 use SQLiteCloud\SQLiteCloudRowset;
 
 $sqlitecloud = new SQLiteCloudClient();
-$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+$sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 /** @var SQLiteCloudRowset */
 $result = $sqlitecloud->execute('LIST INFO');
@@ -176,7 +176,7 @@ The **disconnect** public method closes the connection with the server.
 use SQLiteCloud\SQLiteCloudClient;
 
 $sqlitecloud = new SQLiteCloudClient();
-$sqlitecloud->connectWithString('sqlitecloud://myhost.sqlite.cloud:8860/mydatabase?apikey=myapikey')
+$sqlitecloud->connectWithString('sqlitecloud://myproject.myzone.sqlite.cloud:8860/mydatabase?apikey=myapikey')
 
 $sqlitecloud->disconnect();
 ```

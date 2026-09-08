@@ -24,7 +24,7 @@ slug: sdk-go-introduction
 3. Connect to a SQLite Cloud database with a valid [connection string](#get-a-connection-string):
 
     ```go
-    db, err := sqlitecloud.Connect("sqlitecloud://user:pass@host.sqlite.cloud:port/dbname")
+    db, err := sqlitecloud.Connect("sqlitecloud://user:pass@myproject.myzone.sqlite.cloud:port/dbname")
     ```
 
 4. Execute queries using a [method](#api-documentation) defined on the `SQCloud` struct, for example `Select`:
@@ -45,7 +45,7 @@ import (
     sqlitecloud "github.com/sqlitecloud/sqlitecloud-go"
 )
 
-const connectionString = "sqlitecloud://admin:password@host.sqlite.cloud:8860/dbname.sqlite"
+const connectionString = "sqlitecloud://admin:password@myproject.myzone.sqlite.cloud:8860/dbname.sqlite"
 
 func main() {
     db, err := sqlitecloud.Connect(connectionString)

@@ -28,8 +28,8 @@ cd sqlc-quickstart && npm install @sqlitecloud/drivers
 4. **Configure the Database Connection**
   - Create a `.env.local` file in the root of your Next.js project and add your SQLite Cloud connection string:
 ```bash
-SQLITECLOUD_URL=sqlitecloud://abcd1234.global1.qwerty.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
-NEXT_PUBLIC_SQLITECLOUD_URL=sqlitecloud://abcd1234.global1.qwerty.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
+SQLITECLOUD_URL=sqlitecloud://myproject.myzone.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
+NEXT_PUBLIC_SQLITECLOUD_URL=sqlitecloud://myproject.myzone.sqlite.cloud:8860/chinook.sqlite?apikey=your-api-key
 ```
   - The database driver establishes a TLS connection in Node.js and a WebSocket connection in the browser. 
 
