@@ -58,14 +58,16 @@ GRANT rls_role TO postgres;
 
 `cloudsync_payload_apply` running as a non-superuser touches several internal CloudSync objects during apply — not just your user table. If any grant is missing on an internal object, the per-PK savepoint silently rolls back the write and the caller sees a non-zero column-change count with no rows landing.
 
-Recommended setup:
+Recommended setup: run this as the connection user configured in CloudSync (typically `postgres`), the role that creates your tables and runs the first `cloudsync_init`. Default privileges apply only to objects created by the role that set them. CloudSync creates its internal tables during the first `cloudsync_init`, and each `<table>_cloudsync` shadow during that table's `cloudsync_init`, so run this before the first `cloudsync_init`.
 
 ```sql
 GRANT USAGE ON SCHEMA public TO rls_role;
+-- Needed if your RLS policies call functions in the auth schema (the platform's
+-- auth.uid(), or the optional helpers below: on plain PostgreSQL create them first)
 GRANT USAGE ON SCHEMA auth   TO rls_role;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
-    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER
+    GRANT SELECT, INSERT, UPDATE, DELETE
     ON TABLES TO rls_role;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
@@ -75,7 +77,12 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
     GRANT EXECUTE ON FUNCTIONS TO rls_role;
 ```
 
-If the extension is already installed, backfill existing objects with one-time grants and keep the default-privileges block for future objects.
+If `cloudsync_init` has already run, default privileges don't apply to the objects it created. Grant them once, then keep the block above for future objects:
+
+```sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES    IN SCHEMA public TO rls_role;
+GRANT USAGE, SELECT                  ON ALL SEQUENCES IN SCHEMA public TO rls_role;
+```
 
 ## How CloudSync Passes JWT Claims to PostgreSQL
 
@@ -90,7 +97,9 @@ current_setting('request.jwt.claims')::jsonb->>'role'
 
 ## Optional Helper Functions
 
-If you want shorter policy expressions, create convenience wrappers:
+If you want shorter policy expressions, create convenience wrappers.
+
+These are for plain PostgreSQL. If your platform already provides an `auth` schema with these functions, use those instead of redefining them:
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS auth;
