@@ -120,7 +120,8 @@ SELECT cloudsync_network_sync();
 3. For claim details and RLS examples, see:
    - [JWT Claims Reference](/docs/sqlite-sync-jwt-claims)
    - [RLS Reference](/docs/sqlite-sync-rls-reference)
-4. In your client code:
+4. Supabase Auth tokens carry `role: authenticated`. That role already exists, `postgres` can switch into it, and it can already use the `auth` schema and its `auth.uid()`, so skip *Creating the Role* and the optional helper functions in the [JWT Claims Reference](/docs/sqlite-sync-jwt-claims). Check that `authenticated` has the *Required Grants* on your tables and on CloudSync's tables, and apply them with `authenticated` in place of `rls_role` if any are missing.
+5. In your client code:
 
    ```sql
    SELECT cloudsync_network_init('<database-id>');
